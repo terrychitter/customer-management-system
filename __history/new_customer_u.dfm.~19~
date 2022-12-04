@@ -1,0 +1,429 @@
+object frmAddNewCustomer: TfrmAddNewCustomer
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'frmAddNewCustomer'
+  ClientHeight = 410
+  ClientWidth = 732
+  Color = 12615680
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Arial'
+  Font.Style = []
+  OldCreateOrder = False
+  Visible = True
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 14
+  object lblAddNew: TLabel
+    Left = 285
+    Top = 8
+    Width = 178
+    Height = 24
+    Caption = 'Add New Customer'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object shpBorder1: TShape
+    Left = 7
+    Top = 38
+    Width = 717
+    Height = 2
+  end
+  object lblPersonalDetails: TLabel
+    Left = 8
+    Top = 46
+    Width = 138
+    Height = 22
+    Caption = 'Personal Details'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblAddress: TLabel
+    Left = 382
+    Top = 46
+    Width = 72
+    Height = 22
+    Caption = 'Address'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Shape1: TShape
+    Left = 374
+    Top = 46
+    Width = 2
+    Height = 195
+  end
+  object lblTitle: TLabel
+    Left = 8
+    Top = 74
+    Width = 26
+    Height = 17
+    Caption = 'Title'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblName: TLabel
+    Left = 8
+    Top = 102
+    Width = 39
+    Height = 17
+    Caption = 'Name'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblSurname: TLabel
+    Left = 8
+    Top = 130
+    Width = 60
+    Height = 17
+    Caption = 'Surname'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblPhone: TLabel
+    Left = 8
+    Top = 158
+    Width = 96
+    Height = 17
+    Caption = 'Phone number'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblOrigin: TLabel
+    Left = 8
+    Top = 214
+    Width = 39
+    Height = 17
+    Caption = 'Origin'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblNumber: TLabel
+    Left = 382
+    Top = 74
+    Width = 96
+    Height = 17
+    Caption = 'House number'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblStreet: TLabel
+    Left = 382
+    Top = 102
+    Width = 80
+    Height = 17
+    Caption = 'Street name'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblSuburb: TLabel
+    Left = 382
+    Top = 130
+    Width = 47
+    Height = 17
+    Caption = 'Suburb'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblPostal: TLabel
+    Left = 382
+    Top = 158
+    Width = 41
+    Height = 17
+    Caption = 'Postal'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Shape2: TShape
+    Left = 7
+    Top = 247
+    Width = 717
+    Height = 2
+  end
+  object lblSanitizingDetails: TLabel
+    Left = 8
+    Top = 255
+    Width = 143
+    Height = 22
+    Caption = 'Sanitizing Details'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblFrequency: TLabel
+    Left = 8
+    Top = 283
+    Width = 69
+    Height = 17
+    Caption = 'Frequency'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblNoBins: TLabel
+    Left = 8
+    Top = 312
+    Width = 99
+    Height = 17
+    Caption = 'Number of bins'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblDay: TLabel
+    Left = 8
+    Top = 340
+    Width = 26
+    Height = 17
+    Caption = 'Day'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblMonthly: TLabel
+    Left = 8
+    Top = 369
+    Width = 78
+    Height = 17
+    Caption = 'Monthly Fee'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblEmail: TLabel
+    Left = 8
+    Top = 186
+    Width = 94
+    Height = 17
+    Caption = 'Email Address'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+  end
+  object edtName: TEdit
+    Left = 200
+    Top = 102
+    Width = 168
+    Height = 22
+    TabOrder = 1
+    OnChange = edtNameChange
+  end
+  object cmbTitle: TComboBox
+    Left = 285
+    Top = 74
+    Width = 83
+    Height = 22
+    TabOrder = 0
+    OnChange = cmbTitleChange
+    Items.Strings = (
+      'Mr'
+      'Miss'
+      'Mrs'
+      'Dr')
+  end
+  object edtSurname: TEdit
+    Left = 200
+    Top = 130
+    Width = 168
+    Height = 22
+    TabOrder = 2
+    OnChange = edtSurnameChange
+  end
+  object edtPhone: TEdit
+    Left = 200
+    Top = 158
+    Width = 168
+    Height = 22
+    TabOrder = 3
+    OnChange = edtPhoneChange
+  end
+  object edtOrigin: TEdit
+    Left = 248
+    Top = 214
+    Width = 120
+    Height = 22
+    TabOrder = 5
+    OnChange = edtOriginChange
+  end
+  object edtNumber: TEdit
+    Left = 664
+    Top = 74
+    Width = 52
+    Height = 22
+    TabOrder = 6
+    OnChange = edtNumberChange
+  end
+  object edtStreet: TEdit
+    Left = 496
+    Top = 102
+    Width = 220
+    Height = 22
+    TabOrder = 7
+    OnChange = edtStreetChange
+  end
+  object edtSuburb: TEdit
+    Left = 496
+    Top = 130
+    Width = 220
+    Height = 22
+    TabOrder = 8
+    OnChange = edtSuburbChange
+  end
+  object edtPostal: TEdit
+    Left = 632
+    Top = 158
+    Width = 84
+    Height = 22
+    TabOrder = 9
+    OnChange = edtPostalChange
+  end
+  object sedFrequency: TSpinEdit
+    Left = 320
+    Top = 283
+    Width = 48
+    Height = 23
+    MaxValue = 4
+    MinValue = 0
+    TabOrder = 10
+    Value = 0
+    OnChange = sedFrequencyChange
+  end
+  object sedNoBins: TSpinEdit
+    Left = 320
+    Top = 312
+    Width = 48
+    Height = 23
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 11
+    Value = 0
+    OnChange = sedNoBinsChange
+  end
+  object cmbDays: TComboBox
+    Left = 223
+    Top = 341
+    Width = 145
+    Height = 22
+    TabOrder = 12
+    OnChange = cmbDaysChange
+    Items.Strings = (
+      'Monday'
+      'Tuesday'
+      'Wednesday'
+      'Thursday'
+      'Friday')
+  end
+  object edtMonthly: TEdit
+    Left = 285
+    Top = 369
+    Width = 83
+    Height = 22
+    TabOrder = 13
+    OnChange = edtMonthlyChange
+  end
+  object chkOpen: TCheckBox
+    Left = 560
+    Top = 346
+    Width = 164
+    Height = 17
+    BiDiMode = bdRightToLeft
+    Caption = 'Open customer when done'
+    Checked = True
+    ParentBiDiMode = False
+    State = cbChecked
+    TabOrder = 14
+  end
+  object edtEmail: TEdit
+    Left = 200
+    Top = 186
+    Width = 168
+    Height = 22
+    TabOrder = 4
+    OnChange = edtEmailChange
+  end
+  object btnAdd: TButton
+    Left = 609
+    Top = 369
+    Width = 115
+    Height = 33
+    Caption = 'Add Customer'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 15
+    OnClick = btnAddClick
+  end
+end

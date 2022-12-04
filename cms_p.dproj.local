@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/05/15 13:15:31.000.586,=C:\Users\Terry\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/05/15 13:16:36.000.390,C:\Users\Terry\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Terry\Desktop\CMS\main.pas</Transaction>
+    <Transaction>2022/05/15 13:16:36.000.390,C:\Users\Terry\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Terry\Desktop\CMS\main.dfm</Transaction>
+    <Transaction>2022/05/15 13:16:53.000.047,C:\Users\Terry\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Terry\Desktop\CMS\cms_p.dproj</Transaction>
+    <Transaction>2022/05/15 13:17:28.000.819,C:\Users\Terry\Desktop\CMS\main.pas=C:\Users\Terry\Desktop\CMS\main_u.pas</Transaction>
+    <Transaction>2022/05/15 13:17:28.000.819,C:\Users\Terry\Desktop\CMS\main.dfm=C:\Users\Terry\Desktop\CMS\main_u.dfm</Transaction>
+    <Transaction>2022/05/15 17:18:39.000.682,=C:\Users\Terry\Desktop\CMS\Unit1.pas</Transaction>
+    <Transaction>2022/05/15 17:33:01.000.492,C:\Users\Terry\Desktop\CMS\Unit1.pas=C:\Users\Terry\Desktop\CMS\dm_TKServices_u.pas</Transaction>
+    <Transaction>2022/05/15 17:33:01.000.492,C:\Users\Terry\Desktop\CMS\Unit1.dfm=C:\Users\Terry\Desktop\CMS\dm_TKServices_u.dfm</Transaction>
+    <Transaction>2022/05/15 21:08:30.000.889,=C:\Users\Terry\Desktop\CMS\Unit1.pas</Transaction>
+    <Transaction>2022/05/15 21:10:15.000.482,C:\Users\Terry\Desktop\CMS\customer_u.pas=C:\Users\Terry\Desktop\CMS\Unit1.pas</Transaction>
+    <Transaction>2022/05/29 16:00:28.000.521,=C:\Users\Terry\Desktop\CMS\Unit1.pas</Transaction>
+    <Transaction>2022/05/29 16:03:47.000.467,C:\Users\Terry\Desktop\CMS\new_customer_u.pas=C:\Users\Terry\Desktop\CMS\Unit1.pas</Transaction>
+    <Transaction>2022/05/29 16:03:47.000.467,C:\Users\Terry\Desktop\CMS\new_customer_u.dfm=C:\Users\Terry\Desktop\CMS\Unit1.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="customer_u.pas"/>
+    <File Path="dm_TKServices_u.pas"/>
+    <File Path="dm_TKServices_u.dfm"/>
+    <File Path="main_u.pas"/>
+    <File Path="main_u.dfm"/>
+    <File Path="new_customer_u.pas"/>
+    <File Path="new_customer_u.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

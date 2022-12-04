@@ -1,0 +1,569 @@
+unit new_customer_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Samples.Spin, main_u, dm_TKServices_u;
+
+type
+  TfrmAddNewCustomer = class(TForm)
+    lblAddNew: TLabel;
+    shpBorder1: TShape;
+    lblPersonalDetails: TLabel;
+    lblAddress: TLabel;
+    Shape1: TShape;
+    lblTitle: TLabel;
+    lblName: TLabel;
+    lblSurname: TLabel;
+    lblPhone: TLabel;
+    lblOrigin: TLabel;
+    lblNumber: TLabel;
+    lblStreet: TLabel;
+    lblSuburb: TLabel;
+    lblPostal: TLabel;
+    edtName: TEdit;
+    cmbTitle: TComboBox;
+    edtSurname: TEdit;
+    edtPhone: TEdit;
+    edtOrigin: TEdit;
+    edtNumber: TEdit;
+    edtStreet: TEdit;
+    edtSuburb: TEdit;
+    edtPostal: TEdit;
+    Shape2: TShape;
+    lblSanitizingDetails: TLabel;
+    lblFrequency: TLabel;
+    lblNoBins: TLabel;
+    lblDay: TLabel;
+    lblMonthly: TLabel;
+    sedFrequency: TSpinEdit;
+    sedNoBins: TSpinEdit;
+    cmbDays: TComboBox;
+    edtMonthly: TEdit;
+    chkOpen: TCheckBox;
+    lblEmail: TLabel;
+    edtEmail: TEdit;
+    btnAdd: TButton;
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnAddClick(Sender: TObject);
+    procedure edtNameChange(Sender: TObject);
+    procedure edtSurnameChange(Sender: TObject);
+    procedure edtPhoneChange(Sender: TObject);
+    procedure edtEmailChange(Sender: TObject);
+    procedure edtOriginChange(Sender: TObject);
+    procedure edtNumberChange(Sender: TObject);
+    procedure edtStreetChange(Sender: TObject);
+    procedure edtSuburbChange(Sender: TObject);
+    procedure edtPostalChange(Sender: TObject);
+    procedure edtMonthlyChange(Sender: TObject);
+    procedure cmbTitleChange(Sender: TObject);
+    procedure sedFrequencyChange(Sender: TObject);
+    procedure sedNoBinsChange(Sender: TObject);
+    procedure cmbDaysChange(Sender: TObject);
+  private
+    { Private declarations }
+    function isValid(): boolean;
+    function isCorrectLength(edit: TEdit; size: Integer): boolean;
+    procedure AddCustomerToDB;
+
+    { Validation functions and procedures }
+    function isEmpty(combo: TComboBox): boolean; Overload;
+    function isEmpty(Spin: TSpinEdit): boolean; Overload;
+    function isEmpty(edit: TEdit): boolean Overload;
+    function isFieldValid(combo: TComboBox; fieldName: string)
+      : boolean; Overload;
+    function isFieldValid(Spin: TSpinEdit; fieldName: string): boolean;
+      Overload;
+    function isFieldValid(edit: TEdit; size: Integer; fieldName: string)
+      : boolean; Overload;
+    procedure redify(value: boolean; edit: TEdit); Overload;
+    procedure redify(value: boolean; combo: TComboBox); Overload;
+    procedure redify(value: boolean; Spin: TSpinEdit); Overload;
+    function isInteger(value: string): boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmAddNewCustomer: TfrmAddNewCustomer;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmAddNewCustomer.AddCustomerToDB;
+var
+  preAccNo, tempAccNo: Integer;
+begin
+
+  // Adding the new customer to the database
+
+  with dmTKServices do
+  begin
+
+    // Generating new customer ID
+    adoCustomers.Sort := 'Acc_no DESC';
+    adoCustomers.First;
+    preAccNo := adoCustomers['Acc_no'];
+    tempAccNo := preAccNo + 1;
+
+    adoCustomers.edit;
+    adoCustomers['Acc_no'] := tempAccNo;
+    adoCustomers['Title'] := cmbTitle.Items[cmbTitle.ItemIndex];
+    adoCustomers['Initial'] := edtName.Text[1];
+    adoCustomers['Name'] := edtName.Text;
+    adoCustomers['Surname'] := edtSurname.Text;
+    adoCustomers['Home_no'] := edtNumber.Text;
+    adoCustomers['Street_name'] := edtStreet.Text;
+    adoCustomers['Suburb'] := edtSuburb.Text;
+    adoCustomers['Postal'] := StrToInt(edtPostal.Text);
+    adoCustomers['Active'] := True;
+    adoCustomers['Phone_no'] := edtPhone.Text;
+    adoCustomers['Email'] := edtEmail.Text;
+    adoCustomers['Origin'] := edtOrigin.Text;
+    adoCustomers['Frequency'] := sedFrequency.value;
+    adoCustomers['No_bins'] := sedNoBins.value;
+    adoCustomers['Day'] := cmbDays.Items[cmbDays.ItemIndex];
+    adoCustomers['Monthly_payable'] := StrToInt(edtMonthly.Text);
+    adoCustomers.Post;
+    adoCustomers.Refresh;
+  end;
+
+  if chkOpen.Checked then
+    frmMain.activeCustomer := tempAccNo;
+
+  frmMain.OnActivate(self);
+  frmAddNewCustomer.Close;
+
+end;
+
+procedure TfrmAddNewCustomer.btnAddClick(Sender: TObject);
+begin
+
+  // Adding new customer to the database if all fields are valid
+  if isValid then
+  begin
+    ShowMessage('Customers has been added');
+  end;
+
+end;
+
+procedure TfrmAddNewCustomer.cmbDaysChange(Sender: TObject);
+begin
+
+  redify(False, cmbDays);
+
+end;
+
+procedure TfrmAddNewCustomer.cmbTitleChange(Sender: TObject);
+begin
+
+  redify(False, cmbTitle);
+
+end;
+
+procedure TfrmAddNewCustomer.edtEmailChange(Sender: TObject);
+begin
+
+  redify(False, edtEmail);
+
+end;
+
+procedure TfrmAddNewCustomer.edtMonthlyChange(Sender: TObject);
+begin
+
+  redify(False, edtMonthly);
+
+end;
+
+procedure TfrmAddNewCustomer.edtNameChange(Sender: TObject);
+begin
+
+  redify(False, edtName);
+
+end;
+
+procedure TfrmAddNewCustomer.edtNumberChange(Sender: TObject);
+begin
+
+  redify(False, edtNumber);
+
+end;
+
+procedure TfrmAddNewCustomer.edtOriginChange(Sender: TObject);
+begin
+
+  redify(False, edtOrigin);
+
+end;
+
+procedure TfrmAddNewCustomer.edtPhoneChange(Sender: TObject);
+begin
+
+  redify(False, edtPhone);
+
+end;
+
+procedure TfrmAddNewCustomer.edtPostalChange(Sender: TObject);
+begin
+
+  redify(False, edtPostal);
+
+end;
+
+procedure TfrmAddNewCustomer.edtStreetChange(Sender: TObject);
+begin
+
+  redify(False, edtStreet);
+
+end;
+
+procedure TfrmAddNewCustomer.edtSuburbChange(Sender: TObject);
+begin
+
+  redify(False, edtSuburb);
+
+end;
+
+procedure TfrmAddNewCustomer.edtSurnameChange(Sender: TObject);
+begin
+
+  redify(False, edtSurname);
+
+end;
+
+procedure TfrmAddNewCustomer.FormActivate(Sender: TObject);
+begin
+
+  Self.SetFocus;
+
+end;
+
+procedure TfrmAddNewCustomer.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+
+  // Clearing all fields
+  cmbTitle.ItemIndex := -1;
+  edtName.Clear;
+  edtSurname.Clear;
+  edtPhone.Clear;
+  edtOrigin.Clear;
+  edtNumber.Clear;
+  edtStreet.Clear;
+  edtSuburb.Clear;
+  edtPostal.Clear;
+  sedFrequency.value := 0;
+  sedNoBins.value := 0;
+  cmbDays.ItemIndex := -1;
+  edtMonthly.Clear;
+  chkOpen.Checked := True;
+
+end;
+
+procedure TfrmAddNewCustomer.FormCreate(Sender: TObject);
+begin
+
+  frmAddNewCustomer.Position := poDesktopCenter;
+
+end;
+
+function TfrmAddNewCustomer.isCorrectLength(edit: TEdit; size: Integer)
+  : boolean;
+begin
+
+  // Returning whether edit is the correct length (size)
+  if Length(edit.Text) > size then
+    Result := False
+  else
+    Result := True;
+
+end;
+
+function TfrmAddNewCustomer.isEmpty(edit: TEdit): boolean;
+begin
+
+  // Determining whether edit is empty
+  if Length(edit.Text) = 0 then
+    Result := True
+  else
+    Result := False;
+
+end;
+
+function TfrmAddNewCustomer.isFieldValid(combo: TComboBox;
+  fieldName: string): boolean;
+begin
+
+  // Checking whether the field is empty
+  if isEmpty(combo) then
+  begin
+    ShowMessage(fieldName + ' field is empty.');
+    redify(True, combo);
+    Result := False;
+    Exit;
+  end;
+
+  Result := True;
+
+end;
+
+function TfrmAddNewCustomer.isFieldValid(Spin: TSpinEdit;
+  fieldName: string): boolean;
+begin
+
+  // First checking whether the field is empty or whether it is a valid integer
+  if isEmpty(Spin) then
+  begin
+    ShowMessage(fieldName + ' field can not be set to zero.');
+    redify(True, Spin);
+    Result := False;
+    Exit;
+  end;
+
+  Result := True;
+
+end;
+
+function TfrmAddNewCustomer.isFieldValid(edit: TEdit; size: Integer;
+  fieldName: string): boolean;
+begin
+
+  // First checking whether the field is empty then whether length is appropriate
+  if isEmpty(edit) then
+  begin
+    ShowMessage(fieldName + ' field is empty.');
+    redify(True, edit);
+    Result := False;
+    Exit;
+  end;
+
+  if Length(edit.Text) > size then
+  begin
+    ShowMessage(fieldName + ' field is too long. Max ' + IntToStr(size) +
+      ' characters');
+    redify(True, edit);
+    Result := False;
+    Exit;
+  end;
+
+  Result := True;
+
+end;
+
+function TfrmAddNewCustomer.isEmpty(combo: TComboBox): boolean;
+begin
+
+  // Determining whether combo box is empty
+  if (combo.ItemIndex < 0) or (combo.Text = '') then
+    Result := True
+  else
+    Result := False;
+
+end;
+
+function TfrmAddNewCustomer.isEmpty(Spin: TSpinEdit): boolean;
+begin
+
+  // Determining whether spin edit is empty
+  if Spin.value <= 0 then
+    Result := True
+  else
+    Result := False;
+
+end;
+
+function TfrmAddNewCustomer.isInteger(value: string): boolean;
+var
+  tempInt: Integer;
+begin
+
+  // Determing whether value is a valid integer
+  if TryStrToInt(value, tempInt) then
+    Result := True
+  else
+    Result := False;
+
+end;
+
+function TfrmAddNewCustomer.isValid: boolean;
+begin
+
+  // Validating all fields
+
+  // Title
+  if not isFieldValid(cmbTitle, 'Title') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Name --50
+  if not isFieldValid(edtName, 50, 'Name') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Surname --50
+  if not isFieldValid(edtSurname, 50, 'Surname') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Phone --15
+  if not isFieldValid(edtPhone, 15, 'Phone Number') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Email --110
+  if not isFieldValid(edtEmail, 110, 'Email Address') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Origin --50
+  if not isFieldValid(edtOrigin, 50, 'Origin') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // House Number --10
+  if not isFieldValid(edtNumber, 10, 'House Number') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Street Name --60
+  if not isFieldValid(edtStreet, 60, 'Street Name') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Suburb --50
+  if not isFieldValid(edtSuburb, 50, 'Suburb') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Postal
+  if not isFieldValid(edtPostal, 10, 'Postal') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  if not isInteger(edtPostal.Text) then
+  begin
+    ShowMessage('Postal Code field is not a number.');
+    redify(True, edtPostal);
+    Result := False;
+    Exit;
+  end;
+
+  // Frequency
+  if not isFieldValid(sedFrequency, 'Frequency') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // No Bins
+  if not isFieldValid(sedNoBins, 'No Bins') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Days
+  if not isFieldValid(cmbDays, 'Day') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // Monthly Fee
+  if not isFieldValid(edtMonthly, 10, 'Monthly Fee') then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  if not isInteger(edtMonthly.Text) then
+  begin
+    ShowMessage('Monthly Fee field is not a number.');
+    Result := False;
+    Exit;
+  end;
+
+  Result := True;
+
+end;
+
+procedure TfrmAddNewCustomer.redify(value: boolean; edit: TEdit);
+begin
+
+  // Redify the edit
+  if value then
+    edit.Color := clRed
+  else
+    edit.Color := clWhite;
+
+  edit.SetFocus;
+
+end;
+
+procedure TfrmAddNewCustomer.redify(value: boolean; combo: TComboBox);
+begin
+
+  // Redify the combo box
+  if value then
+    combo.Color := clRed
+  else
+    combo.Color := clWhite;
+
+  combo.SetFocus;
+
+end;
+
+procedure TfrmAddNewCustomer.redify(value: boolean; Spin: TSpinEdit);
+begin
+
+  // Redify the spin edit
+  if value then
+    Spin.Color := clRed
+  else
+    Spin.Color := clWhite;
+
+  Spin.SetFocus;
+
+end;
+
+procedure TfrmAddNewCustomer.sedFrequencyChange(Sender: TObject);
+begin
+
+  sedFrequency.Color := clWhite;
+
+end;
+
+procedure TfrmAddNewCustomer.sedNoBinsChange(Sender: TObject);
+begin
+
+  sedNoBins.Color := clWhite;
+
+end;
+
+end.

@@ -1,0 +1,54 @@
+unit dm_TKServices_u;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB;
+
+type
+  TdmTKServices = class(TDataModule)
+    conTKServices: TADOConnection;
+    adoCustomers: TADOTable;
+    dsOutput: TDataSource;
+    adoPayments: TADOTable;
+    adoQry: TADOQuery;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmTKServices: TdmTKServices;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+{$R *.dfm}
+
+procedure TdmTKServices.DataModuleCreate(Sender: TObject);
+begin
+
+  // Connecting to the database
+  conTKServices.ConnectionString :=
+    'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=' +
+    ExtractFilePath('cms_p.exe') +
+    'database\TKServices.mdb;Mode=ReadWrite;Persist Security Info=False';
+  //conTKServices.LoginPrompt := False;
+//  conTKServices.open;
+
+  adoCustomers.Connection := conTKServices;
+  adoCustomers.TableName := 'Customers';
+  adoCustomers.Active := True;
+
+  adoPayments.Connection := conTKServices;
+  adoPayments.TableName := 'Customer_Payments';
+
+  adoQry.Active := True;
+  adoQry.Connection := conTKServices;
+  adoQry.SQL.Text := 'SELECT * FROM Customers';
+
+end;
+
+end.

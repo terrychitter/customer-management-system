@@ -1,0 +1,1494 @@
+unit main_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Vcl.Samples.Spin, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  dm_TKServices_u, customer_u, Vcl.WinXPickers, DateUtils, Math, ShellApi;
+
+type
+  TfrmMain = class(TForm)
+    pgMain: TPageControl;
+    tbsCustomers: TTabSheet;
+    tbsPayments: TTabSheet;
+    tbsInvoices: TTabSheet;
+    edt_tbsCustomers_search: TEdit;
+    img_tbsCustomers_search: TImage;
+    lst_tbsCustomers_results: TListBox;
+    grp_tbsCustomers_customer: TGroupBox;
+    rdg_tbsCustomers_searchby: TRadioGroup;
+    pnl_tbsCustomers_customer2: TPanel;
+    img_tbsCustomers_cancel: TImage;
+    img_tbsCustomers_edit: TImage;
+    img_tbsCustomers_profile: TImage;
+    img_tbsCustomers_save: TImage;
+    lbl_tbsCustomers_Comments: TLabel;
+    lbl_tbsCustomers_details: TLabel;
+    shp_tbsCustomers_active: TShape;
+    lbl_tbsCustomers_active: TLabel;
+    shp_tbsCustomers_border1: TShape;
+    lbl_tbsCustomers_bindetails: TLabel;
+    lbl_tbsCustomers_frequency: TLabel;
+    lbl_tbsCustomers_nobins: TLabel;
+    lbl_tbsCustomers_day: TLabel;
+    lbl_tbsCustomers_montly: TLabel;
+    shp_tbsCustomers_border2: TShape;
+    lbl_tbsCustomers_payments: TLabel;
+    shp_tbsCustomers_addpayment: TShape;
+    shp_tbsCustomers_generateinvoice: TShape;
+    shp_tbsCustomers_generatestatement: TShape;
+    lbl_tbsCustomers_addpayment: TLabel;
+    lbl_tbsCustomers_generateinvoice: TLabel;
+    lbl_tbsCustomers_generatestatement: TLabel;
+    edt_tbsCustomers_email: TEdit;
+    edt_tbsCustomers_housenumber: TEdit;
+    edt_tbsCustomers_initial: TEdit;
+    edt_tbsCustomers_name: TEdit;
+    edt_tbsCustomers_origin: TEdit;
+    edt_tbsCustomers_phonenumber: TEdit;
+    edt_tbsCustomers_postal: TEdit;
+    edt_tbsCustomers_streetname: TEdit;
+    edt_tbsCustomers_suburb: TEdit;
+    edt_tbsCustomers_surname: TEdit;
+    edt_tbsCustomers_title: TEdit;
+    red_tbsCustomers_comments: TRichEdit;
+    cmb_tbsCustomers_days: TComboBox;
+    edt_tbsCustomers_frequency: TEdit;
+    edt_tbsCustomers_nobins: TEdit;
+    edt_tbsCustomers_price: TEdit;
+    dbg_tbsCustomers_payments: TDBGrid;
+    img_tbsCustomers_addnew: TImage;
+    lst_tbsPayments_results: TListBox;
+    lbl_tbsPayments_Heading: TLabel;
+    lbl_tbsPayments_paymenthistory: TLabel;
+    lbl_tbsPayments_addpayment: TLabel;
+    lbl_tbsPayments_date: TLabel;
+    shp_tbsPayments_border1: TShape;
+    lbl_tbsPayments_amount: TLabel;
+    lbl_tbsPayments_type: TLabel;
+    dt_tbsPayments_date: TDateTimePicker;
+    sed_tbsPayments_amount: TSpinEdit;
+    cmb_tbsPayments_type: TComboBox;
+    dbg_tbsPayments_paymenthistory: TDBGrid;
+    shp_tbsPayments_addpayment: TShape;
+    shp_tbsPayments_edit: TShape;
+    shp_tbsPayments_delete: TShape;
+    lbl_tbsPayments_add: TLabel;
+    lbl_tbsPayments_edit: TLabel;
+    lbl_tbsPayments_delete: TLabel;
+    lbl_tbsPayments_note: TLabel;
+    edt_tbsPayments_search: TEdit;
+    rdg_tbsPayments_searchby: TRadioGroup;
+    img_tbsPayments_search: TImage;
+    lbl_tbsInvoices_heading: TLabel;
+    edt_tbsInvoices_search: TEdit;
+    img_tbsInvoices_search: TImage;
+    rdg_tbsInvoices_searchby: TRadioGroup;
+    lst_tbsInvoices_selected: TListBox;
+    lbl_tbsInvoices_details: TLabel;
+    lbl_tbsInvoices_month: TLabel;
+    lbl_tbsInvoices_year: TLabel;
+    sed_tbsInvoices_year: TSpinEdit;
+    cmb_tbsInvoices_month: TComboBox;
+    lbl_tbsInvoices_bfDate: TLabel;
+    lbl_tbsInvoices_feeDate: TLabel;
+    dt_tbsInvoices_bfDate: TDateTimePicker;
+    dt_tbsInvoices_feeDate: TDateTimePicker;
+    shp_tbsInvoices_generate: TShape;
+    lbl_tbsInvoices_selected: TLabel;
+    lbl_tbsInvoices_generate: TLabel;
+    chk_tbsInvoices_selectAll: TCheckBox;
+    Shape1: TShape;
+    lst_tbsInvoices_results: TListBox;
+    img_tbsInvoices_remove: TImage;
+    lbl_tbsInvoices_issuedate: TLabel;
+    dt_tbsInvoices_issuedate: TDateTimePicker;
+    procedure FormCreate(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure lst_tbsCustomers_resultsExit(Sender: TObject);
+    procedure lst_tbsCustomers_resultsMouseLeave(Sender: TObject);
+    procedure edt_tbsCustomers_searchChange(Sender: TObject);
+    procedure lst_tbsCustomers_resultsDblClick(Sender: TObject);
+    procedure img_tbsCustomers_editClick(Sender: TObject);
+    procedure img_tbsCustomers_cancelClick(Sender: TObject);
+    procedure img_tbsCustomers_saveClick(Sender: TObject);
+    procedure edt_tbsCustomers_titleChange(Sender: TObject);
+    procedure edt_tbsCustomers_initialChange(Sender: TObject);
+    procedure edt_tbsCustomers_nameChange(Sender: TObject);
+    procedure edt_tbsCustomers_surnameChange(Sender: TObject);
+    procedure edt_tbsCustomers_housenumberChange(Sender: TObject);
+    procedure edt_tbsCustomers_streetnameChange(Sender: TObject);
+    procedure edt_tbsCustomers_suburbChange(Sender: TObject);
+    procedure edt_tbsCustomers_postalChange(Sender: TObject);
+    procedure edt_tbsCustomers_phonenumberChange(Sender: TObject);
+    procedure edt_tbsCustomers_emailChange(Sender: TObject);
+    procedure edt_tbsCustomers_frequencyChange(Sender: TObject);
+    procedure edt_tbsCustomers_nobinsChange(Sender: TObject);
+    procedure cmb_tbsCustomers_daysChange(Sender: TObject);
+    procedure edt_tbsCustomers_priceChange(Sender: TObject);
+    procedure lbl_tbsCustomers_activeClick(Sender: TObject);
+    procedure img_tbsCustomers_addnewClick(Sender: TObject);
+    procedure tbsPaymentsEnter(Sender: TObject);
+    procedure pgMainChange(Sender: TObject);
+    procedure lst_tbsPayments_resultsDblClick(Sender: TObject);
+    procedure lbl_tbsPayments_addClick(Sender: TObject);
+    procedure dt_tbsPayments_dateChange(Sender: TObject);
+    procedure edt_tbsPayments_searchChange(Sender: TObject);
+    procedure tbsPaymentsShow(Sender: TObject);
+    procedure lbl_tbsPayments_deleteClick(Sender: TObject);
+    procedure lbl_tbsCustomers_addpaymentClick(Sender: TObject);
+    procedure tbsInvoicesShow(Sender: TObject);
+    procedure edt_tbsInvoices_searchChange(Sender: TObject);
+    procedure chk_tbsInvoices_selectAllClick(Sender: TObject);
+    procedure lst_tbsInvoices_resultsDblClick(Sender: TObject);
+    procedure lst_tbsInvoices_selectedExit(Sender: TObject);
+    procedure lst_tbsInvoices_selectedClick(Sender: TObject);
+    procedure lst_tbsInvoices_resultsClick(Sender: TObject);
+    procedure img_tbsInvoices_removeClick(Sender: TObject);
+    procedure lbl_tbsInvoices_generateClick(Sender: TObject);
+    procedure lbl_tbsCustomers_generateinvoiceDblClick(Sender: TObject);
+  private
+    { Private declarations }
+    // User-defined procedures
+    editing: boolean;
+    procedure loadCustomer(customer: TCustomer);
+    procedure searchAccount(searchbox: TEdit; radiogroup: TRadioGroup;
+      listbox: TListBox);
+    procedure displayCustomers(key, field: string; listbox: TListBox;
+      radiogroup: TRadioGroup);
+    procedure popSearchList(list: TListBox);
+    function retreiveAccountNum(list: TListBox): integer;
+    procedure openPaymentState(accNum: integer);
+    procedure enterEditMode(enter: boolean);
+    Function validationPassed(): boolean;
+    procedure saveToDB();
+    procedure InstantiateCustomer;
+    function paymentMonthAndYearPresent(account: integer;
+      date: TDateTimePicker): boolean;
+    procedure addPayment(account: integer; date: TDate; amount: integer;
+      pay_type: string; newOrExisting: string);
+    procedure intializeInvoicesSheet;
+    procedure addToSelectedList(account: integer; option: string);
+    procedure writeAccountsToFile;
+    function getBfAmount(account, month, year: integer): integer;
+  public
+    { Public declarations }
+    // Declaring project scope variables
+    activeCustomer: integer;
+    activePayment: integer;
+    customer: TCustomer;
+    procedure redify(redify: boolean; item: TEdit);
+  end;
+
+var
+  frmMain: TfrmMain;
+
+implementation
+
+uses new_customer_u;
+
+{$R *.dfm}
+
+procedure TfrmMain.addPayment(account: integer; date: TDate; amount: integer;
+  pay_type: string; newOrExisting: string);
+var
+  month, year, prevBalance, feeAmount, diffInMonths: integer;
+begin
+
+  with dmTKServices do
+  begin
+    adoPayments.Filtered := False;
+    adoCustomers.Locate('Acc_no', activePayment, []);
+
+    if newOrExisting = 'existing' then
+    begin
+      // Adding a payment to a month that already has a payment
+      month := MonthOf(date);
+      year := YearOf(date);
+
+      // Sorting and filtering the records so that it may add the balance correctly
+      adoPayments.Filter := 'Acc_No=' + IntToStr(account) + ' AND Date >=#' +
+        IntToStr(year) + '/' + IntToStr(month) + '/1# AND Date <=#' +
+        IntToStr(year) + '/' + IntToStr(month) + '/' +
+        IntToStr(DayOf(EndOfAMonth(StrToInt(IntToStr(year)),
+        StrToInt(IntToStr(month))))) + '#';
+      adoPayments.Filtered := True;
+      adoPayments.Sort := 'Date DESC';
+
+      // Getting balance from previous month
+      adoPayments.First;
+      prevBalance := adoPayments['Balance_bf'];
+
+      // Adding a new payment
+      adoPayments.Insert;
+      adoPayments['Acc_No'] := activePayment;
+      adoPayments['Date'] := date;
+      adoPayments['Amount'] := amount;
+      adoPayments['Payment_type'] := pay_type;
+      adoPayments['Balance_bf'] := prevBalance - amount;
+      adoPayments.Post;
+      adoPayments.Filtered := False;
+    end
+    else
+    begin
+      diffInMonths := 1;
+      adoPayments.Filter := 'Acc_No=' + IntToStr(account);
+      adoPayments.Filtered := True;
+      adoPayments.Sort := 'Date DESC';
+      adoPayments.First;
+
+      // Getting previous balance and fee
+      if adoPayments.RecordCount = 0 then
+        prevBalance := 0
+      else
+      begin
+        prevBalance := adoPayments['Balance_bf'];
+
+        // First working out the fee amount if the user has not paid the previous month/s
+        diffInMonths := Round(MonthSpan(date, adoPayments['Date']));
+        // ShowMessage('Difference in months: ' + IntToStr(diffInMonths));
+      end;
+
+      // Getting fee of the account
+      feeAmount := adoCustomers['Monthly_payable'];
+
+      // Adding a new payment
+      adoPayments.Insert;
+      adoPayments['Acc_No'] := activePayment;
+      adoPayments['Date'] := date;
+      adoPayments['Amount'] := amount;
+      adoPayments['Payment_type'] := pay_type;
+
+      // Working out the difference depending on whether the customer is active or not
+      if adoCustomers['Active'] then
+        adoPayments['Balance_bf'] := prevBalance - amount +
+          (diffInMonths * feeAmount)
+      else
+        adoPayments['Balance_bf'] := prevBalance - amount;
+
+      adoPayments.Post;
+      adoPayments.Filtered := False;
+    end;
+  end;
+
+  // Loading the customer in the payment sheet again
+  openPaymentState(account);
+
+end;
+
+procedure TfrmMain.addToSelectedList(account: integer; option: string);
+var
+  tempAccNum, i { loop variable } : integer;
+begin
+
+  lst_tbsInvoices_selected.TabWidth := 20;
+
+  // Making sure the same customer is not added twice or more
+  if lst_tbsInvoices_selected.Items.Count <> 0 then
+  begin
+    for i := 0 to lst_tbsInvoices_selected.Items.Count do
+    begin
+      // Retrieving the account number of the active item and comparing it with the account parameter
+      { ShowMessage('i: ' + IntToStr(i) + #13 + 'Count: ' +
+        IntToStr(lst_tbsInvoices_selected.Items.Count) + #13 + 'Item Index: ' +
+        IntToStr(lst_tbsInvoices_selected.ItemIndex)); }
+
+      lst_tbsInvoices_selected.ItemIndex := i;
+
+      tempAccNum := retreiveAccountNum(lst_tbsInvoices_selected);
+      if tempAccNum = account then
+      begin
+        if option <> 'selectAll' then
+          ShowMessage('This account is already selected');
+        Exit;
+      end;
+    end;
+  end;
+
+  // Adding an account to the selected list
+  with dmTKServices do
+  begin
+    adoCustomers.Locate('Acc_no', account, []);
+    lst_tbsInvoices_selected.Items.Add(IntToStr(adoCustomers['Acc_no']) + #9 +
+      adoCustomers['Surname'] + ' ' + adoCustomers['Initial'] + '.' + #9 +
+      adoCustomers['Street_name'] + #9 + adoCustomers['Suburb']);
+  end;
+
+  lst_tbsInvoices_selected.ItemIndex := -1;
+
+end;
+
+procedure TfrmMain.chk_tbsInvoices_selectAllClick(Sender: TObject);
+begin
+
+  // Adding all customers to the list (only adding active customers)
+  if chk_tbsInvoices_selectAll.Checked = True then
+  begin
+    with dmTKServices do
+    begin
+      adoCustomers.Filtered := False;
+      adoCustomers.Filter := 'Active=true';
+      adoCustomers.Filtered := True;
+      adoCustomers.First;
+
+      while not adoCustomers.Eof do
+      begin
+        addToSelectedList(adoCustomers['Acc_no'], 'selectAll');
+        adoCustomers.Next;
+      end;
+    end;
+  end
+  else
+    lst_tbsInvoices_selected.Clear;
+
+  dmTKServices.adoCustomers.Filter := '';
+  dmTKServices.adoCustomers.Filtered := False;
+
+  lst_tbsInvoices_selected.OnClick(self);
+
+end;
+
+procedure TfrmMain.cmb_tbsCustomers_daysChange(Sender: TObject);
+begin
+
+  // De-redifying
+  cmb_tbsCustomers_days.Color := clSilver;
+
+end;
+
+procedure TfrmMain.displayCustomers(key, field: string; listbox: TListBox;
+  radiogroup: TRadioGroup);
+begin
+
+  // Displaying all customers pertaining to the criteria
+  with dmTKServices do
+  begin
+
+    // Displaying different queries for different data types
+    adoQry.Close;
+    case radiogroup.ItemIndex of
+      0:
+        adoQry.SQL.Text :=
+          'SELECT Acc_no, Surname, Initial, Street_name FROM Customers WHERE Acc_no='
+          + key;
+      1 .. 2:
+        adoQry.SQL.Text :=
+          'SELECT Acc_no, Surname, Initial, Street_name FROM Customers WHERE ' +
+          field + ' like "' + Uppercase(key) + '%"';
+    end;
+    adoQry.Open;
+
+    adoQry.First;
+    while not adoQry.Eof do
+    begin
+      listbox.Items.Add(IntToStr(adoQry['Acc_No']) + #9 + adoQry['Surname'] + #9
+        + adoQry['Initial'] + '.' + #9 + adoQry['Street_name']);
+      adoQry.Next;
+    end;
+  end;
+
+end;
+
+procedure TfrmMain.dt_tbsPayments_dateChange(Sender: TObject);
+begin
+
+  // Displaying a message indicating the customer has already made a payment in the month
+  if paymentMonthAndYearPresent(activePayment, dt_tbsPayments_date) then
+    lbl_tbsPayments_note.Visible := True
+  else
+    lbl_tbsPayments_note.Visible := False;
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_emailChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_email);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_frequencyChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_frequency);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_housenumberChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_housenumber);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_initialChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_initial);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_nameChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_name);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_nobinsChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_nobins);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_phonenumberChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_phonenumber);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_postalChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_postal);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_priceChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_price);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_searchChange(Sender: TObject);
+begin
+
+  // Searching for the accounts
+  searchAccount(edt_tbsCustomers_search, rdg_tbsCustomers_searchby,
+    lst_tbsCustomers_results);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_streetnameChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_streetname);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_suburbChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_suburb);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_surnameChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_surname);
+
+end;
+
+procedure TfrmMain.edt_tbsCustomers_titleChange(Sender: TObject);
+begin
+
+  // De-redifying
+  redify(False, edt_tbsCustomers_title);
+
+end;
+
+procedure TfrmMain.edt_tbsInvoices_searchChange(Sender: TObject);
+begin
+
+  // Searching for the account
+  searchAccount(edt_tbsInvoices_search, rdg_tbsInvoices_searchby,
+    lst_tbsInvoices_results);
+
+end;
+
+procedure TfrmMain.edt_tbsPayments_searchChange(Sender: TObject);
+begin
+
+  // Searching for the account
+  searchAccount(edt_tbsPayments_search, rdg_tbsPayments_searchby,
+    lst_tbsPayments_results);
+
+end;
+
+procedure TfrmMain.enterEditMode(enter: boolean);
+begin
+
+  // Enabling or disabling edit mode
+
+  if not enter then
+  begin
+    // Exiting out of edit mode
+    edt_tbsCustomers_initial.ReadOnly := True;
+    edt_tbsCustomers_title.ReadOnly := True;
+    edt_tbsCustomers_name.ReadOnly := True;
+    edt_tbsCustomers_surname.ReadOnly := True;
+    edt_tbsCustomers_housenumber.ReadOnly := True;
+    edt_tbsCustomers_streetname.ReadOnly := True;
+    edt_tbsCustomers_suburb.ReadOnly := True;
+    edt_tbsCustomers_postal.ReadOnly := True;
+    edt_tbsCustomers_phonenumber.ReadOnly := True;
+    edt_tbsCustomers_email.ReadOnly := True;
+    red_tbsCustomers_comments.ReadOnly := True;
+    edt_tbsCustomers_frequency.ReadOnly := True;
+    edt_tbsCustomers_nobins.ReadOnly := True;
+    cmb_tbsCustomers_days.Enabled := False;
+    edt_tbsCustomers_price.ReadOnly := True;
+    editing := False;
+
+    img_tbsCustomers_cancel.Visible := False;
+    img_tbsCustomers_save.Visible := False;
+    img_tbsCustomers_edit.Visible := True;
+    lbl_tbsCustomers_active.Cursor := crDefault;
+  end
+  else
+  begin
+    // Entering edit mode
+    edt_tbsCustomers_initial.ReadOnly := False;
+    edt_tbsCustomers_title.ReadOnly := False;
+    edt_tbsCustomers_name.ReadOnly := False;
+    edt_tbsCustomers_surname.ReadOnly := False;
+    edt_tbsCustomers_housenumber.ReadOnly := False;
+    edt_tbsCustomers_streetname.ReadOnly := False;
+    edt_tbsCustomers_suburb.ReadOnly := False;
+    edt_tbsCustomers_postal.ReadOnly := False;
+    edt_tbsCustomers_phonenumber.ReadOnly := False;
+    edt_tbsCustomers_email.ReadOnly := False;
+    red_tbsCustomers_comments.ReadOnly := False;
+    edt_tbsCustomers_frequency.ReadOnly := False;
+    edt_tbsCustomers_nobins.ReadOnly := False;
+    cmb_tbsCustomers_days.Enabled := True;
+    edt_tbsCustomers_price.ReadOnly := False;
+    editing := True;
+
+    img_tbsCustomers_cancel.Visible := True;
+    img_tbsCustomers_save.Visible := True;
+    img_tbsCustomers_edit.Visible := False;
+    lbl_tbsCustomers_active.Cursor := crHandPoint;
+  end;
+
+end;
+
+procedure TfrmMain.FormActivate(Sender: TObject);
+begin
+
+  // Loading in a customer if one is active
+  dmTKServices.adoCustomers.Refresh;
+  if activeCustomer = 0 then
+  begin
+    grp_tbsCustomers_customer.Enabled := False;
+  end
+  else
+  begin
+    InstantiateCustomer;
+    loadCustomer(customer);
+  end;
+
+  popSearchList(lst_tbsCustomers_results);
+
+  // ShowMessage(dmTKServices.conTKServices.ConnectionString);
+
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+begin
+
+  // Setting active customer to Null
+  activeCustomer := 0;
+  editing := False;
+
+  // Initialising components and variables
+  img_tbsCustomers_cancel.Visible := False;
+  img_tbsCustomers_save.Visible := False;
+  lst_tbsCustomers_results.Items.Clear;
+  popSearchList(lst_tbsCustomers_results);
+
+end;
+
+function TfrmMain.getBfAmount(account, month, year: integer): integer;
+var
+  prevBalance, diffInMonths: integer;
+begin
+
+  { ShowMessage('Account: ' + IntToStr(account) + #13 + 'Month: ' +
+    IntToStr(month) + #13 + 'Year: ' + IntToStr(year)); }
+
+  // Returning the customers bbf amount of the previous month or year
+  with dmTKServices do
+  begin
+    adoPayments.Filtered := False;
+    if month > 1 then
+    begin
+      adoPayments.Filter := 'Acc_no=' + IntToStr(account) + ' AND Date>=#' +
+        IntToStr(year) + '/' + IntToStr(month - 1) + '/1# AND Date<=#' +
+        IntToStr(year) + '/' + IntToStr(month - 1) + '/' +
+        IntToStr(DayOf(EndOfAMonth(year, month - 1))) + '#';
+      // ShowMessage(adoPayments.Filter);
+    end
+    else if month = 1 then
+    begin
+      adoPayments.Filter := 'Acc_no=' + IntToStr(account) + ' AND Date>=#' +
+        IntToStr(year - 1) + '/' + IntToStr(12) + '/1# AND Date<=#' +
+        IntToStr(year - 1) + '/' + IntToStr(12) + '/' +
+        IntToStr(DayOf(EndOfAMonth(year - 1, 12))) + '#';
+      // ShowMessage(adoPayments.Filter);
+    end;
+
+    adoPayments.Filtered := True;
+    adoPayments.Sort := 'Date DESC';
+    adoPayments.First;
+
+    // ShowMessage('Record count: ' + IntToStr(adoPayments.RecordCount));
+
+    if adoPayments.RecordCount = 0 then
+    begin
+      // ShowMessage('Balance is set to zero');
+      prevBalance := 0;
+
+      // Checking if there is any payments at all
+      adoPayments.Filtered := False;
+      adoPayments.Filter := 'Acc_no=' + IntToStr(account);
+      adoPayments.Sort := 'Date DESC';
+      adoPayments.First;
+
+      if adoPayments.RecordCount > 0 then
+      begin
+        // First working out the fee date if the user has not paid the previous month/s
+        diffInMonths :=
+          Round(MonthSpan(StrToDate(IntToStr(year) + '/' + IntToStr(month) +
+          '/1'), adoPayments['Date']));
+        // ShowMessage('Difference in months: ' + IntToStr(diffInMonths));
+        adoCustomers.Locate('Acc_No', account, []);
+
+        if adoCustomers['Active'] then
+        begin
+          prevBalance := adoPayments['Balance_bf'] +
+            ((diffInMonths - 1) * adoCustomers['Monthly_payable']);
+          // ShowMessage('adding difference')
+        end
+        else
+        begin
+          prevBalance := adoPayments['Balance_bf'];
+          // ShowMessage('not adding difference')
+        end;
+      end;
+    end
+    else
+    begin
+      // ShowMessage('Balance is taken from db');
+      prevBalance := adoPayments['Balance_bf'];
+    end;
+
+    adoPayments.Filtered := False;
+    // ShowMessage(IntToStr(prevBalance));
+    Result := prevBalance;
+
+  end;
+
+end;
+
+procedure TfrmMain.img_tbsCustomers_addnewClick(Sender: TObject);
+begin
+
+  // Showing new customer page
+  frmAddNewCustomer.ShowModal;
+
+end;
+
+procedure TfrmMain.img_tbsCustomers_cancelClick(Sender: TObject);
+var
+  response: integer;
+begin
+
+  // Exiting out of edit mode if the user is sure
+  response := MessageDlg
+    ('Any changed made will not be saved. Are you sure you want to cancel?',
+    TMsgDlgType.mtWarning, mbYesNo, 0);
+
+  if response = mrYes then
+  begin
+    enterEditMode(False);
+    loadCustomer(customer)
+  end
+  else if response = mrNo then
+    enterEditMode(True);
+
+end;
+
+procedure TfrmMain.img_tbsCustomers_editClick(Sender: TObject);
+begin
+
+  // Entering edit mode
+  enterEditMode(True);
+
+end;
+
+procedure TfrmMain.img_tbsCustomers_saveClick(Sender: TObject);
+begin
+
+  if validationPassed then
+  begin
+    // Save all field to database using object
+    saveToDB;
+    ShowMessage('Your changes have been saved.');
+    frmMain.OnActivate(self);
+    popSearchList(lst_tbsCustomers_results);
+    enterEditMode(False);
+  end;
+
+end;
+
+procedure TfrmMain.img_tbsInvoices_removeClick(Sender: TObject);
+begin
+
+  // Removing the selcted item
+  lst_tbsInvoices_selected.Items.Delete(lst_tbsInvoices_selected.ItemIndex);
+
+end;
+
+procedure TfrmMain.InstantiateCustomer;
+var
+  comment: string;
+begin
+
+  // Instantiating the customer
+  with dmTKServices do
+  begin
+
+    adoCustomers.Locate('Acc_no', activeCustomer, []);
+
+    customer := TCustomer.Create(adoCustomers['Title'], adoCustomers['Initial'],
+      adoCustomers['Name'], adoCustomers['Surname'], adoCustomers['Active'],
+      adoCustomers['Email'], adoCustomers['Home_no'],
+      adoCustomers['Street_name'], adoCustomers['Suburb'],
+      adoCustomers['Postal'], adoCustomers['Phone_no'], adoCustomers['Origin'],
+      adoCustomers['Frequency'], adoCustomers['No_bins'], adoCustomers['Day'],
+      adoCustomers['Monthly_payable'], adoCustomers['Acc_no']);
+  end;
+
+end;
+
+procedure TfrmMain.intializeInvoicesSheet;
+var
+  currentMonth, currentYear: integer;
+begin
+
+  // Intializing the invoices sheet page
+
+  // populate the search
+  popSearchList(lst_tbsInvoices_results);
+  edt_tbsInvoices_search.Clear;
+  edt_tbsInvoices_search.SetFocus;
+
+  chk_tbsInvoices_selectAll.Checked := False;
+
+  // Setting the current month and year
+  currentMonth := MonthOf(Today);
+  currentYear := YearOf(Today);
+
+  sed_tbsInvoices_year.Value := currentYear;
+  cmb_tbsInvoices_month.ItemIndex := currentMonth - 1;
+
+  dt_tbsInvoices_bfDate.date := Today;
+  dt_tbsInvoices_feeDate.date := Today;
+  dt_tbsInvoices_issuedate.date := Today;
+
+end;
+
+procedure TfrmMain.lbl_tbsCustomers_activeClick(Sender: TObject);
+begin
+
+  // Setting account to active or not active
+  if editing then
+  begin
+    if lbl_tbsCustomers_active.Caption = 'Active' then
+    begin
+      shp_tbsCustomers_active.Brush.Color := clRed;
+      lbl_tbsCustomers_active.Caption := 'Inactive';
+    end
+    else
+    begin
+      shp_tbsCustomers_active.Brush.Color := clMoneyGreen;
+      lbl_tbsCustomers_active.Caption := 'Active';
+    end;
+  end;
+
+end;
+
+procedure TfrmMain.lbl_tbsCustomers_addpaymentClick(Sender: TObject);
+begin
+
+  // Opening the payments tab for the customer
+  pgMain.ActivePage := tbsPayments;
+  activePayment := activeCustomer;
+  openPaymentState(activePayment);
+
+end;
+
+procedure TfrmMain.lbl_tbsCustomers_generateinvoiceDblClick(Sender: TObject);
+begin
+  // Generating an invoice for the customer
+  pgMain.ActivePageIndex := 2;
+  addToSelectedList(activeCustomer, 'new');
+
+end;
+
+procedure TfrmMain.lbl_tbsInvoices_generateClick(Sender: TObject);
+begin
+
+  // Generating the invoices
+
+  // Putting all data into a file
+  writeAccountsToFile;
+
+end;
+
+procedure TfrmMain.lbl_tbsPayments_addClick(Sender: TObject);
+begin
+
+  // Add the payment and update the balance
+
+  // Checking if the month and year is present in the list of payments
+
+  if paymentMonthAndYearPresent(activePayment, dt_tbsPayments_date) then
+  begin
+    addPayment(activePayment, dt_tbsPayments_date.date,
+      sed_tbsPayments_amount.Value, cmb_tbsPayments_type.Items
+      [cmb_tbsPayments_type.ItemIndex], 'existing');
+  end
+  else
+    addPayment(activePayment, dt_tbsPayments_date.date,
+      sed_tbsPayments_amount.Value, cmb_tbsPayments_type.Items
+      [cmb_tbsPayments_type.ItemIndex], 'new');
+
+end;
+
+procedure TfrmMain.lbl_tbsPayments_deleteClick(Sender: TObject);
+begin
+
+  // Deleting the record
+  with dmTKServices do
+  begin
+    if MessageDlg('Are you sure you want to delete this record?',
+      TMsgDlgType.mtWarning, mbYesNo, 0) = mrOk then
+    begin
+      // dmTKServices.adoPayments.Edit;
+      dbg_tbsPayments_paymenthistory.Options := [dgEditing, dgAlwaysShowEditor,
+        dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs,
+        dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack];
+
+      // adoPayments.Locate('Acc_no', activePayment, []);
+
+      adoPayments.Delete;
+      adoPayments.Post;
+    end;
+  end;
+
+end;
+
+procedure TfrmMain.loadCustomer(customer: TCustomer);
+var
+  tempFile: Textfile;
+  line: string;
+begin
+
+  // Loading customer details into the ui
+  edt_tbsCustomers_title.Text := customer.getTitle;
+  edt_tbsCustomers_initial.Text := customer.getInitial;
+  edt_tbsCustomers_name.Text := customer.getName;
+  edt_tbsCustomers_surname.Text := customer.getSurname;
+  edt_tbsCustomers_email.Text := customer.getEmail;
+  edt_tbsCustomers_housenumber.Text := customer.getHouseNo;
+  edt_tbsCustomers_streetname.Text := customer.getStreet;
+  edt_tbsCustomers_suburb.Text := customer.getSuburb;
+  edt_tbsCustomers_postal.Text := IntToStr(customer.getPostal);
+  edt_tbsCustomers_phonenumber.Text := customer.getPhone;
+  edt_tbsCustomers_origin.Text := customer.getOrigin;
+  edt_tbsCustomers_frequency.Text := IntToStr(customer.getFrequency);
+  edt_tbsCustomers_nobins.Text := IntToStr(customer.getnoBins);
+  cmb_tbsCustomers_days.Text := customer.getDay;
+  edt_tbsCustomers_price.Text := IntToStr(customer.getMonthly);
+  red_tbsCustomers_comments.Clear;
+
+  // Getting comments
+  AssignFile(tempFile, GetCurrentDir + '\datafiles\comments\' +
+    IntToStr(customer.getAccNo) + '.txt');
+  Reset(tempFile);
+  while not Eof(tempFile) do
+  begin
+    Readln(tempFile, line);
+    red_tbsCustomers_comments.Lines.Add(line);
+  end;
+
+  CloseFile(tempFile);
+
+  if customer.getaccStatus then
+  begin
+    shp_tbsCustomers_active.Brush.Color := clMoneyGreen;
+    lbl_tbsCustomers_active.Caption := 'Active';
+  end
+  else
+  begin
+    shp_tbsCustomers_active.Brush.Color := clRed;
+    lbl_tbsCustomers_active.Caption := 'Inactive';
+  end;
+
+  // Loading payments into the dbgrid
+  dbg_tbsCustomers_payments.DataSource := dmTKServices.dsOutput;
+  with dmTKServices.adoPayments do
+  begin
+    Filtered := False;
+    Filter := 'Acc_no = ' + IntToStr(customer.getAccNo);
+    Filtered := True;
+    Sort := 'Date DESC';
+    tfloatfield(dbg_tbsCustomers_payments.DataSource.dataset.fieldbyname
+      ('Amount')).Displayformat := 'R0.00';
+    tfloatfield(dbg_tbsCustomers_payments.DataSource.dataset.fieldbyname
+      ('Balance_bf')).Displayformat := 'R0.00';
+  end;
+
+  // Updating status bar and enabling group box
+  grp_tbsCustomers_customer.Enabled := True;
+
+  // Entering edit mode
+  if editing then
+    enterEditMode(True)
+  else
+    enterEditMode(False);
+
+end;
+
+procedure TfrmMain.lst_tbsCustomers_resultsDblClick(Sender: TObject);
+begin
+
+  // Loading in the selected customer
+  activeCustomer := retreiveAccountNum(lst_tbsCustomers_results);
+
+  InstantiateCustomer;
+  frmMain.OnActivate(self);
+
+end;
+
+procedure TfrmMain.lst_tbsCustomers_resultsExit(Sender: TObject);
+begin
+
+  // Deselecting any selected items from the results listbox
+  lst_tbsCustomers_results.ItemIndex := -1;
+
+end;
+
+procedure TfrmMain.lst_tbsCustomers_resultsMouseLeave(Sender: TObject);
+begin
+
+  lst_tbsCustomers_results.OnExit(self);
+
+end;
+
+procedure TfrmMain.lst_tbsInvoices_resultsClick(Sender: TObject);
+begin
+
+  // Removing the cancel button
+  lst_tbsInvoices_selected.OnClick(self);
+
+end;
+
+procedure TfrmMain.lst_tbsInvoices_resultsDblClick(Sender: TObject);
+var
+  accNum: integer;
+begin
+
+  // Retrieving account number and adding it to the selected list
+  accNum := retreiveAccountNum(lst_tbsInvoices_results);
+
+  addToSelectedList(accNum, 'none');
+
+  lst_tbsInvoices_selected.OnClick(self);
+
+end;
+
+procedure TfrmMain.lst_tbsInvoices_selectedClick(Sender: TObject);
+begin
+
+  // Showing the remove button
+  if lst_tbsInvoices_selected.ItemIndex <> -1 then
+    img_tbsInvoices_remove.Visible := True
+  else
+    img_tbsInvoices_remove.Visible := False;
+
+end;
+
+procedure TfrmMain.lst_tbsInvoices_selectedExit(Sender: TObject);
+begin
+
+  // Deselecting item
+  lst_tbsInvoices_selected.ItemIndex := -1;
+
+end;
+
+procedure TfrmMain.lst_tbsPayments_resultsDblClick(Sender: TObject);
+begin
+
+  // Opening customer for payment
+  activePayment := retreiveAccountNum(lst_tbsPayments_results);
+
+  // Setting status and other items
+  openPaymentState(activePayment);
+
+end;
+
+procedure TfrmMain.openPaymentState(accNum: integer);
+begin
+
+  // Opening payment state for selected cunstomer
+  lbl_tbsPayments_addpayment.Caption := 'Add Payment: Account ' +
+    IntToStr(accNum);
+
+  // Loading in payment history
+  dbg_tbsPayments_paymenthistory.DataSource := dmTKServices.dsOutput;
+  with dmTKServices.adoPayments do
+  begin
+    Filtered := False;
+    Filter := 'Acc_no = ' + IntToStr(activePayment);
+    Filtered := True;
+    Sort := 'Date DESC';
+    tfloatfield(dbg_tbsPayments_paymenthistory.DataSource.dataset.fieldbyname
+      ('Amount')).Displayformat := 'R0.00';
+    tfloatfield(dbg_tbsPayments_paymenthistory.DataSource.dataset.fieldbyname
+      ('Balance_bf')).Displayformat := 'R0.00';
+  end;
+
+  lbl_tbsPayments_add.Enabled := True;
+  lbl_tbsPayments_edit.Enabled := True;
+  lbl_tbsPayments_delete.Enabled := True;
+
+end;
+
+function TfrmMain.paymentMonthAndYearPresent(account: integer;
+  date: TDateTimePicker): boolean;
+var
+  month, year: integer;
+begin
+
+  // Determining if there is already a month and year for the payment
+
+  // Retrieving month and year
+  month := MonthOf(date.date);
+  year := YearOf(date.date);
+  // ShowMessage('Month: ' + IntToStr(month) + #13 + 'Year: ' + IntToStr(year));
+
+  // Searching for month and year in the payments table
+  with dmTKServices do
+  begin
+    adoPayments.Open;
+    adoPayments.Filter := '';
+    adoPayments.Filtered := False;
+    adoPayments.Filter := 'Acc_No=' + IntToStr(account) + ' AND Date >=#' +
+      IntToStr(year) + '/' + IntToStr(month) + '/1# AND Date <=#' +
+      IntToStr(year) + '/' + IntToStr(month) + '/' +
+      IntToStr(DayOf(EndOfAMonth(StrToInt(IntToStr(year)),
+      StrToInt(IntToStr(month))))) + '#';
+    adoPayments.Filtered := True;
+    // ShowMessage(adoPayments.Filter);
+    if adoPayments.RecordCount > 0 then
+    begin
+      adoPayments.Filtered := False;
+      Result := True;
+    end
+    else
+    begin
+      adoPayments.Filtered := False;
+      Result := False;
+    end;
+  end;
+
+  openPaymentState(activePayment);
+
+end;
+
+procedure TfrmMain.pgMainChange(Sender: TObject);
+begin
+
+  // Populating results lists
+  if pgMain.ActivePage = tbsCustomers then
+    popSearchList(lst_tbsCustomers_results)
+  else if pgMain.ActivePage = tbsPayments then
+    popSearchList(lst_tbsPayments_results);
+
+end;
+
+procedure TfrmMain.popSearchList(list: TListBox);
+begin
+
+  list.Items.Clear;
+  list.TabWidth := 35;
+
+  // Populating the search list with all customers in the format: Surname, Initial, Street Name)
+  with dmTKServices do
+  begin
+    adoCustomers.Open;
+    adoCustomers.Filtered := False;
+    adoCustomers.First;
+
+    while not adoCustomers.Eof do
+    begin
+      list.Items.Add(IntToStr(adoCustomers['Acc_No']) + #9 + adoCustomers
+        ['Surname'] + #9 + adoCustomers['Initial'] + '.' + #9 + adoCustomers
+        ['Street_name']);
+      adoCustomers.Next;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmMain.redify(redify: boolean; item: TEdit);
+begin
+
+  // Turning the current object red or silver depending on the redify param
+  if redify then
+    item.Color := clRed
+  else
+    item.Color := clSilver;
+
+end;
+
+function TfrmMain.retreiveAccountNum(list: TListBox): integer;
+begin
+
+  // Getting the account number and returning it
+  Result := StrToInt(Trim(Copy(list.Items[list.ItemIndex], 1,
+    pos(#9, list.Items[list.ItemIndex]))));
+
+end;
+
+procedure TfrmMain.saveToDB;
+var
+  tempFile: Textfile;
+begin
+
+  // Saving all fields to the database;
+  customer.setTitle(edt_tbsCustomers_title.Text);
+  customer.setInitial(edt_tbsCustomers_name.Text[1]);
+  customer.setName(edt_tbsCustomers_name.Text);
+  customer.setSurname(edt_tbsCustomers_surname.Text);
+  customer.setHouseNo(edt_tbsCustomers_housenumber.Text);
+  customer.setStreet(edt_tbsCustomers_streetname.Text);
+  customer.setSuburb(edt_tbsCustomers_suburb.Text);
+  customer.setPostal(StrToInt(edt_tbsCustomers_postal.Text));
+  customer.setPhone(edt_tbsCustomers_phonenumber.Text);
+  customer.setEmail(edt_tbsCustomers_email.Text);
+  customer.setOrigin(edt_tbsCustomers_origin.Text);
+
+  // Adding comments to the comment's file
+  AssignFile(tempFile, GetCurrentDir + '\datafiles\comments\' +
+    IntToStr(customer.getAccNo) + '.txt');
+  Rewrite(tempFile);
+  Write(tempFile, red_tbsCustomers_comments.Text);
+  CloseFile(tempFile);
+
+  customer.setFrequency(StrToInt(edt_tbsCustomers_frequency.Text));
+  customer.setNoBins(StrToInt(edt_tbsCustomers_nobins.Text));
+  customer.setDay(cmb_tbsCustomers_days.Items[cmb_tbsCustomers_days.ItemIndex]);
+  customer.setMonthly(StrToInt(edt_tbsCustomers_price.Text));
+
+  if lbl_tbsCustomers_active.Caption = 'Active' then
+    customer.setAccStatus(True)
+  else
+    customer.setAccStatus(False);
+
+end;
+
+procedure TfrmMain.searchAccount(searchbox: TEdit; radiogroup: TRadioGroup;
+  listbox: TListBox);
+var
+  field: string;
+begin
+
+  listbox.Enabled := True;
+  listbox.Items.Clear;
+
+  // Showing all customers related to the search
+
+  case radiogroup.ItemIndex of
+    0:
+      field := 'Acc_No';
+    1:
+      field := 'Surname';
+    2:
+      field := 'Street_name';
+  end;
+
+  if searchbox.Text = '' then
+    popSearchList(listbox)
+  else if dmTKServices.adoCustomers.Locate(field, searchbox.Text,
+    [loPartialKey, loCaseInsensitive]) then
+  begin
+    displayCustomers(searchbox.Text, field, listbox, radiogroup);
+  end
+  else
+  begin
+    listbox.Items.Clear;
+    listbox.Items.Add('No Results for ''' + searchbox.Text + '''');
+    listbox.Enabled := False;
+  end;
+end;
+
+procedure TfrmMain.tbsInvoicesShow(Sender: TObject);
+begin
+
+  // Setting up invoices page
+  intializeInvoicesSheet;
+
+end;
+
+procedure TfrmMain.tbsPaymentsEnter(Sender: TObject);
+begin
+
+  // Populating the search box with customer details
+  popSearchList(lst_tbsPayments_results);
+
+end;
+
+procedure TfrmMain.tbsPaymentsShow(Sender: TObject);
+begin
+
+  popSearchList(lst_tbsPayments_results);
+
+end;
+
+function TfrmMain.validationPassed: boolean;
+var
+  tempNum: integer;
+begin
+
+  // Validating all fields
+
+  // Title
+  if Length(edt_tbsCustomers_title.Text) > 4 then
+  begin
+    ShowMessage('Title field is too long. Max 4 characters.');
+    redify(True, edt_tbsCustomers_title);
+    Result := False;
+    Exit;
+  end;
+
+  // Initial
+  if Length(edt_tbsCustomers_initial.Text) > 1 then
+  begin
+    ShowMessage('Initial field is too long. Max 1 character.');
+    redify(True, edt_tbsCustomers_initial);
+    Result := False;
+    Exit;
+  end;
+
+  // Name
+  if Length(edt_tbsCustomers_name.Text) > 50 then
+  begin
+    ShowMessage('Name field is too long. Max 50 characters.');
+    redify(True, edt_tbsCustomers_name);
+    Result := False;
+    Exit;
+  end;
+
+  // Surname
+  if Length(edt_tbsCustomers_surname.Text) > 50 then
+  begin
+    ShowMessage('Surname field is too long. Max 50 characters.');
+    redify(True, edt_tbsCustomers_surname);
+    Result := False;
+    Exit;
+  end;
+
+  // House number
+  if Length(edt_tbsCustomers_housenumber.Text) > 10 then
+  begin
+    ShowMessage('House number field is too long. Max 10 characters.');
+    redify(True, edt_tbsCustomers_housenumber);
+    Result := False;
+    Exit;
+  end;
+
+  // Street name
+  if Length(edt_tbsCustomers_streetname.Text) > 60 then
+  begin
+    ShowMessage('Street Name field is too long. Max 60 characters.');
+    redify(True, edt_tbsCustomers_streetname);
+    Result := False;
+    Exit;
+  end;
+
+  // Suburb
+  if Length(edt_tbsCustomers_suburb.Text) > 50 then
+  begin
+    ShowMessage('Suburb field is too long. Max 50 characters.');
+    redify(True, edt_tbsCustomers_suburb);
+    Result := False;
+    Exit;
+  end;
+
+  // Postal
+  if not TryStrToInt(edt_tbsCustomers_postal.Text, tempNum) then
+  begin
+    ShowMessage('Postal code is not valid.');
+    redify(True, edt_tbsCustomers_postal);
+    Result := False;
+    Exit;
+  end;
+
+  // Phone
+  if Length(edt_tbsCustomers_phonenumber.Text) > 15 then
+  begin
+    ShowMessage('Phone number field is too long. Max 15 characters.');
+    redify(True, edt_tbsCustomers_phonenumber);
+    Result := False;
+    Exit;
+  end;
+
+  // Email
+  if Length(edt_tbsCustomers_email.Text) > 110 then
+  begin
+    ShowMessage('Email field is too long. Max 110 characters.');
+    redify(True, edt_tbsCustomers_email);
+    Result := False;
+    Exit;
+  end;
+
+  // Origin
+  if Length(edt_tbsCustomers_origin.Text) > 50 then
+  begin
+    ShowMessage('Origin field is too long. Max 50 characters.');
+    redify(True, edt_tbsCustomers_origin);
+    Result := False;
+    Exit;
+  end;
+
+  // Frequency
+  if not TryStrToInt(edt_tbsCustomers_frequency.Text, tempNum) then
+  begin
+    ShowMessage('Frequency field is not valid.');
+    redify(True, edt_tbsCustomers_frequency);
+    Result := False;
+    Exit;
+  end;
+
+  // Number Bins
+  if not TryStrToInt(edt_tbsCustomers_nobins.Text, tempNum) then
+  begin
+    ShowMessage('Number Of Bins field is not valid.');
+    redify(True, edt_tbsCustomers_nobins);
+    Result := False;
+    Exit;
+  end;
+
+  // Day
+  if cmb_tbsCustomers_days.ItemIndex = -1 then
+  begin
+    ShowMessage('Day field is not valid.');
+    cmb_tbsCustomers_days.Color := clRed;
+    Result := False;
+    Exit;
+  end;
+
+  // Monthly price
+  if not TryStrToInt(edt_tbsCustomers_price.Text, tempNum) then
+  begin
+    ShowMessage('Monthly Price field is not valid');
+    redify(True, edt_tbsCustomers_price);
+    Result := False;
+    Exit;
+  end;
+
+  Result := True;
+
+end;
+
+procedure TfrmMain.writeAccountsToFile;
+var
+  tempDataFile: Textfile;
+  i, tempAccNum, prevBalance, monthlyPayable: integer;
+  invoiceNum, month, line, exeDir: string;
+begin
+
+  // Adding each account to a file
+  AssignFile(tempDataFile, GetCurrentDir + '\datafiles\invoice_data.txt');
+  Rewrite(tempDataFile);
+
+  line := cmb_tbsInvoices_month.Items[cmb_tbsInvoices_month.ItemIndex] + ',' +
+    IntToStr(sed_tbsInvoices_year.Value) + ',0,0,0,0,0,0,0,0,0,0';
+  Writeln(tempDataFile, line);
+
+  for i := 0 to lst_tbsInvoices_selected.Items.Count - 1 do
+  begin
+    lst_tbsInvoices_selected.ItemIndex := i;
+    tempAccNum := retreiveAccountNum(lst_tbsInvoices_selected);
+
+    // Getting the previous month's bbf amount
+    prevBalance := getBfAmount(tempAccNum, cmb_tbsInvoices_month.ItemIndex + 1,
+      sed_tbsInvoices_year.Value);
+
+    with dmTKServices do
+    begin
+      adoCustomers.Locate('Acc_no', tempAccNum, []);
+
+      // Generating invoice number
+      month := '';
+      if cmb_tbsInvoices_month.ItemIndex + 1 <= 9 then
+        month := '0';
+
+      month := month + IntToStr(cmb_tbsInvoices_month.ItemIndex + 1);
+      invoiceNum := IntToStr(tempAccNum) +
+        IntToStr(sed_tbsInvoices_year.Value) + month;
+      // ShowMessage(invoiceNum);
+
+      // Getting monthly payable based on the user's inactivity
+      if adoCustomers['Active'] then
+        monthlyPayable := adoCustomers['monthly_payable']
+      else
+        monthlyPayable := 0;
+
+      line := IntToStr(adoCustomers['Acc_no']) + ',' + IntToStr(prevBalance) +
+        ',' + IntToStr(monthlyPayable) + ',' +
+        DateToStr(dt_tbsInvoices_bfDate.date) + ',' +
+        DateToStr(dt_tbsInvoices_feeDate.date) + ',' +
+        DateToStr(dt_tbsInvoices_issuedate.date) + ',' + adoCustomers['Title'] +
+        ' ' + adoCustomers['Initial'] + '. ' + adoCustomers['Surname'] + ',' +
+        adoCustomers['Home_no'] + ' ' + adoCustomers['Street_name'] + ',' +
+        adoCustomers['Suburb'] + ',' + IntToStr(adoCustomers['postal']) + ',' +
+        invoiceNum + ',' + Copy(adoCustomers['Surname'], 1, 3) +
+        IntToStr(adoCustomers['Acc_no']);
+      Writeln(tempDataFile, line);
+    end;
+  end;
+
+  CloseFile(tempDataFile);
+
+  exeDir := GetCurrentDir + '\invoice_generation\ims.exe';
+  ShellExecute(Handle, 'open', PChar(exeDir), nil, nil, SW_SHOWNORMAL);
+
+end;
+
+end.

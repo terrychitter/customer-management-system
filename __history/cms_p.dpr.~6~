@@ -1,0 +1,18 @@
+program cms_p;
+
+uses
+  Vcl.Forms,
+  main_u in 'main_u.pas' {frmMain},
+  dm_TKServices_u in 'dm_TKServices_u.pas' {dmTKServices: TDataModule},
+  customer_u in 'customer_u.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TdmTKServices, dmTKServices);
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.Run;
+
+end.

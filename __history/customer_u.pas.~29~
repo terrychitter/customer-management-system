@@ -1,0 +1,471 @@
+unit customer_u;
+
+interface
+
+uses
+  dm_TKServices_u;
+
+type
+  TCustomer = class
+
+    // Private attributes
+  private
+    title, intial, name, surname, email, street, suburb, phone, origin, day,
+      comments, houseNo: string;
+    postal, frequency, noBins, monthly, accNo, currentBalance: integer;
+    accStatus: boolean;
+
+    procedure setAndLocateAdo();
+
+  public
+    // Constructor and auxiliary methods
+    constructor Create(title, initial, name, surname: string;
+      accStatus: boolean; email, houseNo: string;
+      street, suburb: string; postal: integer; phone, origin: string;
+      frequency, noBins: integer; day: string;
+      monthly, accNo, currentBalance: integer; comments: string);
+
+    // Getters
+    Function getTitle(): string;
+    Function getInitial(): string;
+    Function getName(): string;
+    Function getSurname(): string;
+    Function getEmail(): string;
+    Function getStreet(): string;
+    Function getSuburb(): string;
+    Function getPhone(): string;
+    Function getOrigin(): string;
+    Function getDay(): string;
+    Function getHouseNo(): string;
+    Function getPostal(): integer;
+    Function getFrequency(): integer;
+    Function getnoBins(): integer;
+    Function getMonthly(): integer;
+    Function getAccNo(): integer;
+    Function getaccStatus: boolean;
+
+    // Setters
+    procedure setTitle(title: string);
+    procedure setInitial(initial: string);
+    procedure setName(value: string);
+    procedure setSurname(surname: string);
+    procedure setEmail(email: string);
+    procedure setStreet(street: string);
+    procedure setSuburb(suburb: string);
+    procedure setPhone(phone: string);
+    procedure setOrigin(origin: string);
+    procedure setDay(day: string);
+    procedure setHouseNo(houseNo: string);
+    procedure setPostal(postal: integer);
+    procedure setFrequency(frequency: integer);
+    procedure setNoBins(noBins: integer);
+    procedure setMonthly(monthly: integer);
+    procedure setAccNo(accNo: integer);
+    procedure setAccStatus(accStatus: boolean);
+  end;
+
+implementation
+
+{ TCustomer }
+
+constructor TCustomer.Create(title, initial, name, surname: string;
+  accStatus: boolean; email, houseNo: string; street, suburb: string;
+  postal: integer; phone, origin: string; frequency, noBins: integer;
+  day: string; monthly, accNo, currentBalance: integer; comments: string);
+begin
+
+  // Intantiating the object
+  self.title := title;
+  self.intial := initial;
+  self.name := name;
+  self.surname := surname;
+  self.accStatus := accStatus;
+  self.email := email;
+  self.houseNo := houseNo;
+  self.street := street;
+  self.suburb := suburb;
+  self.postal := postal;
+  self.phone := phone;
+  self.origin := origin;
+  self.frequency := frequency;
+  self.noBins := noBins;
+  self.day := day;
+  self.monthly := monthly;
+  self.accNo := accNo;
+  self.currentBalance := currentBalance;
+  self.comments := comments;
+
+end;
+
+function TCustomer.getAccNo: integer;
+begin
+
+  result := self.accNo;
+
+end;
+
+function TCustomer.getaccStatus: boolean;
+begin
+
+  result := self.accStatus;
+
+end;
+
+
+function TCustomer.getDay: string;
+begin
+
+  result := self.day;
+
+end;
+
+function TCustomer.getEmail: string;
+begin
+
+  result := self.email;
+
+end;
+
+function TCustomer.getFrequency: integer;
+begin
+
+  result := self.frequency;
+
+end;
+
+function TCustomer.getHouseNo: string;
+begin
+
+  result := self.houseNo;
+
+end;
+
+function TCustomer.getInitial: string;
+begin
+
+  result := self.intial;
+
+end;
+
+function TCustomer.getMonthly: integer;
+begin
+
+  result := self.monthly;
+
+end;
+
+function TCustomer.getName: string;
+begin
+
+  result := self.name;
+
+end;
+
+function TCustomer.getnoBins: integer;
+begin
+
+  result := self.noBins;
+
+end;
+
+function TCustomer.getOrigin: string;
+begin
+
+  result := self.origin;
+
+end;
+
+function TCustomer.getPhone: string;
+begin
+
+  result := self.phone;
+
+end;
+
+function TCustomer.getPostal: integer;
+begin
+
+  result := self.postal;
+
+end;
+
+function TCustomer.getStreet: string;
+begin
+
+  result := self.street;
+
+end;
+
+function TCustomer.getSuburb: string;
+begin
+
+  result := self.suburb;
+
+end;
+
+function TCustomer.getSurname: string;
+begin
+
+  result := self.surname;
+
+end;
+
+function TCustomer.getTitle: string;
+begin
+
+  result := self.title;
+
+end;
+
+procedure TCustomer.setAccNo(accNo: integer);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Acc_no'] := accNo;
+    adoCustomers.Post;
+  end;
+  self.accNo := accNo;
+
+end;
+
+procedure TCustomer.setAccStatus(accStatus: boolean);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Active'] := accStatus;
+    adoCustomers.Post;
+  end;
+  self.accStatus := accStatus;
+
+end;
+
+procedure TCustomer.setAndLocateAdo;
+begin
+
+  with dmTKServices.adoCustomers do
+  begin
+    Close;
+    TableName := 'Customers';
+    Open;
+    Locate('Acc_no', self.accNo, []);
+  end;
+
+end;
+
+procedure TCustomer.setDay(day: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Day'] := day;
+    adoCustomers.Post;
+  end;
+  self.day := day;
+
+end;
+
+procedure TCustomer.setEmail(email: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Email'] := email;
+    adoCustomers.Post;
+  end;
+  self.email := email;
+
+end;
+
+procedure TCustomer.setFrequency(frequency: integer);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Frequency'] := frequency;
+    adoCustomers.Post;
+  end;
+  self.frequency := frequency;
+
+end;
+
+procedure TCustomer.setHouseNo(houseNo: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Home_no'] := houseNo;
+    adoCustomers.Post;
+  end;
+  self.houseNo := houseNo;
+
+end;
+
+procedure TCustomer.setInitial(initial: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Initial'] := initial;
+    adoCustomers.Post;
+  end;
+  self.intial := initial;
+
+end;
+
+procedure TCustomer.setMonthly(monthly: integer);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Monthly_payable'] := monthly;
+    adoCustomers.Post;
+  end;
+  self.monthly := monthly;
+
+end;
+
+procedure TCustomer.setName(value: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Name'] := value;
+    adoCustomers.Post;
+  end;
+  self.name := value;
+
+end;
+
+procedure TCustomer.setNoBins(noBins: integer);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['No_bins'] := noBins;
+    adoCustomers.Post;
+  end;
+  self.noBins := noBins;
+
+end;
+
+procedure TCustomer.setOrigin(origin: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Origin'] := origin;
+    adoCustomers.Post;
+  end;
+  self.origin := origin;
+
+end;
+
+procedure TCustomer.setPhone(phone: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Phone_no'] := phone;
+    adoCustomers.Post;
+  end;
+  self.phone := phone;
+
+end;
+
+procedure TCustomer.setPostal(postal: integer);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Postal'] := postal;
+    adoCustomers.Post;
+  end;
+  self.postal := postal;
+
+end;
+
+procedure TCustomer.setStreet(street: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Street_name'] := street;
+    adoCustomers.Post;
+  end;
+  self.street := street;
+
+end;
+
+procedure TCustomer.setSuburb(suburb: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Suburb'] := suburb;
+    adoCustomers.Post;
+  end;
+  self.suburb := suburb;
+
+end;
+
+procedure TCustomer.setSurname(surname: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Surname'] := surname;
+    adoCustomers.Post;
+  end;
+  self.surname := surname;
+
+end;
+
+procedure TCustomer.setTitle(title: string);
+begin
+
+  setAndLocateAdo;
+  with dmTKServices do
+  begin
+    adoCustomers.Edit;
+    adoCustomers['Title'] := title;
+    adoCustomers.Post;
+  end;
+  self.title := title;
+
+end;
+
+end.
