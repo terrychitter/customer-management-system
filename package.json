@@ -1,0 +1,14 @@
+{
+  "name": "kleenbin-cms",
+  "version": "1.0.0",
+  "description": "A customer management system for personal usage. The program is responsible for managing customers such as creating, updating and deleting as well as other functions such a invoice and statement generation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Terry Chitter",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.0"
+  }
+}
