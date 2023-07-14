@@ -1,0 +1,28 @@
+@import "node_modules/bootstrap/dist/css/bootstrap.css";
+@import "custom-theme.css";
+body {
+  min-height: 100vh;
+}
+
+.panel {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.custom-form-control div {
+  display: flex;
+}
+
+.custom-form-control input {
+  border-left: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.custom-form-control i {
+  width: 40px;
+  font-size: 1.5rem;
+  border-right: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}

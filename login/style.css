@@ -1,0 +1,46 @@
+main.panel {
+  width: 500px;
+  min-height: 600px;
+  margin-top: -2rem;
+  position: relative;
+  box-shadow: 0px 0px 7px 1px rgba(112, 112, 112, 0.58);
+  -webkit-box-shadow: 0px 0px 7px 1px rgba(112, 112, 112, 0.58);
+  -moz-box-shadow: 0px 0px 7px 1px rgba(112, 112, 112, 0.58);
+}
+
+form {
+  width: 100%;
+}
+
+form p {
+  margin-top: -0.5rem;
+  margin-bottom: 3rem;
+}
+
+form button[type="submit"] {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: calc(100% - 4rem);
+}
+
+form a {
+  float: right;
+}
+
+@media (max-width: 576px) {
+  main.panel {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+  }
+
+  svg {
+    transform: scale(1, -1);
+    top: 0;
+  }
+}
+.custom-form-control {
+  margin-bottom: 1rem;
+}
