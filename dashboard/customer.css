@@ -1,0 +1,55 @@
+.search-results {
+  cursor: pointer;
+}
+
+.profile-col i {
+  font-size: 7rem;
+  background: rgb(65, 105, 225);
+  background: radial-gradient(
+    circle,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(134, 119, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.customer {
+  position: relative;
+}
+
+.details-col label {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.customer-acc-num {
+  margin-top: -2rem;
+}
+
+.contact-container {
+  max-height: 190px;
+}
+
+.contact-container .card .badge {
+  margin-bottom: 1rem;
+}
+
+.deactivate-customer-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.comments-container {
+  max-height: 550px;
+}
+
+.comments-container .card {
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.comments-container .card:hover {
+  background-color: #d9e1f9;
+}

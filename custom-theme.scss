@@ -1,4 +1,12 @@
 // CUSTOM BOOTSTRAP THEME
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 $primary: #4169e1;
-$danger: lightcoral;
+$danger: #f08080;
+
 @import "node_modules/bootstrap/scss/bootstrap.scss";
+
+:root {
+  --bs-body-font-family: "Poppins", sans-serif;
+  --bs-breadcrumb-margin-bottom: 0;
+}
