@@ -31,6 +31,14 @@
   max-height: 190px;
 }
 
+.contact-card {
+  cursor: pointer;
+}
+
+.contact-card:hover {
+  background-color: #d9e1f9;
+}
+
 .contact-container .card .badge {
   margin-bottom: 1rem;
 }
@@ -52,4 +60,36 @@
 
 .comments-container .card:hover {
   background-color: #d9e1f9;
+}
+
+.dustbins-container {
+  max-height: 200px;
+}
+
+.dustbins-container .card {
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.dustbins-container .card:hover {
+  background-color: #d9e1f9;
+}
+
+.payments-container {
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.payments-container .card {
+  margin-bottom: 1rem;
+  border: none;
+}
+
+.invoices-container {
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.invoices-container .card {
+  border: none;
 }
