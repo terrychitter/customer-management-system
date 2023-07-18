@@ -132,6 +132,7 @@
         </div>
       </nav>
       <main class="overflow-auto col-12 col-md px-md-3 pt-2 pb-3">
+        <!-- Header Row -->
         <header class="custom-header row align-items-center">
           <div class="d-none d-sm-block col">
             <nav aria-label="breadcrumb mb-0 pb-0">
@@ -154,6 +155,7 @@
             <i class="bi bi-gear-fill fs-4"></i>
           </div>
         </header>
+        <!-- Search Customers Accordion -->
         <div
           class="search-customers work-panel col-12 accordion"
           id="search-customer-accordion"
@@ -176,6 +178,7 @@
               class="accordion-collapse collapse show"
               aria-labelledby="panelsStayOpen-headingOne"
             >
+              <!-- Search Accordion Body -->
               <div class="accordion-body">
                 <div class="search-functions row">
                   <div class="search-bar col-12 col-md-6 col-xl-5">
@@ -199,7 +202,7 @@
                       >
                       <select
                         class="form-select"
-                        aria-label="Default select example"
+                        aria-label="Search By"
                         aria-describedby="search-by-text"
                       >
                         <option value="account-number" selected>
@@ -237,286 +240,330 @@
             </div>
           </div>
         </div>
-        <div class="customer work-panel col-12 border rounded p-3 pb-5 mb-3">
-          <h2 class="fs-5">Customer Details</h2>
-          <div class="row">
+        <!-- Customer Details Accordion -->
+        <div class="customer work-panel col-12 p-0 mb-3 accordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="customer-details-heading">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#customer-details-collapse"
+                aria-expanded="false"
+                aria-controls="customer-details-collapse"
+              >
+                <span class="fs-5">Customer Details</span>
+              </button>
+            </h2>
             <div
-              class="profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center"
+              id="customer-details-collapse"
+              class="accordion-collapse collapse"
+              aria-labelledby="customer-details-heading"
             >
-              <i class="bi bi-person-fill mb-0"></i>
-              <p class="customer-acc-num fs-1">901</p>
-            </div>
-            <form class="details-col col-12 col-md col-xl-4 p-3 mb-0">
-              <div class="title row">
-                <div class="col-auto">
-                  <label for="title" class="form-label">Title</label>
-                  <select class="form-select" aria-label="Title">
-                    <option value="Mr">Mr</option>
-                    <option value="Mrs">Ms</option>
-                    <option value="Ms">Ms</option>
-                    <option value="Dr">Dr</option>
-                    <option value="Prof">Prof</option>
-                  </select>
-                </div>
-              </div>
-              <div class="name-surname row">
-                <div class="name col-sm-6">
-                  <label for="name" class="form-label">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="John"
-                  />
-                </div>
-                <div class="surname col-sm-6">
-                  <label for="surname" class="form-label">Surname</label>
-                  <input
-                    type="text"
-                    name="surname"
-                    class="form-control"
-                    placeholder="Doe"
-                  />
-                </div>
-              </div>
-              <div class="address row">
-                <div class="col">
-                  <label for="address" class="form-label">Address</label>
-                  <input
-                    type="text"
-                    name="address"
-                    class="form-control"
-                    placeholder="22 Cactus Lane"
-                  />
-                </div>
-              </div>
-              <div class="suburb-postal row">
-                <div class="suburb col">
-                  <label for="suburb" class="form-label">Suburb</label>
-                  <input
-                    type="text"
-                    name="suburb"
-                    class="form-control"
-                    placeholder="Bassonia"
-                  />
-                </div>
-                <div class="postal col-4">
-                  <label for="postal" class="form-label">Postal</label>
-                  <input
-                    type="text"
-                    name="postal"
-                    class="form-control"
-                    placeholder="1448"
-                  />
-                </div>
-              </div>
-              <div class="email row">
-                <div class="col">
-                  <label for="email" class="form-label">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    placeholder="johndoe@gmail.com"
-                  />
-                </div>
-              </div>
-              <div class="contact row">
-                <div class="col-12">
-                  <label for="contacts" class="form-label"> Contacts </label>
+              <div class="accordion-body">
+                <div class="row">
+                  <!-- Profile Column -->
                   <div
-                    name="contacts"
-                    class="contact-container overflow-auto rounded border p-2"
+                    class="profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center"
                   >
-                    <div class="contact-card card mb-2">
-                      <div class="card-body pb-1">
-                        <div class="row p-0">
-                          <div class="col-12 col-lg-4 col-xl-12 text-truncate">
-                            Home Number
-                          </div>
-                          <div class="col-10 col-md col-xl">
-                            <div class="badge bg-secondary">+27</div>
-                            763220935
+                    <i class="bi bi-person-fill mb-0"></i>
+                    <p class="customer-acc-num fs-1">901</p>
+                  </div>
+                  <!-- Personal Details Column -->
+                  <form class="details-col col-12 col-md col-xl-4 p-3 mb-0">
+                    <div class="title row">
+                      <div class="col-auto">
+                        <label for="title" class="form-label">Title</label>
+                        <select class="form-select" aria-label="Title">
+                          <option value="Mr">Mr</option>
+                          <option value="Mrs">Ms</option>
+                          <option value="Ms">Ms</option>
+                          <option value="Dr">Dr</option>
+                          <option value="Prof">Prof</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="name-surname row">
+                      <div class="name col-sm-6">
+                        <label for="name" class="form-label">Name</label>
+                        <input
+                          type="text"
+                          name="name"
+                          class="form-control"
+                          placeholder="John"
+                        />
+                      </div>
+                      <div class="surname col-sm-6">
+                        <label for="surname" class="form-label">Surname</label>
+                        <input
+                          type="text"
+                          name="surname"
+                          class="form-control"
+                          placeholder="Doe"
+                        />
+                      </div>
+                    </div>
+                    <div class="address row">
+                      <div class="col">
+                        <label for="address" class="form-label">Address</label>
+                        <input
+                          type="text"
+                          name="address"
+                          class="form-control"
+                          placeholder="22 Cactus Lane"
+                        />
+                      </div>
+                    </div>
+                    <div class="suburb-postal row">
+                      <div class="suburb col">
+                        <label for="suburb" class="form-label">Suburb</label>
+                        <input
+                          type="text"
+                          name="suburb"
+                          class="form-control"
+                          placeholder="Bassonia"
+                        />
+                      </div>
+                      <div class="postal col-4">
+                        <label for="postal" class="form-label">Postal</label>
+                        <input
+                          type="text"
+                          name="postal"
+                          class="form-control"
+                          placeholder="1448"
+                        />
+                      </div>
+                    </div>
+                    <div class="email row">
+                      <div class="col">
+                        <label for="email" class="form-label"
+                          >Email Address</label
+                        >
+                        <input
+                          type="email"
+                          name="email"
+                          class="form-control"
+                          placeholder="johndoe@gmail.com"
+                        />
+                      </div>
+                    </div>
+                    <div class="contact row">
+                      <div class="col-12">
+                        <label for="contacts" class="form-label">
+                          Contacts
+                        </label>
+                        <div
+                          name="contacts"
+                          class="contact-container overflow-auto rounded border p-2"
+                        >
+                          <div class="contact-card card mb-2">
+                            <div class="card-body pb-1">
+                              <div class="row p-0">
+                                <div
+                                  class="col-12 col-lg-4 col-xl-12 text-truncate"
+                                >
+                                  Home Number
+                                </div>
+                                <div class="col-10 col-md col-xl">
+                                  <div class="badge bg-secondary">+27</div>
+                                  763220935
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div class="col mt-2 text-end">
+                        <button class="btn btn-sm btn-primary">
+                          Add Contact
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col mt-2 text-end">
-                  <button class="btn btn-sm btn-primary">Add Contact</button>
-                </div>
-              </div>
-              <div class="origin-active row">
-                <div class="origin col-12">
-                  <label for="origin" class="form-label mb-0">Origin</label>
-                  <input
-                    type="text"
-                    name="origin"
-                    id="origin"
-                    class="form-control"
-                    placeholder="Origin"
-                  />
-                </div>
-                <div class="active col">
-                  <button
-                    class="deactivate-customer-btn btn btn-sm btn-danger"
-                    style="background-color: red"
-                  >
-                    Deactivate Customer
-                  </button>
-                </div>
-              </div>
-            </form>
-            <div class="comments-col p-3 mb-4 col-12 col-md-12 col-xl">
-              <label for="comments">Comments</label>
-              <div class="col h-100">
-                <div
-                  class="comments-container overflow-auto border rounded p-2 h-100"
-                >
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">Comment Title</div>
-                      <div class="col-12 fs-6 text-secondary">
-                        <i
-                          >Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Dolorem soluta unde ratione provident cum
-                          debitis laboriosam consequatur, autem assumenda
-                          commodi consequuntur eos blanditiis ullam quo quae
-                          incidunt? Fuga, a sit!</i
+                    <div class="origin-active row">
+                      <div class="origin col-12">
+                        <label for="origin" class="form-label mb-0"
+                          >Origin</label
                         >
+                        <input
+                          type="text"
+                          name="origin"
+                          id="origin"
+                          class="form-control"
+                          placeholder="Origin"
+                        />
                       </div>
-                      <div
-                        class="col-12 text-secondary text-end"
-                        style="font-size: 0.7rem"
-                      >
-                        Posted:23/07/12 19:36
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">Comment Title</div>
-                      <div class="col-12 fs-6 text-secondary">
-                        <i
-                          >Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Dolorem soluta unde ratione provident cum
-                          debitis laboriosam consequatur, autem assumenda
-                          commodi consequuntur eos blanditiis ullam quo quae
-                          incidunt? Fuga, a sit!</i
+                      <div class="active col">
+                        <button
+                          class="deactivate-customer-btn btn btn-sm btn-danger"
+                          style="background-color: red"
                         >
+                          Deactivate Customer
+                        </button>
                       </div>
+                    </div>
+                  </form>
+                  <!-- Comments Column -->
+                  <div class="comments-col p-3 mb-4 col-12 col-md-12 col-xl">
+                    <label for="comments">Comments</label>
+                    <div class="col h-100">
                       <div
-                        class="col-12 text-secondary text-end"
-                        style="font-size: 0.7rem"
+                        class="comments-container overflow-auto border rounded p-2 h-100"
                       >
-                        Posted:23/07/12 19:36
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col-12">Comment Title</div>
+                            <div class="col-12 fs-6 text-secondary">
+                              <i
+                                >Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Dolorem soluta unde ratione
+                                provident cum debitis laboriosam consequatur,
+                                autem assumenda commodi consequuntur eos
+                                blanditiis ullam quo quae incidunt? Fuga, a
+                                sit!</i
+                              >
+                            </div>
+                            <div
+                              class="col-12 text-secondary text-end"
+                              style="font-size: 0.7rem"
+                            >
+                              Posted:23/07/12 19:36
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col-12">Comment Title</div>
+                            <div class="col-12 fs-6 text-secondary">
+                              <i
+                                >Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Dolorem soluta unde ratione
+                                provident cum debitis laboriosam consequatur,
+                                autem assumenda commodi consequuntur eos
+                                blanditiis ullam quo quae incidunt? Fuga, a
+                                sit!</i
+                              >
+                            </div>
+                            <div
+                              class="col-12 text-secondary text-end"
+                              style="font-size: 0.7rem"
+                            >
+                              Posted:23/07/12 19:36
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col-12">Comment Title</div>
+                            <div class="col-12 fs-6 text-secondary">
+                              <i
+                                >Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Dolorem soluta unde ratione
+                                provident cum debitis laboriosam consequatur,
+                                autem assumenda commodi consequuntur eos
+                                blanditiis ullam quo quae incidunt? Fuga, a
+                                sit!</i
+                              >
+                            </div>
+                            <div
+                              class="col-12 text-secondary text-end"
+                              style="font-size: 0.7rem"
+                            >
+                              Posted:23/07/12 19:36
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col-12">Comment Title</div>
+                            <div class="col-12 fs-6 text-secondary">
+                              <i
+                                >Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Dolorem soluta unde ratione
+                                provident cum debitis laboriosam consequatur,
+                                autem assumenda commodi consequuntur eos
+                                blanditiis ullam quo quae incidunt? Fuga, a
+                                sit!</i
+                              >
+                            </div>
+                            <div
+                              class="col-12 text-secondary text-end"
+                              style="font-size: 0.7rem"
+                            >
+                              Posted:23/07/12 19:36
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col-12">Comment Title</div>
+                            <div class="col-12 fs-6 text-secondary">
+                              <i
+                                >Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Dolorem soluta unde ratione
+                                provident cum debitis laboriosam consequatur,
+                                autem assumenda commodi consequuntur eos
+                                blanditiis ullam quo quae incidunt? Fuga, a
+                                sit!</i
+                              >
+                            </div>
+                            <div
+                              class="col-12 text-secondary text-end"
+                              style="font-size: 0.7rem"
+                            >
+                              Posted:23/07/12 19:36
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col-12">Comment Title</div>
+                            <div class="col-12 fs-6 text-secondary">
+                              <i
+                                >Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Dolorem soluta unde ratione
+                                provident cum debitis laboriosam consequatur,
+                                autem assumenda commodi consequuntur eos
+                                blanditiis ullam quo quae incidunt? Fuga, a
+                                sit!</i
+                              >
+                            </div>
+                            <div
+                              class="col-12 text-secondary text-end"
+                              style="font-size: 0.7rem"
+                            >
+                              Posted:23/07/12 19:36
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col-12">Comment Title</div>
+                            <div class="col-12 fs-6 text-secondary">
+                              <i
+                                >Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Dolorem soluta unde ratione
+                                provident cum debitis laboriosam consequatur,
+                                autem assumenda commodi consequuntur eos
+                                blanditiis ullam quo quae incidunt? Fuga, a
+                                sit!</i
+                              >
+                            </div>
+                            <div
+                              class="col-12 text-secondary text-end"
+                              style="font-size: 0.7rem"
+                            >
+                              Posted:23/07/12 19:36
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col text-end mt-2">
+                        <button class="btn btn-primary btn-sm">
+                          Add Comment
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">Comment Title</div>
-                      <div class="col-12 fs-6 text-secondary">
-                        <i
-                          >Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Dolorem soluta unde ratione provident cum
-                          debitis laboriosam consequatur, autem assumenda
-                          commodi consequuntur eos blanditiis ullam quo quae
-                          incidunt? Fuga, a sit!</i
-                        >
-                      </div>
-                      <div
-                        class="col-12 text-secondary text-end"
-                        style="font-size: 0.7rem"
-                      >
-                        Posted:23/07/12 19:36
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">Comment Title</div>
-                      <div class="col-12 fs-6 text-secondary">
-                        <i
-                          >Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Dolorem soluta unde ratione provident cum
-                          debitis laboriosam consequatur, autem assumenda
-                          commodi consequuntur eos blanditiis ullam quo quae
-                          incidunt? Fuga, a sit!</i
-                        >
-                      </div>
-                      <div
-                        class="col-12 text-secondary text-end"
-                        style="font-size: 0.7rem"
-                      >
-                        Posted:23/07/12 19:36
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">Comment Title</div>
-                      <div class="col-12 fs-6 text-secondary">
-                        <i
-                          >Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Dolorem soluta unde ratione provident cum
-                          debitis laboriosam consequatur, autem assumenda
-                          commodi consequuntur eos blanditiis ullam quo quae
-                          incidunt? Fuga, a sit!</i
-                        >
-                      </div>
-                      <div
-                        class="col-12 text-secondary text-end"
-                        style="font-size: 0.7rem"
-                      >
-                        Posted:23/07/12 19:36
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">Comment Title</div>
-                      <div class="col-12 fs-6 text-secondary">
-                        <i
-                          >Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Dolorem soluta unde ratione provident cum
-                          debitis laboriosam consequatur, autem assumenda
-                          commodi consequuntur eos blanditiis ullam quo quae
-                          incidunt? Fuga, a sit!</i
-                        >
-                      </div>
-                      <div
-                        class="col-12 text-secondary text-end"
-                        style="font-size: 0.7rem"
-                      >
-                        Posted:23/07/12 19:36
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">Comment Title</div>
-                      <div class="col-12 fs-6 text-secondary">
-                        <i
-                          >Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Dolorem soluta unde ratione provident cum
-                          debitis laboriosam consequatur, autem assumenda
-                          commodi consequuntur eos blanditiis ullam quo quae
-                          incidunt? Fuga, a sit!</i
-                        >
-                      </div>
-                      <div
-                        class="col-12 text-secondary text-end"
-                        style="font-size: 0.7rem"
-                      >
-                        Posted:23/07/12 19:36
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col text-end mt-2">
-                  <button class="btn btn-primary btn-sm">Add Comment</button>
                 </div>
               </div>
             </div>
@@ -532,11 +579,11 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="sanitizing-details-heading">
                   <button
-                    class="accordion-button"
+                    class="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#sanitizing-details-collapse"
-                    aria-expanded="true"
+                    aria-expanded="false"
                     aria-controls="sanitizing-details-collapse"
                   >
                     <span class="fs-5">Sanitizing Details</span>
@@ -544,7 +591,7 @@
                 </h2>
                 <div
                   id="sanitizing-details-collapse"
-                  class="accordion-collapse collapse show"
+                  class="accordion-collapse collapse"
                   aria-labelledby="sanitizing-details-heading"
                 >
                   <!-- Sanitizing Details Body -->
@@ -688,11 +735,11 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="finance-heading">
                   <button
-                    class="accordion-button"
+                    class="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#finance-collapse"
-                    aria-expanded="true"
+                    aria-expanded="false"
                     aria-controls="finance-collapse"
                   >
                     <span class="fs-5">Finance</span>
@@ -700,12 +747,12 @@
                 </h2>
                 <div
                   id="finance-collapse"
-                  class="accordion-collapse collapse show"
+                  class="accordion-collapse collapse"
                   aria-labelledby="finance-heading"
                 >
                   <!-- Finance Panel Body -->
                   <div class="accordion-body">
-                    <!-- Paymenys Col -->
+                    <!-- Payments Col -->
                     <div class="payments col">
                       <div class="row mb-3">
                         <h3 class="col-12 fs-6 col-sm-6 col-lg-12 col-xxl-6">
