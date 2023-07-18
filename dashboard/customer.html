@@ -18,7 +18,9 @@
       }
     </style>
     <div class="row h-100">
-      <nav class="custom-nav d-none d-md-block col-12 col-md-4 col-xl-3 col-xxl-2">
+      <nav
+        class="custom-nav d-none d-md-block col-12 col-md-4 col-lg-3 col-xl-3 col-xxl-2"
+      >
         <div class="row justify-content-center pt-3">
           <div class="custom-nav-head text-center col-12">
             <style>
@@ -129,7 +131,7 @@
           </div>
         </div>
       </nav>
-      <main class="overflow-auto col-12 col-md px-md-3 pt-2">
+      <main class="overflow-auto col-12 col-md px-md-3 pt-2 pb-3">
         <header class="custom-header row align-items-center">
           <div class="d-none d-sm-block col">
             <nav aria-label="breadcrumb mb-0 pb-0">
@@ -166,7 +168,7 @@
                 aria-expanded="true"
                 aria-controls="panelsStayOpen-collapseOne"
               >
-                <h2 class="fs-5 mb-0">Search</h1>
+                <h2 class="fs-5 mb-0">Search</h2>
               </button>
             </div>
             <div
@@ -236,200 +238,476 @@
           </div>
         </div>
         <div class="customer work-panel col-12 border rounded p-3 pb-5 mb-3">
-            <h2 class="fs-5">Customer Details</h2>
-            <div class="row">
-                <div class=" profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center">
-                    <i class="bi bi-person-fill mb-0"></i>
-                    <p class="customer-acc-num fs-1">901</p>
-                </div>
-                <form class="details-col col-12 col-md col-xl-4 p-3 mb-0">
-                    <div class="title row">
-                        <div class="col-auto">
-                            <label for="title" class="form-label">Title</label>
-                            <select class="form-select" aria-label="Title">
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Ms</option>
-                                <option value="Ms">Ms</option>
-                                <option value="Dr">Dr</option>
-                                <option value="Prof">Prof</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="name-surname row">
-                        <div class="name col-sm-6">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="John">
-                        </div>
-                        <div class="surname col-sm-6">
-                            <label for="surname" class="form-label">Surname</label>
-                            <input type="text" name="surname" class="form-control" placeholder="Doe">
-                        </div>
-                    </div>
-                    <div class="address row">
-                        <div class="col">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" name="address" class="form-control" placeholder="22 Cactus Lane">
-                        </div>
-                    </div>
-                    <div class="suburb-postal row">
-                        <div class="suburb col">
-                            <label for="suburb" class="form-label">Suburb</label>
-                            <input type="text" name="suburb" class="form-control" placeholder="Bassonia">
-                        </div>
-                        <div class="postal col-4">
-                            <label for="postal" class="form-label">Postal</label>
-                            <input type="text" name="postal" class="form-control" placeholder="1448">
-                        </div>
-                    </div>
-                    <div class=" email row">
-                        <div class="col">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" name="email" class="form-control" placeholder="johndoe@gmail.com">
-                        </div>
-                    </div>
-                    <div class="contact row">
-                        <div class="col-12">
-                            <label for="contacts" class="form-label">
-                                Contacts
-                            </label>
-                            <div name="contacts" class="contact-container overflow-auto rounded border p-2">
-                                <div class="card mb-2">
-                                    <div class="card-body pb-1">
-                                        <div class="row p-0">
-                                            <div class=" col-12 col-lg-4 col-xl-12 text-truncate">Home Number</div>
-                                            <div class="col-10 col-md col-xl">
-                                                    <div class="badge bg-secondary">+27</div>
-                                                    763220935
-                                            </div>
-                                            <div class="col-12 justify-content-end" style="cursor: pointer; margin-top: -3.4rem; display: flex; gap: 0.5rem; align-items: center;">
-                                                <i class="bi bi-pencil-fill text-warning"></i>
-                                                <i class="bi bi-trash-fill fs-5 text-danger" style="cursor:pointer"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card mb-2">
-                                    <div class="card-body pb-1">
-                                        <div class="row p-0">
-                                            <div class=" col-12 col-lg-4 col-xl-12 text-truncate">Home Number</div>
-                                            <div class="col-10 col-md col-xl">
-                                                    <div class="badge bg-secondary">+27</div>
-                                                    763220935
-                                            </div>
-                                            <div class="col-12 justify-content-end" style="cursor: pointer; margin-top: -3.4rem; display: flex; gap: 0.5rem; align-items: center;">
-                                                <i class="bi bi-pencil-fill text-warning"></i>
-                                                <i class="bi bi-trash-fill fs-5 text-danger" style="cursor:pointer"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card mb-2">
-                                    <div class="card-body pb-1">
-                                        <div class="row p-0">
-                                            <div class=" col-12 col-lg-4 col-xl-12 text-truncate">Home Number</div>
-                                            <div class="col-10 col-md col-xl">
-                                                    <div class="badge bg-secondary">+27</div>
-                                                    763220935
-                                            </div>
-                                            <div class="col-12 justify-content-end" style="cursor: pointer; margin-top: -3.4rem; display: flex; gap: 0.5rem; align-items: center;">
-                                                <i class="bi bi-pencil-fill text-warning"></i>
-                                                <i class="bi bi-trash-fill fs-5 text-danger" style="cursor:pointer"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card mb-2">
-                                    <div class="card-body pb-1">
-                                        <div class="row p-0">
-                                            <div class=" col-12 col-lg-4 col-xl-12 text-truncate">Home Number</div>
-                                            <div class="col-10 col-md col-xl">
-                                                    <div class="badge bg-secondary">+27</div>
-                                                    763220935
-                                            </div>
-                                            <div class="col-12 justify-content-end" style="cursor: pointer; margin-top: -3.4rem; display: flex; gap: 0.5rem; align-items: center;">
-                                                <i class="bi bi-pencil-fill text-warning"></i>
-                                                <i class="bi bi-trash-fill fs-5 text-danger" style="cursor:pointer"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="col mt-2 text-end">
-                            <button class="btn btn-sm btn-primary">Add Contact</button>
-                        </div>
-                    </div>
-                    <div class="origin-active row">
-                        <div class="origin col-12">
-                            <label for="origin" class="form-label mb-0">Origin</label>
-                            <input type="text" name="origin" id="origin" class="form-control" placeholder="Origin">
-                        </div>
-                        <div class="active col">
-                            <button class="deactivate-customer-btn btn btn-sm btn-danger" style="background-color: red;">Deactivate Customer</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="comments-col p-3 mb-4 col-12 col-md-12 col-xl">
-                    <label for="comments">Comments</label>
-                    <div class="col h-100">
-                        <div class="comments-container overflow-auto border rounded p-2 h-100">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">Comment Title</div>
-                                    <div class="col-12 fs-6 text-secondary"><i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem soluta unde ratione provident cum debitis laboriosam consequatur, autem assumenda commodi consequuntur eos blanditiis ullam quo quae incidunt? Fuga, a sit!</i></div>
-                                    <div class="col-12 text-secondary text-end" style="font-size: 0.7rem;">Posted:23/07/12 19:36</div>
-                                </div>
-                        </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">Comment Title</div>
-                                    <div class="col-12 fs-6 text-secondary"><i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem soluta unde ratione provident cum debitis laboriosam consequatur, autem assumenda commodi consequuntur eos blanditiis ullam quo quae incidunt? Fuga, a sit!</i></div>
-                                    <div class="col-12 text-secondary text-end" style="font-size: 0.7rem;">Posted:23/07/12 19:36</div>
-                                </div>
-                        </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">Comment Title</div>
-                                    <div class="col-12 fs-6 text-secondary"><i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem soluta unde ratione provident cum debitis laboriosam consequatur, autem assumenda commodi consequuntur eos blanditiis ullam quo quae incidunt? Fuga, a sit!</i></div>
-                                    <div class="col-12 text-secondary text-end" style="font-size: 0.7rem;">Posted:23/07/12 19:36</div>
-                                </div>
-                        </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">Comment Title</div>
-                                    <div class="col-12 fs-6 text-secondary"><i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem soluta unde ratione provident cum debitis laboriosam consequatur, autem assumenda commodi consequuntur eos blanditiis ullam quo quae incidunt? Fuga, a sit!</i></div>
-                                    <div class="col-12 text-secondary text-end" style="font-size: 0.7rem;">Posted:23/07/12 19:36</div>
-                                </div>
-                        </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">Comment Title</div>
-                                    <div class="col-12 fs-6 text-secondary"><i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem soluta unde ratione provident cum debitis laboriosam consequatur, autem assumenda commodi consequuntur eos blanditiis ullam quo quae incidunt? Fuga, a sit!</i></div>
-                                    <div class="col-12 text-secondary text-end" style="font-size: 0.7rem;">Posted:23/07/12 19:36</div>
-                                </div>
-                        </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">Comment Title</div>
-                                    <div class="col-12 fs-6 text-secondary"><i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem soluta unde ratione provident cum debitis laboriosam consequatur, autem assumenda commodi consequuntur eos blanditiis ullam quo quae incidunt? Fuga, a sit!</i></div>
-                                    <div class="col-12 text-secondary text-end" style="font-size: 0.7rem;">Posted:23/07/12 19:36</div>
-                                </div>
-                        </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">Comment Title</div>
-                                    <div class="col-12 fs-6 text-secondary"><i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem soluta unde ratione provident cum debitis laboriosam consequatur, autem assumenda commodi consequuntur eos blanditiis ullam quo quae incidunt? Fuga, a sit!</i></div>
-                                    <div class="col-12 text-secondary text-end" style="font-size: 0.7rem;">Posted:23/07/12 19:36</div>
-                                </div>
-                        </div>
-                        </div>
-                        <div class="col text-end mt-2">
-                            <button class="btn  btn-primary btn-sm">Add Comment</button>
-                        </div>
-                    </div>
-                </div>
+          <h2 class="fs-5">Customer Details</h2>
+          <div class="row">
+            <div
+              class="profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center"
+            >
+              <i class="bi bi-person-fill mb-0"></i>
+              <p class="customer-acc-num fs-1">901</p>
             </div>
+            <form class="details-col col-12 col-md col-xl-4 p-3 mb-0">
+              <div class="title row">
+                <div class="col-auto">
+                  <label for="title" class="form-label">Title</label>
+                  <select class="form-select" aria-label="Title">
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Ms</option>
+                    <option value="Ms">Ms</option>
+                    <option value="Dr">Dr</option>
+                    <option value="Prof">Prof</option>
+                  </select>
+                </div>
+              </div>
+              <div class="name-surname row">
+                <div class="name col-sm-6">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="John"
+                  />
+                </div>
+                <div class="surname col-sm-6">
+                  <label for="surname" class="form-label">Surname</label>
+                  <input
+                    type="text"
+                    name="surname"
+                    class="form-control"
+                    placeholder="Doe"
+                  />
+                </div>
+              </div>
+              <div class="address row">
+                <div class="col">
+                  <label for="address" class="form-label">Address</label>
+                  <input
+                    type="text"
+                    name="address"
+                    class="form-control"
+                    placeholder="22 Cactus Lane"
+                  />
+                </div>
+              </div>
+              <div class="suburb-postal row">
+                <div class="suburb col">
+                  <label for="suburb" class="form-label">Suburb</label>
+                  <input
+                    type="text"
+                    name="suburb"
+                    class="form-control"
+                    placeholder="Bassonia"
+                  />
+                </div>
+                <div class="postal col-4">
+                  <label for="postal" class="form-label">Postal</label>
+                  <input
+                    type="text"
+                    name="postal"
+                    class="form-control"
+                    placeholder="1448"
+                  />
+                </div>
+              </div>
+              <div class="email row">
+                <div class="col">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="johndoe@gmail.com"
+                  />
+                </div>
+              </div>
+              <div class="contact row">
+                <div class="col-12">
+                  <label for="contacts" class="form-label"> Contacts </label>
+                  <div
+                    name="contacts"
+                    class="contact-container overflow-auto rounded border p-2"
+                  >
+                    <div class="contact-card card mb-2">
+                      <div class="card-body pb-1">
+                        <div class="row p-0">
+                          <div class="col-12 col-lg-4 col-xl-12 text-truncate">
+                            Home Number
+                          </div>
+                          <div class="col-10 col-md col-xl">
+                            <div class="badge bg-secondary">+27</div>
+                            763220935
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mt-2 text-end">
+                  <button class="btn btn-sm btn-primary">Add Contact</button>
+                </div>
+              </div>
+              <div class="origin-active row">
+                <div class="origin col-12">
+                  <label for="origin" class="form-label mb-0">Origin</label>
+                  <input
+                    type="text"
+                    name="origin"
+                    id="origin"
+                    class="form-control"
+                    placeholder="Origin"
+                  />
+                </div>
+                <div class="active col">
+                  <button
+                    class="deactivate-customer-btn btn btn-sm btn-danger"
+                    style="background-color: red"
+                  >
+                    Deactivate Customer
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="comments-col p-3 mb-4 col-12 col-md-12 col-xl">
+              <label for="comments">Comments</label>
+              <div class="col h-100">
+                <div
+                  class="comments-container overflow-auto border rounded p-2 h-100"
+                >
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-12">Comment Title</div>
+                      <div class="col-12 fs-6 text-secondary">
+                        <i
+                          >Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Dolorem soluta unde ratione provident cum
+                          debitis laboriosam consequatur, autem assumenda
+                          commodi consequuntur eos blanditiis ullam quo quae
+                          incidunt? Fuga, a sit!</i
+                        >
+                      </div>
+                      <div
+                        class="col-12 text-secondary text-end"
+                        style="font-size: 0.7rem"
+                      >
+                        Posted:23/07/12 19:36
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-12">Comment Title</div>
+                      <div class="col-12 fs-6 text-secondary">
+                        <i
+                          >Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Dolorem soluta unde ratione provident cum
+                          debitis laboriosam consequatur, autem assumenda
+                          commodi consequuntur eos blanditiis ullam quo quae
+                          incidunt? Fuga, a sit!</i
+                        >
+                      </div>
+                      <div
+                        class="col-12 text-secondary text-end"
+                        style="font-size: 0.7rem"
+                      >
+                        Posted:23/07/12 19:36
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-12">Comment Title</div>
+                      <div class="col-12 fs-6 text-secondary">
+                        <i
+                          >Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Dolorem soluta unde ratione provident cum
+                          debitis laboriosam consequatur, autem assumenda
+                          commodi consequuntur eos blanditiis ullam quo quae
+                          incidunt? Fuga, a sit!</i
+                        >
+                      </div>
+                      <div
+                        class="col-12 text-secondary text-end"
+                        style="font-size: 0.7rem"
+                      >
+                        Posted:23/07/12 19:36
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-12">Comment Title</div>
+                      <div class="col-12 fs-6 text-secondary">
+                        <i
+                          >Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Dolorem soluta unde ratione provident cum
+                          debitis laboriosam consequatur, autem assumenda
+                          commodi consequuntur eos blanditiis ullam quo quae
+                          incidunt? Fuga, a sit!</i
+                        >
+                      </div>
+                      <div
+                        class="col-12 text-secondary text-end"
+                        style="font-size: 0.7rem"
+                      >
+                        Posted:23/07/12 19:36
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-12">Comment Title</div>
+                      <div class="col-12 fs-6 text-secondary">
+                        <i
+                          >Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Dolorem soluta unde ratione provident cum
+                          debitis laboriosam consequatur, autem assumenda
+                          commodi consequuntur eos blanditiis ullam quo quae
+                          incidunt? Fuga, a sit!</i
+                        >
+                      </div>
+                      <div
+                        class="col-12 text-secondary text-end"
+                        style="font-size: 0.7rem"
+                      >
+                        Posted:23/07/12 19:36
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-12">Comment Title</div>
+                      <div class="col-12 fs-6 text-secondary">
+                        <i
+                          >Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Dolorem soluta unde ratione provident cum
+                          debitis laboriosam consequatur, autem assumenda
+                          commodi consequuntur eos blanditiis ullam quo quae
+                          incidunt? Fuga, a sit!</i
+                        >
+                      </div>
+                      <div
+                        class="col-12 text-secondary text-end"
+                        style="font-size: 0.7rem"
+                      >
+                        Posted:23/07/12 19:36
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-12">Comment Title</div>
+                      <div class="col-12 fs-6 text-secondary">
+                        <i
+                          >Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Dolorem soluta unde ratione provident cum
+                          debitis laboriosam consequatur, autem assumenda
+                          commodi consequuntur eos blanditiis ullam quo quae
+                          incidunt? Fuga, a sit!</i
+                        >
+                      </div>
+                      <div
+                        class="col-12 text-secondary text-end"
+                        style="font-size: 0.7rem"
+                      >
+                        Posted:23/07/12 19:36
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col text-end mt-2">
+                  <button class="btn btn-primary btn-sm">Add Comment</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sanitize-finance col-12">
+          <div class="row" style="padding-inline: 0.7rem; gap: 1rem">
+            <!-- Sanitizing Details Accordion -->
+            <div
+              class="sanitizing-details col-12 col-lg-6 accordion p-0"
+              id="sanitizing-details-accordion"
+            >
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="sanitizing-details-heading">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#sanitizing-details-collapse"
+                    aria-expanded="true"
+                    aria-controls="sanitizing-details-collapse"
+                  >
+                    <span class="fs-5">Sanitizing Details</span>
+                  </button>
+                </h2>
+                <div
+                  id="sanitizing-details-collapse"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="sanitizing-details-heading"
+                >
+                  <!-- Sanitizing Details Body -->
+                  <div class="accordion-body p-3">
+                    <form action="" class="bin-details row p-0">
+                      <!-- Frequency -->
+                      <div class="col-12 col-sm-4 col-lg-12 col-xxl-3">
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="frequency-label"
+                            >Frequency</span
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            min="1"
+                            max="4"
+                            aria-label="Frequency"
+                            aria-describedby="frequency-label"
+                          />
+                        </div>
+                      </div>
+                      <!-- Sanitizing Day -->
+                      <div class="col-12 col-sm col-lg-12 col-xxl">
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="sanitizing-day"
+                            >Day</span
+                          >
+                          <select
+                            class="form-select"
+                            aria-label="Sanitizing Day"
+                            aria-describedby="sanitizing-day"
+                          >
+                            <option value="monday" selected>Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- Monthly Fee -->
+                      <div class="col-12">
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="monthly-fee-label"
+                            >Monthly Fee</span
+                          >
+                          <span class="input-group-text" id="currency-label"
+                            >R</span
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            aria-label="Rand"
+                            step="10"
+                            min="1"
+                            aria-describedby="monthly-fee-label"
+                          />
+                        </div>
+                      </div>
+                    </form>
+                    <div class="dustbins row gx-0">
+                      <div class="col-12">Dustbins</div>
+                      <!-- Dustbins container -->
+                      <div
+                        class="dustbins-container col-12 overflow-auto border rounded p-2"
+                      >
+                        <!-- Dustbin card -->
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="row align-items-center">
+                              <div class="col-2">
+                                <!-- iCon by oNlineWebFonts.Com -->
+                                <img
+                                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjU2IDI1NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+DQo8Zz48Zz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNODUuMiwxMC4zYy0yLjcsMC42LTMuOSwxLjEtNi4xLDIuN2MtMi40LDEuOC00LjcsNS41LTUsOC40Yy0wLjMsMi4xLTAuNCwyLjItMiwyLjRjLTUuOCwwLjktMTAuMSwyLjctMTMuNCw1LjdjLTIsMS43LTQuMSw1LTQuOCw3LjNMNTMuNSwzOGg1OS44aDU5LjhsMS4xLDEuMmMyLDEuOSwxLjMsNC44LTEuMyw1LjhjLTAuOCwwLjMtMjEuNiwwLjUtNjMuNywwLjVINDYuNnY1LjV2NS41aDMuOWgzLjlsMC4zLDEuOWMwLjEsMS4xLDQuNCw0My42LDkuNSw5NC40YzUuMSw1MC44LDkuNCw5Mi42LDkuNSw5Mi44YzAuMywwLjUsNjcuMSwwLjYsNjcuMSwwLjFjMC0wLjEtMS0xLjQtMi4zLTIuOGMtMi42LTIuOC01LjItNy44LTYuMi0xMS45Yy0wLjktMy41LTAuOS0xMC4yLDAtMTRjMS44LTcuNCw3LjgtMTUuMiwxNC4zLTE4LjVjNS43LTMsNy42LTMuNCwxNC40LTMuNGM0LjYsMCw2LjEtMC4xLDYuMS0wLjZjMC0yLjQsMTItMTE5LjgsMTIuMy0xMjBjMC4yLTAuMiw2LjUtNS4yLDE0LTExLjJjMTAuMS04LDEzLjktMTEuMywxNC43LTEyLjdjMS41LTIuNiwxLjgtNi4yLDAuOC05LjNjLTAuNy0yLjItMS42LTMuMy03LjYtOS4yYy02LjEtNi4xLTctNi44LTkuMi03LjVjLTIuMi0wLjYtNi44LTAuNy0zOC43LTAuN2gtMzYuMXYtMS42YzAtMC45LTAuNi0yLjktMS41LTQuNWMtMS42LTMuMS00LjYtNS44LTcuNi02LjlDMTA2LDEwLjEsODgsOS43LDg1LjIsMTAuM3ogTTEwNS40LDE5LjdjMS42LDAuNiwyLjUsMS45LDIuNSwzLjJjMCwwLjYtMS41LDAuNy0xMi41LDAuN2MtMTEuNiwwLTEyLjUsMC0xMi41LTAuOGMwLTEuMSwxLjQtMi43LDIuOC0zLjNDODcuNywxOC44LDEwMy42LDE4LjksMTA1LjQsMTkuN3ogTTIwMC43LDQxLjRjNC4yLDIuMiwyLjMsOC41LTIuNSw4LjVjLTAuNiwwLTEuOC0wLjYtMi43LTEuM2MtMS4yLTEuMS0xLjUtMS43LTEuNS0zLjNjMC0xLjYsMC4zLTIuMiwxLjUtMy4zQzE5Ny4yLDQwLjYsMTk4LjcsNDAuNCwyMDAuNyw0MS40eiBNMTI0LDY4YzEuMywxLjIsMS40LDMuMSwwLjIsNC42bC0wLjksMS4xbC0xMy43LDAuMWMtMTEuOSwwLjEtMTMuOCwwLTE0LjktMC42Yy0xLjQtMS0yLTIuNC0xLjQtMy45YzAuOC0yLjMsMS0yLjMsMTUuOC0yLjNDMTIyLjYsNjcsMTIyLjksNjcsMTI0LDY4eiIvPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik0xNTUuNiwyMDIuOGMtNy43LDEuOS0xNCw4LjEtMTYsMTUuN2MtMS45LDcuMywwLDE0LjYsNS40LDIwLjNjMTEuNiwxMi40LDMyLjMsNy4xLDM2LjgtOS41YzAuOC0zLjEsMC42LTguNi0wLjQtMTEuOUMxNzgsMjA2LjcsMTY2LjYsMjAwLjIsMTU1LjYsMjAyLjh6IE0xNjMuOCwyMTcuNWMyLjgsMS40LDQuMiwzLjYsNC4yLDYuNWMwLDcuMy05LDEwLTEzLjUsMy45Yy0yLjQtMy4yLTAuOS04LjQsMi45LTEwLjRDMTU5LjgsMjE2LjIsMTYxLjIsMjE2LjIsMTYzLjgsMjE3LjV6Ii8+PC9nPjwvZz48L2c+DQo8L3N2Zz4="
+                                  width="40rem"
+                                  height="40rem"
+                                />
+                              </div>
+                              <div class="col">
+                                <span class="fs-5 font-monospace"
+                                  >3808101019</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Dustbin card -->
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="row align-items-center">
+                              <div class="col-2">
+                                <!-- iCon by oNlineWebFonts.Com -->
+                                <img
+                                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjU2IDI1NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+DQo8Zz48Zz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNODUuMiwxMC4zYy0yLjcsMC42LTMuOSwxLjEtNi4xLDIuN2MtMi40LDEuOC00LjcsNS41LTUsOC40Yy0wLjMsMi4xLTAuNCwyLjItMiwyLjRjLTUuOCwwLjktMTAuMSwyLjctMTMuNCw1LjdjLTIsMS43LTQuMSw1LTQuOCw3LjNMNTMuNSwzOGg1OS44aDU5LjhsMS4xLDEuMmMyLDEuOSwxLjMsNC44LTEuMyw1LjhjLTAuOCwwLjMtMjEuNiwwLjUtNjMuNywwLjVINDYuNnY1LjV2NS41aDMuOWgzLjlsMC4zLDEuOWMwLjEsMS4xLDQuNCw0My42LDkuNSw5NC40YzUuMSw1MC44LDkuNCw5Mi42LDkuNSw5Mi44YzAuMywwLjUsNjcuMSwwLjYsNjcuMSwwLjFjMC0wLjEtMS0xLjQtMi4zLTIuOGMtMi42LTIuOC01LjItNy44LTYuMi0xMS45Yy0wLjktMy41LTAuOS0xMC4yLDAtMTRjMS44LTcuNCw3LjgtMTUuMiwxNC4zLTE4LjVjNS43LTMsNy42LTMuNCwxNC40LTMuNGM0LjYsMCw2LjEtMC4xLDYuMS0wLjZjMC0yLjQsMTItMTE5LjgsMTIuMy0xMjBjMC4yLTAuMiw2LjUtNS4yLDE0LTExLjJjMTAuMS04LDEzLjktMTEuMywxNC43LTEyLjdjMS41LTIuNiwxLjgtNi4yLDAuOC05LjNjLTAuNy0yLjItMS42LTMuMy03LjYtOS4yYy02LjEtNi4xLTctNi44LTkuMi03LjVjLTIuMi0wLjYtNi44LTAuNy0zOC43LTAuN2gtMzYuMXYtMS42YzAtMC45LTAuNi0yLjktMS41LTQuNWMtMS42LTMuMS00LjYtNS44LTcuNi02LjlDMTA2LDEwLjEsODgsOS43LDg1LjIsMTAuM3ogTTEwNS40LDE5LjdjMS42LDAuNiwyLjUsMS45LDIuNSwzLjJjMCwwLjYtMS41LDAuNy0xMi41LDAuN2MtMTEuNiwwLTEyLjUsMC0xMi41LTAuOGMwLTEuMSwxLjQtMi43LDIuOC0zLjNDODcuNywxOC44LDEwMy42LDE4LjksMTA1LjQsMTkuN3ogTTIwMC43LDQxLjRjNC4yLDIuMiwyLjMsOC41LTIuNSw4LjVjLTAuNiwwLTEuOC0wLjYtMi43LTEuM2MtMS4yLTEuMS0xLjUtMS43LTEuNS0zLjNjMC0xLjYsMC4zLTIuMiwxLjUtMy4zQzE5Ny4yLDQwLjYsMTk4LjcsNDAuNCwyMDAuNyw0MS40eiBNMTI0LDY4YzEuMywxLjIsMS40LDMuMSwwLjIsNC42bC0wLjksMS4xbC0xMy43LDAuMWMtMTEuOSwwLjEtMTMuOCwwLTE0LjktMC42Yy0xLjQtMS0yLTIuNC0xLjQtMy45YzAuOC0yLjMsMS0yLjMsMTUuOC0yLjNDMTIyLjYsNjcsMTIyLjksNjcsMTI0LDY4eiIvPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik0xNTUuNiwyMDIuOGMtNy43LDEuOS0xNCw4LjEtMTYsMTUuN2MtMS45LDcuMywwLDE0LjYsNS40LDIwLjNjMTEuNiwxMi40LDMyLjMsNy4xLDM2LjgtOS41YzAuOC0zLjEsMC42LTguNi0wLjQtMTEuOUMxNzgsMjA2LjcsMTY2LjYsMjAwLjIsMTU1LjYsMjAyLjh6IE0xNjMuOCwyMTcuNWMyLjgsMS40LDQuMiwzLjYsNC4yLDYuNWMwLDcuMy05LDEwLTEzLjUsMy45Yy0yLjQtMy4yLTAuOS04LjQsMi45LTEwLjRDMTU5LjgsMjE2LjIsMTYxLjIsMjE2LjIsMTYzLjgsMjE3LjV6Ii8+PC9nPjwvZz48L2c+DQo8L3N2Zz4="
+                                  width="40rem"
+                                  height="40rem"
+                                />
+                              </div>
+                              <div class="col">
+                                <span class="fs-5 font-monospace"
+                                  >3808101019</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Dustbin card -->
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="row align-items-center">
+                              <div class="col-2">
+                                <!-- iCon by oNlineWebFonts.Com -->
+                                <img
+                                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjU2IDI1NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+DQo8Zz48Zz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNODUuMiwxMC4zYy0yLjcsMC42LTMuOSwxLjEtNi4xLDIuN2MtMi40LDEuOC00LjcsNS41LTUsOC40Yy0wLjMsMi4xLTAuNCwyLjItMiwyLjRjLTUuOCwwLjktMTAuMSwyLjctMTMuNCw1LjdjLTIsMS43LTQuMSw1LTQuOCw3LjNMNTMuNSwzOGg1OS44aDU5LjhsMS4xLDEuMmMyLDEuOSwxLjMsNC44LTEuMyw1LjhjLTAuOCwwLjMtMjEuNiwwLjUtNjMuNywwLjVINDYuNnY1LjV2NS41aDMuOWgzLjlsMC4zLDEuOWMwLjEsMS4xLDQuNCw0My42LDkuNSw5NC40YzUuMSw1MC44LDkuNCw5Mi42LDkuNSw5Mi44YzAuMywwLjUsNjcuMSwwLjYsNjcuMSwwLjFjMC0wLjEtMS0xLjQtMi4zLTIuOGMtMi42LTIuOC01LjItNy44LTYuMi0xMS45Yy0wLjktMy41LTAuOS0xMC4yLDAtMTRjMS44LTcuNCw3LjgtMTUuMiwxNC4zLTE4LjVjNS43LTMsNy42LTMuNCwxNC40LTMuNGM0LjYsMCw2LjEtMC4xLDYuMS0wLjZjMC0yLjQsMTItMTE5LjgsMTIuMy0xMjBjMC4yLTAuMiw2LjUtNS4yLDE0LTExLjJjMTAuMS04LDEzLjktMTEuMywxNC43LTEyLjdjMS41LTIuNiwxLjgtNi4yLDAuOC05LjNjLTAuNy0yLjItMS42LTMuMy03LjYtOS4yYy02LjEtNi4xLTctNi44LTkuMi03LjVjLTIuMi0wLjYtNi44LTAuNy0zOC43LTAuN2gtMzYuMXYtMS42YzAtMC45LTAuNi0yLjktMS41LTQuNWMtMS42LTMuMS00LjYtNS44LTcuNi02LjlDMTA2LDEwLjEsODgsOS43LDg1LjIsMTAuM3ogTTEwNS40LDE5LjdjMS42LDAuNiwyLjUsMS45LDIuNSwzLjJjMCwwLjYtMS41LDAuNy0xMi41LDAuN2MtMTEuNiwwLTEyLjUsMC0xMi41LTAuOGMwLTEuMSwxLjQtMi43LDIuOC0zLjNDODcuNywxOC44LDEwMy42LDE4LjksMTA1LjQsMTkuN3ogTTIwMC43LDQxLjRjNC4yLDIuMiwyLjMsOC41LTIuNSw4LjVjLTAuNiwwLTEuOC0wLjYtMi43LTEuM2MtMS4yLTEuMS0xLjUtMS43LTEuNS0zLjNjMC0xLjYsMC4zLTIuMiwxLjUtMy4zQzE5Ny4yLDQwLjYsMTk4LjcsNDAuNCwyMDAuNyw0MS40eiBNMTI0LDY4YzEuMywxLjIsMS40LDMuMSwwLjIsNC42bC0wLjksMS4xbC0xMy43LDAuMWMtMTEuOSwwLjEtMTMuOCwwLTE0LjktMC42Yy0xLjQtMS0yLTIuNC0xLjQtMy45YzAuOC0yLjMsMS0yLjMsMTUuOC0yLjNDMTIyLjYsNjcsMTIyLjksNjcsMTI0LDY4eiIvPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik0xNTUuNiwyMDIuOGMtNy43LDEuOS0xNCw4LjEtMTYsMTUuN2MtMS45LDcuMywwLDE0LjYsNS40LDIwLjNjMTEuNiwxMi40LDMyLjMsNy4xLDM2LjgtOS41YzAuOC0zLjEsMC42LTguNi0wLjQtMTEuOUMxNzgsMjA2LjcsMTY2LjYsMjAwLjIsMTU1LjYsMjAyLjh6IE0xNjMuOCwyMTcuNWMyLjgsMS40LDQuMiwzLjYsNC4yLDYuNWMwLDcuMy05LDEwLTEzLjUsMy45Yy0yLjQtMy4yLTAuOS04LjQsMi45LTEwLjRDMTU5LjgsMjE2LjIsMTYxLjIsMjE2LjIsMTYzLjgsMjE3LjV6Ii8+PC9nPjwvZz48L2c+DQo8L3N2Zz4="
+                                  width="40rem"
+                                  height="40rem"
+                                />
+                              </div>
+                              <div class="col">
+                                <span class="fs-5 font-monospace"
+                                  >3808101019</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col p-0 mt-2 text-end">
+                        <button class="btn btn-primary btn-sm">Add Bin</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Finance Panel Accordion -->
+            <div
+              class="finance col-12 col-lg accordion p-0"
+              id="finance-accordion"
+            >
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="finance-heading">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#finance-collapse"
+                    aria-expanded="true"
+                    aria-controls="finance-collapse"
+                  >
+                    <span class="fs-5">Finance</span>
+                  </button>
+                </h2>
+                <div
+                  id="finance-collapse"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="finance-heading"
+                >
+                  <div class="accordion-body">This is the accordion body</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
