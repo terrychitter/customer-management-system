@@ -74,3 +74,22 @@
 .dustbins-container .card:hover {
   background-color: #d9e1f9;
 }
+
+.payments-container {
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.payments-container .card {
+  margin-bottom: 1rem;
+  border: none;
+}
+
+.invoices-container {
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.invoices-container .card {
+  border: none;
+}
