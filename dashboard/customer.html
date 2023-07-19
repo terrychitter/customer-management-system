@@ -11,129 +11,148 @@
     <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="customer.css" />
   </head>
-  <body class="container-fluid d-flex flex-column w-100">
+  <body class="container-fluid d-flex flex-column w-100 overflow-x-hidden">
     <div class="row h-100">
-      <nav
-        class="custom-nav position-sticky d-none d-md-block col-12 col-md-4 col-lg-3 col-xl-3 col-xxl-2"
+      <!-- Navigation Canvas -->
+      <style>
+        .canvas-button {
+          position: absolute;
+          top: 50%;
+          right: -2.5rem;
+          visibility: visible;
+          color: white;
+          border: none;
+          padding-block: 2rem;
+          border-radius: 0 10px 10px 0;
+        }
+
+        .list-group-item {
+          border: none;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          border-radius: 5px;
+          margin-bottom: 1.3rem;
+          font-size: 1.3rem;
+          cursor: pointer;
+        }
+
+        .nav-item-icon-container {
+          background-color: white;
+          color: #4169e1;
+          width: 35px;
+          height: 35px;
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          border-radius: 5px;
+          box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+          -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+          -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+        }
+
+        .nav-item-icon-container i {
+          font-size: 1.5rem;
+        }
+
+        .nav-item-icon-container.active {
+          box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+          -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+          -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+        }
+
+        .profile-icon-container {
+          width: 2rem;
+          height: 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: rgb(77, 77, 77);
+          border-radius: 50%;
+          background: rgb(226, 226, 226);
+          background: linear-gradient(
+            338deg,
+            rgba(226, 226, 226, 1) 45%,
+            rgba(246, 246, 246, 1) 52%,
+            rgba(255, 255, 255, 1) 60%
+          );
+        }
+      </style>
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="navigation-canvas"
+        aria-labelledby="navigation-canvas-label"
       >
-        <div class="row justify-content-center pt-3">
-          <div class="custom-nav-head text-center col-12">
-            <style>
-              .custom-nav {
-                box-shadow: 7px 0px 19px 5px rgba(171, 171, 171, 0.3);
-                -webkit-box-shadow: 7px 0px 19px 5px rgba(171, 171, 171, 0.3);
-                -moz-box-shadow: 7px 0px 19px 5px rgba(171, 171, 171, 0.3);
-              }
-
-              .custom-nav-head {
-                height: auto;
-              }
-
-              .custom-nav-body {
-                height: 80%;
-              }
-
-              .logo {
-                margin: auto;
-                width: 100%;
-              }
-
-              .list-group-item {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                border: none;
-                margin-bottom: 1rem;
-                cursor: pointer;
-              }
-
-              .icon-container {
-                padding-inline: 7px;
-                border-radius: 5px;
-              }
-
-              .list-group-item.active {
-                background-color: transparent;
-                color: black;
-                border-radius: 5px;
-                box-shadow: 0px 4px 19px 5px rgba(171, 171, 171, 0.3);
-                -webkit-box-shadow: 0px 4px 19px 5px rgba(171, 171, 171, 0.3);
-                -moz-box-shadow: 0px 4px 19px 5px rgba(171, 171, 171, 0.3);
-              }
-
-              .list-group-item.active .icon-container {
-                background-color: #4169e1;
-                color: white;
-                box-shadow: 0px 4px 19px 5px rgba(171, 171, 171, 0.3);
-                -webkit-box-shadow: 0px 4px 19px 5px rgba(171, 171, 171, 0.3);
-                -moz-box-shadow: 0px 4px 19px 5px rgba(171, 171, 171, 0.3);
-              }
-
-              .breadcrumb,
-              .breadcrumb * {
-                margin-bottom: 0;
-                padding-bottom: 0;
-              }
-
-              .profile-icon-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 2.1rem;
-                height: 2.1rem;
-                border-radius: 50%;
-                background: linear-gradient(145deg, #4670f1, #3b5fcb);
-              }
-
-              .profile-icon-container i {
-                color: white;
-              }
-            </style>
-            <img
-              src="../images/logo_cropped.png"
-              alt="Kleenbin CMS Logo"
-              class="logo"
-            />
-            <hr class="custom-hr" />
-          </div>
-          <div class="custom-nav-body text-center col-12">
-            <ul class="list-group">
-              <li class="list-group-item active">
-                <div class="icon-container">
-                  <i class="bi bi-people fs-3"></i>
-                </div>
-                Customers
-              </li>
-              <li class="list-group-item">
-                <div class="icon-container">
-                  <i class="bi bi-cash-stack fs-3"></i>
-                </div>
-                Payments
-              </li>
-              <li class="list-group-item">
-                <div class="icon-container">
-                  <i class="bi bi-receipt fs-3"></i>
-                </div>
-                Invoices
-              </li>
-              <li class="list-group-item">
-                <div class="icon-container">
-                  <i class="bi bi-file-text fs-3"></i>
-                </div>
-                Statements
-              </li>
-            </ul>
-          </div>
+        <!-- Canvas Head -->
+        <div class="offcanvas-header">
+          <h2>
+            <div class="row" style="margin-left: -2.5rem">
+              <img src="../images/logo_cropped.png" alt="Kleenbin CMS Logo" />
+            </div>
+          </h2>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-labelledby="Close"
+          ></button>
         </div>
-      </nav>
-      <main class="overflow-auto col-12 col-md px-md-3 pt-2 pb-3">
+        <!-- Canvas Body -->
+        <div class="offcanvas-body">
+          <ul class="list-group p-0">
+            <li class="list-group-item active">
+              <div class="nav-item-icon-container">
+                <i class="bi bi-people"></i>
+              </div>
+              Customers
+            </li>
+            <li class="list-group-item">
+              <div class="nav-item-icon-container">
+                <i class="bi bi-cash-stack"></i>
+              </div>
+              Payments
+            </li>
+            <li class="list-group-item">
+              <div class="nav-item-icon-container">
+                <i class="bi bi-receipt"></i>
+              </div>
+              Invoices
+            </li>
+            <li class="list-group-item">
+              <div class="nav-item-icon-container">
+                <i class="bi bi-file-earmark-spreadsheet"></i>
+              </div>
+              Statements
+            </li>
+          </ul>
+        </div>
+        <!-- Wide Screen Toggle Button -->
+        <button
+          class="btn btn-primary canvas-button"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#navigation-canvas"
+          aria-controls="navigation-canvas"
+        >
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+      </div>
+      <main class="overflow-auto col-12 col-md px-md-3 pb-3">
         <!-- Header Row -->
-        <header class="custom-header row align-items-center">
+        <header
+          class="custom-header row align-items-center bg-primary text-white py-2"
+        >
           <div class="d-none d-sm-block col">
             <nav aria-label="breadcrumb mb-0 pb-0">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
+                <li class="breadcrumb-item">
+                  <a href="#" class="text-white">Dashboard</a>
+                </li>
+                <li
+                  class="breadcrumb-item text-white active"
+                  aria-current="page"
+                >
                   Customers
                 </li>
               </ol>
