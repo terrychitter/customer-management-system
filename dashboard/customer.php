@@ -275,7 +275,12 @@
               aria-labelledby="customer-details-heading"
             >
               <div class="accordion-body">
+                <!-- NO CUSTOMER SELECTED DIV -->
                 <div class="row">
+                  <?php include "no-customer-selected.html"; ?>
+                </div>
+                <!-- CUSTOMER SELECTED DIV -->
+                <div class="d-none row">
                   <!-- Profile Column -->
                   <div
                     class="profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center"
@@ -610,7 +615,10 @@
                 >
                   <!-- Sanitizing Details Body -->
                   <div class="accordion-body p-3">
-                    <form action="" class="bin-details row p-0">
+                    <!-- CUSTOMER NOT SELECTED -->
+                    <?php include "no-customer-selected.html"; ?>
+                    <!-- CUSTOMER SELECTED -->
+                    <form action="" class="bin-details d-none row p-0">
                       <!-- Frequency -->
                       <div class="col-12 col-sm-4 col-lg-12 col-xxl-3">
                         <div class="input-group mb-3">
@@ -666,7 +674,7 @@
                         </div>
                       </div>
                     </form>
-                    <div class="dustbins row gx-0">
+                    <div class="dustbins d-none row gx-0">
                       <div class="col-12">Dustbins</div>
                       <!-- Dustbins container -->
                       <div
@@ -766,8 +774,9 @@
                 >
                   <!-- Finance Panel Body -->
                   <div class="accordion-body">
+                    <?php include "no-customer-selected.html"; ?>
                     <!-- Payments Col -->
-                    <div class="payments col">
+                    <div class="payments d-none col">
                       <div class="row mb-3">
                         <h3 class="col-12 fs-6 col-sm-6 col-lg-12 col-xxl-6">
                           <b>Payments</b>
@@ -894,7 +903,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="invoices col mt-3">
+                    <!-- Invoices Col -->
+                    <div class="invoices d-none col mt-3">
                       <div class="col-12 mb-3"><b>Invoices</b></div>
                       <div
                         class="invoices-container col-12 border rounded p-2 overflow-auto"
