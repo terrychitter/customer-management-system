@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="customer.css" />
   </head>
+  <?php
+    session_start();
+
+    $customerActive = false;
+    $customerID = '0';
+
+    if (isset($_GET['customer_id'])) {
+      $customerActive = true;
+      $customerID = $_GET['customer_id'];
+    }
+?>
+
   <body class="container-fluid d-flex flex-column w-100 overflow-x-hidden">
     <div class="row h-100">
       <!-- Navigation Canvas -->
@@ -131,11 +143,68 @@
         <button
           class="btn btn-primary canvas-button"
           type="button"
+          id="offcanvas-toggle-button"
+          draggable="true"
           data-bs-toggle="offcanvas"
           data-bs-target="#navigation-canvas"
           aria-controls="navigation-canvas"
         >
           <i class="bi bi-three-dots-vertical"></i>
+          <!-- Dragging script -->
+          <script>
+            const draggableElement = document.getElementById('offcanvas-toggle-button');
+            let isDragging = false;
+            let startY;
+            let initialTop;
+            const topBoundaryOffset = 64; // 4rem = 64px
+            const bottomBoundaryOffset = 16; // 1rem = 16px
+
+            // Function to handle the touch start event
+            function handleTouchStart(event) {
+              const touch = event.touches[0];
+              startY = touch.clientY;
+              initialTop = parseInt(window.getComputedStyle(draggableElement).top);
+              isDragging = false; // Initialize as click, not drag
+            }
+
+            // Function to handle the touch move event and update the element position along the Y-axis
+            function handleTouchMove(event) {
+              const touch = event.touches[0];
+              const deltaY = touch.clientY - startY;
+
+              // Check if the user has moved enough to be considered a drag
+              if (!isDragging && Math.abs(deltaY) > 5) {
+                isDragging = true;
+              }
+
+              // If dragging, limit the element's position within the boundaries
+              if (isDragging) {
+                const minTop = topBoundaryOffset;
+                const maxTop = window.innerHeight - draggableElement.clientHeight - bottomBoundaryOffset;
+                let newTop = Math.max(minTop, Math.min(initialTop + deltaY, maxTop));
+                draggableElement.style.top = newTop + 'px';
+
+                // Save the element's vertical position to localStorage
+                localStorage.setItem('draggableElementTop', newTop);
+              }
+            }
+
+            // Function to handle the touch end event
+            function handleTouchEnd(event) {
+              isDragging = false;
+            }
+
+            // Retrieve the stored position from localStorage
+            const storedTop = localStorage.getItem('draggableElementTop');
+            if (storedTop) {
+              draggableElement.style.top = storedTop + 'px';
+            }
+
+            // Add touch event listeners for dragging
+            draggableElement.addEventListener('touchstart', handleTouchStart);
+            draggableElement.addEventListener('touchmove', handleTouchMove);
+            draggableElement.addEventListener('touchend', handleTouchEnd);
+          </script>
         </button>
       </div>
       <main class="overflow-auto col-12 col-md px-md-3 pb-3">
@@ -169,9 +238,17 @@
             <i class="bi bi-gear-fill fs-4"></i>
           </div>
         </header>
+        <div class="customer-buttons col p-0 pb-2 mt-3 text-end">
+          <button class="btn btn-primary btn-sm">
+           <i class="bi bi-people-fill fs-6"></i> View All
+          </button>
+          <button class="btn btn-primary btn-sm">
+           <i class="bi bi-person-fill-add fs-6"></i> Add New Customer
+          </button>
+        </div>
         <!-- Search Customers Accordion -->
         <div
-          class="search-customers work-panel col-12 accordion"
+          class="search-customers col-12 accordion"
           id="search-customer-accordion"
         >
           <div class="accordion-item">
@@ -229,7 +306,7 @@
                   </div>
                 </div>
                 <div class="row search-results gx-0">
-                  <h3 class="fs-6">Search Results</h3>
+                  <h3 style="font-size: 0.9rem; margin-bottom: 0;">Search Results</h3>
                   <table class="table table-striped table-hover">
                     <tbody>
                       <tr>
@@ -276,11 +353,13 @@
             >
               <div class="accordion-body">
                 <!-- NO CUSTOMER SELECTED DIV -->
-                <div class="row">
+                <?php if (!$customerActive) { ?>
+                  <div class="row">
                   <?php include "no-customer-selected.html"; ?>
                 </div>
+                <?php } else { ?>
                 <!-- CUSTOMER SELECTED DIV -->
-                <div class="d-none row">
+                <div class="row">
                   <!-- Profile Column -->
                   <div
                     class="profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center"
@@ -584,6 +663,7 @@
                     </div>
                   </div>
                 </div>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -616,9 +696,11 @@
                   <!-- Sanitizing Details Body -->
                   <div class="accordion-body p-3">
                     <!-- CUSTOMER NOT SELECTED -->
-                    <?php include "no-customer-selected.html"; ?>
+                    <?php if (!$customerActive) {
+                    include "no-customer-selected.html";
+                    } else { ?>
                     <!-- CUSTOMER SELECTED -->
-                    <form action="" class="bin-details d-none row p-0">
+                    <form action="" class="bin-details row p-0">
                       <!-- Frequency -->
                       <div class="col-12 col-sm-4 col-lg-12 col-xxl-3">
                         <div class="input-group mb-3">
@@ -674,7 +756,7 @@
                         </div>
                       </div>
                     </form>
-                    <div class="dustbins d-none row gx-0">
+                    <div class="dustbins row gx-0">
                       <div class="col-12">Dustbins</div>
                       <!-- Dustbins container -->
                       <div
@@ -745,6 +827,7 @@
                         <button class="btn btn-primary btn-sm">Add Bin</button>
                       </div>
                     </div>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
@@ -774,9 +857,11 @@
                 >
                   <!-- Finance Panel Body -->
                   <div class="accordion-body">
-                    <?php include "no-customer-selected.html"; ?>
+                    <?php if (!$customerActive) {
+                    include "no-customer-selected.html";
+                    } else { ?>
                     <!-- Payments Col -->
-                    <div class="payments d-none col">
+                    <div class="payments col">
                       <div class="row mb-3">
                         <h3 class="col-12 fs-6 col-sm-6 col-lg-12 col-xxl-6">
                           <b>Payments</b>
@@ -904,7 +989,7 @@
                       </div>
                     </div>
                     <!-- Invoices Col -->
-                    <div class="invoices d-none col mt-3">
+                    <div class="invoices col mt-3">
                       <div class="col-12 mb-3"><b>Invoices</b></div>
                       <div
                         class="invoices-container col-12 border rounded p-2 overflow-auto"
@@ -1062,6 +1147,7 @@
                         </div>
                       </div>
                     </div>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
