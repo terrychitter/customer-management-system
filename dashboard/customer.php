@@ -12,14 +12,107 @@
     <link rel="stylesheet" href="customer.css" />
   </head>
   <?php
+    // Getting database connection and starting the session
+    require_once("../db_conn.php");
     session_start();
 
+    // Intialising variables
     $customerActive = false;
     $customerID = '0';
 
+    // Assigning variables
     if (isset($_GET['customer_id'])) {
       $customerActive = true;
       $customerID = $_GET['customer_id'];
+    }
+
+    // Getting customer data if a customer is selected
+    if ($customerActive) {
+
+    // Query the database to get the customer data
+    $sql = "SELECT * FROM customers WHERE account_number = $customerID";
+
+    // Execute the query and store the result in $result
+    $result = mysqli_query($conn, $sql);
+
+    // Check if the query was successful and fetch the customer data
+    if ($result && mysqli_num_rows($result) > 0) {
+          $customerData = mysqli_fetch_assoc($result);
+
+          // Extract each field value and store them in variables
+          $accountNumber = $customerData['account_number'];
+          $title = $customerData['title'];
+          $name = $customerData['name'];
+          $surname = $customerData['surname'];
+          $address = $customerData['address'];
+          $suburb = $customerData['suburb'];
+          $city = $customerData['city'];
+          $postalCode = $customerData['postal_code'];
+          $active = $customerData['active'];
+          $email = $customerData['email'];
+          $origin = $customerData['origin'];
+          $frequency = $customerData['frequency'];
+          $day = $customerData['day'];
+          $monthlyRate = $customerData['monthly_rate'];
+          $dateJoined = $customerData['date_joined'];
+          $dateAdded = $customerData['date_added'];
+
+          // Retrieve comments for the customer and store in an array
+          $comments = array();
+          $sql_comments = "SELECT * FROM comments WHERE customer_id = $customerID";
+          $result_comments = mysqli_query($conn, $sql_comments);
+          if ($result_comments) {
+              while ($commentData = mysqli_fetch_assoc($result_comments)) {
+                  $comments[] = $commentData;
+              }
+          }
+
+          // Retrieve bins for the customer and store in an array
+          $bins = array();
+          $sql_bins = "SELECT * FROM bins WHERE customer_id = $customerID";
+          $result_bins = mysqli_query($conn, $sql_bins);
+          if ($result_bins) {
+              while ($binData = mysqli_fetch_assoc($result_bins)) {
+                  $bins[] = $binData;
+              }
+          }
+
+          // Retrieve contacts for the customer and store in an array
+          $contacts = array();
+          $sql_contacts = "SELECT * FROM contacts WHERE customer_id = $customerID";
+          $result_contacts = mysqli_query($conn, $sql_contacts);
+          if ($result_contacts) {
+              while ($contactData = mysqli_fetch_assoc($result_contacts)) {
+                  $contacts[] = $contactData;
+              }
+          }
+
+          // Retrieve payments for the customer and store in an array
+          $payments = array();
+          $sql_payments = "SELECT * FROM payments WHERE customer_id = $customerID";
+          $result_payments = mysqli_query($conn, $sql_payments);
+          if ($result_payments) {
+              while ($paymentData = mysqli_fetch_assoc($result_payments)) {
+                  $payments[] = $paymentData;
+              }
+          }
+
+          // Retrieve invoices for the customer and store in an array
+          $invoices = array();
+          $sql_invoices = "SELECT * FROM invoices WHERE customer_id = $customerID";
+          $result_invoices = mysqli_query($conn, $sql_invoices);
+          if ($result_invoices) {
+              while ($invoiceData = mysqli_fetch_assoc($result_invoices)) {
+                  $invoices[] = $invoiceData;
+              }
+          }
+      } else {
+          // Customer with the given account_number not found or query error
+          // Handle the case when the customer doesn't exist or the query fails
+          header("Location: customer.php?status=1")
+      }
+          // Close the database connection
+          mysqli_close($conn);
     }
 ?>
 
@@ -365,7 +458,7 @@
                     class="profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center"
                   >
                     <i class="bi bi-person-fill mb-0"></i>
-                    <p class="customer-acc-num fs-1">901</p>
+                    <p class="customer-acc-num fs-1"><?php echo $accountNumber; ?></p>
                   </div>
                   <!-- Personal Details Column -->
                   <form class="details-col col-12 col-md col-xl-4 p-3 mb-0">
@@ -373,11 +466,11 @@
                       <div class="col-auto">
                         <label for="title" class="form-label">Title</label>
                         <select class="form-select" aria-label="Title">
-                          <option value="Mr">Mr</option>
-                          <option value="Mrs">Ms</option>
-                          <option value="Ms">Ms</option>
-                          <option value="Dr">Dr</option>
-                          <option value="Prof">Prof</option>
+                          <option value="Mr" <?php echo ($title === 'Mr') ? 'selected' : ''; ?>>Mr</option>
+                          <option value="Mrs" <?php echo ($title === 'Mrs') ? 'selected' : ''; ?>>Mrs</option>
+                          <option value="Ms" <?php echo ($title === 'Ms') ? 'selected' : ''; ?>>Ms</option>
+                          <option value="Dr" <?php echo ($title === 'Dr') ? 'selected' : ''; ?>>Dr</option>
+                          <option value="Prof" <?php echo ($title === 'Prof') ? 'selected' : ''; ?>>Prof</option>
                         </select>
                       </div>
                     </div>
@@ -389,6 +482,7 @@
                           name="name"
                           class="form-control"
                           placeholder="Name"
+                          value="<?php echo $name; ?>"
                         />
                       </div>
                       <div class="surname col-sm-6">
@@ -398,6 +492,7 @@
                           name="surname"
                           class="form-control"
                           placeholder="Surname"
+                          value="<?php echo $surname; ?>"
                         />
                       </div>
                     </div>
@@ -409,6 +504,7 @@
                           name="address"
                           class="form-control"
                           placeholder="Address"
+                          value="<?php echo $address;?>"
                         />
                       </div>
                     </div>
@@ -420,6 +516,7 @@
                           name="suburb"
                           class="form-control"
                           placeholder="Suburb"
+                          value="<?php echo $suburb; ?>"
                         />
                       </div>
                       <div class="postal col-4">
@@ -429,6 +526,7 @@
                           name="postal"
                           class="form-control"
                           placeholder="Postal"
+                          value="<?php echo $postalCode; ?>"
                         />
                       </div>
                     </div>
@@ -442,6 +540,7 @@
                           name="email"
                           class="form-control"
                           placeholder="Email Address"
+                          value="<?php echo $email; ?>"
                         />
                       </div>
                     </div>
@@ -454,21 +553,32 @@
                           name="contacts"
                           class="contact-container overflow-auto rounded border p-2"
                         >
-                          <div class="contact-card card mb-2">
+                        <?php if(!empty($contacts)) {
+                          foreach ($contacts as $contact) {
+                            $contactID = $contact['contact_id'];
+                            $contactTitle = $contact['contact_title'];
+                            $contactNumber = $contact['contact'];
+                            $countryCode = $contact['country_code'];?>
+                          <div class="contact-card card mb-2" data-contact-id="<?php echo $contactID; ?>">
                             <div class="card-body pb-1">
                               <div class="row p-0">
                                 <div
                                   class="col-12 col-lg-4 col-xl-12 text-truncate"
                                 >
-                                  Home Number
+                                  <?php echo $contactTitle ?>
                                 </div>
                                 <div class="col-10 col-md col-xl">
-                                  <div class="badge bg-secondary">+27</div>
-                                  763220935
+                                  <div class="badge bg-secondary"><?php echo $countryCode;?></div>
+                                  <?php echo $contactNumber;?>
                                 </div>
                               </div>
                             </div>
                           </div>
+                          <?php }} else { ?>
+                            <div class="no-contacts text-secondary">
+                              No Contacts to display
+                            </div>
+                            <?php } ?>
                         </div>
                       </div>
                       <div class="col mt-2 text-end">
@@ -488,8 +598,10 @@
                           id="origin"
                           class="form-control"
                           placeholder="Origin"
+                          value="<?php echo $origin; ?>"
                         />
                       </div>
+                      <?php if($active) { ?>
                       <div class="active col">
                         <button
                           class="deactivate-customer-btn btn btn-sm btn-danger"
@@ -498,162 +610,42 @@
                           Deactivate Customer
                         </button>
                       </div>
+                      <?php }?>
                     </div>
                   </form>
                   <!-- Comments Column -->
                   <div class="comments-col p-3 mb-4 col-12 col-md-12 col-xl">
                     <label for="comments">Comments</label>
-                    <div class="col h-100">
+                    <div class="col">
                       <div
-                        class="comments-container overflow-auto border rounded p-2 h-100"
+                        class="comments-container overflow-auto border rounded p-2"
                       >
-                        <div class="card">
+                      <?php if (!empty($comments)) { 
+                        foreach ($comments as $comment) {
+                          $commentID = $comment['comment_id'];
+                          $commentTitle = $comment['comment_title'];
+                          $commentText = $comment['comment_text'];
+                          $commentDatePosted = date('d/m/Y H:i', strtotime($comment['date_time_added']));?>
+                        <div class="card" data-comment-id="<?php echo $commentID; ?>">
                           <div class="card-body">
-                            <div class="col-12">Comment Title</div>
+                            <div class="col-12"><?php echo $commentTitle; ?></div>
                             <div class="col-12 fs-6 text-secondary">
-                              <i
-                                >Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Dolorem soluta unde ratione
-                                provident cum debitis laboriosam consequatur,
-                                autem assumenda commodi consequuntur eos
-                                blanditiis ullam quo quae incidunt? Fuga, a
-                                sit!</i
+                              <i><?php echo $commentText; ?></i
                               >
                             </div>
                             <div
                               class="col-12 text-secondary text-end"
                               style="font-size: 0.7rem"
                             >
-                              Posted:23/07/12 19:36
+                              Posted: <?php echo $commentDatePosted; ?>
                             </div>
                           </div>
                         </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="col-12">Comment Title</div>
-                            <div class="col-12 fs-6 text-secondary">
-                              <i
-                                >Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Dolorem soluta unde ratione
-                                provident cum debitis laboriosam consequatur,
-                                autem assumenda commodi consequuntur eos
-                                blanditiis ullam quo quae incidunt? Fuga, a
-                                sit!</i
-                              >
-                            </div>
-                            <div
-                              class="col-12 text-secondary text-end"
-                              style="font-size: 0.7rem"
-                            >
-                              Posted:23/07/12 19:36
-                            </div>
+                        <?php }} else { ?>
+                          <div class="no-comments text-secondary">
+                            No comments to display
                           </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="col-12">Comment Title</div>
-                            <div class="col-12 fs-6 text-secondary">
-                              <i
-                                >Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Dolorem soluta unde ratione
-                                provident cum debitis laboriosam consequatur,
-                                autem assumenda commodi consequuntur eos
-                                blanditiis ullam quo quae incidunt? Fuga, a
-                                sit!</i
-                              >
-                            </div>
-                            <div
-                              class="col-12 text-secondary text-end"
-                              style="font-size: 0.7rem"
-                            >
-                              Posted:23/07/12 19:36
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="col-12">Comment Title</div>
-                            <div class="col-12 fs-6 text-secondary">
-                              <i
-                                >Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Dolorem soluta unde ratione
-                                provident cum debitis laboriosam consequatur,
-                                autem assumenda commodi consequuntur eos
-                                blanditiis ullam quo quae incidunt? Fuga, a
-                                sit!</i
-                              >
-                            </div>
-                            <div
-                              class="col-12 text-secondary text-end"
-                              style="font-size: 0.7rem"
-                            >
-                              Posted:23/07/12 19:36
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="col-12">Comment Title</div>
-                            <div class="col-12 fs-6 text-secondary">
-                              <i
-                                >Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Dolorem soluta unde ratione
-                                provident cum debitis laboriosam consequatur,
-                                autem assumenda commodi consequuntur eos
-                                blanditiis ullam quo quae incidunt? Fuga, a
-                                sit!</i
-                              >
-                            </div>
-                            <div
-                              class="col-12 text-secondary text-end"
-                              style="font-size: 0.7rem"
-                            >
-                              Posted:23/07/12 19:36
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="col-12">Comment Title</div>
-                            <div class="col-12 fs-6 text-secondary">
-                              <i
-                                >Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Dolorem soluta unde ratione
-                                provident cum debitis laboriosam consequatur,
-                                autem assumenda commodi consequuntur eos
-                                blanditiis ullam quo quae incidunt? Fuga, a
-                                sit!</i
-                              >
-                            </div>
-                            <div
-                              class="col-12 text-secondary text-end"
-                              style="font-size: 0.7rem"
-                            >
-                              Posted:23/07/12 19:36
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="col-12">Comment Title</div>
-                            <div class="col-12 fs-6 text-secondary">
-                              <i
-                                >Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Dolorem soluta unde ratione
-                                provident cum debitis laboriosam consequatur,
-                                autem assumenda commodi consequuntur eos
-                                blanditiis ullam quo quae incidunt? Fuga, a
-                                sit!</i
-                              >
-                            </div>
-                            <div
-                              class="col-12 text-secondary text-end"
-                              style="font-size: 0.7rem"
-                            >
-                              Posted:23/07/12 19:36
-                            </div>
-                          </div>
-                        </div>
+                          <?php } ?>
                       </div>
                       <div class="col text-end mt-2">
                         <button class="btn btn-primary btn-sm">
@@ -714,6 +706,7 @@
                             max="4"
                             aria-label="Frequency"
                             aria-describedby="frequency-label"
+                            value="<?php echo $frequency;?>"
                           />
                         </div>
                       </div>
@@ -723,16 +716,12 @@
                           <span class="input-group-text" id="sanitizing-day"
                             >Day</span
                           >
-                          <select
-                            class="form-select"
-                            aria-label="Sanitizing Day"
-                            aria-describedby="sanitizing-day"
-                          >
-                            <option value="monday" selected>Monday</option>
-                            <option value="tuesday">Tuesday</option>
-                            <option value="wednesday">Wednesday</option>
-                            <option value="thursday">Thursday</option>
-                            <option value="friday">Friday</option>
+                          <select id="day-select" class="form-select" aria-label="Sanitizing Day" aria-describedby="sanitizing-day">
+                            <option value="Monday" <?php echo (ucfirst($day) === 'Monday') ? 'selected' : ''; ?>>Monday</option>
+                            <option value="Tuesday" <?php echo (ucfirst($day) === 'Tuesday') ? 'selected' : ''; ?>>Tuesday</option>
+                            <option value="Wednesday" <?php echo (ucfirst($day) === 'Wednesday') ? 'selected' : ''; ?>>Wednesday</option>
+                            <option value="Thursday" <?php echo (ucfirst($day) === 'Thursday') ? 'selected' : ''; ?>>Thursday</option>
+                            <option value="Friday" <?php echo (ucfirst($day) === 'Friday') ? 'selected' : ''; ?>>Friday</option>
                           </select>
                         </div>
                       </div>
@@ -752,6 +741,7 @@
                             step="10"
                             min="1"
                             aria-describedby="monthly-fee-label"
+                            value="<?php echo $monthlyRate; ?>"
                           />
                         </div>
                       </div>
@@ -759,11 +749,12 @@
                     <div class="dustbins row gx-0">
                       <div class="col-12">Dustbins</div>
                       <!-- Dustbins container -->
-                      <div
-                        class="dustbins-container col-12 overflow-auto border rounded p-2"
-                      >
+                      <div class="dustbins-container col-12 overflow-auto border rounded p-2">
                         <!-- Dustbin card -->
-                        <div class="card">
+                        <?php if (!empty($bins)) {
+                          foreach ($bins as $bin) {
+                            $binSerialNum = $bin['serial_number']?>
+                        <div class="card" data-bin-id="<?php echo  $binSerialNum; ?>">
                           <div class="card-body">
                             <div class="row align-items-center">
                               <div class="col-2">
@@ -776,52 +767,17 @@
                               </div>
                               <div class="col">
                                 <span class="fs-5 font-monospace"
-                                  >3808101019</span
+                                  ><?php echo  $binSerialNum; ?></span
                                 >
                               </div>
                             </div>
                           </div>
                         </div>
-                        <!-- Dustbin card -->
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="row align-items-center">
-                              <div class="col-2">
-                                <!-- iCon by oNlineWebFonts.Com -->
-                                <img
-                                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjU2IDI1NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+DQo8Zz48Zz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNODUuMiwxMC4zYy0yLjcsMC42LTMuOSwxLjEtNi4xLDIuN2MtMi40LDEuOC00LjcsNS41LTUsOC40Yy0wLjMsMi4xLTAuNCwyLjItMiwyLjRjLTUuOCwwLjktMTAuMSwyLjctMTMuNCw1LjdjLTIsMS43LTQuMSw1LTQuOCw3LjNMNTMuNSwzOGg1OS44aDU5LjhsMS4xLDEuMmMyLDEuOSwxLjMsNC44LTEuMyw1LjhjLTAuOCwwLjMtMjEuNiwwLjUtNjMuNywwLjVINDYuNnY1LjV2NS41aDMuOWgzLjlsMC4zLDEuOWMwLjEsMS4xLDQuNCw0My42LDkuNSw5NC40YzUuMSw1MC44LDkuNCw5Mi42LDkuNSw5Mi44YzAuMywwLjUsNjcuMSwwLjYsNjcuMSwwLjFjMC0wLjEtMS0xLjQtMi4zLTIuOGMtMi42LTIuOC01LjItNy44LTYuMi0xMS45Yy0wLjktMy41LTAuOS0xMC4yLDAtMTRjMS44LTcuNCw3LjgtMTUuMiwxNC4zLTE4LjVjNS43LTMsNy42LTMuNCwxNC40LTMuNGM0LjYsMCw2LjEtMC4xLDYuMS0wLjZjMC0yLjQsMTItMTE5LjgsMTIuMy0xMjBjMC4yLTAuMiw2LjUtNS4yLDE0LTExLjJjMTAuMS04LDEzLjktMTEuMywxNC43LTEyLjdjMS41LTIuNiwxLjgtNi4yLDAuOC05LjNjLTAuNy0yLjItMS42LTMuMy03LjYtOS4yYy02LjEtNi4xLTctNi44LTkuMi03LjVjLTIuMi0wLjYtNi44LTAuNy0zOC43LTAuN2gtMzYuMXYtMS42YzAtMC45LTAuNi0yLjktMS41LTQuNWMtMS42LTMuMS00LjYtNS44LTcuNi02LjlDMTA2LDEwLjEsODgsOS43LDg1LjIsMTAuM3ogTTEwNS40LDE5LjdjMS42LDAuNiwyLjUsMS45LDIuNSwzLjJjMCwwLjYtMS41LDAuNy0xMi41LDAuN2MtMTEuNiwwLTEyLjUsMC0xMi41LTAuOGMwLTEuMSwxLjQtMi43LDIuOC0zLjNDODcuNywxOC44LDEwMy42LDE4LjksMTA1LjQsMTkuN3ogTTIwMC43LDQxLjRjNC4yLDIuMiwyLjMsOC41LTIuNSw4LjVjLTAuNiwwLTEuOC0wLjYtMi43LTEuM2MtMS4yLTEuMS0xLjUtMS43LTEuNS0zLjNjMC0xLjYsMC4zLTIuMiwxLjUtMy4zQzE5Ny4yLDQwLjYsMTk4LjcsNDAuNCwyMDAuNyw0MS40eiBNMTI0LDY4YzEuMywxLjIsMS40LDMuMSwwLjIsNC42bC0wLjksMS4xbC0xMy43LDAuMWMtMTEuOSwwLjEtMTMuOCwwLTE0LjktMC42Yy0xLjQtMS0yLTIuNC0xLjQtMy45YzAuOC0yLjMsMS0yLjMsMTUuOC0yLjNDMTIyLjYsNjcsMTIyLjksNjcsMTI0LDY4eiIvPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik0xNTUuNiwyMDIuOGMtNy43LDEuOS0xNCw4LjEtMTYsMTUuN2MtMS45LDcuMywwLDE0LjYsNS40LDIwLjNjMTEuNiwxMi40LDMyLjMsNy4xLDM2LjgtOS41YzAuOC0zLjEsMC42LTguNi0wLjQtMTEuOUMxNzgsMjA2LjcsMTY2LjYsMjAwLjIsMTU1LjYsMjAyLjh6IE0xNjMuOCwyMTcuNWMyLjgsMS40LDQuMiwzLjYsNC4yLDYuNWMwLDcuMy05LDEwLTEzLjUsMy45Yy0yLjQtMy4yLTAuOS04LjQsMi45LTEwLjRDMTU5LjgsMjE2LjIsMTYxLjIsMjE2LjIsMTYzLjgsMjE3LjV6Ii8+PC9nPjwvZz48L2c+DQo8L3N2Zz4="
-                                  width="40rem"
-                                  height="40rem"
-                                />
-                              </div>
-                              <div class="col">
-                                <span class="fs-5 font-monospace"
-                                  >3808101019</span
-                                >
-                              </div>
-                            </div>
+                        <?php }} else { ?>
+                          <div class="no-dustbins text-secondary">
+                            No dustbins to display
                           </div>
-                        </div>
-                        <!-- Dustbin card -->
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="row align-items-center">
-                              <div class="col-2">
-                                <!-- iCon by oNlineWebFonts.Com -->
-                                <img
-                                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjU2IDI1NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+DQo8Zz48Zz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNODUuMiwxMC4zYy0yLjcsMC42LTMuOSwxLjEtNi4xLDIuN2MtMi40LDEuOC00LjcsNS41LTUsOC40Yy0wLjMsMi4xLTAuNCwyLjItMiwyLjRjLTUuOCwwLjktMTAuMSwyLjctMTMuNCw1LjdjLTIsMS43LTQuMSw1LTQuOCw3LjNMNTMuNSwzOGg1OS44aDU5LjhsMS4xLDEuMmMyLDEuOSwxLjMsNC44LTEuMyw1LjhjLTAuOCwwLjMtMjEuNiwwLjUtNjMuNywwLjVINDYuNnY1LjV2NS41aDMuOWgzLjlsMC4zLDEuOWMwLjEsMS4xLDQuNCw0My42LDkuNSw5NC40YzUuMSw1MC44LDkuNCw5Mi42LDkuNSw5Mi44YzAuMywwLjUsNjcuMSwwLjYsNjcuMSwwLjFjMC0wLjEtMS0xLjQtMi4zLTIuOGMtMi42LTIuOC01LjItNy44LTYuMi0xMS45Yy0wLjktMy41LTAuOS0xMC4yLDAtMTRjMS44LTcuNCw3LjgtMTUuMiwxNC4zLTE4LjVjNS43LTMsNy42LTMuNCwxNC40LTMuNGM0LjYsMCw2LjEtMC4xLDYuMS0wLjZjMC0yLjQsMTItMTE5LjgsMTIuMy0xMjBjMC4yLTAuMiw2LjUtNS4yLDE0LTExLjJjMTAuMS04LDEzLjktMTEuMywxNC43LTEyLjdjMS41LTIuNiwxLjgtNi4yLDAuOC05LjNjLTAuNy0yLjItMS42LTMuMy03LjYtOS4yYy02LjEtNi4xLTctNi44LTkuMi03LjVjLTIuMi0wLjYtNi44LTAuNy0zOC43LTAuN2gtMzYuMXYtMS42YzAtMC45LTAuNi0yLjktMS41LTQuNWMtMS42LTMuMS00LjYtNS44LTcuNi02LjlDMTA2LDEwLjEsODgsOS43LDg1LjIsMTAuM3ogTTEwNS40LDE5LjdjMS42LDAuNiwyLjUsMS45LDIuNSwzLjJjMCwwLjYtMS41LDAuNy0xMi41LDAuN2MtMTEuNiwwLTEyLjUsMC0xMi41LTAuOGMwLTEuMSwxLjQtMi43LDIuOC0zLjNDODcuNywxOC44LDEwMy42LDE4LjksMTA1LjQsMTkuN3ogTTIwMC43LDQxLjRjNC4yLDIuMiwyLjMsOC41LTIuNSw4LjVjLTAuNiwwLTEuOC0wLjYtMi43LTEuM2MtMS4yLTEuMS0xLjUtMS43LTEuNS0zLjNjMC0xLjYsMC4zLTIuMiwxLjUtMy4zQzE5Ny4yLDQwLjYsMTk4LjcsNDAuNCwyMDAuNyw0MS40eiBNMTI0LDY4YzEuMywxLjIsMS40LDMuMSwwLjIsNC42bC0wLjksMS4xbC0xMy43LDAuMWMtMTEuOSwwLjEtMTMuOCwwLTE0LjktMC42Yy0xLjQtMS0yLTIuNC0xLjQtMy45YzAuOC0yLjMsMS0yLjMsMTUuOC0yLjNDMTIyLjYsNjcsMTIyLjksNjcsMTI0LDY4eiIvPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik0xNTUuNiwyMDIuOGMtNy43LDEuOS0xNCw4LjEtMTYsMTUuN2MtMS45LDcuMywwLDE0LjYsNS40LDIwLjNjMTEuNiwxMi40LDMyLjMsNy4xLDM2LjgtOS41YzAuOC0zLjEsMC42LTguNi0wLjQtMTEuOUMxNzgsMjA2LjcsMTY2LjYsMjAwLjIsMTU1LjYsMjAyLjh6IE0xNjMuOCwyMTcuNWMyLjgsMS40LDQuMiwzLjYsNC4yLDYuNWMwLDcuMy05LDEwLTEzLjUsMy45Yy0yLjQtMy4yLTAuOS04LjQsMi45LTEwLjRDMTU5LjgsMjE2LjIsMTYxLjIsMjE2LjIsMTYzLjgsMjE3LjV6Ii8+PC9nPjwvZz48L2c+DQo8L3N2Zz4="
-                                  width="40rem"
-                                  height="40rem"
-                                />
-                              </div>
-                              <div class="col">
-                                <span class="fs-5 font-monospace"
-                                  >3808101019</span
-                                >
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          <?php } ?>
                       </div>
                       <div class="col p-0 mt-2 text-end">
                         <button class="btn btn-primary btn-sm">Add Bin</button>
@@ -877,115 +833,38 @@
                         class="payments-container overflow-auto border rounded p-2"
                       >
                         <!-- Payment Card -->
-                        <div class="card">
+                        <?php if(!empty($payments)) {
+                          foreach($payments as $payment) {
+                            $paymentID = $payment['payment_id'];
+                            $paymentDate = date('F d, Y', strtotime($payment['payment_date']));
+                            $paymentAmount = $payment['payment_amount'];
+                            $paymentType = $payment['payment_type'];?>
+                        <div class="card" data-payment-id="<?php echo $paymentID; ?>">
                           <div class="card-body p-2">
                             <div class="col-12" style="font-size: 0.7rem">
-                              #221208CA901
+                              #<?php echo $paymentID; ?>
                             </div>
                             <div class="row">
-                              <div class="col">2022/12/08</div>
+                              <div class="col"><?php echo $paymentDate; ?></div>
                               <div
                                 class="col text-end text-sm-center text-lg-end text-xxl-center"
                               >
-                                CASH
+                                <?php echo $paymentType;?>
                               </div>
                               <div
                                 class="col-12 col-sm col-lg-12 col-xxl text-end text-success"
                               >
-                                + R22.00
+                                + R <?php echo $paymentAmount;?>
                                 <i class="bi bi-cash-coin ms-1"></i>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <!-- Payment Card -->
-                        <div class="card">
-                          <div class="card-body p-2">
-                            <div class="col-12" style="font-size: 0.7rem">
-                              #221208CA901
-                            </div>
-                            <div class="row">
-                              <div class="col">2022/12/08</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                CASH
-                              </div>
-                              <div
-                                class="col-12 col-sm col-lg-12 col-xxl text-end text-success"
-                              >
-                                + R22.00
-                                <i class="bi bi-cash-coin ms-1"></i>
-                              </div>
-                            </div>
+                        <?php }} else {?>
+                          <div class="no-payments text-secondary">
+                            No Payments to display
                           </div>
-                        </div>
-                        <!-- Payment Card -->
-                        <div class="card">
-                          <div class="card-body p-2">
-                            <div class="col-12" style="font-size: 0.7rem">
-                              #221208CA901
-                            </div>
-                            <div class="row">
-                              <div class="col">2022/12/08</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                CASH
-                              </div>
-                              <div
-                                class="col-12 col-sm col-lg-12 col-xxl text-end text-success"
-                              >
-                                + R22.00
-                                <i class="bi bi-cash-coin ms-1"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Payment Card -->
-                        <div class="card">
-                          <div class="card-body p-2">
-                            <div class="col-12" style="font-size: 0.7rem">
-                              #221208CA901
-                            </div>
-                            <div class="row">
-                              <div class="col">2022/12/08</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                CASH
-                              </div>
-                              <div
-                                class="col-12 col-sm col-lg-12 col-xxl text-end text-success"
-                              >
-                                + R22.00
-                                <i class="bi bi-cash-coin ms-1"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Payment Card -->
-                        <div class="card">
-                          <div class="card-body p-2">
-                            <div class="col-12" style="font-size: 0.7rem">
-                              #221208CA901
-                            </div>
-                            <div class="row">
-                              <div class="col">2022/12/08</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                CASH
-                              </div>
-                              <div
-                                class="col-12 col-sm col-lg-12 col-xxl text-end text-success"
-                              >
-                                + R22.00
-                                <i class="bi bi-cash-coin ms-1"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          <?php }?>
                       </div>
                     </div>
                     <!-- Invoices Col -->
@@ -995,19 +874,24 @@
                         class="invoices-container col-12 border rounded p-2 overflow-auto"
                       >
                         <!-- Invoice Card -->
-                        <div class="card">
+                        <?php if(!empty($invoices)) {
+                          foreach($invoices as $invoice) {
+                            $invoiceID = $invoice['invoice_id'];
+                            $invoiceAmount = $invoice['invoice_amount'];
+                            $invoiceDate = date('F d, Y', strtotime($invoice['invoice_date']));?>
+                        <div class="card" data-invoice-id="<?php echo $invoiceID; ?>">
                           <div class="card-body">
                             <div class="row">
                               <div class="col" style="font-size: 0.7rem">
-                                #2201901
+                                #<?php echo $invoiceID;?>
                               </div>
                             </div>
                             <div class="row">
-                              <div class="col">March, 01, 2022</div>
+                              <div class="col"><?php echo $invoiceDate;?></div>
                               <div
                                 class="col text-end text-sm-center text-lg-end text-xxl-center"
                               >
-                                R 180.00
+                                R <?php echo $invoiceAmount ?>
                               </div>
                               <div
                                 class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end"
@@ -1020,131 +904,11 @@
                             </div>
                           </div>
                         </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col" style="font-size: 0.7rem">
-                                #2201901
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col">March, 01, 2022</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                R 180.00
-                              </div>
-                              <div
-                                class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end"
-                              >
-                                <a href="" class="link-success">
-                                  <i class="bi bi-file-earmark-pdf-fill"></i>
-                                  PDF</a
-                                >
-                              </div>
-                            </div>
+                        <?php }} else { ?>
+                          <div class="no-invoices text-secondary">
+                            No Invoices to display
                           </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col" style="font-size: 0.7rem">
-                                #2201901
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col">March, 01, 2022</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                R 180.00
-                              </div>
-                              <div
-                                class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end"
-                              >
-                                <a href="" class="link-success">
-                                  <i class="bi bi-file-earmark-pdf-fill"></i>
-                                  PDF</a
-                                >
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col" style="font-size: 0.7rem">
-                                #2201901
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col">March, 01, 2022</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                R 180.00
-                              </div>
-                              <div
-                                class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end"
-                              >
-                                <a href="" class="link-success">
-                                  <i class="bi bi-file-earmark-pdf-fill"></i>
-                                  PDF</a
-                                >
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col" style="font-size: 0.7rem">
-                                #2201901
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col">March, 01, 2022</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                R 180.00
-                              </div>
-                              <div
-                                class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end"
-                              >
-                                <a href="" class="link-success">
-                                  <i class="bi bi-file-earmark-pdf-fill"></i>
-                                  PDF</a
-                                >
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col" style="font-size: 0.7rem">
-                                #2201901
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col">March, 01, 2022</div>
-                              <div
-                                class="col text-end text-sm-center text-lg-end text-xxl-center"
-                              >
-                                R 180.00
-                              </div>
-                              <div
-                                class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end"
-                              >
-                                <a href="" class="link-success">
-                                  <i class="bi bi-file-earmark-pdf-fill"></i>
-                                  PDF</a
-                                >
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <?php } ?>
                       </div>
                     </div>
                     <?php } ?>
