@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="customer.css" />
   </head>
+
   <?php
+    include "../popup.php";
     // Getting database connection and starting the session
     require_once("../db_conn.php");
-    session_start();
 
     // Intialising variables
     $customerActive = false;
@@ -109,13 +110,12 @@
       } else {
           // Customer with the given account_number not found or query error
           // Handle the case when the customer doesn't exist or the query fails
-          header("Location: customer.php?status=1")
+          header("Location: customer.php?status=1");
       }
           // Close the database connection
           mysqli_close($conn);
     }
 ?>
-
   <body class="container-fluid d-flex flex-column w-100 overflow-x-hidden">
     <div class="row h-100">
       <!-- Navigation Canvas -->
