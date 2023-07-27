@@ -108,8 +108,8 @@
               }
           }
       } else {
-          // Customer with the given account_number not found or query error
-          // Handle the case when the customer doesn't exist or the query fails
+
+          // Customer could not be found
           header("Location: customer.php?status=1");
       }
           // Close the database connection
@@ -364,61 +364,54 @@
             >
               <!-- Search Accordion Body -->
               <div class="accordion-body">
-                <div class="search-functions row">
-                  <div class="search-bar col-12 col-md-6 col-xl-5">
-                    <div class="input-group mb-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Search Customers"
-                        aria-label="Search Customers"
-                        aria-describedby="search-icon"
-                      />
-                      <span class="input-group-text" id="search-icon"
-                        ><i class="bi bi-search"></i
-                      ></span>
-                    </div>
-                  </div>
-                  <div class="search-by col">
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="search-by-text"
-                        >Search by</span
-                      >
-                      <select
-                        class="form-select"
-                        aria-label="Search By"
-                        aria-describedby="search-by-text"
-                      >
-                        <option value="account-number" selected>
-                          Account Number
-                        </option>
-                        <option value="surname">Surname</option>
-                        <option value="street-name">Street Name</option>
-                      </select>
-                    </div>
+              <form class="search-functions row" id="search-customer-form">
+                <!-- Search input field -->
+                <div class="search-bar col-12 col-md-6 col-xl-5">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="search-input"
+                      placeholder="Search Customers"
+                      aria-label="Search Customers"
+                      aria-describedby="search-icon"
+                    />
+                    <span class="input-group-text" id="search-icon"
+                      ><i class="bi bi-search"></i
+                    ></span>
                   </div>
                 </div>
-                <div class="row search-results gx-0">
+
+                <!-- Search by select field -->
+                <div class="search-by col">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="search-by-text"
+                      >Search by</span
+                    >
+                    <select
+                      class="form-select"
+                      id="search-by-select"
+                      aria-label="Search By"
+                      aria-describedby="search-by-text"
+                    >
+                      <option value="account-number" selected>
+                        Account Number
+                      </option>
+                      <option value="surname">Surname</option>
+                      <option value="street-name">Street Name</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+                <div class="row search-results gx-0" style="max-height:300px">
                   <h3 style="font-size: 0.9rem; margin-bottom: 0;">Search Results</h3>
-                  <table class="table table-striped table-hover">
+                  <table class="table table-striped table-hover" id="search-results-table">
                     <tbody>
-                      <tr>
-                        <th scope="row">901</th>
-                        <td>Doe J.</td>
-                        <td>22 Cactus Lane</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">901</th>
-                        <td>Doe J.</td>
-                        <td>22 Cactus Lane</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">901</th>
-                        <td>Doe J.</td>
-                        <td>22 Cactus Lane</td>
-                      </tr>
                     </tbody>
                   </table>
+                  <div class="d-none" id="no-search-matches">
+                    <div class="fs-6 text-secondary text-center" style="border: none; background: none; margin-top: -1rem;" onclick="exit();">No Matches Found</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -426,6 +419,12 @@
         </div>
         <!-- Customer Details Accordion -->
         <div class="customer work-panel col-12 p-0 mb-3 accordion">
+        <?php if (isset($_GET['customer_id'])) { ?>
+               <span class="position-absolute badge rounded-pill bg-success" style="z-index: 999; top: -0.5rem; right: 0.5rem">
+                  Account Active: <?php echo $surname.' '.mb_substr($name, 0, 1) ; ?>
+                  <span class="visually-hidden">Active Account</span>
+               </span>
+            <?php } ?>
           <div class="accordion-item">
             <h2 class="accordion-header" id="customer-details-heading">
               <button
@@ -667,6 +666,12 @@
               class="sanitizing-details col-12 col-lg-6 accordion p-0"
               id="sanitizing-details-accordion"
             >
+            <?php if (isset($_GET['customer_id'])) { ?>
+               <span class="position-absolute badge rounded-pill bg-success" style="z-index: 999; top: -0.5rem; right: 0.5rem">
+                  Account Active: <?php echo $surname.' '.mb_substr($name, 0, 1) ; ?>
+                  <span class="visually-hidden">Active Account</span>
+               </span>
+            <?php } ?>
               <div class="accordion-item">
                 <h2 class="accordion-header" id="sanitizing-details-heading">
                   <button
@@ -793,6 +798,12 @@
               class="finance col-12 col-lg accordion p-0"
               id="finance-accordion"
             >
+            <?php if (isset($_GET['customer_id'])) { ?>
+               <span class="position-absolute badge rounded-pill bg-success" style="z-index: 999; top: -0.5rem; right: 0.5rem">
+                  Account Active: <?php echo $surname.' '.mb_substr($name, 0, 1) ; ?>
+                  <span class="visually-hidden">Active Account</span>
+               </span>
+            <?php } ?>
               <div class="accordion-item">
                 <h2 class="accordion-header" id="finance-heading">
                   <button
@@ -920,6 +931,56 @@
         </div>
       </main>
     </div>
+    <script src="search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Function to get URL parameter by name
+      function getURLParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      // Function to apply the success border color to all accordion elements
+      function colorAccordions() {
+        const customer_id = getURLParameter('customer_id');
+
+        if (customer_id) {
+          // Get all accordion elements
+          const accordions = document.querySelectorAll('.accordion:not(.search-customers)');
+
+          // Loop through the accordion elements and apply the success border color
+          accordions.forEach((accordion) => {
+            // Add the success border color to the .accordion-item class
+            const accordionItems = accordion.querySelectorAll('.accordion-item');
+            accordionItems.forEach((item) => {
+              item.classList.add('border-3');
+            });
+          });
+
+          // Collapse the .search-customers accordion
+          const searchCustomersAccordion = document.querySelector('.search-customers');
+          if (searchCustomersAccordion) {
+            // Get the accordion header button
+            const headerButton = searchCustomersAccordion.querySelector('.accordion-header > button');
+            if (headerButton) {
+              // Add the collapsed class and set aria-expanded to false
+              headerButton.classList.add('collapsed');
+              headerButton.setAttribute('aria-expanded', 'false');
+            }
+
+            // Collapse the .search-customers accordion content
+            const accordionCollapse = searchCustomersAccordion.querySelector('.accordion-collapse');
+            if (accordionCollapse) {
+              // Remove the show class and add the collapse class
+              accordionCollapse.classList.remove('show');
+              accordionCollapse.classList.add('collapse');
+            }
+          }
+        }
+      }
+
+      // Call the function to color the accordions on document load
+      document.addEventListener('DOMContentLoaded', colorAccordions);
+    </script>
   </body>
 </html>

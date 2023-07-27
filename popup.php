@@ -13,6 +13,7 @@ switch ($status) {
   case '1':
     $popupText = "Customer could not be found. Please try again!";
     $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">

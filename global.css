@@ -38,6 +38,10 @@ body {
   background-color: white;
 }
 
+.accordion {
+  position: relative;
+}
+
 .custom-form-control div {
   display: flex;
 }
