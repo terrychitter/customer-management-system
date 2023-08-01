@@ -414,6 +414,7 @@
                     <tbody>
                     </tbody>
                   </table>
+                  <div class="lds-ripple m-auto" id="search-results-spinner"><div></div><div></div></div>
                   <div class="d-none" id="no-search-matches">
                     <div class="fs-6 text-secondary text-center" style="border: none; background: none; margin-top: -1rem;" onclick="exit();">No Matches Found</div>
                   </div>

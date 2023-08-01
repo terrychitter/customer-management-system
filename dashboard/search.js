@@ -1,5 +1,9 @@
 // Function to send AJAX request to search customers
 function searchCustomers(searchTerm, searchBy) {
+  // Show the spinner while waiting for results
+  const spinnerElement = document.getElementById("search-results-spinner");
+  spinnerElement.style.display = "inline-block";
+
   // Create a data object to hold the search data
   const searchData = {
     searchTerm: searchTerm,
@@ -18,8 +22,10 @@ function searchCustomers(searchTerm, searchBy) {
     .then((data) => {
       updateTable(data);
       toggleNoSearchMatches(data.length === 0); // Check if there are no search results
+      spinnerElement.style.display = "none"; // Hide the spinner
     })
     .catch((error) => console.error("Error:", error));
+  spinnerElement.style.display = "none"; // Hide the spinner
 }
 
 // Function to toggle the visibility of "No Matches" message
@@ -92,6 +98,16 @@ function handleSearch() {
   const searchBy = document.querySelector("#search-by-select").value;
 
   // Debounce the search to wait 2 seconds after the input changes
+  // Show the spinner
+  const spinnerElement = document.getElementById("search-results-spinner");
+  // Get the table body element
+  const tableBody = document.querySelector("#search-results-table tbody");
+  tableBody.innerHTML = "";
+
+  // Show the spinner
+  spinnerElement.style.display = "inline-block";
+
+  // Clear the current table content
   debounce(searchCustomers, 1000)(searchTerm, searchBy);
 }
 
