@@ -42,6 +42,10 @@ body {
   position: relative;
 }
 
+.form-label {
+  margin-bottom: 0;
+}
+
 .custom-form-control div {
   display: flex;
 }

@@ -1,0 +1,80 @@
+<div
+  class="modal fade"
+  id="add-contact-modal"
+  tabindex="-1"
+  aria-labelledby="Add Contact Modal"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <div class="align-content-center d-flex" style="gap: 1rem">
+            <i class="bi bi-telephone-fill"></i>
+            <p>Add Contact</p>
+          </div>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <label for="modal-contact-name" class="form-label"
+            >Contact Name</label
+          >
+          <input type="text" class="form-control" />
+          <label for="modal-contact" class="form-label">Contact</label>
+          <div class="input-group">
+            <span class="input-group-text" id="modal-country-code-label">
+              <select class="form-select" aria-label="Country Code">
+                <option value="+27">+27</option>
+              </select>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              id="modal-contact-number"
+              style="margin-bottom: 0"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Add Contact</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Function to validate the input and allow only numbers
+  function allowOnlyNumbers(event) {
+    const input = event.target;
+    let value = input.value;
+
+    // Replace non-numeric characters with an empty string
+    const onlyNumbers = value.replace(/\D/g, "");
+
+    // Limit the length to a maximum of 9 digits
+    if (onlyNumbers.length > 9) {
+      value = onlyNumbers.slice(0, 9);
+    }
+
+    // Set the updated value back to the input
+    input.value = value;
+  }
+
+  // Get the modal-contact-number input element
+  const contactNumberInput = document.getElementById("modal-contact-number");
+
+  // Add event listener for input events
+  contactNumberInput.addEventListener("input", allowOnlyNumbers);
+</script>

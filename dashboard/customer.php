@@ -14,7 +14,12 @@
 
   <?php
     include "../popup.php";
-    // Getting database connection and starting the session
+    include "modals/add_comment.html";
+    include "modals/add_contact.html";
+    include "modals/add_dustbin.html";
+    include "modals/add_customer.html";
+
+    // Getting database connection
     require_once("../db_conn.php");
 
     // Intialising variables
@@ -335,7 +340,7 @@
           <button class="btn btn-primary btn-sm">
            <i class="bi bi-people-fill fs-6"></i> View All
           </button>
-          <button class="btn btn-primary btn-sm">
+          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add-customer-modal" onclick="event.preventDefault();">
            <i class="bi bi-person-fill-add fs-6"></i> Add New Customer
           </button>
         </div>
@@ -581,7 +586,7 @@
                         </div>
                       </div>
                       <div class="col mt-2 text-end">
-                        <button class="btn btn-sm btn-primary">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#add-contact-modal" onclick="event.preventDefault();">
                           Add Contact
                         </button>
                       </div>
@@ -647,7 +652,7 @@
                           <?php } ?>
                       </div>
                       <div class="col text-end mt-2">
-                        <button class="btn btn-primary btn-sm">
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add-comment-modal" onclick="event.preventDefault();">
                           Add Comment
                         </button>
                       </div>
@@ -785,7 +790,7 @@
                           <?php } ?>
                       </div>
                       <div class="col p-0 mt-2 text-end">
-                        <button class="btn btn-primary btn-sm">Add Bin</button>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add-dustbin-modal" onclick="event.preventDefault();">Add Bin</button>
                       </div>
                     </div>
                     <?php } ?>
@@ -978,7 +983,6 @@
           }
         }
       }
-
       // Call the function to color the accordions on document load
       document.addEventListener('DOMContentLoaded', colorAccordions);
     </script>

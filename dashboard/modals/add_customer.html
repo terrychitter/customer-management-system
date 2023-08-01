@@ -1,0 +1,257 @@
+<form action="">
+  <script
+    async
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNdPGukoe7mhpRBGEZxziTqgSLTWMjAdU&libraries=places&callback=initAutocomplete&callback=initAutocomplete"
+  ></script>
+  <div
+    class="modal fade"
+    id="add-customer-modal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <div class="align-content-center d-flex" style="gap: 1rem">
+              <i class="bi bi-person-fill-add fs-3"></i>
+              <p>Add Customer</p>
+            </div>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h6 class="fs-5 text-center">Personal Details</h6>
+          <div class="modal-personal-details-container border rounded p-2 mb-3">
+            <label for="modal-account-number" class="form-label"
+              >Account Number
+              <b id="auto-generated-text">[Auto Generated]</b></label
+            >
+            <input type="text" class="form-control" value="901" required />
+            <div
+              class="form-text text-danger mt-n3 d-none"
+              id="modal-account-number-status"
+            >
+              This account number is already in use
+            </div>
+            <label for="modal-title" class="form-label">Title</label>
+            <select class="form-select" aria-label="Title" required>
+              <option value="Mr">Mr</option>
+              <option value="Mrs">Mrs</option>
+              <option value="Ms">Ms</option>
+              <option value="Dr">Dr</option>
+              <option value="Prof" <>Prof</option>
+            </select>
+            <label for="modal-name" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="modal-name"
+              id="modal-name"
+              required
+            />
+            <label for="modal-surname" class="form-label">Surname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="modal-surname"
+              id="modal-surname"
+              required
+            />
+            <label for="modal-address" class="form-label">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              name="modal-address"
+              id="modal-address"
+              placeholder=""
+              required
+            />
+            <label for="modal-suburb" class="form-label">Suburb</label>
+            <input
+              type="text"
+              class="form-control"
+              name="modal-suburb"
+              id="modal-suburb"
+              placeholder=""
+              required
+            />
+            <label for="modal-postal" class="form-label">Postal</label>
+            <input
+              type="text"
+              class="form-control"
+              name="modal-postal"
+              id="modal-postal"
+              placeholder=""
+              required
+            />
+            <label for="modal-email" class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="modal-email"
+              id="modal-email"
+              required
+            />
+            <label for="modal-origin" class="form-label"
+              >Origin (Optional)</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="modal-origin"
+              id="modal-origin"
+            />
+          </div>
+          <h6 class="fs-5 text-center">Sanitizing Details</h6>
+          <div class="modal-sanitizing-details-container border rounded p-2">
+            <div class="input-group">
+              <span class="input-group-text" id="modal-frequency-label"
+                >Frequency</span
+              >
+              <input
+                type="number"
+                class="form-control"
+                min="1"
+                max="4"
+                aria-label="Frequency"
+                aria-describedby="frequency-label"
+                name="modal-frquency"
+              />
+            </div>
+            <div>
+              <div class="input-group">
+                <span class="input-group-text">Day</span>
+                <select
+                  id="modal-day"
+                  class="form-select"
+                  aria-label="Sanitizing Day"
+                  aria-describedby="sanitizing-day"
+                >
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday" <?>Wednesday</option>
+                  <option value="Thursday" <>Thursday</option>
+                  <option value="Friday">Friday</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text" id="-modal-monthly-fee-label"
+                >Monthly Fee</span
+              >
+              <span class="input-group-text" id="modal-currency-label">R</span>
+              <input
+                type="number"
+                class="form-control"
+                aria-label="Rand"
+                step="10"
+                min="1"
+                aria-describedby="modal-monthly-fee-label"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Add Customer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .pac-container {
+      z-index: 10000 !important;
+      /* display: block !important; */
+    }
+  </style>
+</form>
+<script>
+  // Function to initialize the Place Autocomplete for a given input field
+  function initAutocomplete(inputId) {
+    const inputElement = document.getElementById(inputId);
+    const autocomplete = new google.maps.places.Autocomplete(inputElement);
+
+    // Optional: Restrict the Autocomplete results to specific countries (e.g., South Africa)
+    autocomplete.setComponentRestrictions({ country: ["ZA"] });
+
+    // Optional: Listen for place changes to populate additional fields (e.g., suburb and postal code)
+    autocomplete.addListener("place_changed", function () {
+      const place = autocomplete.getPlace();
+      if (!place.geometry) {
+        console.error("No location data for this place.");
+        return;
+      }
+
+      // Extract the house number and street name components and populate the address field
+      let address = "";
+      if (place.address_components) {
+        const streetNumber = place.address_components.find((component) =>
+          component.types.includes("street_number")
+        );
+        const streetName = place.address_components.find((component) =>
+          component.types.includes("route")
+        );
+
+        if (streetNumber) {
+          address += streetNumber.long_name;
+        }
+
+        if (streetName) {
+          if (address !== "") {
+            address += " ";
+          }
+          address += streetName.long_name;
+        }
+      }
+
+      // Populate the address field with the extracted components
+      const addressElement = document.getElementById("modal-address");
+      addressElement.value = address;
+
+      // Populate the suburb field (if available)
+      const suburbElement = document.getElementById("modal-suburb");
+      suburbElement.value = getComponentLongName(place, "sublocality");
+
+      // Populate the postal field (if available)
+      const postalElement = document.getElementById("modal-postal");
+      postalElement.value = getComponentLongName(place, "postal_code");
+    });
+  }
+
+  // Function to get the long name of a specific component type from the place object
+  function getComponentLongName(place, componentType) {
+    if (place.address_components) {
+      const component = place.address_components.find((component) =>
+        component.types.includes(componentType)
+      );
+      if (component) {
+        return component.long_name;
+      }
+    }
+    return "";
+  }
+
+  // Call initAutocomplete once the page and Google Maps API are fully loaded
+  window.onload = function () {
+    initAutocomplete("modal-address");
+    initAutocomplete("modal-suburb");
+    initAutocomplete("modal-postal");
+  };
+</script>
