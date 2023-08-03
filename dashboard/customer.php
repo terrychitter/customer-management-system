@@ -765,7 +765,7 @@
                         <?php if (!empty($bins)) {
                           foreach ($bins as $bin) {
                             $binSerialNum = $bin['serial_number']?>
-                        <div class="card" data-bin-id="<?php echo  $binSerialNum; ?>">
+                        <div class="card" data-bin-id="<?php echo  $binSerialNum; ?>" data-bs-toggle="modal" data-bs-target="#add-dustbin-modal">
                           <div class="card-body">
                             <div class="row align-items-center">
                               <div class="col-2">
@@ -791,7 +791,7 @@
                           <?php } ?>
                       </div>
                       <div class="col p-0 mt-2 text-end">
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add-dustbin-modal" onclick="event.preventDefault();">Add Bin</button>
+                        <button class="btn btn-primary btn-sm" data-clear-form data-bs-toggle="modal" data-bs-target="#add-dustbin-modal" onclick="event.preventDefault();">Add Bin</button>
                       </div>
                     </div>
                     <?php } ?>
@@ -938,6 +938,7 @@
       </main>
     </div>
     <script src="search.js"></script>
+    <script src="clear_form.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       // Function to get URL parameter by name
