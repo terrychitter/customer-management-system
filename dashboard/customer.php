@@ -466,7 +466,7 @@
                     <p class="customer-acc-num fs-1"><?php echo $accountNumber; ?></p>
                   </div>
                   <!-- Personal Details Column -->
-                  <form class="details-col col-12 col-md col-xl-4 p-3 mb-0" data-smart-form="customer-details-form">
+                  <form class="details-col col-12 col-md col-xl-4 p-3 mb-0" action="update_customer_data.php" method="POST" data-smart-form="customer-details-form">
                     <div class="title row">
                       <div class="col-auto">
                         <label for="title" class="form-label">Title</label>
@@ -703,7 +703,7 @@
                     include "no-customer-selected.html";
                     } else { ?>
                     <!-- CUSTOMER SELECTED -->
-                    <form action="POST" class="bin-details row p-0" data-smart-form>
+                    <form action="update_sanitizing_details.php" method="POST" class="bin-details row p-0" data-smart-form="sanitizing-details-form">
                       <!-- Frequency -->
                       <div class="col-12 col-sm-4 col-lg-12 col-xxl-3">
                         <div class="input-group mb-3">
@@ -940,6 +940,7 @@
     <script src="search.js"></script>
     <script src="clear_form.js"></script>
     <script src="smart_form.js"></script>
+    <script src="../remove_paramters.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       // Function to get URL parameter by name

@@ -122,3 +122,111 @@ function toggleButtonsContainer(field, show) {
     fieldContainer.appendChild(btnContainer);
   }
 }
+
+window.smartFormHandlers = {};
+
+window.smartFormHandlers["customer-details-form"] = {
+  saveHandler: function (form) {
+    // Validate the form fields
+    const nameInput = form.querySelector('input[name="name"]');
+    const surnameInput = form.querySelector('input[name="surname"]');
+    const addressInput = form.querySelector('input[name="address"]');
+    const suburbInput = form.querySelector('input[name="suburb"]');
+    const emailInput = form.querySelector('input[name="email"]');
+    const originInput = form.querySelector('input[name="origin"]');
+
+    const validName = validateField(nameInput, 255, "Name");
+    const validSurname = validateField(surnameInput, 255, "Surname");
+    const validAddress = validateField(addressInput, 255, "Address");
+    const validSuburb = validateField(suburbInput, 255, "Suburb");
+    const validEmail = validateEmail(emailInput);
+    const validOrigin = validateField(originInput, 255, "Origin");
+
+    if (
+      !validName ||
+      !validSurname ||
+      !validAddress ||
+      !validSuburb ||
+      !validEmail ||
+      !validOrigin
+    ) {
+      let status = 2;
+      let statusDetails = "";
+      if (!validName) statusDetails += "name,";
+      if (!validSurname) statusDetails += "surname,";
+      if (!validAddress) statusDetails += "address,";
+      if (!validSuburb) statusDetails += "suburb,";
+      if (!validOrigin) statusDetails += "origin,";
+
+      if (validEmail) {
+        window.location.href =
+          window.location.href +
+          "?status=" +
+          status +
+          "&status_details=" +
+          statusDetails;
+      } else {
+        window.location.href = window.location.href + "?status=3";
+      }
+      return;
+    }
+
+    // If all fields are valid, submit the form
+    form.submit();
+  },
+};
+
+function validateField(input, maxLength, fieldName) {
+  const value = input.value.trim();
+  if (value.length > maxLength) {
+    return false;
+  }
+  return true;
+}
+
+function validateEmail(input) {
+  const value = input.value.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(value);
+}
+
+window.smartFormHandlers["sanitizing-details-form"] = {
+  saveHandler: function (form) {
+    // Validate the form fields
+    const frequencyInput = form.querySelector('input[type="number"]');
+    const monthlyFeeInput = form.querySelector(
+      'input[type="number"][step="10"]'
+    );
+
+    const validFrequency = validateField(frequencyInput, 1, 4, 4);
+    const validMonthlyFee = validateField(monthlyFeeInput, 1, null, 5);
+
+    if (!validFrequency || !validMonthlyFee) {
+      let status = "";
+      if (!validFrequency) {
+        status = "4";
+      } else if (!validMonthlyFee) {
+        status = "5";
+      }
+      window.location.href = window.location.href + "?status=" + status;
+      return;
+    }
+
+    // If all fields are valid, submit the form
+    form.submit();
+  },
+};
+
+function validateField(input, minValue, maxValue, status) {
+  const value = input.value.trim();
+  const numValue = parseFloat(value);
+
+  if (
+    isNaN(numValue) ||
+    numValue < minValue ||
+    (maxValue !== null && numValue > maxValue)
+  ) {
+    return false;
+  }
+  return true;
+}

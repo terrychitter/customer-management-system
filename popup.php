@@ -14,6 +14,28 @@ switch ($status) {
     $popupText = "Customer could not be found. Please try again!";
     $popupColour = "danger";
     break;
+  case '2':
+    // Get the field name
+    if (isset($_GET['status_details'])) {
+      $fieldTooLongName = $_GET['status_details'];
+      $popupText = "$fieldTooLongName field is too long (max 255 characters). Please try again!";
+    } else {
+      $popupText = "An unexpected error occured and one of your fields were too long. Please try again!";
+    }
+    $popupColour = "danger";
+    break;
+  case '3':
+    $popupText = "Invalid Email for customer. Please try again!";
+    $popupColour = "danger";
+    break;
+  case '4':
+    $popupText = "Frequency cannot be higher than 4. Please try again!";
+    $popupColour = "danger";
+    break;
+  case '5':
+    $popupText = "Monthly fee cannot be zero or less. Please try again!";
+    $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">
