@@ -549,6 +549,19 @@
                         />
                       </div>
                     </div>
+                    <div class="origin col-12">
+                        <label for="origin" class="form-label mb-0"
+                          >Origin</label
+                        >
+                        <input
+                          type="text"
+                          name="origin"
+                          id="origin"
+                          class="form-control"
+                          placeholder="Origin"
+                          value="<?php echo $origin; ?>"
+                        />
+                      </div>
                     <div class="contact row">
                       <div class="col-12">
                         <label for="contacts" class="form-label">
@@ -593,19 +606,6 @@
                       </div>
                     </div>
                     <div class="origin-active row">
-                      <div class="origin col-12">
-                        <label for="origin" class="form-label mb-0"
-                          >Origin</label
-                        >
-                        <input
-                          type="text"
-                          name="origin"
-                          id="origin"
-                          class="form-control"
-                          placeholder="Origin"
-                          value="<?php echo $origin; ?>"
-                        />
-                      </div>
                       <?php if($active) { ?>
                       <div class="active col">
                         <button
