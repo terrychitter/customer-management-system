@@ -102,11 +102,14 @@ function toggleButtonsContainer(field, show) {
       event.preventDefault(); // Prevents the default form submission
       btnContainer.remove();
 
-      // Restore original values
+      // Restore original values for all fields
       const form = field.closest("[data-smart-form]");
-      const originalValue = field.getAttribute("data-original-value");
-      field.value = originalValue;
-      field.classList.remove("border-warning"); // Remove the warning border class
+      const fields = form.querySelectorAll("input, select");
+      fields.forEach(function (field) {
+        const originalValue = field.getAttribute("data-original-value");
+        field.value = originalValue;
+        field.classList.remove("border-warning"); // Remove the warning border class
+      });
     });
 
     btnContainer = document.createElement("div");
