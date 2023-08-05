@@ -466,7 +466,7 @@
                     <p class="customer-acc-num fs-1"><?php echo $accountNumber; ?></p>
                   </div>
                   <!-- Personal Details Column -->
-                  <form class="details-col col-12 col-md col-xl-4 p-3 mb-0">
+                  <form class="details-col col-12 col-md col-xl-4 p-3 mb-0" data-smart-form="customer-details-form">
                     <div class="title row">
                       <div class="col-auto">
                         <label for="title" class="form-label">Title</label>
@@ -939,6 +939,7 @@
     </div>
     <script src="search.js"></script>
     <script src="clear_form.js"></script>
+    <script src="smart_form.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       // Function to get URL parameter by name

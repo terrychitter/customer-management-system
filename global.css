@@ -111,3 +111,8 @@ body {
     opacity: 0;
   }
 }
+
+.smart-form-btn-container button {
+  border: none;
+  background: none;
+}
