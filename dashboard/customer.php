@@ -703,7 +703,7 @@
                     include "no-customer-selected.html";
                     } else { ?>
                     <!-- CUSTOMER SELECTED -->
-                    <form action="" class="bin-details row p-0">
+                    <form action="POST" class="bin-details row p-0" data-smart-form>
                       <!-- Frequency -->
                       <div class="col-12 col-sm-4 col-lg-12 col-xxl-3">
                         <div class="input-group mb-3">
