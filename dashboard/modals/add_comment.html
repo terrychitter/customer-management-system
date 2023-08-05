@@ -14,7 +14,7 @@
           <h5 class="modal-title" id="add-comment-title">
             <div class="align-content-center d-flex" style="gap: 1rem">
               <i class="bi bi-chat-square-text-fill"></i>
-              <p>Add Comment</p>
+              <p data-type="Comment">Add Comment</p>
             </div>
           </h5>
           <button
@@ -55,3 +55,46 @@
     </div>
   </div>
 </form>
+<!-- Add this script after the HTML content -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get all the comment card elements
+    const commentCards = document.querySelectorAll(".card");
+
+    // Get the input elements in the modal
+    const modalCommentTitleSelect = document.getElementById(
+      "modal-comment-title"
+    );
+    const modalCommentTextInput = document.getElementById("modal-comment-text");
+    const modalHeader = document
+      .getElementById("add-comment-modal")
+      .querySelector(".modal-title p[data-type]");
+
+    // Add click event listener to each comment card
+    commentCards.forEach((commentCard) => {
+      commentCard.addEventListener("click", function () {
+        // Get the data attributes from the clicked comment card
+        const commentId = commentCard.getAttribute("data-comment-id");
+        const commentTitle = commentCard.getAttribute("data-comment-title");
+        const commentText = commentCard.getAttribute("data-comment-text");
+
+        // Update the modal's input values with the comment details
+        modalCommentTitleSelect.value = commentTitle;
+        modalCommentTextInput.value = commentText;
+        modalHeader.innerHTML = "Edit Comment";
+
+        // Check if the selected value exists in the options
+        const optionExists = [...modalCommentTitleSelect.options].some(
+          (option) => option.value === commentTitle
+        );
+
+        // If the selected value doesn't exist, create a new option and select it
+        if (!optionExists) {
+          const newOption = new Option(commentTitle, commentTitle);
+          modalCommentTitleSelect.add(newOption);
+          modalCommentTitleSelect.value = commentTitle;
+        }
+      });
+    });
+  });
+</script>

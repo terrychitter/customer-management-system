@@ -564,7 +564,7 @@
                             $contactTitle = $contact['contact_title'];
                             $contactNumber = $contact['contact'];
                             $countryCode = $contact['country_code'];?>
-                          <div class="contact-card card mb-2" data-contact-id="<?php echo $contactID; ?>">
+                          <div class="contact-card card mb-2" data-contact-id="<?php echo $contactID; ?>" data-contact-title="<?php echo $contactTitle; ?>" data-country-code="<?php echo $countryCode; ?>" data-contact-number="<?php echo $contactNumber; ?>" data-bs-toggle="modal" data-bs-target="#add-contact-modal">
                             <div class="card-body pb-1">
                               <div class="row p-0">
                                 <div
@@ -587,7 +587,7 @@
                         </div>
                       </div>
                       <div class="col mt-2 text-end">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#add-contact-modal" onclick="event.preventDefault();">
+                        <button class="btn btn-sm btn-primary" data-clear-form data-bs-toggle="modal" data-bs-target="#add-contact-modal" onclick="event.preventDefault();">
                           Add Contact
                         </button>
                       </div>
@@ -631,7 +631,7 @@
                           $commentTitle = $comment['comment_title'];
                           $commentText = $comment['comment_text'];
                           $commentDatePosted = date('d/m/Y H:i', strtotime($comment['date_time_added']));?>
-                        <div class="card" data-comment-id="<?php echo $commentID; ?>">
+                        <div class="card" data-comment-id="<?php echo $commentID; ?>" data-comment-title="<?php echo $commentTitle; ?>" data-comment-text="<?php echo $commentText; ?>" data-bs-toggle="modal" data-bs-target="#add-comment-modal">
                           <div class="card-body">
                             <div class="col-12"><?php echo $commentTitle; ?></div>
                             <div class="col-12 fs-6 text-secondary">
@@ -653,7 +653,7 @@
                           <?php } ?>
                       </div>
                       <div class="col text-end mt-2">
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add-comment-modal" onclick="event.preventDefault();">
+                        <button class="btn btn-primary btn-sm" data-clear-form data-bs-toggle="modal" data-bs-target="#add-comment-modal" onclick="event.preventDefault();">
                           Add Comment
                         </button>
                       </div>

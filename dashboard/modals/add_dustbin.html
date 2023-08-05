@@ -61,7 +61,9 @@
     const modalSerialNumberInput = document.getElementById(
       "modal-serial-number"
     );
-    const modalHeader = document.querySelector(".modal-title p[data-type]");
+    const modalHeader = document
+      .getElementById("add-dustbin-modal")
+      .querySelector(".modal-title p[data-type]");
 
     // Add click event listener to each card
     cards.forEach((card) => {

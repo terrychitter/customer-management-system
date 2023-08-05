@@ -1,38 +1,42 @@
-<div
-  class="modal fade"
-  id="add-contact-modal"
-  tabindex="-1"
-  aria-labelledby="Add Contact Modal"
-  aria-hidden="true"
->
+<form action="">
   <div
-    class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable"
+    class="modal fade"
+    id="add-contact-modal"
+    tabindex="-1"
+    aria-labelledby="Add Contact Modal"
+    aria-hidden="true"
   >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          <div class="align-content-center d-flex" style="gap: 1rem">
-            <i class="bi bi-telephone-fill"></i>
-            <p>Add Contact</p>
-          </div>
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form action="">
+    <div
+      class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <div class="align-content-center d-flex" style="gap: 1rem">
+              <i class="bi bi-telephone-fill"></i>
+              <p data-type="Contact">Add Contact</p>
+            </div>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
           <label for="modal-contact-name" class="form-label"
             >Contact Name</label
           >
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" id="modal-contact-name" />
           <label for="modal-contact" class="form-label">Contact</label>
           <div class="input-group">
             <span class="input-group-text" id="modal-country-code-label">
-              <select class="form-select" aria-label="Country Code">
+              <select
+                class="form-select"
+                aria-label="Country Code"
+                id="modal-country-code"
+              >
                 <option value="+27">+27</option>
               </select>
             </span>
@@ -43,17 +47,21 @@
               style="margin-bottom: 0"
             />
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Add Contact</button>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Add Contact</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>
 <script>
   // Function to validate the input and allow only numbers
   function allowOnlyNumbers(event) {
@@ -77,4 +85,65 @@
 
   // Add event listener for input events
   contactNumberInput.addEventListener("input", allowOnlyNumbers);
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get all the contact card elements
+    const contactCards = document.querySelectorAll(".contact-card");
+
+    // Get the input elements in the modal
+    const modalContactNameInput = document.getElementById("modal-contact-name");
+    const modalCountryCodeSelect =
+      document.getElementById("modal-country-code");
+    const modalContactNumberInput = document.getElementById(
+      "modal-contact-number"
+    );
+
+    // Check if the country code select element exists
+    if (modalCountryCodeSelect) {
+      // Populate the country code select with options based on the data-country-code attributes
+      const countryCodes = new Set();
+      contactCards.forEach((contactCard) => {
+        const countryCode = contactCard.getAttribute("data-country-code");
+        countryCodes.add(countryCode);
+      });
+      countryCodes.forEach((code) => {
+        const option = new Option(code, code);
+        modalCountryCodeSelect.add(option);
+      });
+    }
+
+    // Add click event listener to each contact card
+    contactCards.forEach((contactCard) => {
+      contactCard.addEventListener("click", function () {
+        console.log("Contact Card has been clicked");
+        // Get the data attributes from the clicked contact card
+        const contactId = contactCard.getAttribute("data-contact-id");
+        const contactName = contactCard.getAttribute("data-contact-title");
+        console.log("Contact Title: ", contactName);
+        const countryCode = contactCard.getAttribute("data-country-code");
+        const contactNumber = contactCard.getAttribute("data-contact-number");
+
+        // Update the modal's input values with the contact details
+        modalContactNameInput.value = contactName;
+        modalContactNumberInput.value = contactNumber;
+
+        // Check if the selected country code exists in the options
+        if (modalCountryCodeSelect) {
+          const optionExists = [...modalCountryCodeSelect.options].some(
+            (option) => option.value === countryCode
+          );
+
+          // If the selected country code doesn't exist, create a new option and select it
+          if (!optionExists) {
+            const newOption = new Option(countryCode, countryCode);
+            modalCountryCodeSelect.add(newOption);
+            modalCountryCodeSelect.value = countryCode;
+          } else {
+            // Otherwise, just select the existing option
+            modalCountryCodeSelect.value = countryCode;
+          }
+        }
+      });
+    });
+  });
 </script>
