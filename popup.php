@@ -36,6 +36,29 @@ switch ($status) {
     $popupText = "Monthly fee cannot be zero or less. Please try again!";
     $popupColour = "danger";
     break;
+  case '6':
+    $popupText = "There was an error while updating the customer's details. Please try again! (6)";
+    $popupColour = "danger";
+    break;
+  case '7':
+    $popupText = "Successfully updated customer details!";
+    $popupColour = "success";
+    break;
+  case '8':
+    $popupText = "There was an error while updating the customer's details. Please try again! (8)";
+    $popupColour = "danger";
+    break;
+  case '9':
+    $popupText = "There was an error while updating the customer's sanitizing details. Please try again! (9)";
+    $popupColour = "danger";
+    break;
+  case '10':
+    $popupText = "Successfully updated customer sanitizing details";
+    $popupColour = "success";
+    break;
+  case '11':
+    $popupText = "There was an error while updating the customer's sanitizing details. Please try again! (11)";
+    $popupColour = "danger";
 }
 ?>
   <div class="d-flex justify-content-center">

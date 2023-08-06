@@ -466,11 +466,11 @@
                     <p class="customer-acc-num fs-1"><?php echo $accountNumber; ?></p>
                   </div>
                   <!-- Personal Details Column -->
-                  <form class="details-col col-12 col-md col-xl-4 p-3 mb-0" action="update_customer_data.php" method="POST" data-smart-form="customer-details-form">
+                  <form class="details-col col-12 col-md col-xl-4 p-3 mb-0" action="update_customer_data.php?account_number=<?php echo $accountNumber?>" method="POST" data-smart-form="customer-details-form">
                     <div class="title row">
                       <div class="col-auto">
                         <label for="title" class="form-label">Title</label>
-                        <select class="form-select" aria-label="Title">
+                        <select class="form-select" name="title" aria-label="Title">
                           <option value="Mr" <?php echo ($title === 'Mr') ? 'selected' : ''; ?>>Mr</option>
                           <option value="Mrs" <?php echo ($title === 'Mrs') ? 'selected' : ''; ?>>Mrs</option>
                           <option value="Ms" <?php echo ($title === 'Ms') ? 'selected' : ''; ?>>Ms</option>
@@ -703,7 +703,7 @@
                     include "no-customer-selected.html";
                     } else { ?>
                     <!-- CUSTOMER SELECTED -->
-                    <form action="update_sanitizing_details.php" method="POST" class="bin-details row p-0" data-smart-form="sanitizing-details-form">
+                    <form action="update_sanitizing_details.php?account_number=<?php echo $accountNumber;?>" method="POST" class="bin-details row p-0" data-smart-form="sanitizing-details-form">
                       <!-- Frequency -->
                       <div class="col-12 col-sm-4 col-lg-12 col-xxl-3">
                         <div class="input-group mb-3">
@@ -715,6 +715,7 @@
                             class="form-control"
                             min="1"
                             max="4"
+                            name="frequency"
                             aria-label="Frequency"
                             aria-describedby="frequency-label"
                             value="<?php echo $frequency;?>"
@@ -727,7 +728,7 @@
                           <span class="input-group-text" id="sanitizing-day"
                             >Day</span
                           >
-                          <select id="day-select" class="form-select" aria-label="Sanitizing Day" aria-describedby="sanitizing-day">
+                          <select id="day-select" name="sanitizing-day" class="form-select" aria-label="Sanitizing Day" aria-describedby="sanitizing-day">
                             <option value="Monday" <?php echo (ucfirst($day) === 'Monday') ? 'selected' : ''; ?>>Monday</option>
                             <option value="Tuesday" <?php echo (ucfirst($day) === 'Tuesday') ? 'selected' : ''; ?>>Tuesday</option>
                             <option value="Wednesday" <?php echo (ucfirst($day) === 'Wednesday') ? 'selected' : ''; ?>>Wednesday</option>
@@ -749,8 +750,9 @@
                             type="number"
                             class="form-control"
                             aria-label="Rand"
-                            step="10"
                             min="1"
+                            step="0.01"
+                            name="monthly-fee"
                             aria-describedby="monthly-fee-label"
                             value="<?php echo $monthlyRate; ?>"
                           />
