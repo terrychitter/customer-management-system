@@ -13,12 +13,6 @@
   </head>
 
   <?php
-    include "../popup.php";
-    include "modals/add_comment.html";
-    include "modals/add_contact.html";
-    include "modals/add_dustbin.html";
-    include "modals/add_customer.html";
-
     // Getting database connection
     require_once("../db_conn.php");
 
@@ -122,6 +116,13 @@
     }
 ?>
   <body class="container-fluid d-flex flex-column w-100 overflow-x-hidden">
+    <?php
+        include "../popup.php";
+        include "modals/add_comment.html";
+        include "modals/add_contact.html";
+        include "modals/add_dustbin.html";
+        include "modals/add_customer.html";
+    ?>
     <div class="row h-100">
       <!-- Navigation Canvas -->
       <style>

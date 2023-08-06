@@ -53,12 +53,33 @@ switch ($status) {
     $popupColour = "danger";
     break;
   case '10':
-    $popupText = "Successfully updated customer sanitizing details";
+    $popupText = "Successfully updated customer sanitizing details!";
     $popupColour = "success";
     break;
   case '11':
     $popupText = "There was an error while updating the customer's sanitizing details. Please try again! (11)";
     $popupColour = "danger";
+    break;
+  case '12':
+    $popupText = "There was an error while adding the customer's contact. Please try again! (12)";
+    $popupColour = "danger";
+    break;
+  case '13':
+    $popupText = "Successfully added customer contact!";
+    $popupColour = "success";
+    break;
+  case '14':
+    $popupText = "There was an error while updating the customer's contact. Please try again! (14)";
+    $popupColour = "danger";
+    break;
+  case '15':
+    $popupText = "Successfully updated customer contact!";
+    $popupColour = "success";
+    break;
+  case '16':
+    $popupText = "An unexpected error occured while adding/updating the customer's contact. Please try again! (16)";
+    $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">

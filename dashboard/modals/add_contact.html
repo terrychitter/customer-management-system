@@ -1,4 +1,13 @@
-<form action="">
+<form
+  action="add_update_contact.php?account_number=<?php echo $accountNumber;?>"
+  method="POST"
+>
+  <input
+    class="d-none"
+    type="text"
+    name="modal-contact-id"
+    id="contact-id-div"
+  />
   <div
     class="modal fade"
     id="add-contact-modal"
@@ -28,7 +37,12 @@
           <label for="modal-contact-name" class="form-label"
             >Contact Name</label
           >
-          <input type="text" class="form-control" id="modal-contact-name" />
+          <input
+            type="text"
+            class="form-control"
+            name="modal-contact-name"
+            id="modal-contact-name"
+          />
           <label for="modal-contact" class="form-label">Contact</label>
           <div class="input-group">
             <span class="input-group-text" id="modal-country-code-label">
@@ -36,6 +50,7 @@
                 class="form-select"
                 aria-label="Country Code"
                 id="modal-country-code"
+                name="modal-country-code"
               >
                 <option value="+27">+27</option>
               </select>
@@ -45,6 +60,7 @@
               class="form-control"
               id="modal-contact-number"
               style="margin-bottom: 0"
+              name="modal-contact-number"
             />
           </div>
         </div>
@@ -56,7 +72,7 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Add Contact</button>
+          <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
@@ -115,17 +131,24 @@
     // Add click event listener to each contact card
     contactCards.forEach((contactCard) => {
       contactCard.addEventListener("click", function () {
-        console.log("Contact Card has been clicked");
         // Get the data attributes from the clicked contact card
         const contactId = contactCard.getAttribute("data-contact-id");
+        console.log("contact id: ", contactId);
         const contactName = contactCard.getAttribute("data-contact-title");
-        console.log("Contact Title: ", contactName);
         const countryCode = contactCard.getAttribute("data-country-code");
         const contactNumber = contactCard.getAttribute("data-contact-number");
+        const modalHeader = document
+          .getElementById("add-contact-modal")
+          .querySelector(".modal-title p[data-type]");
+
+        // Setting the contact id in a div
+        const contactIdDiv = document.getElementById("contact-id-div");
+        contactIdDiv.value = contactId;
 
         // Update the modal's input values with the contact details
         modalContactNameInput.value = contactName;
         modalContactNumberInput.value = contactNumber;
+        modalHeader.innerHTML = "Edit Contact";
 
         // Check if the selected country code exists in the options
         if (modalCountryCodeSelect) {
