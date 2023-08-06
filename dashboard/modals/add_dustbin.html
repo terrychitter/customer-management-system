@@ -1,4 +1,8 @@
-<form action="">
+<form
+  action="add_update_bin.php?account_number=<?php echo $accountNumber; ?>"
+  method="POST"
+>
+  <input class="d-none" type="text" name="modal-bin-id" id="bin-id-div" />
   <div
     class="modal fade"
     id="add-dustbin-modal"
@@ -46,7 +50,7 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Save</button>
+          <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
@@ -71,9 +75,12 @@
         // Get the data-bin-id attribute value from the clicked card
         const binId = card.getAttribute("data-bin-id");
 
+        const binIdDiv = document.getElementById("bin-id-div");
+
         // Update the modal's input and heading value with the binId
         modalSerialNumberInput.value = binId;
         modalHeader.innerHTML = "Edit Dustbin";
+        binIdDiv.value = binId;
       });
     });
   });
