@@ -80,6 +80,26 @@ switch ($status) {
     $popupText = "An unexpected error occured while adding/updating the customer's contact. Please try again! (16)";
     $popupColour = "danger";
     break;
+  case '17':
+    $popupText = "There was an error while adding the customer's comment. Please try again! (17)";
+    $popupColour = "danger";
+    break;
+  case '18':
+    $popupText = "Successfully added customer comment!";
+    $popupColour = "success";
+    break;
+  case '19':
+    $popupText = "There was an error while updating the customer's comment. Please try again! (19)";
+    $popupColour = "danger";
+    break;
+  case '20':
+    $popupText = "Successfully updated customer comment!";
+    $popupColour = "success";
+    break;
+  case '21':
+    $popupText = "An unexpected error occured while adding/updating the customer's comment. Please try again! (21)";
+    $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">

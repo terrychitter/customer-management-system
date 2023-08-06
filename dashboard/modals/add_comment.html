@@ -1,4 +1,13 @@
-<form action="">
+<form
+  action="add_update_comment.php?account_number=<?php echo $accountNumber;?>"
+  method="POST"
+>
+  <input
+    class="d-none"
+    type="text"
+    name="modal-comment-id"
+    id="comment-id-div"
+  />
   <div
     class="modal fade"
     id="add-comment-modal"
@@ -30,6 +39,7 @@
           >
           <select
             id="modal-comment-title"
+            name="modal-comment-title"
             class="form-select"
             aria-label="Comment Title"
           >
@@ -39,7 +49,11 @@
             <option value="3">Three</option>
           </select>
           <label for="modal-comment-text">Comment</label>
-          <textarea class="form-control" id="modal-comment-text"></textarea>
+          <textarea
+            class="form-control"
+            id="modal-comment-text"
+            name="modal-comment-text"
+          ></textarea>
         </div>
         <div class="modal-footer">
           <button
@@ -77,11 +91,13 @@
         const commentId = commentCard.getAttribute("data-comment-id");
         const commentTitle = commentCard.getAttribute("data-comment-title");
         const commentText = commentCard.getAttribute("data-comment-text");
+        const commentIdDiv = document.getElementById("comment-id-div");
 
         // Update the modal's input values with the comment details
         modalCommentTitleSelect.value = commentTitle;
         modalCommentTextInput.value = commentText;
         modalHeader.innerHTML = "Edit Comment";
+        commentIdDiv.value = commentId;
 
         // Check if the selected value exists in the options
         const optionExists = [...modalCommentTitleSelect.options].some(
