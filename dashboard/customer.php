@@ -788,8 +788,8 @@
                                   height="40rem"
                                 />
                               </div>
-                              <div class="col">
-                                <span class="fs-5 font-monospace"
+                              <div class="col text-truncate">
+                                <span class="fs-5 font-monospace "
                                   ><?php echo  $binSerialNum; ?></span
                                 >
                               </div>
