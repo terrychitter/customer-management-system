@@ -59,7 +59,7 @@
 
           // Retrieve comments for the customer and store in an array
           $comments = array();
-          $sql_comments = "SELECT * FROM comments WHERE customer_id = $customerID";
+          $sql_comments = "SELECT * FROM comments WHERE customer_id = $customerID ORDER BY date_time_added DESC";
           $result_comments = mysqli_query($conn, $sql_comments);
           if ($result_comments) {
               while ($commentData = mysqli_fetch_assoc($result_comments)) {
@@ -122,6 +122,9 @@
         include "modals/add_contact.html";
         include "modals/add_dustbin.html";
         include "modals/add_customer.html";
+        include "modals/delete_dustbin_confirm.html";
+        include "modals/delete_contact_confirm.html";
+        include "modals/delete_comment_confirm.html";
     ?>
     <div class="row h-100">
       <!-- Navigation Canvas -->
@@ -590,6 +593,9 @@
                                   <div class="badge bg-secondary"><?php echo $countryCode;?></div>
                                   <?php echo $contactNumber;?>
                                 </div>
+                                <div class="col text-end text-sm-center text-md-end mt-n3 mt-lg-n1 mt-xxl-n3">
+                                  <i class="bi bi-trash-fill fs-4 text-danger"  data-bs-toggle="modal" data-bs-target="#contact-confirm-delete-modal"></i>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -632,7 +638,7 @@
                           $commentTitle = $comment['comment_title'];
                           $commentText = $comment['comment_text'];
                           $commentDatePosted = date('d/m/Y H:i', strtotime($comment['date_time_added']));?>
-                        <div class="card" data-comment-id="<?php echo $commentID; ?>" data-comment-title="<?php echo $commentTitle; ?>" data-comment-text="<?php echo $commentText; ?>" data-bs-toggle="modal" data-bs-target="#add-comment-modal">
+                        <div class="card comment-card" data-comment-id="<?php echo $commentID; ?>" data-comment-title="<?php echo $commentTitle; ?>" data-comment-text="<?php echo $commentText; ?>" data-bs-toggle="modal" data-bs-target="#add-comment-modal">
                           <div class="card-body">
                             <div class="col-12"><?php echo $commentTitle; ?></div>
                             <div class="col-12 fs-6 text-secondary">
@@ -644,6 +650,9 @@
                               style="font-size: 0.7rem"
                             >
                               Posted: <?php echo $commentDatePosted; ?>
+                              <div class="col">
+                              <i class="bi bi-trash-fill fs-4 text-danger" data-bs-toggle="modal" data-bs-target="#comment-confirm-delete-modal"></i>
+                            </div>
                             </div>
                           </div>
                         </div>
@@ -768,7 +777,7 @@
                         <?php if (!empty($bins)) {
                           foreach ($bins as $bin) {
                             $binSerialNum = $bin['serial_number']?>
-                        <div class="card" data-bin-id="<?php echo  $binSerialNum; ?>" data-bs-toggle="modal" data-bs-target="#add-dustbin-modal">
+                        <div class="card dustbin-card" data-bin-id="<?php echo  $binSerialNum; ?>" data-bs-toggle="modal" data-bs-target="#add-dustbin-modal">
                           <div class="card-body">
                             <div class="row align-items-center">
                               <div class="col-2">
@@ -784,6 +793,9 @@
                                   ><?php echo  $binSerialNum; ?></span
                                 >
                               </div>
+                              <div class="col-2 text-end">
+                              <i class="bi bi-trash-fill fs-4 text-danger" data-bs-toggle="modal" data-bs-target="#bin-confirm-delete-modal"></i>
+                            </div>
                             </div>
                           </div>
                         </div>

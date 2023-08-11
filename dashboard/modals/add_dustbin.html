@@ -59,7 +59,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Get all the card elements with the class "card"
-    const cards = document.querySelectorAll(".card");
+    const cards = document.querySelectorAll(".dustbin-card");
 
     // Get the input element and title in the modal
     const modalSerialNumberInput = document.getElementById(
@@ -71,12 +71,22 @@
 
     // Add click event listener to each card
     cards.forEach((card) => {
+      // Get the data-bin-id attribute value from the clicked card
+      const binId = card.getAttribute("data-bin-id");
+      const binIdDiv = document.getElementById("bin-id-div");
+
+      // Get delete button
+      const deleteButton = card.querySelector(".bi");
+
+      // Add click event for delete button
+      deleteButton.addEventListener("click", function () {
+        binIdDiveConfirmDelete = document.getElementById("bin-confirm-id-div");
+
+        binIdDiveConfirmDelete.value = binId;
+      });
+
+      // Add click event for card
       card.addEventListener("click", function () {
-        // Get the data-bin-id attribute value from the clicked card
-        const binId = card.getAttribute("data-bin-id");
-
-        const binIdDiv = document.getElementById("bin-id-div");
-
         // Update the modal's input and heading value with the binId
         modalSerialNumberInput.value = binId;
         modalHeader.innerHTML = "Edit Dustbin";

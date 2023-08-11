@@ -73,7 +73,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Get all the comment card elements
-    const commentCards = document.querySelectorAll(".card");
+    const commentCards = document.querySelectorAll(".comment-card");
 
     // Get the input elements in the modal
     const modalCommentTitleSelect = document.getElementById(
@@ -86,9 +86,25 @@
 
     // Add click event listener to each comment card
     commentCards.forEach((commentCard) => {
+      // Get comment ID
+      const commentId = commentCard.getAttribute("data-comment-id");
+
+      // Get delete button
+      const deleteButton = commentCard.querySelector(".bi");
+      console.log("Delete buttonn: ", deleteButton);
+
+      // Get div holder for confirm comment delete
+      const commentConfirmIdDiv = document.getElementById(
+        "comment-confirm-id-div"
+      );
+
+      // Add click event for the delete button
+      deleteButton.addEventListener("click", function () {
+        commentConfirmIdDiv.value = commentId;
+      });
+
       commentCard.addEventListener("click", function () {
         // Get the data attributes from the clicked comment card
-        const commentId = commentCard.getAttribute("data-comment-id");
         const commentTitle = commentCard.getAttribute("data-comment-title");
         const commentText = commentCard.getAttribute("data-comment-text");
         const commentIdDiv = document.getElementById("comment-id-div");

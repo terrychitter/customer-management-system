@@ -130,10 +130,21 @@
 
     // Add click event listener to each contact card
     contactCards.forEach((contactCard) => {
+      const contactId = contactCard.getAttribute("data-contact-id");
+
+      // Get the delete button
+      const deleteButton = contactCard.querySelector(".bi");
+
+      // Get id holder on confirm delete modal
+      contactConfirmIdDiv = document.getElementById("contact-confirm-id-div");
+
+      // Add event listener for delete button
+      deleteButton.addEventListener("click", function () {
+        contactConfirmIdDiv.value = contactId;
+      });
+
       contactCard.addEventListener("click", function () {
         // Get the data attributes from the clicked contact card
-        const contactId = contactCard.getAttribute("data-contact-id");
-        console.log("contact id: ", contactId);
         const contactName = contactCard.getAttribute("data-contact-title");
         const countryCode = contactCard.getAttribute("data-country-code");
         const contactNumber = contactCard.getAttribute("data-contact-number");

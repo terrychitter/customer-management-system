@@ -120,6 +120,42 @@ switch ($status) {
     $popupText = "An unexpected error occured while adding/updating the customer's bin. Please try again! (26)";
     $popupColour = "danger";
     break;
+  case '27':
+    $popupText = "An unexpected error occured while removing the customer's contact. Please try again! (27)";
+    $popupColour = "danger";
+    break;
+  case '28':
+    $popupText = "Successfully removed customer contact!";
+    $popupColour = "success";
+    break;
+  case '29':
+    $popupText = "There was an error while removing the customer's contact. Please try again! (29)";
+    $popupColour = "danger";
+    break;
+  case '30':
+    $popupText = "An unexpected error occured while removing the customer's comment. Please try again! (30)";
+    $popupColour = "danger";
+    break;
+  case '31':
+    $popupText = "Successfully removed customer comment!";
+    $popupColour = "success";
+    break;
+  case '32':
+    $popupText = "There was an error while removing the customer's comment. Please try again! (32)";
+    $popupColour = "danger";
+    break;
+  case '33':
+    $popupText = "An unexpected error occured while removing the customer's bin. Please try again! (33)";
+    $popupColour = "danger";
+    break;
+  case '34':
+    $popupText = "Successfully removed customer bin!";
+    $popupColour = "success";
+    break;
+  case '35':
+    $popupText = "There was an error while removing the customer's bin. Please try again! (35)";
+    $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">

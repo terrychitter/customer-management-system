@@ -161,12 +161,12 @@ window.smartFormHandlers["customer-details-form"] = {
       if (validEmail) {
         window.location.href =
           window.location.href +
-          "?status=" +
+          "&status=" +
           status +
           "&status_details=" +
           statusDetails;
       } else {
-        window.location.href = window.location.href + "?status=3";
+        window.location.href = window.location.href + "&status=3";
       }
       return;
     }
