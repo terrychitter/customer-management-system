@@ -114,6 +114,7 @@
           // Close the database connection
           mysqli_close($conn);
     }
+    include "../popup.php";
 ?>
   <body class="container-fluid d-flex flex-column w-100 overflow-x-hidden">
     <?php
@@ -928,7 +929,7 @@
                               <div
                                 class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end"
                               >
-                                <a href="" class="link-success">
+                                <a href="../invoices/<?php echo $invoiceID;?>.pdf" class="link-success" download="<?php echo $invoiceID; ?>">
                                   <i class="bi bi-file-earmark-pdf-fill"></i>
                                   PDF</a
                                 >

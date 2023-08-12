@@ -15,7 +15,6 @@ if(isset($_GET['account_number'])) {
         $surname = filter_var($_POST['surname'], FILTER_SANITIZE_STRING);
         $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
         $suburb = filter_var($_POST['suburb'], FILTER_SANITIZE_STRING);
-        $city = filter_var($_POST['city'], FILTER_SANITIZE_STRING);
         $postalCode = filter_var($_POST['postal'], FILTER_SANITIZE_STRING);
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $origin = filter_var($_POST['origin'], FILTER_SANITIZE_STRING);

@@ -43,10 +43,14 @@
             class="form-select"
             aria-label="Comment Title"
           >
-            <option selected>Comment Title 1</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="Add bin">Add bin</option>
+            <option value="Additional Email">Additional Email</option>
+            <option value="Bin Details">Bin Details</option>
+            <option value="Communication">Communication</option>
+            <option value="Fee structure">Fee structure</option>
+            <option value="No Charge">No Charge</option>
+            <option value="Schedule">Schedule</option>
+            <option value="Transfer">Transfer</option>
           </select>
           <label for="modal-comment-text">Comment</label>
           <textarea
@@ -114,18 +118,6 @@
         modalCommentTextInput.value = commentText;
         modalHeader.innerHTML = "Edit Comment";
         commentIdDiv.value = commentId;
-
-        // Check if the selected value exists in the options
-        const optionExists = [...modalCommentTitleSelect.options].some(
-          (option) => option.value === commentTitle
-        );
-
-        // If the selected value doesn't exist, create a new option and select it
-        if (!optionExists) {
-          const newOption = new Option(commentTitle, commentTitle);
-          modalCommentTitleSelect.add(newOption);
-          modalCommentTitleSelect.value = commentTitle;
-        }
       });
     });
   });

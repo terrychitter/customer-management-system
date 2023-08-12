@@ -1,5 +1,8 @@
-<?php 
-session_start();
+<?php
+if( empty(session_id()) && !headers_sent()){
+  session_start();
+}
+
 if (isset($_GET['status'])) {
 // Get the status
 $status = $_GET['status'];
