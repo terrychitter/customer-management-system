@@ -1,4 +1,4 @@
-<form action="">
+<form action="add_customer.php" method="POST">
   <script
     async
     defer
@@ -32,19 +32,47 @@
         <div class="modal-body">
           <h6 class="fs-5 text-center">Personal Details</h6>
           <div class="modal-personal-details-container border rounded p-2 mb-3">
-            <label for="modal-account-number" class="form-label"
+            <label
+              for="modal-account-number"
+              class="form-label align-items-center"
               >Account Number
-              <b id="auto-generated-text">[Auto Generated]</b></label
-            >
-            <input type="text" class="form-control" value="901" required />
+              <i
+                class="bi bi-info-circle-fill text-secondary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                data-bs-title="Account numbers are generated automatically. You may edit the account number if neccessary."
+              ></i>
+            </label>
+            <div class="input-group">
+              <input
+                name="modal-account-number"
+                id="modal-add-customer-acc-num"
+                type="number"
+                class="form-control"
+                required
+                data-available="true"
+              />
+              <button
+                class="btn btn-primary"
+                type="button"
+                id="modal-add-customer-refresh"
+              >
+                <i class="bi bi-arrow-clockwise fs-5"></i>
+              </button>
+            </div>
             <div
-              class="form-text text-danger mt-n3 d-none"
+              class="form-text text-danger d-none"
               id="modal-account-number-status"
             >
               This account number is already in use
             </div>
             <label for="modal-title" class="form-label">Title</label>
-            <select class="form-select" aria-label="Title" required>
+            <select
+              name="modal-title"
+              class="form-select"
+              aria-label="Title"
+              required
+            >
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
               <option value="Ms">Ms</option>
@@ -125,13 +153,14 @@
                 max="4"
                 aria-label="Frequency"
                 aria-describedby="frequency-label"
-                name="modal-frquency"
+                name="modal-frequency"
               />
             </div>
             <div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Day</span>
                 <select
+                  name="modal-day"
                   id="modal-day"
                   class="form-select"
                   aria-label="Sanitizing Day"
@@ -146,18 +175,20 @@
               </div>
             </div>
             <div class="input-group">
-              <span class="input-group-text" id="-modal-monthly-fee-label"
+              <span
+                class="input-group-text"
+                id="modal-monthly-fee-label"
+                for="modal-monthly-fee"
                 >Monthly Fee</span
               >
               <span class="input-group-text" id="modal-currency-label">R</span>
               <input
+                name="modal-monthly-fee"
                 type="number"
                 class="form-control"
                 aria-label="Rand"
-                step="10"
                 min="1"
                 aria-describedby="modal-monthly-fee-label"
-                value=""
               />
             </div>
           </div>
@@ -170,7 +201,7 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Add Customer</button>
+          <button type="submit" class="btn btn-primary">Add Customer</button>
         </div>
       </div>
     </div>

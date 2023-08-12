@@ -345,7 +345,7 @@
           <button class="btn btn-primary btn-sm">
            <i class="bi bi-people-fill fs-6"></i> View All
           </button>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add-customer-modal" onclick="event.preventDefault();">
+          <button class="btn btn-primary btn-sm" id="add-customer-modal-toggle" data-bs-toggle="modal" data-bs-target="#add-customer-modal" onclick="event.preventDefault();">
            <i class="bi bi-person-fill-add fs-6"></i> Add New Customer
           </button>
         </div>
@@ -415,10 +415,12 @@
               </form>
                 <div class="row search-results gx-0" style="max-height:300px">
                   <h3 style="font-size: 0.9rem; margin-bottom: 0;">Search Results</h3>
+                  <div class="overflow-y-auto" style="max-height: 260px">
                   <table class="table table-striped table-hover" id="search-results-table">
                     <tbody>
                     </tbody>
                   </table>
+                  </div>
                   <div class="lds-ripple m-auto" id="search-results-spinner"><div></div><div></div></div>
                   <div class="d-none" id="no-search-matches">
                     <div class="fs-6 text-secondary text-center" style="border: none; background: none; margin-top: -1rem;" onclick="exit();">No Matches Found</div>
@@ -953,9 +955,11 @@
         </div>
       </main>
     </div>
+    <script src="../index.js"></script>
     <script src="search.js"></script>
     <script src="clear_form.js"></script>
     <script src="smart_form.js"></script>
+    <script src="handle_acc_num_gen.js"></script>
     <script src="../remove_paramters.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>

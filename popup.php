@@ -159,6 +159,18 @@ switch ($status) {
     $popupText = "There was an error while removing the customer's bin. Please try again! (35)";
     $popupColour = "danger";
     break;
+  case '36':
+    $popupText = "Something went wrong while adding the customer. Please try again! (36)";
+    $popupColour = "danger";
+    break;
+  case '37':
+    $popupText = "Successfully added customer!";
+    $popupColour = "success";
+    break;
+  case '38':
+    $popupText = "There was an error while adding the customer. Please try again! (38)";
+    $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">
