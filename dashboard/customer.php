@@ -46,7 +46,6 @@
           $surname = $customerData['surname'];
           $address = $customerData['address'];
           $suburb = $customerData['suburb'];
-          $city = $customerData['city'];
           $postalCode = $customerData['postal_code'];
           $active = $customerData['active'];
           $email = $customerData['email'];
@@ -126,6 +125,7 @@
         include "modals/delete_dustbin_confirm.html";
         include "modals/delete_contact_confirm.html";
         include "modals/delete_comment_confirm.html";
+        include "modals/deactivate_customer_confirm.html";
     ?>
     <div class="row h-100">
       <!-- Navigation Canvas -->
@@ -464,11 +464,17 @@
                 </div>
                 <?php } else { ?>
                 <!-- CUSTOMER SELECTED DIV -->
-                <div class="row">
+                <div class="row position-relative">
                   <!-- Profile Column -->
                   <div
                     class="profile-col col-12 col-md-4 col-lg-3 col-xl-2 text-center align-content-center justify-content-center"
                   >
+                    <!-- Active or inactive icon -->
+                    <div class="d-flex align-content-center" style="gap:0.3rem; position: absolute; left: 0; top: -0.6rem;">
+                    <div class="blob <?php echo (!$active) ? 'inactive' : ''; ?>" style="margin-top: 0.25rem"></div>
+                    <b><p style="font-size: 0.9rem" class="text-<?php echo ($active) ? 'success' : 'danger';?>"><?php echo ($active) ? 'Active' : "Inactive";?></p></b>
+                    </div>
+
                     <i class="bi bi-person-fill mb-0"></i>
                     <p class="customer-acc-num fs-1"><?php echo $accountNumber; ?></p>
                   </div>
@@ -619,8 +625,11 @@
                       <?php if($active) { ?>
                       <div class="active col">
                         <button
+                          type="button"
                           class="deactivate-customer-btn btn btn-sm btn-danger"
                           style="background-color: red"
+                          data-bs-toggle="modal" data-bs-target="#deactive_customer_confirm_modal"
+
                         >
                           Deactivate Customer
                         </button>

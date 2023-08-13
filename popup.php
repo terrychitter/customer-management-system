@@ -171,6 +171,18 @@ switch ($status) {
     $popupText = "There was an error while adding the customer. Please try again! (38)";
     $popupColour = "danger";
     break;
+  case '39':
+    $popupText = "Something went wrong while deactivating the customer. Please try again! (39)";
+    $popupColour = "danger";
+    break;
+  case '40':
+    $popupText = "Customer has been successfully deactivated!";
+    $popupColour = "success";
+    break;
+  case '41':
+    $popupText = "There was an error while deactivating the customer. Please try again! (41)";
+    $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">
