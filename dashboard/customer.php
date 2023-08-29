@@ -126,6 +126,7 @@
         include "modals/delete_contact_confirm.html";
         include "modals/delete_comment_confirm.html";
         include "modals/deactivate_customer_confirm.html";
+        include "modals/activate_customer_confirm.html";
     ?>
     <div class="row h-100">
       <!-- Navigation Canvas -->
@@ -342,7 +343,7 @@
           </div>
         </header>
         <div class="customer-buttons col p-0 pb-2 mt-3 text-end">
-          <button class="btn btn-primary btn-sm">
+          <button class="btn btn-primary btn-sm" disabled>
            <i class="bi bi-people-fill fs-6"></i> View All
           </button>
           <button class="btn btn-primary btn-sm" id="add-customer-modal-toggle" data-bs-toggle="modal" data-bs-target="#add-customer-modal" onclick="event.preventDefault();">
@@ -622,8 +623,8 @@
                       </div>
                     </div>
                     <div class="origin-active row">
-                      <?php if($active) { ?>
                       <div class="active col">
+                        <?php if($active) { ?>
                         <button
                           type="button"
                           class="deactivate-customer-btn btn btn-sm btn-danger"
@@ -633,8 +634,16 @@
                         >
                           Deactivate Customer
                         </button>
+                        <?php } else {?>
+                          <button
+                          type="button"
+                          class="activate-customer-btn btn btn-sm btn-success"
+                          data-bs-toggle="modal" data-bs-target="#active_customer_confirm_modal"
+                        >
+                          Reactivate Customer
+                        </button>
+                        <?php } ?>
                       </div>
-                      <?php }?>
                     </div>
                   </form>
                   <!-- Comments Column -->
