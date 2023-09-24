@@ -195,6 +195,18 @@ switch ($status) {
     $popupText = "There was an error while reactivating the customer. Please try again! (44)";
     $popupColour = "danger";
     break;
+  case '45':
+    $popupText = "Customer's prefered banking details have been successfully updated!";
+    $popupColour = "success";
+    break;
+  case '46':
+    $popupText = "There was an error while updating the customer's preferred banking details. Please try again (46)";
+    $popupColour = "danger";
+    break;
+  case '47':
+    $popupText = "An unexpected error occured while updating the customer's preffered banking details. Please try again! (47)";
+    $popupColour = "danger";
+    break;
 }
 ?>
   <div class="d-flex justify-content-center">

@@ -963,6 +963,22 @@
                           </div>
                         <?php } ?>
                       </div>
+                      <div class="bank-details col-12 p-2">
+                        <b>Invoice Bank Details</b>
+                        <p class="mt-n1" style="font-size: 0.9rem;">You can change the banking details that will appear on the customer's invoice. You may add/remove bank accounts in the settings</p>
+                        <form action="update_banking_details.php?account_number=<?php echo $accountNumber; ?>" method="POST" data-smart-form="banking-details-form">
+                          <select name="banking-details-select" class="form-select" aria-label="Banking Details" id="banking-details-select">
+                            <option value="1" selected>
+                              <!-- Bank Details Option -->
+                              FNB – 32039201910&#9;(DEFAULT)
+                            </option>
+                            <option value="2">
+                              <!-- Bank Details Option -->
+                              FNB – 32039201910&#9;
+                            </option>
+                        </select>
+                        </form>
+                      </div>
                     </div>
                     <?php } ?>
                   </div>

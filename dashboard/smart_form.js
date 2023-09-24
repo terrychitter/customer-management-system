@@ -230,3 +230,13 @@ function validateField(input, minValue, maxValue, status) {
   }
   return true;
 }
+
+window.smartFormHandlers["banking-details-form"] = {
+  saveHandler: function(form) {
+    // Validate the select
+    const accountNumber = form.querySelector("input");
+    const bankingDetailsSelectValue = form.querySelector("#banking-details-select").value
+    ;
+    form.submit();
+  }
+}
