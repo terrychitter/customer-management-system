@@ -17,15 +17,16 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
     $freq = $_POST['modal-frequency'];
     $day = $_POST['modal-day'];
     $monthlyFee = $_POST['modal-monthly-fee'];
+    $prefferedBankAccount = $_POST['modal-preffered-bank-account'];
 
     date_default_timezone_set('Africa/Johannesburg');        
     $currentDateTime = date('Y-m-d H:i:s');
 
     // Prepare and execute the update query for adding a customer
-    $stmt = $conn->prepare("INSERT INTO customers (account_number, title, name, surname, address, suburb, postal_code, active, email, origin, frequency, day, monthly_rate, date_joined, date_added)
-    VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO customers (account_number, title, name, surname, address, suburb, postal_code, active, email, origin, frequency, day, monthly_rate, date_joined, date_added, bank_account)
+    VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-    $stmt->bind_param("issssssssisiss", $accountNumber, $title, $name, $surname, $address, $suburb, $postal, $email, $origin, $freq, $day, $monthlyFee, $currentDateTime, $currentDateTime);
+    $stmt->bind_param("issssssssisissi", $accountNumber, $title, $name, $surname, $address, $suburb, $postal, $email, $origin, $freq, $day, $monthlyFee, $currentDateTime, $currentDateTime, $prefferedBankAccount);
 
     if ($stmt->execute()) {
         // Successfully updated bin, replace customer_id parameter in the URL and redirect with status 15

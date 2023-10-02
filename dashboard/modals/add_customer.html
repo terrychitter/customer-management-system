@@ -141,7 +141,7 @@
             />
           </div>
           <h6 class="fs-5 text-center">Sanitizing Details</h6>
-          <div class="modal-sanitizing-details-container border rounded p-2">
+          <div class="modal-sanitizing-details-container border rounded p-2 mb-3">
             <div class="input-group mb-3">
               <span class="input-group-text" id="modal-frequency-label"
                 >Frequency</span
@@ -168,8 +168,8 @@
                 >
                   <option value="Monday">Monday</option>
                   <option value="Tuesday">Tuesday</option>
-                  <option value="Wednesday" <?>Wednesday</option>
-                  <option value="Thursday" <>Thursday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
                   <option value="Friday">Friday</option>
                 </select>
               </div>
@@ -191,6 +191,25 @@
                 aria-describedby="modal-monthly-fee-label"
               />
             </div>
+          </div>
+          <h6 class="fs-5 text-center">Finance Details</h6>
+          <div class="modal-finance-detais-container border rounded p-2"> 
+            <label for="modal-preffered-bank-account" class="form-label">
+              Preffered Bank Account
+              <i
+                class="bi bi-info-circle-fill text-secondary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                data-bs-title="This is the peffered banking account for this customer to make payments into and will be displayed on their invoice."
+              ></i>
+            </label>
+            <select name="modal-preffered-bank-account" class="form-select">
+              <?php foreach($bank_accounts as $bank_account) {?>
+                <option value="<?php echo $bank_account['id'];?>" <?php echo ($bank_account['is_default']) ? 'selected' : ''; ?>>
+                  <?php echo $bank_account['private_name'].' – '.$bank_account['account_number']; echo ($bank_account['is_default']) ? ' (DEFAULT)' : ''?>
+                </option>
+                <?php } ?>
+            </select>
           </div>
         </div>
         <div class="modal-footer">
