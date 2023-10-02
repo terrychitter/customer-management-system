@@ -55,6 +55,7 @@
           $monthlyRate = $customerData['monthly_rate'];
           $dateJoined = $customerData['date_joined'];
           $dateAdded = $customerData['date_added'];
+          $prefferedBank = $customerData['bank_account'];
 
           // Retrieve comments for the customer and store in an array
           $comments = array();
@@ -105,6 +106,17 @@
                   $invoices[] = $invoiceData;
               }
           }
+
+          // Retrieve bank accounts and store in a variable
+          $bank_accounts = array();
+          $sql_bank_accounts = "SELECT * FROM bank_accounts";
+          $result_bank_accounts = mysqli_query($conn, $sql_bank_accounts);
+          if ($result_bank_accounts) {
+            while ($bankAccountsData = mysqli_fetch_assoc($result_bank_accounts)) {
+              $bank_accounts[] = $bankAccountsData;
+            }
+          }
+
       } else {
 
           // Customer could not be found
@@ -968,14 +980,11 @@
                         <p class="mt-n1" style="font-size: 0.9rem;">You can change the banking details that will appear on the customer's invoice. You may add/remove bank accounts in the settings</p>
                         <form action="update_banking_details.php?account_number=<?php echo $accountNumber; ?>" method="POST" data-smart-form="banking-details-form">
                           <select name="banking-details-select" class="form-select" aria-label="Banking Details" id="banking-details-select">
-                            <option value="1" selected>
-                              <!-- Bank Details Option -->
-                              FNB – 32039201910&#9;(DEFAULT)
+                            <?php foreach($bank_accounts as $bank_account) { ?>
+                            <option value="<?php echo $bank_account['id']; ?>" <?php echo ($bank_account['id'] === $prefferedBank) ? 'selected' : '';?>>
+                              <?php echo $bank_account['private_name'].' – '.$bank_account['account_number']; echo ($bank_account['is_default']) ? ' (DEFAULT)' : ''?>
                             </option>
-                            <option value="2">
-                              <!-- Bank Details Option -->
-                              FNB – 32039201910&#9;
-                            </option>
+                            <?php } ?>
                         </select>
                         </form>
                       </div>
