@@ -58,7 +58,8 @@ function updateTable(results) {
     // Add onclick event to the table row
     row.onclick = function () {
       // Update the URL to include customer_id parameter
-      window.location.href = `customer.php?customer_id=${customer.account_number}`;
+      var currentFile = window.location.pathname.split("/").pop();
+      window.location.href = `${currentFile}?customer_id=${customer.account_number}`;
     };
 
     // Create and add table data cells
