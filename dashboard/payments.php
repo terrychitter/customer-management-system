@@ -372,7 +372,8 @@
                             $paymentID = $payment['payment_id'];
                             $paymentDate = date('F d, Y', strtotime($payment['payment_date']));
                             $paymentAmount = $payment['payment_amount'];
-                            $paymentType = $payment['payment_type'];?>
+                            $paymentType = $payment['payment_type'];
+                            $paymentBalance = $payment['balance_after_payment']?>
                                         <div class="card mb-2" data-payment-id="<?php echo $paymentID; ?>">
                                             <div class="card-body p-2">
                                                 <div class="row mb-1 align-items-center">
@@ -397,7 +398,7 @@
                                                         <hr>
                                                     </div>
                                                     <div class="col-12 text-end">
-                                                        <b>Balance: R10.00</b>
+                                                        <b>Balance: <?php echo $paymentBalance; ?></b>
                                                     </div>
                                                 </div>
                                             </div>

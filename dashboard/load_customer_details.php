@@ -72,15 +72,25 @@
               }
           }
 
-          // Retrieve payments for the customer and store in an array
+          // Retrieve payments (with their balances) for the customer and store in an array
           $payments = array();
-          $sql_payments = "SELECT * FROM payments WHERE customer_id = $customerID";
+          $sql_payments = "SELECT P.*, B.balance_amount AS balance_after_payment FROM Payments P LEFT JOIN Balances B ON P.payment_id = B.payment_id WHERE P.customer_id = $customerID ORDER BY P.payment_date DESC";
           $result_payments = mysqli_query($conn, $sql_payments);
           if ($result_payments) {
               while ($paymentData = mysqli_fetch_assoc($result_payments)) {
                   $payments[] = $paymentData;
               }
           }
+
+         // Get current balance
+            $sql_current_balance = "SELECT * FROM Balances WHERE customer_id = $customerID ORDER BY balance_date DESC LIMIT 1";
+            $results_current_balance = mysqli_query($conn, $sql_current_balance);
+
+            if ($results_current_balance) {
+                $row = mysqli_fetch_assoc($results_current_balance);
+                $currentBalance = $row['balance_amount'];
+            }
+
 
           // Retrieve invoices for the customer and store in an array
           $invoices = array();
