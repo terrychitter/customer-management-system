@@ -1,0 +1,43 @@
+<form>
+  <div class="modal fade" id="duplicate-payment-modal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            <i
+              class="bi bi-exclamation-triangle-fill fs-3"
+              style="color: red"
+            ></i>
+            Duplicate Payment
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          There seems to be a payment already entered with an <b>identical date, amount, and payment type</b>. Please ensure that this is not a duplication.
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            style="background-color: red; border: none"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            id="continue-duplicate-payment-button"
+            class="btn btn-secondary"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -13,6 +13,7 @@
     <?php
     require_once("load_customer_details.php");
     require_once("../popup.php");
+    include("modals/duplicate_payment.html");
     ?>
     <div class="row h-100">
         <!-- Navigation Canvas -->
@@ -320,11 +321,11 @@
                                         <?php include "no-customer-selected.html"; ?>
                                     </div>
                                     <?php } else { ?>
-                                    <form action="add_payment.php?customer_id=<?php echo $accountNumber ?>"
-                                        method="POST">
+                                    <form id="add-payment-form"
+                                        action="add_payment.php?customer_id=<?php echo $accountNumber ?>" method="POST">
                                         <label for="payment-date" class="form-label">Date</label>
                                         <input type="date" id="payment-date-id" name="payment-date"
-                                            class="form-control mb-2">
+                                            class="form-control mb-2" required>
                                         <script>
                                         document.getElementById('payment-date-id').valueAsDate = new Date();
                                         </script>
@@ -333,15 +334,17 @@
                                             <div class="input-group-prepend"><span class="input-group-text"
                                                     style="border-top-right-radius: 0; border-bottom-right-radius: 0;">R</span>
                                             </div>
-                                            <input type="number" name="payment-amount" step=1 class="form-control">
+                                            <input type="number" name="payment-amount" step=1 class="form-control"
+                                                required>
                                         </div>
                                         <label for="payment-type" class="form-label">Type</label>
-                                        <select name="payment-type" class="form-select mb-2">
+                                        <select name="payment-type" class="form-select mb-2" required>
                                             <option value="EFT" selected>EFT</option>
                                             <option value="CASH">CASH</option>
                                         </select>
                                         <div class="col text-end">
-                                            <button type="submit" class="btn btn-primary">Add Payment</button>
+                                            <button type="submit" id="add-payment-button" class="btn btn-primary">Add
+                                                Payment</button>
                                         </div>
                                     </form>
                                     <?php } ?>
@@ -374,7 +377,7 @@
                             <div id="payment-history-panel-stay-open"
                                 class="accordion-collapse <?php echo ($customerActive) ? "show" : "collapse" ?>"
                                 aria-labelledby="">
-                                <!-- Search Accordion Body -->
+                                <!-- Payment History Accordion Body -->
                                 <div class="accordion-body">
                                     <!-- NO CUSTOMER SELECTED DIV -->
                                     <?php if (!$customerActive) { ?>
@@ -386,7 +389,8 @@
                                         style="max-height: 550px;">
                                         <!-- Payment Card -->
                                         <?php if (!empty($payments)) {
-                                                foreach ($payments as $payment) {
+                                                $mostRecentPayment = array_key_first($payments);
+                                                foreach ($payments as $key => $payment) {
                                                     $paymentID = $payment['payment_id'];
                                                     $paymentDate = date('F d, Y', strtotime($payment['payment_date']));
                                                     $paymentAmount = $payment['payment_amount'];
@@ -400,8 +404,10 @@
                                                         <?php echo $paymentID; ?>
                                                     </div>
                                                     <div class="col-6 text-end">
+                                                        <?php if ($key === $mostRecentPayment) { ?>
                                                         <i class="bi bi-trash-fill text-danger fs-5"
                                                             style="cursor:pointer;"></i>
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -442,8 +448,56 @@
                 </div>
             </div>
         </main>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="../remove_paramters.js"></script>
         <script src="search.js"></script>
+        <script>
+        $(document).ready(function() {
+            $("#add-payment-button").click(function() {
+                // Prevent the form from submitting
+                event.preventDefault();
+
+                // Gather form data
+                var paymentDate = $("#payment-date-id").val();
+                var paymentAmount = $("input[name='payment-amount']").val();
+                var paymentType = $("select[name='payment-type']").val();
+
+                // Prepare the data to be sent
+                var searchData = {
+                    paymentDate: paymentDate,
+                    paymentAmount: paymentAmount,
+                    paymentType: paymentType,
+                };
+
+                // Send a request to the server
+                fetch("duplicate_payment.php?customer_id=<?php echo $accountNumber ?>", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: new URLSearchParams(searchData).toString(),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // Check the response
+                        if (data.status === false) {
+                            // If the value returned is false, submit the form
+                            $("#add-payment-form").submit();
+                        } else {
+                            // If the value is not false, show the modal
+                            $("#duplicate-payment-modal").modal('show');
+                        }
+                    })
+                    .catch((error) => console.error("Error:", error));
+            });
+
+            // If the continue button in the modal is clicked, submit the form
+            $("#continue-duplicate-payment-button").click(function() {
+                $("#add-payment-form").submit();
+            });
+        });
+        </script>
 </body>
 
 </html>
