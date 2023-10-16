@@ -689,7 +689,9 @@
                                             <div
                                                 class="col-12 col-sm text-sm-end col-lg-12 text-lg-start col-xxl text-xxl-end">
                                                 Current Balance
-                                                <span class="fs-6 badge <?php if ($currentBalance < 0) { echo "bg-danger";} else { echo "bg-success";} ?>">R <?php echo $currentBalance; ?></span>
+                                                <span
+                                                    class="fs-6 badge <?php if ($currentBalance < 0) { echo "bg-danger";} else { echo "bg-success";} ?>">R
+                                                    <?php echo $currentBalance; ?></span>
                                             </div>
                                         </div>
                                         <div class="payments-container overflow-auto border rounded p-2">

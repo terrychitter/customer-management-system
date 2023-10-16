@@ -223,23 +223,18 @@
                 <!-- Search Customers Section -->
                 <div class="search-customers-section col-12">
                     <div class="search-customers col-12 accordion" id="search-customer-accordion">
-                        <?php if (isset($_GET['customer_id'])) { ?>
-                        <span class="position-absolute badge rounded-pill bg-success"
-                            style="z-index: 999; top: -0.5rem; right: 0.5rem">
-                            Account Active:
-                            <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
-                            <span class="visually-hidden">Active Account</span>
-                        </span>
-                        <?php } ?>
                         <div class="accordion-item">
                             <div class="accordion-header" id="search-customer-accordion-item">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button <?php if ($customerActive) {
+                                    echo "collapsed";
+                                } ?>" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapseOne">
                                     <h2 class="fs-5 mb-0">Search</h2>
                                 </button>
                             </div>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                            <div id="panelsStayOpen-collapseOne"
+                                class="accordion-collapse <?php echo ($customerActive) ? "collapse" : "show"; ?>"
                                 aria-labelledby="panelsStayOpen-headingOne">
                                 <!-- Search Accordion Body -->
                                 <div class="accordion-body">
@@ -306,16 +301,25 @@
                         <?php } ?>
                         <div class="accordion-item">
                             <div class="accordion-header" id="add-payment-accordion-item">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button <?php if (!$customerActive) {
+                                    echo "collapsed";
+                                } ?>" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#add-payments-panel-stay-open" aria-expanded="true"
                                     aria-controls="add-payments-panel-stay-open">
                                     <h2 class="fs-5 mb-0">Add Payment</h2>
                                 </button>
                             </div>
-                            <div id="add-payments-panel-stay-open" class="accordion-collapse collapse show"
+                            <div id="add-payments-panel-stay-open"
+                                class="accordion-collapse <?php echo ($customerActive) ? "show" : "collapse"; ?>"
                                 aria-labelledby="">
-                                <!-- Search Accordion Body -->
+                                <!-- Add Payment Accordion Body -->
                                 <div class="accordion-body">
+                                    <!-- NO CUSTOMER SELECTED DIV -->
+                                    <?php if (!$customerActive) { ?>
+                                    <div class="row">
+                                        <?php include "no-customer-selected.html"; ?>
+                                    </div>
+                                    <?php } else { ?>
                                     <form action="add_payment.php?customer_id=<?php echo $accountNumber ?>"
                                         method="POST">
                                         <label for="payment-date" class="form-label">Date</label>
@@ -340,6 +344,7 @@
                                             <button type="submit" class="btn btn-primary">Add Payment</button>
                                         </div>
                                     </form>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -358,26 +363,35 @@
                         <?php } ?>
                         <div class="accordion-item">
                             <div class="accordion-header" id="payment-history-accordion-item">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button <?php if (!$customerActive) {
+                                    echo "collapsed";
+                                } ?>" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#payment-history-panel-stay-open" aria-expanded="true"
                                     aria-controls="payment-history-panel-stay-open">
                                     <h2 class="fs-5 mb-0">Payment History</h2>
                                 </button>
                             </div>
-                            <div id="payment-history-panel-stay-open" class="accordion-collapse collapse show"
+                            <div id="payment-history-panel-stay-open"
+                                class="accordion-collapse <?php echo ($customerActive) ? "show" : "collapse" ?>"
                                 aria-labelledby="">
                                 <!-- Search Accordion Body -->
                                 <div class="accordion-body">
+                                    <!-- NO CUSTOMER SELECTED DIV -->
+                                    <?php if (!$customerActive) { ?>
+                                    <div class="row">
+                                        <?php include "no-customer-selected.html"; ?>
+                                    </div>
+                                    <?php } else { ?>
                                     <div class="payments-history-container overflow-auto border rounded p-2"
                                         style="max-height: 550px;">
                                         <!-- Payment Card -->
                                         <?php if (!empty($payments)) {
-                                            foreach ($payments as $payment) {
-                                                $paymentID = $payment['payment_id'];
-                                                $paymentDate = date('F d, Y', strtotime($payment['payment_date']));
-                                                $paymentAmount = $payment['payment_amount'];
-                                                $paymentType = $payment['payment_type'];
-                                                $paymentBalance = $payment['balance_after_payment'] ?>
+                                                foreach ($payments as $payment) {
+                                                    $paymentID = $payment['payment_id'];
+                                                    $paymentDate = date('F d, Y', strtotime($payment['payment_date']));
+                                                    $paymentAmount = $payment['payment_amount'];
+                                                    $paymentType = $payment['payment_type'];
+                                                    $paymentBalance = $payment['balance_after_payment'] ?>
                                         <div class="card mb-2" data-payment-id="<?php echo $paymentID; ?>">
                                             <div class="card-body p-2">
                                                 <div class="row mb-1 align-items-center">
@@ -414,12 +428,13 @@
                                             </div>
                                         </div>
                                         <?php }
-                                        } else { ?>
+                                            } else { ?>
                                         <div class="no-payments text-secondary">
                                             No Payments to display
                                         </div>
                                         <?php } ?>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
