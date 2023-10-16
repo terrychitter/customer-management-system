@@ -1,50 +1,56 @@
 <?php
-// Establish a database connection
-require_once("../db_conn.php");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Establish a database connection
+    require_once("../db_conn.php");
 
-// Get customer id, amount, date, and type
-$accountNumber = $_GET['customer_id'];
-$paymentAmount = 100;
-$paymentDate = date('2023-10-11') . ' ' . date('H:i:s');
-$paymentType = "EFT";
+    // Get customer id, amount, date, and type
+    $accountNumber = $_GET['customer_id'];
+    $paymentAmount = $_POST['payment-amount'];
+    $paymentDate = $_POST['payment-date'] . ' ' . date('H:i:s');
+    $paymentType = $_POST['payment-type'];
 
-// Get the most recent balance
-$sql_current_balance = "SELECT balance_amount FROM Balances WHERE customer_id = $accountNumber ORDER BY balance_date DESC LIMIT 1";
-$results_current_balance = mysqli_query($conn, $sql_current_balance);
+    // Get the most recent balance
+    $sql_current_balance = "SELECT balance_amount FROM Balances WHERE customer_id = $accountNumber ORDER BY balance_date DESC LIMIT 1";
+    $results_current_balance = mysqli_query($conn, $sql_current_balance);
 
-if ($results_current_balance) {
-    $row = mysqli_fetch_assoc($results_current_balance);
-    $currentBalance = $row['balance_amount'];
-}
+    if ($results_current_balance) {
+        $row = mysqli_fetch_assoc($results_current_balance);
+        $currentBalance = $row['balance_amount'];
+    }
 
-echo "Current Balance: $currentBalance";
+    echo "Current Balance: $currentBalance";
 
-// Calculate the new balance
-$updatedBalance = $currentBalance - $paymentAmount;
+    // Calculate the new balance
+    $updatedBalance = $currentBalance - $paymentAmount;
 
-// Generate the payment id
-$uniquePaymentID = generateUniquePaymentID($accountNumber, $paymentDate, $paymentType, $conn);
+    // Generate the payment id
+    $uniquePaymentID = generateUniquePaymentID($accountNumber, $paymentDate, $paymentType, $conn);
 
 
-// Add a record of the payment
-if (addPayment($uniquePaymentID, $accountNumber, $paymentDate, $paymentAmount, $paymentType, $conn)) {
-    // Add a record of the updated balance
-    if (addBalance($accountNumber, $paymentDate, $updatedBalance, $uniquePaymentID, $conn)) {
-        // Both the payment and balance records were added successfully
-        // Commit the transaction
-        mysqli_commit($conn);
-        echo "Payment and balance records added successfully.<br>";
+    // Add a record of the payment
+    if (addPayment($uniquePaymentID, $accountNumber, $paymentDate, $paymentAmount, $paymentType, $conn)) {
+        // Add a record of the updated balance
+        if (addBalance($accountNumber, $paymentDate, $updatedBalance, $uniquePaymentID, $conn)) {
+            // Both the payment and balance records were added successfully
+            // Commit the transaction
+            mysqli_commit($conn);
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "&status=48");
+            exit();
+        } else {
+            // Error adding balance record
+            // Roll back the transaction
+            mysqli_rollback($conn);
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "&status=49");
+            exit();
+            ;
+        }
     } else {
-        // Error adding balance record
+        // Error adding payment record
         // Roll back the transaction
         mysqli_rollback($conn);
-        echo "Error adding balance record.<br>";
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "&status=50");
+        exit();
     }
-} else {
-    // Error adding payment record
-    // Roll back the transaction
-    mysqli_rollback($conn);
-    echo "Error adding payment record.<br>";
 }
 
 // Function to add a payment record

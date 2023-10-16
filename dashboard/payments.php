@@ -12,7 +12,8 @@
 <body class="container-fluid d-flex flex-column w-100 overflow-x-hidden">
     <?php
     require_once("load_customer_details.php");
-  ?>
+    require_once("../popup.php");
+    ?>
     <div class="row h-100">
         <!-- Navigation Canvas -->
         <style>
@@ -225,7 +226,8 @@
                         <?php if (isset($_GET['customer_id'])) { ?>
                         <span class="position-absolute badge rounded-pill bg-success"
                             style="z-index: 999; top: -0.5rem; right: 0.5rem">
-                            Account Active: <?php echo $surname.' '.mb_substr($name, 0, 1) ; ?>
+                            Account Active:
+                            <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
                             <span class="visually-hidden">Active Account</span>
                         </span>
                         <?php } ?>
@@ -297,7 +299,8 @@
                         <?php if (isset($_GET['customer_id'])) { ?>
                         <span class="position-absolute badge rounded-pill bg-success"
                             style="z-index: 999; top: -0.5rem; right: 0.5rem">
-                            Account Active: <?php echo $surname.' '.mb_substr($name, 0, 1) ; ?>
+                            Account Active:
+                            <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
                             <span class="visually-hidden">Active Account</span>
                         </span>
                         <?php } ?>
@@ -326,8 +329,7 @@
                                             <div class="input-group-prepend"><span class="input-group-text"
                                                     style="border-top-right-radius: 0; border-bottom-right-radius: 0;">R</span>
                                             </div>
-                                            <input type="number" name="payment-amount" step=1 class="form-control"
-                                                value="0.00">
+                                            <input type="number" name="payment-amount" step=1 class="form-control">
                                         </div>
                                         <label for="payment-type" class="form-label">Type</label>
                                         <select name="payment-type" class="form-select mb-2">
@@ -349,7 +351,8 @@
                         <?php if (isset($_GET['customer_id'])) { ?>
                         <span class="position-absolute badge rounded-pill bg-success"
                             style="z-index: 999; top: -0.5rem; right: 0.5rem">
-                            Account Active: <?php echo $surname.' '.mb_substr($name, 0, 1) ; ?>
+                            Account Active:
+                            <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
                             <span class="visually-hidden">Active Account</span>
                         </span>
                         <?php } ?>
@@ -365,20 +368,22 @@
                                 aria-labelledby="">
                                 <!-- Search Accordion Body -->
                                 <div class="accordion-body">
-                                    <div class="payments-history-container overflow-auto border rounded p-2" style="max-height: 550px;">
+                                    <div class="payments-history-container overflow-auto border rounded p-2"
+                                        style="max-height: 550px;">
                                         <!-- Payment Card -->
-                                        <?php if(!empty($payments)) {
-                          foreach($payments as $payment) {
-                            $paymentID = $payment['payment_id'];
-                            $paymentDate = date('F d, Y', strtotime($payment['payment_date']));
-                            $paymentAmount = $payment['payment_amount'];
-                            $paymentType = $payment['payment_type'];
-                            $paymentBalance = $payment['balance_after_payment']?>
+                                        <?php if (!empty($payments)) {
+                                            foreach ($payments as $payment) {
+                                                $paymentID = $payment['payment_id'];
+                                                $paymentDate = date('F d, Y', strtotime($payment['payment_date']));
+                                                $paymentAmount = $payment['payment_amount'];
+                                                $paymentType = $payment['payment_type'];
+                                                $paymentBalance = $payment['balance_after_payment'] ?>
                                         <div class="card mb-2" data-payment-id="<?php echo $paymentID; ?>">
                                             <div class="card-body p-2">
                                                 <div class="row mb-1 align-items-center">
                                                     <div class="col-6" style="font-size: 0.7rem">
-                                                        #<?php echo $paymentID; ?>
+                                                        #
+                                                        <?php echo $paymentID; ?>
                                                     </div>
                                                     <div class="col-6 text-end">
                                                         <i class="bi bi-trash-fill text-danger fs-5"
@@ -386,28 +391,34 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-12"><?php echo $paymentDate; ?></div>
                                                     <div class="col-12">
-                                                        <?php echo $paymentType;?>
+                                                        <?php echo $paymentDate; ?>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <?php echo $paymentType; ?>
                                                     </div>
                                                     <div class="col-12 text-success">
-                                                        + R <?php echo $paymentAmount;?>
+                                                        + R
+                                                        <?php echo $paymentAmount; ?>
                                                         <i class="bi bi-cash-coin ms-1"></i>
                                                     </div>
                                                     <div class="col-12 mt-n2">
                                                         <hr>
                                                     </div>
                                                     <div class="col-12 text-end">
-                                                        <b>Balance: <?php echo $paymentBalance; ?></b>
+                                                        <b>Balance:
+                                                            <?php echo $paymentBalance; ?>
+                                                        </b>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php }} else {?>
+                                        <?php }
+                                        } else { ?>
                                         <div class="no-payments text-secondary">
                                             No Payments to display
                                         </div>
-                                        <?php }?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
