@@ -404,9 +404,51 @@
                                                                     <?php echo $paymentID; ?>
                                                                 </div>
                                                                 <div class="col-6 text-end text-danger align-content-center">
-                                                                    <?php if ($key === $mostRecentPayment) { ?>
-                                                                        <b><i type="button" class="bi bi-arrow-counterclockwise fs-4"
+                                                                    <?php if ($key === $mostRecentPayment) {
+                                                                        $mostRecentPaymentID = $paymentID; ?>
+                                                                        <b><i id="reverse-payment-button" type="button"
+                                                                                class="bi bi-arrow-counterclockwise fs-4"
                                                                                 style="cursor:pointer;"></i></b>
+                                                                        <!-- Confirm reverse modal -->
+                                                                        <form method="post" class="text-start text-black"
+                                                                            action="reverse_payment.php?payment_id=<?php echo $mostRecentPaymentID; ?>">
+                                                                            <div class="modal fade" id="confirm-reverse-payment-modal">
+                                                                                <div
+                                                                                    class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                <i class="bi bi-exclamation-triangle-fill fs-3"
+                                                                                                    style="color: red"></i>
+                                                                                                Reverse Payment
+                                                                                            </h1>
+                                                                                            <button type="button" class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            Are you sure you want to reverse this
+                                                                                            payment?
+                                                                                            <?php echo $mostRecentPaymentID; ?>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                style="background-color: red; border: none">
+                                                                                                Cancel
+                                                                                            </button>
+                                                                                            <button type="submit"
+                                                                                                id="continue-duplicate-payment-button"
+                                                                                                class="btn btn-secondary">
+                                                                                                Reverse
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
                                                                     <?php } ?>
                                                                 </div>
                                                             </div>
@@ -497,6 +539,12 @@
                     $("#add-payment-form").submit();
                 });
             });
+
+
+            // Reversing payments
+            $("#reverse-payment-button").click(function () {
+                $("#confirm-reverse-payment-modal").modal('show');
+            })
         </script>
 </body>
 

@@ -222,6 +222,19 @@ if (isset($_GET['status'])) {
     case '51':
       $popupText = "Please provide a payment amount";
       $popupColour = "danger";
+      break;
+    case '52':
+      $popupText = "Successfully reversed the customer's payment!";
+      $popupColour = "success";
+      break;
+    case '53':
+      $popupText = "There was an error while trying to reverse the customer's payment. Please try again! (53)";
+      $popupColour = "danger";
+      break;
+    case '54':
+      $popupText = "There was an error while trying to reverse the customer's payment. Please try again! (54)";
+      $popupColour = "danger";
+      break;
   }
   ?>
   <div class="d-flex justify-content-center" style="z-index: 999;">
