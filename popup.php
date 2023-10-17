@@ -219,6 +219,9 @@ if (isset($_GET['status'])) {
       $popupText = "There was an error while adding the customer's payment. The payment has been rolled back. (50)";
       $popupColour = "danger";
       break;
+    case '51':
+      $popupText = "Please provide a payment amount";
+      $popupColour = "danger";
   }
   ?>
   <div class="d-flex justify-content-center" style="z-index: 999;">

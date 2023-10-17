@@ -9,6 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $paymentDate = $_POST['payment-date'] . ' ' . date('H:i:s');
     $paymentType = $_POST['payment-type'];
 
+    // Checking if there is a payment amount
+    if ($paymentAmount === "") {
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "&status=51");
+        exit();
+    }
+
     // Get the most recent balance
     $sql_current_balance = "SELECT balance_amount FROM Balances WHERE customer_id = $accountNumber ORDER BY balance_date DESC LIMIT 1";
     $results_current_balance = mysqli_query($conn, $sql_current_balance);

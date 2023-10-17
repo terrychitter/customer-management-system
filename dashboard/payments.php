@@ -18,74 +18,74 @@
     <div class="row h-100">
         <!-- Navigation Canvas -->
         <style>
-        ul a {
-            text-decoration: none;
-        }
+            ul a {
+                text-decoration: none;
+            }
 
-        .canvas-button {
-            position: absolute;
-            top: 50%;
-            right: -2.5rem;
-            visibility: visible;
-            color: white;
-            border: none;
-            padding-block: 2rem;
-            border-radius: 0 10px 10px 0;
-        }
+            .canvas-button {
+                position: absolute;
+                top: 50%;
+                right: -2.5rem;
+                visibility: visible;
+                color: white;
+                border: none;
+                padding-block: 2rem;
+                border-radius: 0 10px 10px 0;
+            }
 
-        .list-group-item {
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1.3rem;
-            font-size: 1.3rem;
-            cursor: pointer;
-        }
+            .list-group-item {
+                border: none;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                border-radius: 5px;
+                margin-bottom: 1.3rem;
+                font-size: 1.3rem;
+                cursor: pointer;
+            }
 
-        .nav-item-icon-container {
-            background-color: white;
-            color: #4169e1;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            border-radius: 5px;
-            box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-        }
+            .nav-item-icon-container {
+                background-color: white;
+                color: #4169e1;
+                width: 35px;
+                height: 35px;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                border-radius: 5px;
+                box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+            }
 
-        .nav-item-icon-container i {
-            font-size: 1.5rem;
-        }
+            .nav-item-icon-container i {
+                font-size: 1.5rem;
+            }
 
-        .nav-item-icon-container.active {
-            box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-        }
+            .nav-item-icon-container.active {
+                box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+            }
 
-        .profile-icon-container {
-            width: 2rem;
-            height: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: rgb(77, 77, 77);
-            border-radius: 50%;
-            background: rgb(226, 226, 226);
-            background: linear-gradient(338deg,
-                    rgba(226, 226, 226, 1) 45%,
-                    rgba(246, 246, 246, 1) 52%,
-                    rgba(255, 255, 255, 1) 60%);
-        }
+            .profile-icon-container {
+                width: 2rem;
+                height: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: rgb(77, 77, 77);
+                border-radius: 50%;
+                background: rgb(226, 226, 226);
+                background: linear-gradient(338deg,
+                        rgba(226, 226, 226, 1) 45%,
+                        rgba(246, 246, 246, 1) 52%,
+                        rgba(255, 255, 255, 1) 60%);
+            }
 
-        .search-results {
-            cursor: pointer;
-        }
+            .search-results {
+                cursor: pointer;
+            }
         </style>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="navigation-canvas"
             aria-labelledby="navigation-canvas-label">
@@ -142,58 +142,58 @@
                 <i class="bi bi-three-dots-vertical"></i>
                 <!-- Dragging script -->
                 <script>
-                const draggableElement = document.getElementById('offcanvas-toggle-button');
-                let isDragging = false;
-                let startY;
-                let initialTop;
-                const topBoundaryOffset = 64; // 4rem = 64px
-                const bottomBoundaryOffset = 16; // 1rem = 16px
+                    const draggableElement = document.getElementById('offcanvas-toggle-button');
+                    let isDragging = false;
+                    let startY;
+                    let initialTop;
+                    const topBoundaryOffset = 64; // 4rem = 64px
+                    const bottomBoundaryOffset = 16; // 1rem = 16px
 
-                // Function to handle the touch start event
-                function handleTouchStart(event) {
-                    const touch = event.touches[0];
-                    startY = touch.clientY;
-                    initialTop = parseInt(window.getComputedStyle(draggableElement).top);
-                    isDragging = false; // Initialize as click, not drag
-                }
-
-                // Function to handle the touch move event and update the element position along the Y-axis
-                function handleTouchMove(event) {
-                    const touch = event.touches[0];
-                    const deltaY = touch.clientY - startY;
-
-                    // Check if the user has moved enough to be considered a drag
-                    if (!isDragging && Math.abs(deltaY) > 5) {
-                        isDragging = true;
+                    // Function to handle the touch start event
+                    function handleTouchStart(event) {
+                        const touch = event.touches[0];
+                        startY = touch.clientY;
+                        initialTop = parseInt(window.getComputedStyle(draggableElement).top);
+                        isDragging = false; // Initialize as click, not drag
                     }
 
-                    // If dragging, limit the element's position within the boundaries
-                    if (isDragging) {
-                        const minTop = topBoundaryOffset;
-                        const maxTop = window.innerHeight - draggableElement.clientHeight - bottomBoundaryOffset;
-                        let newTop = Math.max(minTop, Math.min(initialTop + deltaY, maxTop));
-                        draggableElement.style.top = newTop + 'px';
+                    // Function to handle the touch move event and update the element position along the Y-axis
+                    function handleTouchMove(event) {
+                        const touch = event.touches[0];
+                        const deltaY = touch.clientY - startY;
 
-                        // Save the element's vertical position to localStorage
-                        localStorage.setItem('draggableElementTop', newTop);
+                        // Check if the user has moved enough to be considered a drag
+                        if (!isDragging && Math.abs(deltaY) > 5) {
+                            isDragging = true;
+                        }
+
+                        // If dragging, limit the element's position within the boundaries
+                        if (isDragging) {
+                            const minTop = topBoundaryOffset;
+                            const maxTop = window.innerHeight - draggableElement.clientHeight - bottomBoundaryOffset;
+                            let newTop = Math.max(minTop, Math.min(initialTop + deltaY, maxTop));
+                            draggableElement.style.top = newTop + 'px';
+
+                            // Save the element's vertical position to localStorage
+                            localStorage.setItem('draggableElementTop', newTop);
+                        }
                     }
-                }
 
-                // Function to handle the touch end event
-                function handleTouchEnd(event) {
-                    isDragging = false;
-                }
+                    // Function to handle the touch end event
+                    function handleTouchEnd(event) {
+                        isDragging = false;
+                    }
 
-                // Retrieve the stored position from localStorage
-                const storedTop = localStorage.getItem('draggableElementTop');
-                if (storedTop) {
-                    draggableElement.style.top = storedTop + 'px';
-                }
+                    // Retrieve the stored position from localStorage
+                    const storedTop = localStorage.getItem('draggableElementTop');
+                    if (storedTop) {
+                        draggableElement.style.top = storedTop + 'px';
+                    }
 
-                // Add touch event listeners for dragging
-                draggableElement.addEventListener('touchstart', handleTouchStart);
-                draggableElement.addEventListener('touchmove', handleTouchMove);
-                draggableElement.addEventListener('touchend', handleTouchEnd);
+                    // Add touch event listeners for dragging
+                    draggableElement.addEventListener('touchstart', handleTouchStart);
+                    draggableElement.addEventListener('touchmove', handleTouchMove);
+                    draggableElement.addEventListener('touchend', handleTouchEnd);
                 </script>
             </button>
         </div>
@@ -293,12 +293,12 @@
                     <!-- Add Payments Section -->
                     <div class="add-payment col-12 accordion" id="add-payment-accordion">
                         <?php if (isset($_GET['customer_id'])) { ?>
-                        <span class="position-absolute badge rounded-pill bg-success"
-                            style="z-index: 999; top: -0.5rem; right: 0.5rem">
-                            Account Active:
-                            <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
-                            <span class="visually-hidden">Active Account</span>
-                        </span>
+                            <span class="position-absolute badge rounded-pill bg-success"
+                                style="z-index: 999; top: -0.5rem; right: 0.5rem">
+                                Account Active:
+                                <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
+                                <span class="visually-hidden">Active Account</span>
+                            </span>
                         <?php } ?>
                         <div class="accordion-item">
                             <div class="accordion-header" id="add-payment-accordion-item">
@@ -317,36 +317,36 @@
                                 <div class="accordion-body">
                                     <!-- NO CUSTOMER SELECTED DIV -->
                                     <?php if (!$customerActive) { ?>
-                                    <div class="row">
-                                        <?php include "no-customer-selected.html"; ?>
-                                    </div>
+                                        <div class="row">
+                                            <?php include "no-customer-selected.html"; ?>
+                                        </div>
                                     <?php } else { ?>
-                                    <form id="add-payment-form"
-                                        action="add_payment.php?customer_id=<?php echo $accountNumber ?>" method="POST">
-                                        <label for="payment-date" class="form-label">Date</label>
-                                        <input type="date" id="payment-date-id" name="payment-date"
-                                            class="form-control mb-2" required>
-                                        <script>
-                                        document.getElementById('payment-date-id').valueAsDate = new Date();
-                                        </script>
-                                        <label for="payment-amount" class="form-label">Amount</label>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend"><span class="input-group-text"
-                                                    style="border-top-right-radius: 0; border-bottom-right-radius: 0;">R</span>
+                                        <form id="add-payment-form"
+                                            action="add_payment.php?customer_id=<?php echo $accountNumber ?>" method="POST">
+                                            <label for="payment-date" class="form-label">Date</label>
+                                            <input type="date" id="payment-date-id" name="payment-date"
+                                                class="form-control mb-2" required>
+                                            <script>
+                                                document.getElementById('payment-date-id').valueAsDate = new Date();
+                                            </script>
+                                            <label for="payment-amount" class="form-label">Amount</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend"><span class="input-group-text"
+                                                        style="border-top-right-radius: 0; border-bottom-right-radius: 0;">R</span>
+                                                </div>
+                                                <input type="number" name="payment-amount" step=1 class="form-control"
+                                                    required>
                                             </div>
-                                            <input type="number" name="payment-amount" step=1 class="form-control"
-                                                required>
-                                        </div>
-                                        <label for="payment-type" class="form-label">Type</label>
-                                        <select name="payment-type" class="form-select mb-2" required>
-                                            <option value="EFT" selected>EFT</option>
-                                            <option value="CASH">CASH</option>
-                                        </select>
-                                        <div class="col text-end">
-                                            <button type="submit" id="add-payment-button" class="btn btn-primary">Add
-                                                Payment</button>
-                                        </div>
-                                    </form>
+                                            <label for="payment-type" class="form-label">Type</label>
+                                            <select name="payment-type" class="form-select mb-2" required>
+                                                <option value="EFT" selected>EFT</option>
+                                                <option value="CASH">CASH</option>
+                                            </select>
+                                            <div class="col text-end">
+                                                <button type="submit" id="add-payment-button" class="btn btn-primary">Add
+                                                    Payment</button>
+                                            </div>
+                                        </form>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -357,12 +357,12 @@
                     <!-- Payment History Section -->
                     <div class="payment-history col-12 accordion" id="payment-history-accordion">
                         <?php if (isset($_GET['customer_id'])) { ?>
-                        <span class="position-absolute badge rounded-pill bg-success"
-                            style="z-index: 999; top: -0.5rem; right: 0.5rem">
-                            Account Active:
-                            <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
-                            <span class="visually-hidden">Active Account</span>
-                        </span>
+                            <span class="position-absolute badge rounded-pill bg-success"
+                                style="z-index: 999; top: -0.5rem; right: 0.5rem">
+                                Account Active:
+                                <?php echo $surname . ' ' . mb_substr($name, 0, 1); ?>
+                                <span class="visually-hidden">Active Account</span>
+                            </span>
                         <?php } ?>
                         <div class="accordion-item">
                             <div class="accordion-header" id="payment-history-accordion-item">
@@ -381,14 +381,14 @@
                                 <div class="accordion-body">
                                     <!-- NO CUSTOMER SELECTED DIV -->
                                     <?php if (!$customerActive) { ?>
-                                    <div class="row">
-                                        <?php include "no-customer-selected.html"; ?>
-                                    </div>
+                                        <div class="row">
+                                            <?php include "no-customer-selected.html"; ?>
+                                        </div>
                                     <?php } else { ?>
-                                    <div class="payments-history-container overflow-auto border rounded p-2"
-                                        style="max-height: 550px;">
-                                        <!-- Payment Card -->
-                                        <?php if (!empty($payments)) {
+                                        <div class="payments-history-container overflow-auto border rounded p-2"
+                                            style="max-height: 550px;">
+                                            <!-- Payment Card -->
+                                            <?php if (!empty($payments)) {
                                                 $mostRecentPayment = array_key_first($payments);
                                                 foreach ($payments as $key => $payment) {
                                                     $paymentID = $payment['payment_id'];
@@ -396,50 +396,50 @@
                                                     $paymentAmount = $payment['payment_amount'];
                                                     $paymentType = $payment['payment_type'];
                                                     $paymentBalance = $payment['balance_after_payment'] ?>
-                                        <div class="card mb-2" data-payment-id="<?php echo $paymentID; ?>">
-                                            <div class="card-body p-2">
-                                                <div class="row mb-1 align-items-center">
-                                                    <div class="col-6" style="font-size: 0.7rem">
-                                                        #
-                                                        <?php echo $paymentID; ?>
+                                                    <div class="card mb-2" data-payment-id="<?php echo $paymentID; ?>">
+                                                        <div class="card-body p-2">
+                                                            <div class="row mb-1 align-items-center">
+                                                                <div class="col-6" style="font-size: 0.7rem">
+                                                                    #
+                                                                    <?php echo $paymentID; ?>
+                                                                </div>
+                                                                <div class="col-6 text-end text-danger align-content-center">
+                                                                    <?php if ($key === $mostRecentPayment) { ?>
+                                                                        <b><i type="button" class="bi bi-arrow-counterclockwise fs-4"
+                                                                                style="cursor:pointer;"></i></b>
+                                                                    <?php } ?>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <?php echo $paymentDate; ?>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <?php echo $paymentType; ?>
+                                                                </div>
+                                                                <div class="col-12 text-success">
+                                                                    + R
+                                                                    <?php echo $paymentAmount; ?>
+                                                                    <i class="bi bi-cash-coin ms-1"></i>
+                                                                </div>
+                                                                <div class="col-12 mt-n2">
+                                                                    <hr>
+                                                                </div>
+                                                                <div class="col-12 text-end">
+                                                                    <b>Balance:
+                                                                        <?php echo $paymentBalance; ?>
+                                                                    </b>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-6 text-end">
-                                                        <?php if ($key === $mostRecentPayment) { ?>
-                                                        <i class="bi bi-trash-fill text-danger fs-5"
-                                                            style="cursor:pointer;"></i>
-                                                        <?php } ?>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <?php echo $paymentDate; ?>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <?php echo $paymentType; ?>
-                                                    </div>
-                                                    <div class="col-12 text-success">
-                                                        + R
-                                                        <?php echo $paymentAmount; ?>
-                                                        <i class="bi bi-cash-coin ms-1"></i>
-                                                    </div>
-                                                    <div class="col-12 mt-n2">
-                                                        <hr>
-                                                    </div>
-                                                    <div class="col-12 text-end">
-                                                        <b>Balance:
-                                                            <?php echo $paymentBalance; ?>
-                                                        </b>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php }
+                                                <?php }
                                             } else { ?>
-                                        <div class="no-payments text-secondary">
-                                            No Payments to display
+                                                <div class="no-payments text-secondary">
+                                                    No Payments to display
+                                                </div>
+                                            <?php } ?>
                                         </div>
-                                        <?php } ?>
-                                    </div>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -453,50 +453,50 @@
         <script src="../remove_paramters.js"></script>
         <script src="search.js"></script>
         <script>
-        $(document).ready(function() {
-            $("#add-payment-button").click(function() {
-                // Prevent the form from submitting
-                event.preventDefault();
+            $(document).ready(function () {
+                $("#add-payment-button").click(function () {
+                    // Prevent the form from submitting
+                    event.preventDefault();
 
-                // Gather form data
-                var paymentDate = $("#payment-date-id").val();
-                var paymentAmount = $("input[name='payment-amount']").val();
-                var paymentType = $("select[name='payment-type']").val();
+                    // Gather form data
+                    var paymentDate = $("#payment-date-id").val();
+                    var paymentAmount = $("input[name='payment-amount']").val();
+                    var paymentType = $("select[name='payment-type']").val();
 
-                // Prepare the data to be sent
-                var searchData = {
-                    paymentDate: paymentDate,
-                    paymentAmount: paymentAmount,
-                    paymentType: paymentType,
-                };
+                    // Prepare the data to be sent
+                    var searchData = {
+                        paymentDate: paymentDate,
+                        paymentAmount: paymentAmount,
+                        paymentType: paymentType,
+                    };
 
-                // Send a request to the server
-                fetch("duplicate_payment.php?customer_id=<?php echo $accountNumber ?>", {
+                    // Send a request to the server
+                    fetch("duplicate_payment.php?customer_id=<?php echo $accountNumber ?>", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded",
                         },
                         body: new URLSearchParams(searchData).toString(),
                     })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        // Check the response
-                        if (data.status === false) {
-                            // If the value returned is false, submit the form
-                            $("#add-payment-form").submit();
-                        } else {
-                            // If the value is not false, show the modal
-                            $("#duplicate-payment-modal").modal('show');
-                        }
-                    })
-                    .catch((error) => console.error("Error:", error));
-            });
+                        .then((response) => response.json())
+                        .then((data) => {
+                            // Check the response
+                            if (data.status === false) {
+                                // If the value returned is false, submit the form
+                                $("#add-payment-form").submit();
+                            } else {
+                                // If the value is not false, show the modal
+                                $("#duplicate-payment-modal").modal('show');
+                            }
+                        })
+                        .catch((error) => console.error("Error:", error));
+                });
 
-            // If the continue button in the modal is clicked, submit the form
-            $("#continue-duplicate-payment-button").click(function() {
-                $("#add-payment-form").submit();
+                // If the continue button in the modal is clicked, submit the form
+                $("#continue-duplicate-payment-button").click(function () {
+                    $("#add-payment-form").submit();
+                });
             });
-        });
         </script>
 </body>
 
