@@ -1,3 +1,4 @@
+/vendor/
 /node_modules/
 /invoice_generation/invoices
 /invoice_generation/invoice_template.xlsx
