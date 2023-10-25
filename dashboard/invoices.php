@@ -216,8 +216,263 @@
                         <i class="bi bi-gear-fill fs-4"></i>
                     </div>
                 </header>
+                <div class="row p-0 m-0">
+                    <!-- SearchCustomers Accordion -->
+                    <div class="search-customers col-12 col-lg-6 accordion mt-3 p-0" id="search-customer-accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="search-customer-accordion-item">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapseOne">
+                                    <h2 class="fs-5 mb-0">Search</h2>
+                                </button>
+                            </div>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                aria-labelledby="panelsStayOpen-headingOne">
+                                <!-- Search Accordion Body -->
+                                <div class="accordion-body">
+                                    <form class="search-functions row" id="search-customer-form">
+                                        <!-- Search input field -->
+                                        <div class="search-bar col-12 col-md-6 col-xl-5">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" id="search-input"
+                                                    placeholder="Search Customers" aria-label="Search Customers"
+                                                    aria-describedby="search-icon" />
+                                                <span class="input-group-text" id="search-icon"><i
+                                                        class="bi bi-search"></i></span>
+                                            </div>
+                                        </div>
+                                        <!-- Search by select field -->
+                                        <div class="search-by col">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="search-by-text">Search by</span>
+                                                <select class="form-select" id="search-by-select" aria-label="Search By"
+                                                    aria-describedby="search-by-text">
+                                                    <option value="account-number" selected>
+                                                        Account Number
+                                                    </option>
+                                                    <option value="surname">Surname</option>
+                                                    <option value="street-name">Street Name</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-end">
+                                            <button type="button" class="btn btn-small btn-secondary"
+                                                id="show-hide-filters"><i class="bi bi-funnel-fill"></i>
+                                                <span id="show-hide-filter-button-text">View
+                                                    Filters</span></button>
+                                        </div>
+                                        <div class="mb-3 d-none" id="filters" data-is-hidden="true">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="search-filter-radio"
+                                                    id="search-filter-radio1" value="all" checked>
+                                                <label class="form-check-label" for="search-filter-radio1">
+                                                    All
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="search-filter-radio"
+                                                    id="search-filter-radio2" value="pending">
+                                                <label class="form-check-label" for="search-filter-radio2">
+                                                    Pending Invoices
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="inactive-filter">
+                                                <label class="form-check-label" for="inactive-filter">
+                                                    Inactive Accounts
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="row search-results gx-0" style="max-height:300px">
+                                        <h3 style="font-size: 0.9rem; margin-bottom: 0;">Search Results</h3>
+                                        <div class="overflow-y-auto" style="max-height: 260px">
+                                            <table class="table table-striped table-hover" id="search-results-table">
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="lds-ripple m-auto" id="search-results-spinner">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="d-none" id="no-search-matches">
+                                            <div class="fs-6 text-secondary text-center"
+                                                style="border: none; background: none; margin-top: -1rem;"
+                                                onclick="exit();">No
+                                                Matches Found</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Selected Customers Accordion -->
+                    <div class="selected-customers col-12 col-lg-6 accordion mt-3 p-0 px-lg-3"
+                        id="selected-customers-accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="selected-customers-accordion-item">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#selected-customers-accordion-collapse" aria-expanded="true"
+                                    aria-controls="selected-customers-accordion-collapse">
+                                    <h2 class="fs-5 mb-0">Selected Customers</h2>
+                                </button>
+                            </div>
+                            <div id="selected-customers-accordion-collapse" class="accordion-collapse collapse show"
+                                aria-labelledby="panelsStayOpen-headingOne">
+                                <!-- Search Accordion Body -->
+                                <div class="accordion-body">
+                                    <p style="font-size: 0.9rem;">All customers who will have their invoices generated
+                                        are
+                                        displayed here. Use the
+                                        search panel above to add customers to the list or remove customers from the
+                                        list
+                                        below.</p>
+                                    <table class="table table-striped table-hover" id="search-results-table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Some data</td>
+                                                <td>More Data</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Some data</td>
+                                                <td>More Data</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Invoices Details & Generation -->
+                <div class="invoice-d&g col-12 accordion mt-3 col-lg-6" id="invoice-d&g-accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="invoice-d&g-accordion-heading">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#invoice-d&g-accordion-collapse" aria-expanded="true"
+                                aria-controls="invoice-d&g-accordion-collapse">
+                                <h2 class="fs-5 mb-0">Invoices Details & Generation</h2>
+                            </button>
+                        </div>
+                        <div id="invoice-d&g-accordion-collapse" class="accordion-collapse collapse show"
+                            aria-labelledby="invoice-d&g-accordion-heading">
+                            <!-- Search Accordion Body -->
+                            <div class="accordion-body">
+                                <p style="font-size:0.9rem;">Use this panel to edit the dates to be shown on the
+                                    invoices. This will affect all invoices.</p>
+                                <form action="">
+                                    <label for="invoice-for-group" class="form-label">For:</label>
+                                    <div class="row mb-3 p-2">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Month</span>
+                                            <select class="form-select" name="month" id="month">
+                                                <option value="01">January</option>
+                                                <option value="02">February</option>
+                                                <option value="03">March</option>
+                                                <option value="04">April</option>
+                                                <option value="05">May</option>
+                                                <option value="06">June</option>
+                                                <option value="07">July</option>
+                                                <option value="08">August</option>
+                                                <option value="09">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">Year</span>
+                                            <input class="form-control" type="number" name="year" id="year" min="2000"
+                                                max="9999" step="1">
+                                        </div>
+                                    </div>
+                                    <label for="bf-date" class="form-label">B/F Date <i
+                                            class="bi bi-info-circle-fill text-secondary" data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            data-bs-title="This is the Brought Forward Date to be shown on the customer's invoice. By default this is set to the first day of the current month."></i>
+                                    </label>
+                                    <input class="form-control mb-3" type="date" name="bf-date" id="bf-date">
+                                    <label for="fee-date" class="form-label">Fee Date <i
+                                            class="bi bi-info-circle-fill text-secondary" data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            data-bs-title="The fee date indicates the day the customer's account was charged with their monthly feel. By default this is set to the current date."></i>
+                                    </label>
+                                    <input class="form-control mb-3" type="date" name="fee-date" id="fee-date">
+                                    <label for="issue-date" class="form-label">Issue Date <i
+                                            class="bi bi-info-circle-fill text-secondary" data-bs-toggle="tooltip"
+                                            data-bs-placement="right"
+                                            data-bs-title="The issue date indicated the date the invoice will be sent out. By default this is set to the current date."></i>
+                                    </label>
+                                    <input class="form-control" type="date" name="issue-date" id="issue-date">
+                                    <div class="col text-end">
+                                        <button class="btn btn-primary mt-3" type="button">Generate
+                                            Invoices</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
-            <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="search_invoices.js"></script>
+            <script>
+            // Get the first day of the current month
+            var today = new Date();
+            var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            var dd = String(firstDay.getDate()).padStart(2, '0');
+            var mm = String(firstDay.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = firstDay.getFullYear();
+
+            var formattedDate = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('bf-date').value = formattedDate;
+
+            // Provide fee and issue date with today's date
+            var today = new Date().toISOString().slice(0, 10);
+            document.getElementById('fee-date').value = today;
+            document.getElementById('issue-date').value = today;
+
+            // Selecting correct month based on the date
+            var today = new Date();
+            var currentMonth = today.getMonth() + 1;
+            var monthSelect = document.getElementById('month');
+            var options = monthSelect.options;
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].value == ('0' + currentMonth).slice(-2)) {
+                    options[i].selected = true;
+                    break;
+                }
+            }
+
+            // Displaying correct year based on the date
+            var today = new Date();
+            var currentYear = today.getFullYear();
+            document.getElementById('year').value = currentYear;
+
+            // Showing and hiding filters
+            var showHideFiltersButton = document.getElementById("show-hide-filters");
+            var filterButtonText = document.getElementById("show-hide-filter-button-text");
+            var filtersGroup = document.getElementById("filters");
+
+            showHideFiltersButton.addEventListener("click", function() {
+                var isHidden = filtersGroup.getAttribute('data-is-hidden');
+
+                if (isHidden === 'true') {
+                    filtersGroup.classList.add('d-block');
+                    filtersGroup.classList.remove('d-none');
+                    filtersGroup.setAttribute('data-is-hidden', 'false');
+                    filterButtonText.innerText = "Hide Filters";
+                } else {
+                    filtersGroup.classList.add('d-none');
+                    filtersGroup.classList.remove('d-block');
+                    filtersGroup.setAttribute('data-is-hidden', 'true');
+                    filterButtonText.innerText = "Show Filters";
+                }
+            });
+            </script>
     </body>
 
 </html>

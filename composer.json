@@ -1,0 +1,16 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.29",
+        "dompdf/dompdf": "^2.0",
+        "mpdf/mpdf": "^8.2",
+        "cloudconvert/cloudconvert-php": "^3.4",
+        "symfony/http-client": "^6.0",
+        "nyholm/psr7": "^1.8",
+        "tecnickcom/tcpdf": "^6.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

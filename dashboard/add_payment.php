@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Get the most recent balance
-    $sql_current_balance = "SELECT balance_amount FROM Balances WHERE customer_id = $accountNumber ORDER BY balance_date DESC LIMIT 1";
+    $sql_current_balance = "SELECT balance_amount FROM balances WHERE customer_id = $accountNumber ORDER BY balance_date DESC LIMIT 1";
     $results_current_balance = mysqli_query($conn, $sql_current_balance);
 
     if ($results_current_balance) {

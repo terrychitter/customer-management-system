@@ -74,7 +74,7 @@ if ($customerActive) {
 
         // Retrieve payments (with their balances) for the customer and store in an array
         $payments = array();
-        $sql_payments = "SELECT P.*, B.balance_amount AS balance_after_payment FROM Payments P LEFT JOIN Balances B ON P.payment_id = B.payment_id WHERE P.customer_id = $customerID ORDER BY P.payment_date DESC";
+        $sql_payments = "SELECT P.*, B.balance_amount AS balance_after_payment FROM payments P LEFT JOIN balances B ON P.payment_id = B.payment_id WHERE P.customer_id = $customerID ORDER BY P.payment_date DESC";
         $result_payments = mysqli_query($conn, $sql_payments);
         if ($result_payments) {
             while ($paymentData = mysqli_fetch_assoc($result_payments)) {
