@@ -1,32 +1,32 @@
 <?php
-// Include the database connection file and excel
 require "../db_conn.php";
 require_once '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\Writer\IWriter;
-use PhpOffice\PhpSpreadsheet\Writer\Pdf\Tcpdf;
 
+// header('Content-Type: text/event-stream');
+// header('Cache-Control: no-cache');
+// header('Connection: keep-alive');
 
 // Get variables
-$month = DateTime::createFromFormat('m', '03')->format('F');
-$year = '2023';
-$bfDate = date('2023-10-10');
-$feeDate = date('2023-10-10');
-$issueDate = date('2023-10-10');
+$numericMonth = $_POST['month'];
+$month = DateTime::createFromFormat('m', $numericMonth)->format('F');
+
+$year = $_POST['year'];
+$bfDate = $_POST['bf-date'];
+$feeDate = $_POST['fee-date'];
+$issueDate = $_POST['issue-date'];
 
 // Array to store customer data
-$customerDataArray = array();
-
-// Populate the customerIds array
-$customerIds = array(1, 2, 3, 4); // Populated with 1, 2, 3, and 4
+$customerIds = explode(",", $_POST['customers']);
 
 // Loop through the customerIds array
 foreach ($customerIds as $customerId) {
+
     // Prepare and execute the query to fetch customer information
     $customerQuery = "SELECT monthly_rate, title, name, surname, address, suburb, postal_code, bank_account 
-                      FROM customers 
-                      WHERE account_number = $customerId";
+                        FROM customers 
+                        WHERE account_number = $customerId";
 
     $customerResult = mysqli_query($conn, $customerQuery);
 
@@ -50,10 +50,10 @@ foreach ($customerIds as $customerId) {
 
     // Prepare and execute the query to fetch BBF amount
     $bbfQuery = "SELECT balance_amount
-                 FROM balances
-                 WHERE customer_id = $customerId
-                 ORDER BY balance_date DESC
-                 LIMIT 1";
+                    FROM balances
+                    WHERE customer_id = $customerId
+                    ORDER BY balance_date DESC
+                    LIMIT 1";
 
     $bbfResult = mysqli_query($conn, $bbfQuery);
     $bbfData = mysqli_fetch_assoc($bbfResult);
@@ -88,29 +88,30 @@ while ($bankAccount = mysqli_fetch_assoc($bankAccountsResult)) {
 }
 
 // Display the customer data for verification
-foreach ($customerDataArray as $customerData) {
-    echo "Monthly Fee: " . $customerData['monthlyFee'] . "<br>";
-    echo "Name: " . $customerData['name'] . "<br>";
-    echo "Surname: " . $customerData['surname'] . '<br>';
-    echo "Address: " . $customerData['address'] . "<br>";
-    echo "Suburb: " . $customerData['suburb'] . "<br>";
-    echo "Postal: " . $customerData['postal'] . "<br>";
-    echo "Invoice Number: " . $customerData['invoiceNumber'] . "<br>";
-    echo "BF Amount: " . $customerData['bfAmount'] . "<br>";
-    echo "Customer ID: " . $customerData['id'] . "<br>";
-    echo "Bank Account ID: " . $customerData['bankAccountId'] . "<br><br>";
-}
+// foreach ($customerDataArray as $customerData) {
+//     echo "Monthly Fee: " . $customerData['monthlyFee'] . "<br>";
+//     echo "Name: " . $customerData['name'] . "<br>";
+//     echo "Surname: " . $customerData['surname'] . '<br>';
+//     echo "Address: " . $customerData['address'] . "<br>";
+//     echo "Suburb: " . $customerData['suburb'] . "<br>";
+//     echo "Postal: " . $customerData['postal'] . "<br>";
+//     echo "Invoice Number: " . $customerData['invoiceNumber'] . "<br>";
+//     echo "BF Amount: " . $customerData['bfAmount'] . "<br>";
+//     echo "Customer ID: " . $customerData['id'] . "<br>";
+//     echo "Bank Account ID: " . $customerData['bankAccountId'] . "<br><br>";
+// }
 
 // Function to generate spreadsheet invoice
-function GeneratePDFInvoice($customerDataArray, $month, $year, $bfDate, $feeDate, $issueDate, $bankAccountsArray)
+function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $feeDate, $issueDate, $bankAccountsArray)
 {
     foreach ($customerDataArray as $customer) {
+
         // Load the template spreadsheet
         $spreadsheet = IOFactory::load('invoice_template.xlsx');
         $sheet = $spreadsheet->getActiveSheet();
 
         // Update the spreadsheet with customer data
-        $sheet->getCell('D3')->setValue($month . '–' . $year);
+        $sheet->getCell('D3')->setValue($month . ' – ' . $year);
         $sheet->getCell('B4')->setValue('Acc no: ' . $customer['id']);
         $sheet->getCell('F8')->setValue($customer['bfAmount']);
         $sheet->getCell('D8')->setValue($bfDate);
@@ -159,12 +160,37 @@ function GeneratePDFInvoice($customerDataArray, $month, $year, $bfDate, $feeDate
         $sheet->getCell('B18')->getStyle()->getAlignment()->setWrapText(true);
 
         // Save the spreadsheet as an XLSX file
-        $xlsxFileName = 'invoices/' . $customer['invoiceNumber'] . '.xlsx';
+        $xlsxFileName = '../../invoices/' . $customer['invoiceNumber'] . '.xlsx';
         $writer = new Xlsx($spreadsheet);
         $writer->save($xlsxFileName);
+
+        // Calculate invoice amount
+        $invoiceAmount = $customer['bfAmount'] + $customer['monthlyFee'];
+
+
+        // Add record for the payment
+        $invoiceNumber = $customer['invoiceNumber'];
+        $customerId = $customer['id'];
+        $sql = "INSERT INTO invoices (invoice_id, customer_id, invoice_amount, invoice_date) VALUES ('$invoiceNumber', '$customerId', '$invoiceAmount', '$issueDate')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully PAYMENT";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+
+        // Add record for the balance
+        //Get current balance
+        $sql = "INSERT INTO balances (customer_id, balance_date, balance_amount, invoice_id) VALUES ('$customerId', '$issueDate', '$invoiceAmount', '$invoiceNumber')";
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully BALANCE";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+
     }
 }
 
 // Call the GeneratePDFInvoice function
-GeneratePDFInvoice($customerDataArray, $month, $year, $bfDate, $feeDate, $issueDate, $bankAccountsArray);
+GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $feeDate, $issueDate, $bankAccountsArray);
 ?>

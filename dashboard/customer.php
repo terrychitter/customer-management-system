@@ -753,11 +753,12 @@
                                                         </div>
                                                         <div
                                                             class="pdf-icon col col-12 col-sm col-lg-12 col-xxl text-end">
-                                                            <a href="../invoices/<?php echo $invoiceID;?>.pdf"
+                                                            <a target="_blank"
+                                                                href="download_invoice.php?invoiceID=<?php echo urlencode($invoiceID); ?>"
                                                                 class="link-success"
                                                                 download="<?php echo $invoiceID; ?>">
-                                                                <i class="bi bi-file-earmark-pdf-fill"></i>
-                                                                PDF</a>
+                                                                <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
