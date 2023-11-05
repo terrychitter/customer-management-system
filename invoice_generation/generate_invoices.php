@@ -1,23 +1,20 @@
 <?php
 require "../db_conn.php";
+require __DIR__ . "/../config/keys.php";
 require_once '../vendor/autoload.php';
+use \ConvertApi\ConvertApi;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-// header('Content-Type: text/event-stream');
-// header('Cache-Control: no-cache');
-// header('Connection: keep-alive');
+ConvertApi::setApiSecret($convertAPIKey);
 
-// Get variables
+// Get post variables
 $numericMonth = $_POST['month'];
 $month = DateTime::createFromFormat('m', $numericMonth)->format('F');
-
 $year = $_POST['year'];
 $bfDate = $_POST['bf-date'];
 $feeDate = $_POST['fee-date'];
 $issueDate = $_POST['issue-date'];
-
-// Array to store customer data
 $customerIds = explode(",", $_POST['customers']);
 
 // Loop through the customerIds array
@@ -87,20 +84,6 @@ while ($bankAccount = mysqli_fetch_assoc($bankAccountsResult)) {
     $bankAccountsArray[] = $bankAccount;
 }
 
-// Display the customer data for verification
-// foreach ($customerDataArray as $customerData) {
-//     echo "Monthly Fee: " . $customerData['monthlyFee'] . "<br>";
-//     echo "Name: " . $customerData['name'] . "<br>";
-//     echo "Surname: " . $customerData['surname'] . '<br>';
-//     echo "Address: " . $customerData['address'] . "<br>";
-//     echo "Suburb: " . $customerData['suburb'] . "<br>";
-//     echo "Postal: " . $customerData['postal'] . "<br>";
-//     echo "Invoice Number: " . $customerData['invoiceNumber'] . "<br>";
-//     echo "BF Amount: " . $customerData['bfAmount'] . "<br>";
-//     echo "Customer ID: " . $customerData['id'] . "<br>";
-//     echo "Bank Account ID: " . $customerData['bankAccountId'] . "<br><br>";
-// }
-
 // Function to generate spreadsheet invoice
 function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $feeDate, $issueDate, $bankAccountsArray)
 {
@@ -159,10 +142,6 @@ function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $
         $sheet->getCell('B18')->setValue($richText);
         $sheet->getCell('B18')->getStyle()->getAlignment()->setWrapText(true);
 
-        // Save the spreadsheet as an XLSX file
-        $xlsxFileName = '../../invoices/' . $customer['invoiceNumber'] . '.xlsx';
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($xlsxFileName);
 
         // Calculate invoice amount
         $invoiceAmount = $customer['bfAmount'] + $customer['monthlyFee'];
@@ -188,7 +167,28 @@ function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
+        // Save the spreadsheet as an XLSX file
+        $xlsxFileName = $customer['invoiceNumber'] . '.xlsx';
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($xlsxFileName);
+
+        // Converting the xlsx file to a pdf
+        convertToPDF($xlsxFileName, $customer['invoiceNumber']);
+
     }
+}
+
+function convertToPDF($file, $fileName)
+{
+    echo "File: " . $file;
+    $result = ConvertApi::convert(
+        'pdf',
+        [
+            'File' => $file,
+        ],
+        'xlsx'
+    );
+    $result->saveFiles('output');
 }
 
 // Call the GeneratePDFInvoice function

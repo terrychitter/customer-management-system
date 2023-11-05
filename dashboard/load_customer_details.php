@@ -83,7 +83,7 @@ if ($customerActive) {
         }
 
         // Get current balance
-        $sql_current_balance = "SELECT * FROM Balances WHERE customer_id = $customerID ORDER BY balance_date DESC LIMIT 1";
+        $sql_current_balance = "SELECT * FROM balances WHERE customer_id = $customerID ORDER BY balance_date DESC LIMIT 1";
         $results_current_balance = mysqli_query($conn, $sql_current_balance);
 
         if ($results_current_balance) {

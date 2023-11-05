@@ -1,5 +1,6 @@
-/.vscode/
-/vendor/
-/node_modules/
+/.vscode
+/node_modules
+/vendor
 /invoice_generation/invoices
+/invoice_generation/output
 /invoice_generation/invoice_template.xlsx

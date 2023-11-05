@@ -1,12 +1,11 @@
 {
     "require": {
+        "php": "^8.0.2",
         "phpoffice/phpspreadsheet": "^1.29",
-        "dompdf/dompdf": "^2.0",
-        "mpdf/mpdf": "^8.2",
-        "cloudconvert/cloudconvert-php": "^3.4",
         "symfony/http-client": "^6.0",
         "nyholm/psr7": "^1.8",
-        "tecnickcom/tcpdf": "^6.6"
+        "guzzlehttp/psr7": "^2.6",
+        "convertapi/convertapi-php": "^1.7"
     },
     "config": {
         "allow-plugins": {
