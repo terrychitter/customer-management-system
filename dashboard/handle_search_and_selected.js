@@ -265,7 +265,7 @@ moveAllButton.addEventListener('click', moveAllToSelected);
 removeAllButton.addEventListener('click', moveAllToSearchResults);
 
 function toggleMoveRemoveButtons() {
-    if (allResults.length > 0 || cu) {
+    if (allResults.length > 0) {
         moveAllButton.classList.add('d-block');
         moveAllButton.classList.remove('d-none');
     } else {
@@ -328,7 +328,7 @@ generateInvoicesButton.addEventListener("click", function () {
             populateDuplicateInvoicesTable();
             $("#duplicate-invoice-modal").modal('show');          
         } else {
-            console.log("No Duplicate Invoices Found");
+            generateInvoices();
         }
     })
 });

@@ -20,15 +20,18 @@ $feeDate = $_GET['fee-date'];
 $issueDate = $_GET['issue-date'];
 
 // Generate the array from the input
-$customerIds = explode(",", $_GET['customers']);
-
-// Debug the count function
-$progressTotal = count($customerIds) * 4;
-$progress = 0;
+if ($_GET['customers'] !== '') {
+    $customerIds = explode(",", $_GET['customers']);
+    $progressTotal = count($customerIds) * 4;
+    $progress = 0;
+} else {
+    $customerIds = [];
+    $progressTotal = 100;
+}
 
 sendOutMessage('Preparing...', 'Preparing to process invoices', 0, 2);
 
-if (count($customerIds) - 1 === 0) {
+if (count($customerIds) === 0) {
     sendCompleteMessage();
     exit();
 }
