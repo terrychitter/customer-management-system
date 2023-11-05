@@ -304,48 +304,63 @@ filtersCheckDiv.addEventListener('change', handleSearch);
 
 handleSearch();
 
-function handleEventUpdates(event) {
-    console.log(event.data);
-  }
+// Getting the button
+generateInvoicesButton = document.getElementById("generate-invoices-button");
+
+// Getting the toast
+var invoiceToast = document.getElementById('invoice-status-toast');
+var toastHeader = document.getElementById('invoice-status-toast-header');
+var toastBody = document.getElementById('invoice-status-toast-body');
+var toastClose = document.getElementById('toast-close-button');
+var progressBar = document.getElementById('invoice-status-progress-bar');
   
-  document.getElementById("generate-invoices-button").addEventListener("click", function () {
+generateInvoicesButton.addEventListener("click", function () {
+
+    generateInvoicesButton.disabled = true;
+
     const month = document.getElementsByName("month")[0].value;
     const year = document.getElementsByName("year")[0].value;
     const bfDate = document.getElementsByName("bf-date")[0].value;
     const feeDate = document.getElementsByName("fee-date")[0].value;
     const issueDate = document.getElementsByName("issue-date")[0].value;
-    // Convert the customersArray to send an array
-    const customersArray = selectedCustomers.map(customer => customer.account_number);
-  
-    const requestData = {
-      month: month,
-      year: year,
-      "bf-date": bfDate,
-      "fee-date": feeDate,
-      "issue-date": issueDate,
-      customers: customersArray
-    };
-  
-    // Sending the fetch request
-    fetch("../invoice_generation/generate_invoices.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: new URLSearchParams(requestData)
-    })
-      .then(response => {
-        if (response.ok) {
-          // If the response is successful, start listening to the server-sent events
-          console.log('Processed all invoices');
-        } else {
-          console.error("Network response was not ok");
+    const customersArray = selectedCustomers.map(customer => customer.account_number).join(",");
+
+    const url = `../invoice_generation/generate_invoices.php?month=${month}&year=${year}&bf-date=${bfDate}&fee-date=${feeDate}&issue-date=${issueDate}&customers=${customersArray}`;
+
+    var eventSource = new EventSource(url);
+
+    if (invoiceToast) {
+        invoiceToast = new bootstrap.Toast(invoiceToast, { autohide: false }); // Set autohide to false
+        invoiceToast.show();
+        toastClose.disabled = true;
+    }
+
+    eventSource.onmessage = function (event) {
+        var data = JSON.parse(event.data);
+        toastHeader.innerText = data.status;
+        toastBody.innerText = data.details;
+        progressBar.style.width = ((data.progress / data.progressTotal) * 100).toString() + '%';
+
+
+        // Check if the event is the end event
+        if (data.status === 'All invoices processed') {
+            // Close the EventSource connection
+            eventSource.close();
+
+            toastHeader.innerText = "Successfully Generated Invoices";
+            toastBody.innerText = "The invoice generation has completed. You may close this message.";
+            progressBar.classList.add('bg-success');
+
+            generateInvoicesButton.disabled = false;
+            toastClose.disabled = false;
         }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
-  });
+    };
+
+    eventSource.onerror = function (error) {
+        console.error('EventSource failed:', error);
+    };
+});
+
 
 
 

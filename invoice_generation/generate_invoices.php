@@ -1,6 +1,6 @@
 <?php
 require "../db_conn.php";
-require __DIR__ . "/../config/keys.php";
+require "../../config/keys.php";
 require_once '../vendor/autoload.php';
 use \ConvertApi\ConvertApi;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -8,17 +8,28 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 ConvertApi::setApiSecret($convertAPIKey);
 
+header('Content-Type: text/event-stream');
+header('Cache-Control: no-cache');
+
 // Get post variables
-$numericMonth = $_POST['month'];
+$numericMonth = $_GET['month'];
 $month = DateTime::createFromFormat('m', $numericMonth)->format('F');
-$year = $_POST['year'];
-$bfDate = $_POST['bf-date'];
-$feeDate = $_POST['fee-date'];
-$issueDate = $_POST['issue-date'];
-$customerIds = explode(",", $_POST['customers']);
+$year = $_GET['year'];
+$bfDate = $_GET['bf-date'];
+$feeDate = $_GET['fee-date'];
+$issueDate = $_GET['issue-date'];
+
+// Generate the array from the input
+$customerIds = explode(",", $_GET['customers']);
+
+// Debug the count function
+$progressTotal = count($customerIds) * 4;
+$progress = 0;
+
+sendOutMessage('Preparing...', 'Preparing to process invoices', 0, 2);
 
 // Loop through the customerIds array
-foreach ($customerIds as $customerId) {
+foreach ($customerIds as $key => $customerId) {
 
     // Prepare and execute the query to fetch customer information
     $customerQuery = "SELECT monthly_rate, title, name, surname, address, suburb, postal_code, bank_account 
@@ -87,7 +98,9 @@ while ($bankAccount = mysqli_fetch_assoc($bankAccountsResult)) {
 // Function to generate spreadsheet invoice
 function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $feeDate, $issueDate, $bankAccountsArray)
 {
-    foreach ($customerDataArray as $customer) {
+    foreach ($customerDataArray as $key => $customer) {
+
+        sendOutMessage('Processing invoice for account ' . $customer['id'], 'Filling in invoice template...', 1, 1);
 
         // Load the template spreadsheet
         $spreadsheet = IOFactory::load('invoice_template.xlsx');
@@ -142,6 +155,7 @@ function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $
         $sheet->getCell('B18')->setValue($richText);
         $sheet->getCell('B18')->getStyle()->getAlignment()->setWrapText(true);
 
+        sendOutMessage('Processing invoice for account ' . $customer['id'], 'Recording invoice data...', 1, 1);
 
         // Calculate invoice amount
         $invoiceAmount = $customer['bfAmount'] + $customer['monthlyFee'];
@@ -167,28 +181,68 @@ function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
+        sendOutMessage('Processing invoice for account ' . $customer['id'], 'Saving spreadsheet...', 1, 1);
+
         // Save the spreadsheet as an XLSX file
         $xlsxFileName = $customer['invoiceNumber'] . '.xlsx';
         $writer = new Xlsx($spreadsheet);
         $writer->save($xlsxFileName);
 
+
+        sendOutMessage('Processing invoice for account ' . $customer['id'], 'Converting invoice to PDF', 1, 1);
+
         // Converting the xlsx file to a pdf
         convertToPDF($xlsxFileName, $customer['invoiceNumber']);
 
+        // Check if the current iteration is the last one
+        if ($key === array_key_last($customerDataArray)) {
+            // Send a final message
+            echo "data: " . json_encode(array('status' => 'All invoices processed')) . "\n\n";
+            // Close the connection
+            echo "event: end\n";
+            echo "data: End of stream\n\n";
+            exit();
+        }
     }
 }
 
 function convertToPDF($file, $fileName)
 {
-    echo "File: " . $file;
-    $result = ConvertApi::convert(
-        'pdf',
-        [
-            'File' => $file,
-        ],
-        'xlsx'
+    // echo "File: " . $file;
+    // $result = ConvertApi::convert(
+    //     'pdf',
+    //     [
+    //         'File' => $file,
+    //     ],
+    //     'xlsx'
+    // );
+    // $result->saveFiles('output');
+}
+
+function sendOutMessage($status, $details, $progress, $delay)
+{
+
+    // Increase progress
+    $GLOBALS['progress'] += $progress;
+
+    // Simulate some updates or data changes
+    $data = array(
+        'status' => $status,
+        'details' => $details,
+        'progress' => $GLOBALS['progress'],
+        'progressTotal' => $GLOBALS['progressTotal']
     );
-    $result->saveFiles('output');
+
+    echo "data: " . json_encode($data) . "\n\n";
+
+    // Flush the output buffer and send the data immediately
+    while (ob_get_level() > 0) {
+        ob_end_flush();
+    }
+    flush(); // Flush the output buffer
+
+    // Add a delay to prevent high server load (you can adjust this according to your needs)
+    sleep($delay);
 }
 
 // Call the GeneratePDFInvoice function
