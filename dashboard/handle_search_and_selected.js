@@ -1,6 +1,7 @@
 var searchResults = [];
 var selectedCustomers = [];
 var allResults = [];
+var customersWithDuplicateInvoices = [];
 
 function removeItem(item, list) {
     let index = list.findIndex((customer) => customer.account_number === item.account_number);
@@ -140,10 +141,10 @@ function updateSearchResultsTable() {
 // Function to update the table with the selected customers
 function updateSelectedCustomersTable() {
     // Get the table body element
-    const tableBody = document.querySelector("#selected_customers_table");
+    const tableBody = document.querySelector("#selected_customers_table tbody");
 
     // Clear the current table content
-    tableBody.innerHTML = "<tbody></tbody>";
+    tableBody.innerHTML = "";
 
     // Loop through the results and create table rows
     selectedCustomers.forEach((customer) => {
@@ -313,11 +314,26 @@ var toastHeader = document.getElementById('invoice-status-toast-header');
 var toastBody = document.getElementById('invoice-status-toast-body');
 var toastClose = document.getElementById('toast-close-button');
 var progressBar = document.getElementById('invoice-status-progress-bar');
+
+// Getting the duplicate invoices modal
+const duplicateInvoicesModal = document.getElementById("duplicate-invoice-modal");
   
 generateInvoicesButton.addEventListener("click", function () {
 
     generateInvoicesButton.disabled = true;
 
+    // Check for duplicate invoices
+    duplicateInvoices().then((duplicateFound) => {
+        if (duplicateFound) {
+            populateDuplicateInvoicesTable();
+            $("#duplicate-invoice-modal").modal('show');          
+        } else {
+            console.log("No Duplicate Invoices Found");
+        }
+    })
+});
+
+function generateInvoices() {
     const month = document.getElementsByName("month")[0].value;
     const year = document.getElementsByName("year")[0].value;
     const bfDate = document.getElementsByName("bf-date")[0].value;
@@ -347,8 +363,9 @@ generateInvoicesButton.addEventListener("click", function () {
             // Close the EventSource connection
             eventSource.close();
 
-            toastHeader.innerText = "Successfully Generated Invoices";
-            toastBody.innerText = "The invoice generation has completed. You may close this message.";
+            toastHeader.innerText = data.status
+            toastBody.innerText = data.details;
+            progressBar.style.width = "100%";
             progressBar.classList.add('bg-success');
 
             generateInvoicesButton.disabled = false;
@@ -359,7 +376,113 @@ generateInvoicesButton.addEventListener("click", function () {
     eventSource.onerror = function (error) {
         console.error('EventSource failed:', error);
     };
+}
+
+// Adding click event for when the user wants to remove duplicates from the selected customers
+document.getElementById("remove-continue-button").addEventListener('click', function() {
+
+    // Removing the duplicate invoice customers from the selected customers list and updating the selected customers list
+    removeDuplicateFromSelected();
+    updateSelectedCustomersTable();
+    updateSearchResultsTable();
+
+    // Hiding the modal
+    $("#duplicate-invoice-modal").modal('hide');
+
+    // Continue with generating invoices
+    generateInvoices();
+
 });
+
+// Adding click event for when the user wants to remove duplicates from the selected customers
+document.getElementById("overwrite-button").addEventListener('click', function() {
+
+    // Hiding the modal
+    $("#duplicate-invoice-modal").modal('hide');
+
+    // Continue with generating invoices
+    generateInvoices();
+
+});
+
+function duplicateInvoices() {
+
+    customersWithDuplicateInvoices = [];
+
+    const customersArray = selectedCustomers.map((customer) => customer.account_number).join(",");
+    const url = `duplicate_invoice.php?customers=${customersArray}`;
+
+    return fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.length === 0) {
+                return false;
+            } else {
+
+                // Loop through the data list and search for matching customer.account_number
+                data.forEach((number) => {
+                    const foundCustomer = selectedCustomers.find((customer) => customer.account_number === number.toString());
+                    if (foundCustomer) {
+                        customersWithDuplicateInvoices.push(foundCustomer);
+                    }
+                });
+                return true;
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            return false;
+        });
+}
+
+function populateDuplicateInvoicesTable() {
+    
+    const duplicateInvoicesTable = document.querySelector("#duplicate-invoice-table tbody");
+
+    // Clear the current table content
+    duplicateInvoicesTable.innerHTML = "";
+
+    // Loop through the results and create table rows
+    customersWithDuplicateInvoices.forEach((customer) => {
+
+        const row = document.createElement("tr");
+
+        // Add data-id attribute with the customer's account number
+        row.setAttribute("data-id", customer.account_number);
+
+        // Create and add table data cells
+        const accountNumberCell = document.createElement("td");
+        accountNumberCell.textContent = customer.account_number;
+        row.appendChild(accountNumberCell);
+
+        const nameSurnameCell = document.createElement("td");
+        nameSurnameCell.textContent = `${customer.surname} ${customer.name.charAt(
+                0
+            )}.`;
+        row.appendChild(nameSurnameCell);
+
+        const addressCell = document.createElement("td");
+        addressCell.textContent = customer.address;
+        row.appendChild(addressCell);
+
+        // Append the row to the table body
+        duplicateInvoicesTable.appendChild(row);
+    });
+}
+
+function removeDuplicateFromSelected() {
+    customersWithDuplicateInvoices.forEach((duplicateCustomer) => {
+        removeItem(duplicateCustomer, selectedCustomers);
+    });
+
+    console.log("Selected Customers: ", selectedCustomers);
+}
+
 
 
 

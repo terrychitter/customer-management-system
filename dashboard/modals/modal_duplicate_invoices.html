@@ -1,0 +1,53 @@
+<form>
+  <div class="modal fade" id="duplicate-invoice-modal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            <i
+              class="bi bi-exclamation-triangle-fill fs-3"
+              style="color: red"
+            ></i>
+            Duplicate Invoices
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>Warning! There are already customers with invoices for the current month.</p>
+          <table class="table table-striped" id="duplicate-invoice-table">
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn col-12"
+            data-bs-dismiss="modal"
+            style="background-color: red;"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary text-white col-12"
+            id="overwrite-button"
+          >
+            Overwrite Invoices
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary text-white col-12"
+            id="remove-continue-button"
+          >
+            Remove from list & Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

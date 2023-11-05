@@ -2,7 +2,7 @@
 // Assuming $invoiceID is passed as a query parameter
 if (isset($_GET['invoiceID'])) {
     $invoiceID = $_GET['invoiceID'];
-    $file = '../../invoices/' . $invoiceID . '.pdf';
+    $file = '../../invoices/' . $invoiceID . '.xlsx';
 
     if (file_exists($file)) {
         header('Content-Description: File Transfer');

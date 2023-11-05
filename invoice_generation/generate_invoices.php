@@ -28,6 +28,11 @@ $progress = 0;
 
 sendOutMessage('Preparing...', 'Preparing to process invoices', 0, 2);
 
+if (count($customerIds) - 1 === 0) {
+    sendCompleteMessage();
+    exit();
+}
+
 // Loop through the customerIds array
 foreach ($customerIds as $key => $customerId) {
 
@@ -157,34 +162,10 @@ function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $
 
         sendOutMessage('Processing invoice for account ' . $customer['id'], 'Recording invoice data...', 1, 1);
 
-        // Calculate invoice amount
-        $invoiceAmount = $customer['bfAmount'] + $customer['monthlyFee'];
-
-
-        // Add record for the payment
-        $invoiceNumber = $customer['invoiceNumber'];
-        $customerId = $customer['id'];
-        $sql = "INSERT INTO invoices (invoice_id, customer_id, invoice_amount, invoice_date) VALUES ('$invoiceNumber', '$customerId', '$invoiceAmount', '$issueDate')";
-
-        if (mysqli_query($conn, $sql)) {
-            echo "New record created successfully PAYMENT";
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-
-        // Add record for the balance
-        //Get current balance
-        $sql = "INSERT INTO balances (customer_id, balance_date, balance_amount, invoice_id) VALUES ('$customerId', '$issueDate', '$invoiceAmount', '$invoiceNumber')";
-        if (mysqli_query($conn, $sql)) {
-            echo "New record created successfully BALANCE";
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-
-        sendOutMessage('Processing invoice for account ' . $customer['id'], 'Saving spreadsheet...', 1, 1);
+        addPaymentAndBalanceRecord($customer, $issueDate);
 
         // Save the spreadsheet as an XLSX file
-        $xlsxFileName = $customer['invoiceNumber'] . '.xlsx';
+        $xlsxFileName = "../../invoices/" . $customer['invoiceNumber'] . '.xlsx';
         $writer = new Xlsx($spreadsheet);
         $writer->save($xlsxFileName);
 
@@ -196,12 +177,7 @@ function GeneratePDFInvoice($conn, $customerDataArray, $month, $year, $bfDate, $
 
         // Check if the current iteration is the last one
         if ($key === array_key_last($customerDataArray)) {
-            // Send a final message
-            echo "data: " . json_encode(array('status' => 'All invoices processed')) . "\n\n";
-            // Close the connection
-            echo "event: end\n";
-            echo "data: End of stream\n\n";
-            exit();
+            sendCompleteMessage();
         }
     }
 }
@@ -243,6 +219,65 @@ function sendOutMessage($status, $details, $progress, $delay)
 
     // Add a delay to prevent high server load (you can adjust this according to your needs)
     sleep($delay);
+}
+
+function sendCompleteMessage()
+{
+    // Send a final message
+    echo "data: " . json_encode(
+        array(
+            'status' => 'All invoices processed',
+            'details' => 'All invoices have been successfully processed and generated. You may close this message',
+            'progress' => $GLOBALS['progressTotal'],
+            'progressTotal' => $GLOBALS['progressTotal']
+        )
+    ) . "\n\n";
+
+    // Close the connection
+    echo "event: end\n";
+    echo "data: End of stream\n\n";
+    exit();
+}
+
+function addPaymentAndBalanceRecord($customer, $issueDate)
+{
+    // Calculate invoice amount
+    $invoiceAmount = $customer['bfAmount'] + $customer['monthlyFee'];
+
+    // Add record for the payment
+    $customerId = $customer['id'];
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    // Filter the invoices table based on the criteria
+    $sql_filter = "SELECT * FROM invoices WHERE customer_id = '$customerId' AND MONTH(invoice_date) = '$currentMonth' AND YEAR(invoice_date) = '$currentYear'";
+    $result_filter = mysqli_query($GLOBALS['conn'], $sql_filter);
+
+    // Store the invoice_id temporarily
+    $temp_invoice_id = null;
+    if (mysqli_num_rows($result_filter) > 0) {
+        $row = mysqli_fetch_assoc($result_filter);
+        $temp_invoice_id = $row['invoice_id'];
+
+        // Delete the record from the invoices table
+        $sql_delete_invoice = "DELETE FROM invoices WHERE customer_id = '$customerId' AND MONTH(invoice_date) = '$currentMonth' AND YEAR(invoice_date) = '$currentYear'";
+        mysqli_query($GLOBALS['conn'], $sql_delete_invoice);
+
+        // Delete the corresponding record from the balances table
+        $sql_delete_balance = "DELETE FROM balances WHERE invoice_id = '$temp_invoice_id'";
+        mysqli_query($GLOBALS['conn'], $sql_delete_balance);
+    }
+
+    // Insert the new record in the invoices table
+    $invoiceNumber = $customer['invoiceNumber'];
+    $sql_insert_invoice = "INSERT INTO invoices (invoice_id, customer_id, invoice_amount, invoice_date) VALUES ('$invoiceNumber', '$customerId', '$invoiceAmount', '$issueDate')";
+    mysqli_query($GLOBALS['conn'], $sql_insert_invoice);
+
+    // Add record for the balance
+    $sql_insert_balance = "INSERT INTO balances (customer_id, balance_date, balance_amount, invoice_id) VALUES ('$customerId', '$issueDate', '$invoiceAmount', '$invoiceNumber')";
+    mysqli_query($GLOBALS['conn'], $sql_insert_balance);
+
+    sendOutMessage('Processing invoice for account ' . $customerId, 'Saving spreadsheet...', 1, 1);
 }
 
 // Call the GeneratePDFInvoice function
