@@ -1,12 +1,13 @@
 <?php
+include "../session_check.php";
 // Include the database connection
 require_once("../db_conn.php");
 
-date_default_timezone_set('Africa/Johannesburg');        
+date_default_timezone_set('Africa/Johannesburg');
 $currentDateTime = date('Y-m-d H:i:s');
 
 // Check if the account_number parameter is present in the GET request
-if(isset($_GET['account_number'])) {
+if (isset($_GET['account_number'])) {
     // Sanitize the account number
     $accountNumber = filter_var($_GET['account_number'], FILTER_SANITIZE_NUMBER_INT);
 
@@ -21,7 +22,7 @@ if(isset($_GET['account_number'])) {
             // Prepare and execute the insert query for adding a new comment
             $stmt = $conn->prepare("INSERT INTO comments (customer_id, comment_title, comment_text, date_time_added)
                                     VALUES (?, ?, ?, ?)");
-            
+
             $stmt->bind_param("isss", $accountNumber, $commentTitle, $commentText, $currentDateTime);
 
             if ($stmt->execute()) {
@@ -41,7 +42,7 @@ if(isset($_GET['account_number'])) {
             date_time_added = ?
             WHERE comment_id = ? AND customer_id = ?");
 
-            
+
             $stmt->bind_param("sssii", $commentTitle, $commentText, $currentDateTime, $commentId, $accountNumber);
 
             if ($stmt->execute()) {

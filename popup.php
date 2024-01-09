@@ -235,6 +235,18 @@ if (isset($_GET['status'])) {
       $popupText = "There was an error while trying to reverse the customer's payment. Please try again! (54)";
       $popupColour = "danger";
       break;
+    case '55':
+      $popupText = "There was a error while valdating the reCAPTCHA. Please try again!";
+      $popupColour = "danger";
+      break;
+    case '56':
+      $popupText = "Token is invalid. Please try again!";
+      $popupColour = "danger";
+      break;
+    case '57':
+      $popupText = "reCaptcha is invalid. Please try again!";
+      $popupColour = "danger";
+      break;
   }
   ?>
   <div class="d-flex justify-content-center" style="z-index: 999;">

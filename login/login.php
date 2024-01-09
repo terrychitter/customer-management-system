@@ -145,141 +145,73 @@
                 </div>
                 <div id="form-text" class="form-text text-start d-none"></div>
                 <div class="col d-flex mt-3 justify-content-center">
-                    <div class="g-recaptcha" data-sitekey="6LeGnvsoAAAAAKYxiv-Imx9oTHE-PJk3WN3YZNue"></div>
+                    <div class="g-recaptcha" data-sitekey="6LeFnvsoAAAAAPd313Ny6hB761wY5fb_Yjn6IJey"></div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-lg" id="login-button"
+            <button type="submit" class="btn btn-primary btn-lg" id="login-button"
                 style="width: calc(100% - 3rem * 2);; position: absolute; bottom: 2rem; left: ">Login</button>
         </form>
     </main>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../remove_paramters.js"></script>
+    <!-- <script src="../remove_paramters.js"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    const tokenInput = document.getElementById("token-input");
-    const loginButton = document.getElementById("login-button");
     const loginForm = document.getElementById("login-form");
     const formText = document.getElementById("form-text");
-    const loadingSpinner = document.getElementById("loading-spinner");
+    const tokenInput = document.getElementById("token-input");
 
-    tokenInput.addEventListener("input", function() {
-        if (tokenInput.value !== "") {
-            loginButton.disabled = false;
-        } else {
-            loginButton.disabled = true;
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Check if token was provided
+        if (tokenInput.value.length <= 0) {
+            formText.innerHTML = "Please provide a token!";
+            formText.classList.add('text-danger');
+            formText.classList.add('d-block');
+            formText.classList.remove('d-none');
+            throw new Error("Token not provided");
         }
 
-        formText.classList.add("d-none");
-        formText.classList.remove("d-block");
-    });
+        // Check if reCAPTCHA was completed
+        const captchaResponse = grecaptcha.getResponse();
 
-    loginButton.addEventListener("click", function(event) {
-        event.preventDefault();
-
-        // Disabling the button
-        loginButton.disabled = true;
-
-        // Check if the input is empty
-        if (tokenInput.value === "") {
-            // Display error message for empty token input
-            formText.classList.add("text-danger");
-            formText.classList.add("d-block");
-            formText.classList.remove("d-none");
-            formText.innerText = "No token has been entered. Please provide a token.";
-
-            // Enable the button
-            loginButton.disabled = false;
-        } else {
-            formText.classList.add("d-none");
-            formText.classList.remove("d-block");
-            formText.innerText = "";
-
-            // Display loading spinner
-            loadingSpinner.classList.add("d-inline-block");
-            loadingSpinner.classList.remove("d-none");
-
-            // Verify reCAPTCHA
-            verifyRecaptcha();
+        if (!captchaResponse.length > 0) {
+            formText.innerHTML = "Please complete the reCAPTCHA!";
+            formText.classList.add('text-danger');
+            formText.classList.add('d-block');
+            formText.classList.remove('d-none');
+            throw new Error("Captcha not completed");
         }
-    });
 
-    function verifyRecaptcha() {
-        // Get the reCAPTCHA response
-        const recaptchaResponse = grecaptcha.getResponse();
+        const formData = new FormData(e.target);
+        const params = new URLSearchParams(formData);
 
-        // Check if the user completed the captcha
-        if (recaptchaResponse.length === 0) {
-            // Display error message for failed captcha
-            formText.classList.add("text-danger");
-            formText.classList.add("d-block");
-            formText.classList.remove("d-none");
-            formText.innerText = "Please complete the reCAPTCHA.";
-
-            // Hide loading spinner
-            loadingSpinner.classList.add("d-none");
-            loadingSpinner.classList.remove("d-inline-block");
-
-            // Enable the button
-            loginButton.disabled = false;
-        } else {
-            // Proceed with form submission
-            submitForm();
-        }
-    }
-
-    function submitForm() {
-        // Create a data object to hold the search data
-        const searchData = {
-            token: tokenInput.value,
-        };
-
-        // Send AJAX request to PHP script
+        // Submitting the form
         fetch("validate_token.inc.php", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/x-www-form-urlencoded", // Set the correct Content-Type
                 },
-                body: new URLSearchParams(searchData).toString(),
+                body: params, // Serialize the data
             })
             .then((response) => response.json())
             .then((data) => {
-                // Handle response data
-                if (data.recaptcha === true) {
-                    if (data.valid === false) {
-                        // Handle invalid token
-                        formText.classList.add("text-danger");
-                        formText.classList.add("d-block");
-                        formText.classList.remove("d-none");
-                        formText.innerText = "Invalid token. Please try again!";
 
-                        // Enable the button
-                        loginButton.disabled = false;
-                    } else {
-                        // Redirect to dashboard upon successful login
-                        window.location.href = "/dashboard/customer.php";
-                    }
-                } else {
-                    // Handle reCAPTCHA failure
-                    formText.classList.add("text-danger");
-                    formText.classList.add("d-block");
-                    formText.classList.remove("d-none");
-                    formText.innerText = "reCAPTCHA has failed. Please try again!";
-
-                    // Reset reCAPTCHA
-                    grecaptcha.reset();
-
-                    // Enable the button
-                    loginButton.disabled = false;
+                // if the recaptcha is invalid
+                if (data.recaptcha === false) {
+                    window.location.href = "/login/login.php?status=57";
                 }
 
-                // Hide loading spinner
-                loadingSpinner.classList.add("d-none");
-                loadingSpinner.classList.remove("d-inline-block");
+                if (data.valid === false) {
+                    // if the token is invalid
+                    window.location.href = "/login/login.php?status=56";
+                } else {
+                    // if the token is valid
+                    window.location.href = "/dashboard/customer.php";
+                }
             })
-            .catch((error) => {
-                console.error("Error:", error);
-                loginButton.disabled = false;
-            });
-    }
+            .catch((error) => console.error("Error:", error));
+    });
     </script>
 </body>
 

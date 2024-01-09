@@ -1,9 +1,10 @@
 <?php
+include "../session_check.php";
 // Include the database connection
 require_once("../db_conn.php");
 
 // Check if the account_number parameter is present in the GET request
-if($_SERVER['REQUEST_METHOD'] === "POST") {
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
     // Get account number
     $accountNumber = $_GET['account_number'];
 
@@ -14,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
     if ($stmt->execute()) {
         // Successfully deactived customer
         header("Location: " . $_SERVER['HTTP_REFERER'] . "&status=40");
-        exit();      
+        exit();
     } else {
         // Failed to deactivate customer
         header("Location: " . $_SERVER['HTTP_REFERER'] . "&status=41");

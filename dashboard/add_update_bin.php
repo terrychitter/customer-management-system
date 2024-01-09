@@ -1,9 +1,10 @@
 <?php
 // Include the database connection
+include "../session_check.php";
 require_once("../db_conn.php");
 
 // Check if the account_number parameter is present in the GET request
-if(isset($_GET['account_number'])) {
+if (isset($_GET['account_number'])) {
     // Sanitize the account number
     $accountNumber = filter_var($_GET['account_number'], FILTER_SANITIZE_NUMBER_INT);
 
@@ -17,7 +18,7 @@ if(isset($_GET['account_number'])) {
             // Prepare and execute the insert query for adding a new bin
             $stmt = $conn->prepare("INSERT INTO bins (customer_id, serial_number)
                                     VALUES (?, ?)");
-            
+
             $stmt->bind_param("is", $accountNumber, $serialNumber);
 
             if ($stmt->execute()) {
@@ -34,7 +35,7 @@ if(isset($_GET['account_number'])) {
             $stmt = $conn->prepare("UPDATE bins SET 
                                     serial_number = ?
                                     WHERE serial_number = ? AND customer_id = ?");
-            
+
             $stmt->bind_param("ssi", $serialNumber, $binId, $accountNumber);
 
             if ($stmt->execute()) {

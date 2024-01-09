@@ -1,4 +1,5 @@
 <?php
+include "../session_check.php";
 require_once("../db_conn.php");
 
 $accountNumber = $_GET["account_number"];

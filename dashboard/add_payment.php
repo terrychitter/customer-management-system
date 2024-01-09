@@ -1,4 +1,5 @@
 <?php
+include "../session_check.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Establish a database connection
     require_once("../db_conn.php");
