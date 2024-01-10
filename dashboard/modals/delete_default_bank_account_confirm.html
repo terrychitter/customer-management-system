@@ -1,0 +1,45 @@
+<form
+  action=""
+  method="POST"
+>
+  <div class="modal fade" id="default-bank-account-confirm-delete-modal">
+    <input
+      class="d-none"
+      type="text"
+      name="modal-confirm-default-bank-account-id"
+      id="default-bank-account-confirm-id-div"
+      value="some id"
+    />
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            <i
+              class="bi bi-exclamation-triangle-fill fs-3"
+              style="color: red"
+            ></i>
+            Error Deleting Bank Account
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          This is bank account is currently set as the default bank account and cannot be deleted. Please set a different bank account as the default before deleting the current account.
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

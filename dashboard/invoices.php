@@ -108,7 +108,7 @@
                             </li>
                         </a>
                         <a href="payments.php">
-                            <li class="list-group-item active">
+                            <li class="list-group-item">
                                 <div class="nav-item-icon-container">
                                     <i class="bi bi-cash-stack"></i>
                                 </div>
@@ -116,7 +116,7 @@
                             </li>
                         </a>
                         <a href="invoices.php">
-                            <li class="list-group-item">
+                            <li class="list-group-item active">
                                 <div class="nav-item-icon-container">
                                     <i class="bi bi-receipt"></i>
                                 </div>
@@ -451,6 +451,12 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script src="handle_search_and_selected.js"></script>
             <script>
+                // Enabling all the tool tips
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl)
+                })
+
                 // Get the first day of the current month
                 var today = new Date();
                 var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);

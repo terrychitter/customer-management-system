@@ -13,8 +13,7 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
 
     // If the current page is not a public page, redirect to the login page
     if (!in_array($currentPage, $publicPages)) {
-        var_dump($_SESSION['isLoggedIn']);
-        //header('Location: /login/login.php'); // Redirect to your login page
+        header('Location: /login/login.php'); // Redirect to your login page
         exit(); // Stop further execution
     }
 }

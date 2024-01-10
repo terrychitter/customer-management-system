@@ -96,8 +96,6 @@ if ($customerActive) {
             }
         }
 
-
-
         // Retrieve invoices for the customer and store in an array
         $invoices = array();
         $sql_invoices = "SELECT * FROM invoices WHERE customer_id = $customerID";
@@ -107,23 +105,10 @@ if ($customerActive) {
                 $invoices[] = $invoiceData;
             }
         }
-
-        // Retrieve bank accounts and store in a variable
-        $bank_accounts = array();
-        $sql_bank_accounts = "SELECT * FROM bank_accounts";
-        $result_bank_accounts = mysqli_query($conn, $sql_bank_accounts);
-        if ($result_bank_accounts) {
-            while ($bankAccountsData = mysqli_fetch_assoc($result_bank_accounts)) {
-                $bank_accounts[] = $bankAccountsData;
-            }
-        }
-
     } else {
 
         // Customer could not be found
         header("Location: " . $_SERVER['HTTP_REFERER'] . "&status=1");
     }
-    // Close the database connection
-    mysqli_close($conn);
 }
 ?>

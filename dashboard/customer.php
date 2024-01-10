@@ -15,6 +15,7 @@ include "../session_check.php";
 <?php
     // Getting database connection
     require_once("load_customer_details.php");
+    require_once("load_settings.inc.php");
     include "../popup.php";
 ?>
 

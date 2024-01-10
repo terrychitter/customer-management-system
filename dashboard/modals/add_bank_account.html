@@ -1,0 +1,285 @@
+<form
+  action="add_update_bank_account.php"
+  method="POST"
+>
+  <input
+    class="d-none"
+    type="text"
+    name="modal-bank-account-id"
+    id="bank-account-id"
+  />
+  <div
+    class="modal fade"
+    id="add-bank-account-modal"
+    tabindex="-1"
+    aria-labelledby="Add Bank Account"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <div class="align-items-center d-flex" style="gap: 1rem">
+              <i class="bi bi-credit-card fs-1"></i>
+                <p id="modal-bank-account-header" class="mt-3" data-type="Bank Account">Add Bank Account</p>
+            </div>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            id="modal-bank-account-header-close-button"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <label for="modal-bank-account-name" class="form-label"
+            >Name <i
+            class="bi bi-info-circle-fill text-secondary" data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            data-bs-title="This is not visible to customers and is for the user's use only. Feel free to name the account something you are familiar with."></i></label
+          >
+          <input
+            type="text"
+            class="form-control mb-2"
+            name="modal-bank-account-name"
+            id="modal-bank-account-name"
+          />
+          <label for="modal-bank-account-bank-name" class="form-label">Bank</label>
+        <select class="form-control mb-2" id="modal-bank-account-bank-name" name="modal-bank-account-bank-name">
+            <option value="" selected disabled></option>
+            <option value="FNB">FNB</option>
+            <option value="Capitec">Capitec</option>
+            <option value="ABSA">ABSA</option>
+            <option value="Standard Bank">Standard Bank</option>
+            <option value="Nedbank">Nedbank</option>
+          </select>
+          <label for="modal-bank-account-bank-type" class="form-label">Account Type</label>
+        <select class="form-control mb-2" id="modal-bank-account-bank-type" name="modal-bank-account-bank-type">
+            <option value="" selected disabled></option>
+            <option value="Cheque">Cheque</option>
+            <option value="Savings">Savings</option>
+          </select>
+          <label for="modal-bank-account-account-holder-name" class="form-label"
+          >Account Holder Name</label
+        >
+        <input
+          type="text"
+          class="form-control mb-2"
+          name="modal-bank-account-account-holder-name"
+          id="modal-bank-account-account-holder-name"
+        />
+          <label for="modal-bank-account-account-number" class="form-label"
+          >Account Number</label
+        >
+        <input
+          type="number"
+          class="form-control mb-2"
+          name="modal-bank-account-account-number"
+          id="modal-bank-account-account-number"
+        />
+          <label for="modal-bank-account-branch-code" class="form-label"
+          >Branch Code</label
+        >
+        <input
+          type="number"
+          class="form-control mb-2"
+          name="modal-bank-account-branch-code"
+          id="modal-bank-account-branch-code"
+        />
+          <label for="modal-bank-account-branch-name" class="form-label"
+          >Branch Name</label
+        >
+        <input
+          type="text"
+          class="form-control mb-2"
+          name="modal-bank-account-branch-name"
+          id="modal-bank-account-branch-name"
+        />
+        <div id="default-section-not">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="bank-account-is-default-check">
+                <label class="custom-control-label" for="bank-account-is-default-check">Set as default account</label>
+              </div>
+              <div class="rounded border bg-light p-2" id="modal-bank-account-default-options">
+                  <div class="custom-control custom-radio">
+                      <input type="radio" id="default-future" name="default-options" class="custom-control-input" value="default-future" checked>
+                      <label class="custom-control-label" for="default-future">Use this as the default bank account for future customers</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="default-immediate-partial" name="default-options" class="custom-control-input" value="default-immediate-partial">
+                      <label class="custom-control-label" for="default-immediate-partial" >Link all customers from the current default bank account to this account</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="default-immediate-all" name="default-options" class="custom-control-input" value="default-immediate-all">
+                      <label class="custom-control-label" for="default-immediate-all">Link all customers to this bank account</label>
+                    </div>
+              </div>
+        </div>
+        <div id="default-section">
+            <h2 class="fs-4 ps-2 text-primary">This bank account is set as the default.</h2>
+        </div>
+        </div> 
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="modal-bank-account-close-button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+    const modalBankAccountHeader = document.getElementById("modal-bank-account-header");
+    const isDefaultCheckbox = document.getElementById("bank-account-is-default-check");
+    const isDefaultOptions = document.getElementById("modal-bank-account-default-options");
+
+    isDefaultCheckbox.addEventListener("click", () => {toggleDefaultOptions();})
+
+    function toggleDefaultOptions() {
+        if (isDefaultCheckbox.checked) {
+            isDefaultOptions.classList.add("d-block");
+            isDefaultOptions.classList.remove("d-none");
+        } else {
+            isDefaultOptions.classList.remove("d-block");
+            isDefaultOptions.classList.add("d-none");
+        }
+    }
+
+    function hideDefaultOptions() {
+        isDefaultOptions.classList.remove("d-block");
+        isDefaultOptions.classList.add("d-none");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    // Get all the bank account card elements
+    const bankAccountCards = document.querySelectorAll(".bank-account-card");
+
+    // Get the input elements in the modal
+    const modalBankAccountName = document.getElementById("modal-bank-account-name");
+    const modalBankAccountBankName = document.getElementById("modal-bank-account-bank-name");
+    const modalBankAccountBankType = document.getElementById("modal-bank-account-bank-type");
+    const modalBankAccountAccHolderName = document.getElementById("modal-bank-account-account-holder-name");
+    const modalBankAccountAccNum = document.getElementById("modal-bank-account-account-number");
+    const modalBankAccountBranchName = document.getElementById("modal-bank-account-branch-name");
+    const modalBankAccountBranchCode = document.getElementById("modal-bank-account-branch-code");
+    const modalBankAccountIsDefault = document.getElementById("bank-account-is-default-check");
+    const modalDefaultSectionNot = document.getElementById("default-section-not");
+    const modalDefaultSection = document.getElementById("default-section");
+
+    document.getElementById("add-bank-account-button").addEventListener("click", () => {
+        modalBankAccountIsDefault.checked = false;
+        modalDefaultSection.classList.add("d-none");
+        modalDefaultSection.classList.remove("d-block");
+
+        modalDefaultSectionNot.classList.remove("d-none");
+        modalDefaultSectionNot.classList.add("d-block");
+    })
+
+    // Add click event listener to each contact card
+    bankAccountCards.forEach((bankAccountCard) => {
+      const bankAccountID = bankAccountCard.getAttribute("data-bank-account-id");
+
+      if (document.getElementById("bank-account-is-default-check")) {
+        toggleDefaultOptions();
+      }
+
+      // Get the delete button
+      const deleteButton = bankAccountCard.querySelector(".bi-trash-fill");
+      console.log(deleteButton);
+
+      // Get id holder on confirm delete modal
+      bankAccountDeleteConfirm = document.getElementById("bank-account-confirm-id-div");
+      defaultBankAccountDeleteConfirm = document.getElementById("default-bank-account-confirm-id-div");
+
+      // Add event listener for delete button
+      deleteButton.addEventListener("click", function () {
+        bankAccountDeleteConfirm.value = bankAccountID;
+        defaultBankAccountDeleteConfirm.value = bankAccountID;
+      });
+
+      bankAccountCard.addEventListener("click", function () {
+        // Get the data attributes from the clicked contact card
+        const bankAccountID = bankAccountCard.getAttribute("data-bank-account-id");
+        const bankAccountName = bankAccountCard.getAttribute("data-bank-account-name");
+        const bankAccountBankName = bankAccountCard.getAttribute("data-bank-account-bank-name");
+        const bankAccountType = bankAccountCard.getAttribute("data-bank-account-type");
+        const bankAccountHolderName = bankAccountCard.getAttribute("data-bank-account-holder-name");
+        const bankAccountAccountNumber = bankAccountCard.getAttribute("data-bank-account-account-number");
+        const bankAccountBranchName = bankAccountCard.getAttribute("data-bank-account-branch-name");
+        const bankAccountBranchCode = bankAccountCard.getAttribute("data-bank-account-branch-code");
+        const bankAccountIsDefault = bankAccountCard.getAttribute("data-bank-account-is-default")
+
+        // Setting the bank account id in an input
+        const bankAccountIDInput = document.getElementById("bank-account-id");
+        bankAccountIDInput.value = bankAccountID;
+
+        // Update the modal's input values with the bank account details
+        modalBankAccountName.value = bankAccountName;
+        modalBankAccountBankName.value = bankAccountBankName;
+        modalBankAccountBankType.value = bankAccountType;
+        modalBankAccountAccHolderName.value = bankAccountHolderName;
+        modalBankAccountAccNum.value = bankAccountAccountNumber;
+        modalBankAccountBranchCode.value = bankAccountBranchCode;
+        modalBankAccountBranchName.value = bankAccountBranchName;
+
+        if (bankAccountIsDefault == "1") {
+            modalBankAccountIsDefault.checked = true;
+            modalDefaultSection.classList.add("d-block");
+            modalDefaultSection.classList.remove("d-none");
+
+            modalDefaultSectionNot.classList.remove("d-block");
+            modalDefaultSectionNot.classList.add("d-none");
+        } else {
+            modalBankAccountIsDefault.checked = false;
+            modalDefaultSection.classList.add("d-none");
+            modalDefaultSection.classList.remove("d-block");
+
+            modalDefaultSectionNot.classList.remove("d-none");
+            modalDefaultSectionNot.classList.add("d-block");
+        }
+        // toggleDefaultOptions();
+
+        // Changing the header
+        modalBankAccountHeader.innerText = "Edit Bank Account";
+      });
+    });
+
+    document.getElementById("modal-bank-account-close-button").addEventListener("click", () => {
+        hideDefaultSection();
+        hideDefaultOptions();
+    });
+
+    document.getElementById("modal-bank-account-header-close-button").addEventListener("click", () => {
+        hideDefaultSection();
+        hideDefaultOptions();
+        toggleDefaultOptions();
+    })
+
+    function hideDefaultSection() {
+        modalBankAccountIsDefault.checked = true;
+        modalDefaultSection.classList.add("d-none");
+        modalDefaultSection.classList.remove("d-block");
+
+        modalDefaultSectionNot.classList.remove("d-none");
+        modalDefaultSectionNot.classList.add("d-block");
+    }
+
+    function showDefaultSection() {
+        modalBankAccountIsDefault.checked = false;
+        modalDefaultSection.classList.add("d-block");
+        modalDefaultSection.classList.remove("d-none");
+
+        modalDefaultSectionNot.classList.remove("d-block");
+        modalDefaultSectionNot.classList.add("d-none");
+    }
+});
+</script>
