@@ -1,9 +1,9 @@
 <form
-  action="add_update_bank_account.php"
+  action="add_update_bank_account.inc.php"
   method="POST"
 >
   <input
-    class="d-none"
+    class="d-block"
     type="text"
     name="modal-bank-account-id"
     id="bank-account-id"
@@ -100,7 +100,7 @@
         />
         <div id="default-section-not">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="bank-account-is-default-check">
+                <input type="checkbox" class="custom-control-input" name="bank-account-is-default-check" id="bank-account-is-default-check">
                 <label class="custom-control-label" for="bank-account-is-default-check">Set as default account</label>
               </div>
               <div class="rounded border bg-light p-2" id="modal-bank-account-default-options">
