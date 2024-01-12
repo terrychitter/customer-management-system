@@ -14,6 +14,7 @@
     <?php include "load_settings.inc.php";
     include "modals/delete_bank_account_confirm.html";
     include "modals/delete_default_bank_account_confirm.html";
+    include "../popup.php";
     ?>
     <div class="row h-100">
         <!-- Navigation Canvas -->
@@ -298,6 +299,7 @@
             <?php include "modals/add_bank_account.html"; ?>
         </main>
         <script src="clear_form.js"></script>
+        <script src="/remove_paramters.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

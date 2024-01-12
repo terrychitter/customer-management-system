@@ -247,6 +247,14 @@ if (isset($_GET['status'])) {
       $popupText = "reCaptcha is invalid. Please try again!";
       $popupColour = "danger";
       break;
+    case '58':
+      $popupText = "Successfully updated bank account!";
+      $popupColour = "success";
+      break;
+    case '59':
+      $popupText = "Successfully created bank account!";
+      $popupColour = "success";
+      break;
   }
   ?>
   <div class="d-flex justify-content-center" style="z-index: 999;">

@@ -34,12 +34,14 @@ $result = $stmt->get_result();
 $existingAccount = $result->fetch_assoc();
 
 if ($existingAccount) {
+    $type = 'editing';
     // Update existing record
     $sql = "UPDATE bank_accounts SET private_name=?, bank=?, type=?, name=?, account_number=?, branch_code=?, branch=? WHERE id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssissi", $modalBankAccountName, $modalBankAccountBankName, $modalBankAccountBankType, $modalBankAccountHolderName, $modalBankAccountNumber, $modalBankAccountBranchCode, $modalBankAccountBranchName, $modalBankAccountId);
     $stmt->execute();
 } else {
+    $type = 'creating';
     // Create new record
     $sql = "INSERT INTO bank_accounts (private_name, bank, type, name, account_number, branch_code, branch) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
@@ -86,6 +88,15 @@ if ($defaultOptions === "default-immediate-partial") {
 // Setting the new default bank account
 if ($bankAccountIsDefault) {
     toggleDefaultBankAccount($modalBankAccountId, $conn);
+}
+
+// Going back to previous page
+if ($type == 'editing') {
+    header("Location: " . $_SERVER['HTTP_REFERER'] . "?status=58");
+    exit();
+} elseif ($type == 'creating') {
+    header("Location: " . $_SERVER['HTTP_REFERER'] . "?status=59");
+    exit();
 }
 
 function toggleDefaultBankAccount($newBankAccountID, $conn)

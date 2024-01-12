@@ -10,8 +10,11 @@ function removeStatusParameters() {
     urlParams.delete("status_details");
   }
 
+  // Construct the new URL only if there are remaining parameters
+  const queryString = urlParams.toString();
+  const newUrl = queryString ? window.location.pathname + "?" + queryString : window.location.pathname;
+  
   // Replace the current URL without status and status_details parameters
-  const newUrl = window.location.pathname + "?" + urlParams.toString();
   window.history.replaceState({}, document.title, newUrl);
 }
 

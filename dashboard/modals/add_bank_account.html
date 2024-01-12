@@ -3,7 +3,7 @@
   method="POST"
 >
   <input
-    class="d-block"
+    class="d-none"
     type="text"
     name="modal-bank-account-id"
     id="bank-account-id"
@@ -194,7 +194,6 @@
 
       // Get the delete button
       const deleteButton = bankAccountCard.querySelector(".bi-trash-fill");
-      console.log(deleteButton);
 
       // Get id holder on confirm delete modal
       bankAccountDeleteConfirm = document.getElementById("bank-account-confirm-id-div");
