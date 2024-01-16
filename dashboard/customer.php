@@ -229,7 +229,9 @@
                     <div class="profile-icon-container">
                         <i class="bi bi-person-fill fs-3"></i>
                     </div>
-                    <i class="bi bi-gear-fill fs-4"></i>
+                    <a href="settings.php" class="text-white">
+                        <i href="settings.php" class="bi bi-gear-fill fs-4"></i>
+                    </a>
                 </div>
             </header>
             <div class="customer-buttons col p-0 pb-2 mt-3 text-end">
