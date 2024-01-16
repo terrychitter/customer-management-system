@@ -255,6 +255,10 @@ if (isset($_GET['status'])) {
       $popupText = "Successfully created bank account!";
       $popupColour = "success";
       break;
+    case '60':
+      $popupText = "Successfully deleted bank account!";
+      $popupColour = "success";
+      break;
   }
   ?>
   <div class="d-flex justify-content-center" style="z-index: 999;">
