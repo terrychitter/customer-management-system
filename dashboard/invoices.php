@@ -19,70 +19,70 @@
         <div class="row h-100">
             <!-- Navigation Canvas -->
             <style>
-            ul a {
-                text-decoration: none;
-            }
+                ul a {
+                    text-decoration: none;
+                }
 
-            .canvas-button {
-                position: absolute;
-                top: 50%;
-                right: -2.5rem;
-                visibility: visible;
-                color: white;
-                border: none;
-                padding-block: 2rem;
-                border-radius: 0 10px 10px 0;
-            }
+                .canvas-button {
+                    position: absolute;
+                    top: 50%;
+                    right: -2.5rem;
+                    visibility: visible;
+                    color: white;
+                    border: none;
+                    padding-block: 2rem;
+                    border-radius: 0 10px 10px 0;
+                }
 
-            .list-group-item {
-                border: none;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                border-radius: 5px;
-                margin-bottom: 1.3rem;
-                font-size: 1.3rem;
-                cursor: pointer;
-            }
+                .list-group-item {
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    border-radius: 5px;
+                    margin-bottom: 1.3rem;
+                    font-size: 1.3rem;
+                    cursor: pointer;
+                }
 
-            .nav-item-icon-container {
-                background-color: white;
-                color: #4169e1;
-                width: 35px;
-                height: 35px;
-                display: flex;
-                justify-content: center;
-                align-content: center;
-                border-radius: 5px;
-                box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            }
+                .nav-item-icon-container {
+                    background-color: white;
+                    color: #4169e1;
+                    width: 35px;
+                    height: 35px;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+                    border-radius: 5px;
+                    box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                    -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                    -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                }
 
-            .nav-item-icon-container i {
-                font-size: 1.5rem;
-            }
+                .nav-item-icon-container i {
+                    font-size: 1.5rem;
+                }
 
-            .nav-item-icon-container.active {
-                box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            }
+                .nav-item-icon-container.active {
+                    box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                    -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                    -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+                }
 
-            .profile-icon-container {
-                width: 2rem;
-                height: 2rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: rgb(77, 77, 77);
-                border-radius: 50%;
-                background: rgb(226, 226, 226);
-                background: linear-gradient(338deg,
-                        rgba(226, 226, 226, 1) 45%,
-                        rgba(246, 246, 246, 1) 52%,
-                        rgba(255, 255, 255, 1) 60%);
-            }
+                .profile-icon-container {
+                    width: 2rem;
+                    height: 2rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: rgb(77, 77, 77);
+                    border-radius: 50%;
+                    background: rgb(226, 226, 226);
+                    background: linear-gradient(338deg,
+                            rgba(226, 226, 226, 1) 45%,
+                            rgba(246, 246, 246, 1) 52%,
+                            rgba(255, 255, 255, 1) 60%);
+                }
             </style>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="navigation-canvas"
                 aria-labelledby="navigation-canvas-label">
@@ -140,58 +140,58 @@
                     <i class="bi bi-three-dots-vertical"></i>
                     <!-- Dragging script -->
                     <script>
-                    const draggableElement = document.getElementById('offcanvas-toggle-button');
-                    let isDragging = false;
-                    let startY;
-                    let initialTop;
-                    const topBoundaryOffset = 64; // 4rem = 64px
-                    const bottomBoundaryOffset = 16; // 1rem = 16px
+                        const draggableElement = document.getElementById('offcanvas-toggle-button');
+                        let isDragging = false;
+                        let startY;
+                        let initialTop;
+                        const topBoundaryOffset = 64; // 4rem = 64px
+                        const bottomBoundaryOffset = 16; // 1rem = 16px
 
-                    // Function to handle the touch start event
-                    function handleTouchStart(event) {
-                        const touch = event.touches[0];
-                        startY = touch.clientY;
-                        initialTop = parseInt(window.getComputedStyle(draggableElement).top);
-                        isDragging = false; // Initialize as click, not drag
-                    }
-
-                    // Function to handle the touch move event and update the element position along the Y-axis
-                    function handleTouchMove(event) {
-                        const touch = event.touches[0];
-                        const deltaY = touch.clientY - startY;
-
-                        // Check if the user has moved enough to be considered a drag
-                        if (!isDragging && Math.abs(deltaY) > 5) {
-                            isDragging = true;
+                        // Function to handle the touch start event
+                        function handleTouchStart(event) {
+                            const touch = event.touches[0];
+                            startY = touch.clientY;
+                            initialTop = parseInt(window.getComputedStyle(draggableElement).top);
+                            isDragging = false; // Initialize as click, not drag
                         }
 
-                        // If dragging, limit the element's position within the boundaries
-                        if (isDragging) {
-                            const minTop = topBoundaryOffset;
-                            const maxTop = window.innerHeight - draggableElement.clientHeight - bottomBoundaryOffset;
-                            let newTop = Math.max(minTop, Math.min(initialTop + deltaY, maxTop));
-                            draggableElement.style.top = newTop + 'px';
+                        // Function to handle the touch move event and update the element position along the Y-axis
+                        function handleTouchMove(event) {
+                            const touch = event.touches[0];
+                            const deltaY = touch.clientY - startY;
 
-                            // Save the element's vertical position to localStorage
-                            localStorage.setItem('draggableElementTop', newTop);
+                            // Check if the user has moved enough to be considered a drag
+                            if (!isDragging && Math.abs(deltaY) > 5) {
+                                isDragging = true;
+                            }
+
+                            // If dragging, limit the element's position within the boundaries
+                            if (isDragging) {
+                                const minTop = topBoundaryOffset;
+                                const maxTop = window.innerHeight - draggableElement.clientHeight - bottomBoundaryOffset;
+                                let newTop = Math.max(minTop, Math.min(initialTop + deltaY, maxTop));
+                                draggableElement.style.top = newTop + 'px';
+
+                                // Save the element's vertical position to localStorage
+                                localStorage.setItem('draggableElementTop', newTop);
+                            }
                         }
-                    }
 
-                    // Function to handle the touch end event
-                    function handleTouchEnd(event) {
-                        isDragging = false;
-                    }
+                        // Function to handle the touch end event
+                        function handleTouchEnd(event) {
+                            isDragging = false;
+                        }
 
-                    // Retrieve the stored position from localStorage
-                    const storedTop = localStorage.getItem('draggableElementTop');
-                    if (storedTop) {
-                        draggableElement.style.top = storedTop + 'px';
-                    }
+                        // Retrieve the stored position from localStorage
+                        const storedTop = localStorage.getItem('draggableElementTop');
+                        if (storedTop) {
+                            draggableElement.style.top = storedTop + 'px';
+                        }
 
-                    // Add touch event listeners for dragging
-                    draggableElement.addEventListener('touchstart', handleTouchStart);
-                    draggableElement.addEventListener('touchmove', handleTouchMove);
-                    draggableElement.addEventListener('touchend', handleTouchEnd);
+                        // Add touch event listeners for dragging
+                        draggableElement.addEventListener('touchstart', handleTouchStart);
+                        draggableElement.addEventListener('touchmove', handleTouchMove);
+                        draggableElement.addEventListener('touchend', handleTouchEnd);
                     </script>
                 </button>
             </div>
@@ -428,6 +428,62 @@
                         </div>
                     </div>
                 </div>
+                <div class="download-invoices col-12 col-lg-6 accordion mt-3 p-0 px-lg-3"
+                    id="download-invoices-accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="download-invoices-accordion-item">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#download-invoices-accordion-collapse" aria-expanded="false"
+                                aria-controls="download-invoices-accordion-collapse">
+                                <h2 class="fs-5 mb-0"><i class="bi bi-download fs-3"></i> Download Invoices
+                                </h2>
+                            </button>
+                        </div>
+                        <div id="download-invoices-accordion-collapse" class="accordion-collapse collapse collapse"
+                            aria-labelledby="panelsStayOpen-headingOne">
+                            <!-- Search Accordion Body -->
+                            <div class="accordion-body">
+                                <p>Download invoices by each month. Scroll to see more months/years.</p>
+                                <?php include "load_invoices.inc.php"; ?>
+                                <div class="container">
+                                    <ul class="nav nav-pills flex-nowrap mb-3" id="pills-tab" role="tablist"
+                                        style="overflow-x: auto;">
+                                        <?php foreach ($uniqueMonthsYears as $umy) { ?>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link <?php echo ($umy['id'] == "1") ? "active" : ""; ?>"
+                                                    id="pills-<?php echo $umy['id'] ?>-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#pills-<?php echo $umy['id']; ?>" type="button"
+                                                    role="tab" aria-controls="pills-<?php echo $umy['id']; ?>"
+                                                    aria-selected="true">
+                                                    <?php echo $umy['title']; ?>
+                                                </button>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <?php foreach ($uniqueMonthsYears as $umy) { ?>
+                                            <div class="tab-pane fade show <?php echo ($umy['id'] == "1") ? "active" : ""; ?>"
+                                                id="pills-<?php echo $umy['id'] ?>" role="tabpanel"
+                                                aria-labelledby="pills-<?php echo $umy['id']; ?>-tab">
+                                                <ul class="bg-light border rounded py-3">
+                                                    <?php foreach ($umy['invoices'] as $invoiceData) { ?>
+                                                        <li class="fs-6 mx-0">
+                                                            <?php echo $invoiceData['invoice_id'] ?>&nbsp; &nbsp;
+                                                            <?php echo $invoiceData['customer_name'] ?>
+                                                        </li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2 d-sm-block"><button class="btn btn-primary"><i
+                                            class="bi bi-download fs-4"></i> Download
+                                        Invoices</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="toast-container position-fixed bottom-0 end-0 p-3">
                     <div id="invoice-status-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                         <div class="toast-header">
@@ -447,71 +503,71 @@
                         </div>
                     </div>
                 </div>
-            </main>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="handle_search_and_selected.js"></script>
-            <script>
-            // Enabling all the tool tips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+                </ma in>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="handle_search_and_selected.js"></script>
+                <script>
+                    // Enabling all the tool tips
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                        return new bootstrap.Tooltip(tooltipTriggerEl)
+                    })
 
-            // Get the first day of the current month
-            var today = new Date();
-            var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-            var dd = String(firstDay.getDate()).padStart(2, '0');
-            var mm = String(firstDay.getMonth() + 1).padStart(2, '0');
-            var yyyy = firstDay.getFullYear();
+                    // Get the first day of the current month
+                    var today = new Date();
+                    var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+                    var dd = String(firstDay.getDate()).padStart(2, '0');
+                    var mm = String(firstDay.getMonth() + 1).padStart(2, '0');
+                    var yyyy = firstDay.getFullYear();
 
-            var formattedDate = yyyy + '-' + mm + '-' + dd;
-            document.getElementById('bf-date').value = formattedDate;
+                    var formattedDate = yyyy + '-' + mm + '-' + dd;
+                    document.getElementById('bf-date').value = formattedDate;
 
-            // Provide fee and issue date with today's date
-            var today = new Date().toISOString().slice(0, 10);
-            document.getElementById('fee-date').value = today;
-            document.getElementById('issue-date').value = today;
+                    // Provide fee and issue date with today's date
+                    var today = new Date().toISOString().slice(0, 10);
+                    document.getElementById('fee-date').value = today;
+                    document.getElementById('issue-date').value = today;
 
-            // Selecting correct month based on the date
-            var today = new Date();
-            var currentMonth = today.getMonth() + 1;
-            var monthSelect = document.getElementById('month');
-            var options = monthSelect.options;
-            for (var i = 0; i < options.length; i++) {
-                if (options[i].value == ('0' + currentMonth).slice(-2)) {
-                    options[i].selected = true;
-                    break;
-                }
-            }
+                    // S electing correct month based on the date
+                    var today = new Date();
+                    var currentMonth = today.getMonth() + 1;
+                    var monthSelect = document.getElementById('month');
+                    var options = monthSelect.options;
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].value == ('0' + currentMonth).slice(-2)) {
+                            options[i].selected = true;
+                            break;
+                        }
+                    }
 
-            // Displaying correct year based on the date
-            var today = new Date();
-            var currentYear = today.getFullYear();
-            document.getElementById('year').value = currentYear;
+                    // Displaying correct year based on the date
+                    var today = new Date();
+                    var currentYear = today.getFullYear();
+                    document.getElementById('year').value = currentYear;
 
-            // Showing and hiding filters
-            var showHideFiltersButton = document.getElementById("show-hide-filters");
-            var filterButtonText = document.getElementById("show-hide-filter-button-text");
-            var filtersGroup = document.getElementById("filters");
+                    // Showi ng and hiding filters
+                    var show HideFiltersButton = document.getElementById("show-hide-filters");
+                    var filt erButtonText = document.getElementById("show-hide-filter-button-text");
+                    var filt ersGroup = document.getElementById("filters");
 
-            showHideFiltersButton.addEventListener("click", function() {
-                var isHidden = filtersGroup.getAttribute('data-is-hidden');
+                showHide FiltersButton.addEventListener("click", function () {
+                        var isHidden = filtersGroup.getAttribute('data-is-hidden');
 
-                if (isHidden === 'true') {
-                    filtersGroup.classList.add('d-block');
-                    filtersGroup.classList.remove('d-none');
-                    filtersGroup.setAttribute('data-is-hidden', 'false');
-                    filterButtonText.innerText = "Hide Filters";
-                } else {
-                    filtersGroup.classList.add('d-none');
-                    filtersGroup.classList.remove('d-block');
-                    filtersGroup.setAttribute('data-is-hidden', 'true');
-                    filterButtonText.innerText = "Show Filters";
-                }
-            });
-            </script>
+                        if (isHidden === 'true') {
+                            filtersGroup.classList.add('d-block');
+                            filtersGroup.classList.remove('d-none');
+                            filtersGroup.setAttribute('data-is-hidden', 'false');
+                            filterButtonText.innerText = "Hide Filters";
+                        } else {
+                            filtersGroup.classList.add('d-none');
+                            filtersGroup.classList.remove('d-block');
+                            filtersGroup.setAttribute('data-is-hidden', 'true');
+                            filterButtonText.innerText = "Show Filters";
+                        }
+                    });
+                </script>
     </body>
 
 </html>
