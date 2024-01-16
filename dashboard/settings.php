@@ -1,6 +1,6 @@
+<?php include "../session_check.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php include "../session_check.php"; ?>
 
 <head>
     <meta charset="UTF-8" />
@@ -19,70 +19,70 @@
     <div class="row h-100">
         <!-- Navigation Canvas -->
         <style>
-            ul a {
-                text-decoration: none;
-            }
+        ul a {
+            text-decoration: none;
+        }
 
-            .canvas-button {
-                position: absolute;
-                top: 50%;
-                right: -2.5rem;
-                visibility: visible;
-                color: white;
-                border: none;
-                padding-block: 2rem;
-                border-radius: 0 10px 10px 0;
-            }
+        .canvas-button {
+            position: absolute;
+            top: 50%;
+            right: -2.5rem;
+            visibility: visible;
+            color: white;
+            border: none;
+            padding-block: 2rem;
+            border-radius: 0 10px 10px 0;
+        }
 
-            .list-group-item {
-                border: none;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                border-radius: 5px;
-                margin-bottom: 1.3rem;
-                font-size: 1.3rem;
-                cursor: pointer;
-            }
+        .list-group-item {
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.3rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
 
-            .nav-item-icon-container {
-                background-color: white;
-                color: #4169e1;
-                width: 35px;
-                height: 35px;
-                display: flex;
-                justify-content: center;
-                align-content: center;
-                border-radius: 5px;
-                box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            }
+        .nav-item-icon-container {
+            background-color: white;
+            color: #4169e1;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            border-radius: 5px;
+            box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+            -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+            -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+        }
 
-            .nav-item-icon-container i {
-                font-size: 1.5rem;
-            }
+        .nav-item-icon-container i {
+            font-size: 1.5rem;
+        }
 
-            .nav-item-icon-container.active {
-                box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-                -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
-            }
+        .nav-item-icon-container.active {
+            box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+            -webkit-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+            -moz-box-shadow: 0px 6px 10px 3px rgba(135, 135, 135, 0.2);
+        }
 
-            .profile-icon-container {
-                width: 2rem;
-                height: 2rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: rgb(77, 77, 77);
-                border-radius: 50%;
-                background: rgb(226, 226, 226);
-                background: linear-gradient(338deg,
-                        rgba(226, 226, 226, 1) 45%,
-                        rgba(246, 246, 246, 1) 52%,
-                        rgba(255, 255, 255, 1) 60%);
-            }
+        .profile-icon-container {
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(77, 77, 77);
+            border-radius: 50%;
+            background: rgb(226, 226, 226);
+            background: linear-gradient(338deg,
+                    rgba(226, 226, 226, 1) 45%,
+                    rgba(246, 246, 246, 1) 52%,
+                    rgba(255, 255, 255, 1) 60%);
+        }
         </style>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="navigation-canvas"
             aria-labelledby="navigation-canvas-label">
@@ -139,58 +139,58 @@
                 <i class="bi bi-three-dots-vertical"></i>
                 <!-- Dragging script -->
                 <script>
-                    const draggableElement = document.getElementById('offcanvas-toggle-button');
-                    let isDragging = false;
-                    let startY;
-                    let initialTop;
-                    const topBoundaryOffset = 64; // 4rem = 64px
-                    const bottomBoundaryOffset = 16; // 1rem = 16px
+                const draggableElement = document.getElementById('offcanvas-toggle-button');
+                let isDragging = false;
+                let startY;
+                let initialTop;
+                const topBoundaryOffset = 64; // 4rem = 64px
+                const bottomBoundaryOffset = 16; // 1rem = 16px
 
-                    // Function to handle the touch start event
-                    function handleTouchStart(event) {
-                        const touch = event.touches[0];
-                        startY = touch.clientY;
-                        initialTop = parseInt(window.getComputedStyle(draggableElement).top);
-                        isDragging = false; // Initialize as click, not drag
+                // Function to handle the touch start event
+                function handleTouchStart(event) {
+                    const touch = event.touches[0];
+                    startY = touch.clientY;
+                    initialTop = parseInt(window.getComputedStyle(draggableElement).top);
+                    isDragging = false; // Initialize as click, not drag
+                }
+
+                // Function to handle the touch move event and update the element position along the Y-axis
+                function handleTouchMove(event) {
+                    const touch = event.touches[0];
+                    const deltaY = touch.clientY - startY;
+
+                    // Check if the user has moved enough to be considered a drag
+                    if (!isDragging && Math.abs(deltaY) > 5) {
+                        isDragging = true;
                     }
 
-                    // Function to handle the touch move event and update the element position along the Y-axis
-                    function handleTouchMove(event) {
-                        const touch = event.touches[0];
-                        const deltaY = touch.clientY - startY;
+                    // If dragging, limit the element's position within the boundaries
+                    if (isDragging) {
+                        const minTop = topBoundaryOffset;
+                        const maxTop = window.innerHeight - draggableElement.clientHeight - bottomBoundaryOffset;
+                        let newTop = Math.max(minTop, Math.min(initialTop + deltaY, maxTop));
+                        draggableElement.style.top = newTop + 'px';
 
-                        // Check if the user has moved enough to be considered a drag
-                        if (!isDragging && Math.abs(deltaY) > 5) {
-                            isDragging = true;
-                        }
-
-                        // If dragging, limit the element's position within the boundaries
-                        if (isDragging) {
-                            const minTop = topBoundaryOffset;
-                            const maxTop = window.innerHeight - draggableElement.clientHeight - bottomBoundaryOffset;
-                            let newTop = Math.max(minTop, Math.min(initialTop + deltaY, maxTop));
-                            draggableElement.style.top = newTop + 'px';
-
-                            // Save the element's vertical position to localStorage
-                            localStorage.setItem('draggableElementTop', newTop);
-                        }
+                        // Save the element's vertical position to localStorage
+                        localStorage.setItem('draggableElementTop', newTop);
                     }
+                }
 
-                    // Function to handle the touch end event
-                    function handleTouchEnd(event) {
-                        isDragging = false;
-                    }
+                // Function to handle the touch end event
+                function handleTouchEnd(event) {
+                    isDragging = false;
+                }
 
-                    // Retrieve the stored position from localStorage
-                    const storedTop = localStorage.getItem('draggableElementTop');
-                    if (storedTop) {
-                        draggableElement.style.top = storedTop + 'px';
-                    }
+                // Retrieve the stored position from localStorage
+                const storedTop = localStorage.getItem('draggableElementTop');
+                if (storedTop) {
+                    draggableElement.style.top = storedTop + 'px';
+                }
 
-                    // Add touch event listeners for dragging
-                    draggableElement.addEventListener('touchstart', handleTouchStart);
-                    draggableElement.addEventListener('touchmove', handleTouchMove);
-                    draggableElement.addEventListener('touchend', handleTouchEnd);
+                // Add touch event listeners for dragging
+                draggableElement.addEventListener('touchstart', handleTouchStart);
+                draggableElement.addEventListener('touchmove', handleTouchMove);
+                draggableElement.addEventListener('touchend', handleTouchEnd);
                 </script>
             </button>
         </div>
@@ -245,46 +245,46 @@
                                 $bankAccountBranchName = $bankAccount['branch'];
                                 $bankAccountBranchCode = $bankAccount['branch_code'];
                                 $bankAccountIsDefault = $bankAccount['is_default']; ?>
-                                <div class="card bank-account-card mb-1" data-bank-account-id="<?php echo $bankAccountId; ?>"
-                                    data-bank-account-name="<?php echo $bankAccountName; ?>"
-                                    data-bank-account-bank-name="<?php echo $bankAccountBankName ?>"
-                                    data-bank-account-type="<?php echo $bankAccountType; ?>"
-                                    data-bank-account-holder-name="<?php echo $bankAccountAccountHolder ?>"
-                                    data-bank-account-account-number="<?php echo $bankAccountAccNum; ?>"
-                                    data-bank-account-branch-name="<?php echo $bankAccountBranchName ?>"
-                                    data-bank-account-branch-code="<?php echo $bankAccountBranchCode ?>"
-                                    data-bank-account-is-default="<?php echo $bankAccountIsDefault ?>" data-bs-toggle="modal"
-                                    data-bs-target="#add-bank-account-modal">
-                                    <div class="card-body">
-                                        <div class="row align-items-center">
-                                            <div class="col-2">
-                                                <i class="fs-1 bi bi-credit-card"></i>
-                                            </div>
-                                            <div class="col text-truncate">
-                                                <span class="fs-5">
-                                                    <?php echo $bankAccountName; ?> –
-                                                    <?php echo $bankAccountAccNum; ?>
-                                                    <span class="text-primary font-weight-bold">
-                                                        <?php echo ($bankAccountIsDefault) ? "(DEFAULT)" : ""; ?>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <div class="col-2 text-end">
-                                                <i class="bi bi-trash-fill fs-4 text-danger" data-bs-toggle="modal" <?php if ($bankAccountIsDefault) {
+                        <div class="card bank-account-card mb-1" data-bank-account-id="<?php echo $bankAccountId; ?>"
+                            data-bank-account-name="<?php echo $bankAccountName; ?>"
+                            data-bank-account-bank-name="<?php echo $bankAccountBankName ?>"
+                            data-bank-account-type="<?php echo $bankAccountType; ?>"
+                            data-bank-account-holder-name="<?php echo $bankAccountAccountHolder ?>"
+                            data-bank-account-account-number="<?php echo $bankAccountAccNum; ?>"
+                            data-bank-account-branch-name="<?php echo $bankAccountBranchName ?>"
+                            data-bank-account-branch-code="<?php echo $bankAccountBranchCode ?>"
+                            data-bank-account-is-default="<?php echo $bankAccountIsDefault ?>" data-bs-toggle="modal"
+                            data-bs-target="#add-bank-account-modal">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-2">
+                                        <i class="fs-1 bi bi-credit-card"></i>
+                                    </div>
+                                    <div class="col text-truncate">
+                                        <span class="fs-5">
+                                            <?php echo $bankAccountName; ?> –
+                                            <?php echo $bankAccountAccNum; ?>
+                                            <span class="text-primary font-weight-bold">
+                                                <?php echo ($bankAccountIsDefault) ? "(DEFAULT)" : ""; ?>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="col-2 text-end">
+                                        <i class="bi bi-trash-fill fs-4 text-danger" data-bs-toggle="modal" <?php if ($bankAccountIsDefault) {
                                                     echo 'data-bs-target="#default-bank-account-confirm-delete-modal"';
                                                 } else {
                                                     echo 'data-bs-target="#bank-account-confirm-delete-modal"';
                                                 }
                                                 ?>></i>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-                            <?php }
-                        } else { ?>
-                            <div class="no-bank-accounts text-secondary">
-                                No Bank Accounts to display
                             </div>
+                        </div>
+                        <?php }
+                        } else { ?>
+                        <div class="no-bank-accounts text-secondary">
+                            No Bank Accounts to display
+                        </div>
                         <?php } ?>
                     </div>
                     <div class="col text-end mt-2">
@@ -304,9 +304,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
         </script>
 </body>

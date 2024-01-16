@@ -1,6 +1,4 @@
-<?php
-include "../session_check.php";
-?>
+<?php include "../session_check.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +12,8 @@ include "../session_check.php";
 </head>
 <?php
     // Getting database connection
-    require_once("load_customer_details.php");
-    require_once("load_settings.inc.php");
+    include "load_customer_details.php";
+    include "load_settings.inc.php";
     include "../popup.php";
 ?>
 

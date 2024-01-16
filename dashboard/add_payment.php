@@ -25,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $currentBalance = $row['balance_amount'];
     }
 
-    echo "Current Balance: $currentBalance";
-
     // Calculate the new balance
     $updatedBalance = $currentBalance - $paymentAmount;
 

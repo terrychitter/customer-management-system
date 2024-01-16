@@ -28,14 +28,19 @@ switch ($searchBy) {
 // Execute the query
 $resultSet = mysqli_query($conn, $sql);
 
-// Fetch the results and add them to the $results array
-while ($row = mysqli_fetch_assoc($resultSet)) {
-    $results[] = $row;
+if ($resultSet) {
+    // Fetch the results and add them to the $results array
+    while ($row = mysqli_fetch_assoc($resultSet)) {
+        $results[] = $row;
+    }
+
+    // Close the connection
+    mysqli_close($conn);
+
+    // Return the results in JSON format
+    echo json_encode($results);
+} else {
+    echo "Query Failed";
 }
 
-// Close the connection
-mysqli_close($conn);
-
-// Return the results in JSON format
-echo json_encode($results);
 ?>
