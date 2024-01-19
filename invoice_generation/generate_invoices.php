@@ -62,7 +62,7 @@ foreach ($customerIds as $key => $customerId) {
     $currentYear = date('y');
     $currentMonth = date('m');
     $currentDay = date('d');
-    $invoiceNumber = "INV" . $currentYear . $currentMonth . $currentDay . $customerId;
+    $invoiceNumber = "INV" . substr($year, -2) . $numericMonth . date('d', strtotime($feeDate)) . $customerId;
 
     // Prepare and execute the query to fetch BBF amount
     $bbfQuery = "SELECT balance_amount

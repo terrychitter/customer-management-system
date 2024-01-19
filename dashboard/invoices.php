@@ -450,11 +450,12 @@
                                         style="overflow-x: auto;">
                                         <?php foreach ($uniqueMonthsYears as $umy) { ?>
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link <?php echo ($umy['id'] == "1") ? "active" : ""; ?>"
+                                                <button
+                                                    class="download-invoice-pill-button nav-link <?php echo ($umy['id'] == "1") ? "active" : ""; ?>"
                                                     id="pills-<?php echo $umy['id'] ?>-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-<?php echo $umy['id']; ?>" type="button"
-                                                    role="tab" aria-controls="pills-<?php echo $umy['id']; ?>"
-                                                    aria-selected="true">
+                                                    data-month-year="<?php echo $umy['title']; ?>" role="tab"
+                                                    aria-controls="pills-<?php echo $umy['id']; ?>" aria-selected="true">
                                                     <?php echo $umy['title']; ?>
                                                 </button>
                                             </li>
@@ -477,8 +478,8 @@
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div class="d-grid gap-2 d-sm-block"><button class="btn btn-primary"><i
-                                            class="bi bi-download fs-4"></i> Download
+                                <div id="download-invoices-button" class="d-grid gap-2 d-sm-block"><button
+                                        class="btn btn-primary"><i class="bi bi-download fs-4"></i> Download
                                         Invoices</button></div>
                             </div>
                         </div>
@@ -513,7 +514,7 @@
                     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
                     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                         return new bootstrap.Tooltip(tooltipTriggerEl)
-                    })
+                    });
 
                     // Get the first day of the current month
                     var today = new Date();
@@ -547,12 +548,12 @@
                     var currentYear = today.getFullYear();
                     document.getElementById('year').value = currentYear;
 
-                    // Showi ng and hiding filters
-                    var show HideFiltersButton = document.getElementById("show-hide-filters");
-                    var filt erButtonText = document.getElementById("show-hide-filter-button-text");
-                    var filt ersGroup = document.getElementById("filters");
+                    // Showing and hiding filters
+                    var showHideFiltersButton = document.getElementById("show-hide-filters");
+                    var filterButtonText = document.getElementById("show-hide-filter-button-text");
+                    var filtersGroup = document.getElementById("filters");
 
-                showHide FiltersButton.addEventListener("click", function () {
+                    showHideFiltersButton.addEventListener("click", function () {
                         var isHidden = filtersGroup.getAttribute('data-is-hidden');
 
                         if (isHidden === 'true') {
@@ -567,6 +568,29 @@
                             filterButtonText.innerText = "Show Filters";
                         }
                     });
+
+                    var monthYearToDownload = "";
+
+                    // Set month and year to download
+                    activeMonthYearTabButton = document.querySelector(".download-invoice-pill-button.nav-link.active");
+                    monthYearToDownload = activeMonthYearTabButton.getAttribute("data-month-year");
+
+                    // Get all download invoice tab buttons
+                    downloadInvoiceTabButtons = document.querySelectorAll(".download-invoice-pill-button");
+
+                    // Add event listener to the buttons
+                    downloadInvoiceTabButtons.forEach(downloadInvoiceTabButton => {
+                        downloadInvoiceTabButton.addEventListener("click", () => {
+                            // Setting the monthYearToDownload
+                            monthYearToDownload = downloadInvoiceTabButton.getAttribute("data-month-year");
+                        });
+                    });
+
+                    // Downloading invoices
+                    downloadInvoicesButton = document.getElementById("download-invoices-button");
+                    downloadInvoicesButton.addEventListener("click", () => {
+                        window.location.href = "download_invoices.php?month-year=" + monthYearToDownload;
+                    })
                 </script>
     </body>
 
