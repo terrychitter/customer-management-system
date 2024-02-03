@@ -1,12 +1,13 @@
 # Customer Management System
-
-![CMS Banner](https://tenor.googleapis.com/v2/media?id=11630918916192481541&format=optimizedgif&client_key=tenor_web&appversion=browser-r20240118-1&access_token=ya29.a0AfB_byAsGhHfSkFrrtz3i34xKqWXz6E4Y3bDkzzd2TAJ_w8qpi_o959r1n0XmBEaqsdAaUqwe3iFCLJCeyPGs8wLfw6lY9JjFdV70weRY6BWQQmpMfvg-u4aJ7K8ItiwxLKFT27GnlIUwCYJa1oQC3_TQwN8jvY3_AaCgYKAfcSARISFQHGX2Minzr4hP1egqytfeRG7HdX4Q0169&key=AIzaSyC-P6_qz3FzCoXGLk6tgitZo4jEJ5mLzD8)
+<p align="center">
+ <img width="100%" src="https://tenor.googleapis.com/v2/media?id=11630918916192481541&format=optimizedgif&client_key=tenor_web&appversion=browser-r20240118-1&access_token=ya29.a0AfB_byAsGhHfSkFrrtz3i34xKqWXz6E4Y3bDkzzd2TAJ_w8qpi_o959r1n0XmBEaqsdAaUqwe3iFCLJCeyPGs8wLfw6lY9JjFdV70weRY6BWQQmpMfvg-u4aJ7K8ItiwxLKFT27GnlIUwCYJa1oQC3_TQwN8jvY3_AaCgYKAfcSARISFQHGX2Minzr4hP1egqytfeRG7HdX4Q0169&key=AIzaSyC-P6_qz3FzCoXGLk6tgitZo4jEJ5mLzD8">
+</p>
 
 ## Table of Contents
 - [Description](#description)
 - [Installation](#installation)
-- [Usage](#usage) 
 - [Configuration](#configuration)
+- [Usage](#usage) 
 - [Contributing](#contributing)
 - [Testing](#testing)
 - [Documentation](#documentation)
@@ -15,6 +16,9 @@
 - [Demo](#demo) 
 - [Contact Information](#contact-information)
 - [Version History](#version-history)
+
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/terrychitter/customer-management-system) ![GitHub repo size](https://img.shields.io/github/repo-size/terrychitter/customer-management-system)
+
 
 ## Description
 This project is a customer management system for a fictional business that sanitizes dustbins.
@@ -28,6 +32,8 @@ The invoice section allows for administration to generate invoices for customers
 The settings page allows administration staff to change or set certain features such as adding or removing bank details to display on customer invoices.
 
 The project makes use of programming languages such as HTML5, CSS3, JavaScript, NodeJS and PHP. Additionally Bootstrap is used for styling.
+
+
 ## Installation
 See below instructions to quickly set up and install the project. The project makes use of all frameworks below.
 ### Composer
@@ -40,15 +46,17 @@ See below instructions to quickly set up and install the project. The project ma
  6. Install Node.js dependencies: `npm install`.
 ### Bootstrap
  7. Bootstrap can be added to your project in several ways: 
--**Using npm:**  ```bash npm install bootstrap ```
--**Using yarn:** ```bash yarn add bootstrap ```
+-**Using npm:**  ```bash npm install bootstrap```
+-**Using yarn:** ```bash yarn add bootstrap```
 
-## Usage
 ## Configuration
+## Usage
+## Contributing
 ## Testing
 ## Documentation
 ## License
 ## Acknowledgements
 ## Demo
 ## Contact Information
+For any questions and support, contact me at t.sikenaris@gmail.com
 ## Version History
