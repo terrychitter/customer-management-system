@@ -1,5 +1,5 @@
 {
-  "name": "kleenbin-cms",
+  "name": "cms",
   "version": "1.0.0",
   "description": "A customer management system for personal usage. The program is responsible for managing customers such as creating, updating and deleting as well as other functions such a invoice and statement generation.",
   "main": "index.js",

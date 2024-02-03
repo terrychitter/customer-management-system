@@ -103,8 +103,8 @@
             <!-- Canvas Head -->
             <div class="offcanvas-header">
                 <h2>
-                    <div class="row" style="margin-left: -2.5rem">
-                        <img src="../images/logo_cropped.png" alt="Kleenbin CMS Logo" />
+                    <div class="row align-items-center">
+                        <img src="../images/logo_cropped.png" alt="CMS Logo" width="150px" height="150px" />
                     </div>
                 </h2>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
@@ -225,7 +225,7 @@
                     </nav>
                 </div>
                 <div class="profile-settings col d-flex align-items-center justify-content-end" style="gap: 0.6rem">
-                    <div class="account-name">Kleenbin Norwood</div>
+                    <div class="account-name">Customer Management System</div>
                     <div class="profile-icon-container">
                         <i class="bi bi-person-fill fs-3"></i>
                     </div>
