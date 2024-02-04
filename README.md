@@ -50,6 +50,27 @@ See below instructions to quickly set up and install the project. The project ma
 -**Using yarn:** ```bash yarn add bootstrap```
 
 ## Configuration
+### Config Folder
+You will find a folder in the repository labelled `config`. It is important that you place this folder in the previous directory of the repository. The project has been set up this way as it is good security practice.
+#### db_conn.php
+The `db_conn.php` file holds the database connection. See the [installation](##Installation) regarding database set up. Ensure that the `db_conn.php` file holds the correct details to successfully connect to your database.
+
+<div align="center">
+<img src="https://i.ibb.co/DMqGj49/Snap.png" alt="Snap" border="0">
+</div>
+
+#### keys.php
+The `keys.php` file holds additional keys used in the site. The `$secretLoginToken` is used as the login token when accessing the token and you may set this to whatever you like.
+
+The `$recaptchaKey` should be the secret key for your Google reCaptcha. See [here](https://www.youtube.com/watch?v=i3Uq3-ulW-k) how to setup your Google reCaptcha for the site. Please ensure to use reCaptcha v2 – "I am not a Robot" Checkbox. **Note**: Unfortunately as of the current version there is no work around to the Google reCaptcha and I apologise for the inconvenience this may cause in testing the project.
+
+<div align="center">
+<img src="https://i.ibb.co/ZXdbyGr/Snap-3.png" alt="Snap-3" border="0">
+</div>
+
+### Other Configurations
+Lastly, in addition to providing your secret key for Google reCaptcha, ensure to provide your public key [here]() in the project.
+
 ## Usage
 ## Contributing
 ## Testing
