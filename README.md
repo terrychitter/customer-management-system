@@ -76,6 +76,7 @@ Lastly, in addition to providing your secret key for Google reCaptcha, ensure to
 ## Testing
 ## Documentation
 ## License
+This project makes use of the [MIT License](LICENSE)
 ## Acknowledgements
 ## Demo
 ## Contact Information
