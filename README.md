@@ -71,6 +71,13 @@ Lastly, in addition to providing your secret key for Google reCaptcha, ensure to
 ## Usage
 This section goes through notable features of the site.
 
+### Login
+The site makes use of a login key for administrators to be able to access customer data and perform tasks. If the administrator's session has expired they will be redirected to the login screen seen below. Additionally to prevent cyber attacks such as DDoS a Google reCaptcha is also implemented into the login page.
+
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/DQMTR3Rakrii5LOszaUx36deKN8jiy7v7VmcdUKH7qyjn5xu4AAxxxj5HY6ujIOMy1b1zXJSHNyHdXVfb2HEhtC_2F3s8fhrQL_lRZPVNUY">
+</div>
+
 ### Searching customers
 The search feature is used on multiple pages since customer databases can easily grow to large numbers making it cumbersome to find the customer you are looking for. For this reason, the default search feature allows the user to provide a search term as well as choose a search field, for example, account number, surname, and street name. This search feature is further built apon on the invoice page which you may view [here](###Filters-for-customers-on-Invoice-Page)
 
