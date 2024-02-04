@@ -9,13 +9,10 @@
 - [Configuration](#configuration)
 - [Usage](#usage) 
 - [Contributing](#contributing)
-- [Testing](#testing)
 - [Documentation](#documentation)
-- [License](#license) 
-- [Acknowledgements](#acknowledgements) 
-- [Demo](#demo) 
+- [License](#license)  
+- [Demo](#demo)
 - [Contact Information](#contact-information)
-- [Version History](#version-history)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/terrychitter/customer-management-system) ![GitHub repo size](https://img.shields.io/github/repo-size/terrychitter/customer-management-system)
 
@@ -73,6 +70,35 @@ Lastly, in addition to providing your secret key for Google reCaptcha, ensure to
 
 ## Usage
 ## Contributing
+Contributing
+Contributions from the community is most welcomed! Whether it's reporting a bug, submitting a feature request, or improving the documentation, your help is appreciated. To contribute to this project, please follow these guidelines:
+
+### Issues and Bugs
+If you encounter any issues or find a bug, please check the existing issues to see if it has already been reported. If not, please open a new issue, including the following details:
+
+- A clear and descriptive title.
+- A detailed description of the issue, including steps to reproduce.
+- Screenshots or code snippets, if applicable.
+- Information about your environment (operating system, browser, etc.).
+- Feature Requests
+
+You are welcome to suggest new features or improvements. Before submitting a feature request, please:
+- Check the existing feature requests to avoid duplicates.
+- Provide a clear and detailed description of the proposed feature.
+- Discuss the feature with the community to gather feedback.
+
+### Pull Requests
+Pull requests for bug fixes, new features, and improvements are welcomed as well. To submit a pull request, follow these steps:
+
+- Fork the repository and create a new branch for your contribution.
+- Write clear and comprehensive commit messages.
+- Test your changes thoroughly.
+- Submit a pull request, referencing the relevant issue (if applicable).
+- Be prepared to address feedback and iterate on your changes.
+
+By contributing to this project, you agree that your contributions will be licensed under the project's license.
+Thank you for contributing to the project! 🚀
+
 ## Testing
 ## Documentation
 ## License
