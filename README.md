@@ -1,6 +1,6 @@
 # Customer Management System
 <p align="center">
- <img width="100%" src="https://tenor.googleapis.com/v2/media?id=11630918916192481541&format=optimizedgif&client_key=tenor_web&appversion=browser-r20240118-1&access_token=ya29.a0AfB_byAsGhHfSkFrrtz3i34xKqWXz6E4Y3bDkzzd2TAJ_w8qpi_o959r1n0XmBEaqsdAaUqwe3iFCLJCeyPGs8wLfw6lY9JjFdV70weRY6BWQQmpMfvg-u4aJ7K8ItiwxLKFT27GnlIUwCYJa1oQC3_TQwN8jvY3_AaCgYKAfcSARISFQHGX2Minzr4hP1egqytfeRG7HdX4Q0169&key=AIzaSyC-P6_qz3FzCoXGLk6tgitZo4jEJ5mLzD8">
+ <img src="https://i.ibb.co/rpDYbhw/Customer-Management-System.png" alt="Customer-Management-System" border="0" width="100%">
 </p>
 
 ## Table of Contents
