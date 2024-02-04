@@ -77,8 +77,18 @@ The search feature is used on multiple pages since customer databases can easily
 ### Editing Customers
 Customer details are subject to change, thus, the site provides a quick and easy way to edit customer data. Validation such as length, email validation, and format and always considered.
 
+### Activating/Deactivating Customers
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/WGLAreGQPD7EJPEbysdAC6fC1H-ezKS1zwwYRjV75nMP1OAH-p_AZDQM6Kp7nGImWjOdKHc1R7DZt7DngmNUUyPq163HHNhJYDMOjgplZc8">
+</div>
+
 ### Adding Comments/Contacts
 In many cases administrators would add or edit comments as well as multiple contacts for individual customers.
+
+<div align="center">
+<img src="https://pouch.jumpshare.com/preview/IvMAFnDpetFiVxymAk2_YuQ02fEW-FPSV2BokUB37r87qnNIk0hP32dI6m2tFkE0WjOdKHc1R7DZt7DngmNUU0qT8Mpgoft53irnsAYrb9E">
+ <img src="https://pouch.jumpshare.com/preview/xkKebk1OzgkiW46yRMuBgfIUNI5sE5f34ufmKRSJcYt-ovS11ffxy-94MMnrpINNWjOdKHc1R7DZt7DngmNUUyvie19N1LjeS7Zr_xj-WdU" >
+</div>
 
 ### Adding Payments
 Payments can be recorded on the payments page for each customer. Addition to recording payments, the customer's balance will also be updated and recorded in the balances table with all the neccessary details of the transaction.
@@ -107,6 +117,10 @@ With the risk of human error, it is possible that duplicate invoices may be gene
 
 ### Invoice Downloading
 It is possible to download invoices from a customer's profile, however, this will quickly become tedious as the number of customers grow. On the invoices page administrators are able to download invoices in batch where it will be downloaded to their local device as a `.zip` file. Administrators can download invoices in batch from a certain month and year as seen below.
+
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/f10iFEt0PWDTDNE-hOsiM_eU1-wz_e_CKoyKI7R5vPHrIDANtGvSeIq5E-Bgx1SU3zNxlmFfILdrqQcX1H2a-npVbJk8ZkGkgsIgnm3H944">
+</div>
 
 ### Setting Default Bank Accounts
 Administrators may set default bank accounts to avoid having to manually edit each customer's details. When changing the default bank account the administrator has additional options:
