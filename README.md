@@ -77,7 +77,13 @@ The search feature is used on multiple pages since customer databases can easily
 ### Editing Customers
 Customer details are subject to change, thus, the site provides a quick and easy way to edit customer data. Validation such as length, email validation, and format and always considered.
 
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/ztDqcsqBROngz_cvajK6dyaypo7uM06hIQJQdXyCPOrZzhwofMOgeS8cFOHh0dGbTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk" >
+</div>
+
 ### Activating/Deactivating Customers
+If customers decide to discontinue with the business, their accounts are not closed as they may have outstanding balances. For this reason, customer accounts are set as active or inactive.
+
 <div align="center">
  <img src="https://pouch.jumpshare.com/preview/WGLAreGQPD7EJPEbysdAC6fC1H-ezKS1zwwYRjV75nMP1OAH-p_AZDQM6Kp7nGImWjOdKHc1R7DZt7DngmNUUyPq163HHNhJYDMOjgplZc8">
 </div>
@@ -93,16 +99,32 @@ In many cases administrators would add or edit comments as well as multiple cont
 ### Adding Payments
 Payments can be recorded on the payments page for each customer. Addition to recording payments, the customer's balance will also be updated and recorded in the balances table with all the neccessary details of the transaction.
 
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/dqL6DVCQiiq7seje_TNxu0rj0VXEuVQqWB12E8V8lMxZtuMh6xLX3kk3ry_D2AywTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+</div>
+
 ### Payment Reversal
 It is possible that human error can occur while recording payments. For this reason, payment reversal has been implemented. When a payment is reversed, the customer's payment record will be removed along with the balance recorded inserted into the balances table when the payment was recorded.
 
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/_LkLi1FOybyL9ioFS03cTqu_0v7jgGgH2Rwn8mbDxPCm0GvKaYe-2sat79ZlZ4wVTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+</div>
+
 ### Payment Duplication Checking
 In addition to erroneous input when recording payments, a payment may be mistakingley inserted again. Each payment is checked before inserting it into the database to ensure there is not an existing payment with the same date, amount, and type.
+
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/ntwMh9Rn5drp1uq-NFppXeK3u_NFA4aL1fmWgKTNILveH6ET6q02I8sX_pjhKhUmTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+</div>
 
 ### Invoice Generation
 Invoice generation using the CMS allows you to select which customers you would like to generate invoices for as well as set certain dates for the invoices. From the search section the administrator can select which customers they would like to generate invoices for and they will be displayed in the "Selected Customers" sections. One all invoice details are filled in, the administrator may generate the invoices all at once as seen below. A progress bar along with updates will be displayed at the bottom. All invoices are stored as `.xlsx` files.
 
 **Note**: The site is designed so that invoices are not accessable from the `htdocs` folder, instead, along with the `config` folder, all invoices are stored in the parent directory in the `invoices` folder. While invoices are easily accessible from the site, authorised users may access the invoices from the mentioned directory.
+
+<div>
+ <img src="https://pouch.jumpshare.com/preview/yIEjv3GF7FBZLkal-rcKBmuy7MBEqUw9k78aFZFg0NGnJbHBFcReenzONH_GFTEyikJdwUNrkJfDvJ_kMYHoIR-EQ4Ijnb2sKs2f3hllyz4">
+</div>
 
 ### Filters for customers on Invoice page
 The search feature is expanded on in the invoices page for users to easily find groups of customers. It is important to mention that only active customers are displayed by default on the invoice page, however, this can be overriden using the filters. Administrators may choose to do the following:
@@ -112,8 +134,16 @@ The search feature is expanded on in the invoices page for users to easily find 
 - Display all inactive customers with pending invoices.
 From the group of customers returned from the above filters, administrators may still add a search term and search field.
 
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/Gtnl7fIhx3p0kOybZS-3MJOKk2x0515vXT3N1q2-wXdLJfu45iam7qgKeg2Ya2MmikJdwUNrkJfDvJ_kMYHoIYpTrBUbBQGrOVweqpKvoTE">
+</div>
+
 ### Checking Duplicate Invoices
 With the risk of human error, it is possible that duplicate invoices may be generated. For this reason, duplication checking is run before generating the invoices. The administrator has the option to cancel the action, overwrite the current invoices, or remove those selected customers from the list and generate invoices for the remaining.
+
+<div align="center">
+ <img src="https://pouch.jumpshare.com/preview/Hfmq-rzDZgyGFDvRidDMTIru37IJitbuZroGGRoNEGr3fAinSQbdCZ9npsRIHZ1NikJdwUNrkJfDvJ_kMYHoIYpTrBUbBQGrOVweqpKvoTE">
+</div>
 
 ### Invoice Downloading
 It is possible to download invoices from a customer's profile, however, this will quickly become tedious as the number of customers grow. On the invoices page administrators are able to download invoices in batch where it will be downloaded to their local device as a `.zip` file. Administrators can download invoices in batch from a certain month and year as seen below.
@@ -127,6 +157,10 @@ Administrators may set default bank accounts to avoid having to manually edit ea
 - All future customers will be linked with the selected bank account.
 - All customers linked with the current default bank account will be linked to the new default bank account.
 - All customers will be linked to the new default bank account.
+
+<div align="center">
+<img src="https://pouch.jumpshare.com/preview/CmWBVO9VdAlk3jD35VuBCOLIPzGJlHw7zzLK4JZwc2bzplcAisYuti46Bb-BKtA7TtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+</div>
 
 ## Contributing
 Contributions from the community are most welcomed! Whether it's reporting a bug, submitting a feature request, or improving the documentation, your help is appreciated. To contribute to this project, please follow these guidelines:
