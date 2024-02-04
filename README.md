@@ -69,9 +69,53 @@ The `$recaptchaKey` should be the secret key for your Google reCaptcha. See [her
 Lastly, in addition to providing your secret key for Google reCaptcha, ensure to provide your public key [here](https://github.com/terrychitter/customer-management-system/blob/9fb5185776cc95a50a35b9b13c9cbbd959bc7bae/login/login.php#L148C1-L148C108) in the `data-sitekey` attribute.
 
 ## Usage
+This section goes through notable features of the site.
+
+### Searching customers
+The search feature is used on multiple pages since customer databases can easily grow to large numbers making it cumbersome to find the customer you are looking for. For this reason, the default search feature allows the user to provide a search term as well as choose a search field, for example, account number, surname, and street name. This search feature is further built apon on the invoice page which you may view [here](###Filters-for-customers-on-Invoice-Page)
+
+### Editing Customers
+Customer details are subject to change, thus, the site provides a quick and easy way to edit customer data. Validation such as length, email validation, and format and always considered.
+
+### Adding Comments/Contacts
+In many cases administrators would add or edit comments as well as multiple contacts for individual customers.
+
+### Adding Payments
+Payments can be recorded on the payments page for each customer. Addition to recording payments, the customer's balance will also be updated and recorded in the balances table with all the neccessary details of the transaction.
+
+### Payment Reversal
+It is possible that human error can occur while recording payments. For this reason, payment reversal has been implemented. When a payment is reversed, the customer's payment record will be removed along with the balance recorded inserted into the balances table when the payment was recorded.
+
+### Payment Duplication Checking
+In addition to erroneous input when recording payments, a payment may be mistakingley inserted again. Each payment is checked before inserting it into the database to ensure there is not an existing payment with the same date, amount, and type.
+
+### Invoice Generation
+Invoice generation using the CMS allows you to select which customers you would like to generate invoices for as well as set certain dates for the invoices. From the search section the administrator can select which customers they would like to generate invoices for and they will be displayed in the "Selected Customers" sections. One all invoice details are filled in, the administrator may generate the invoices all at once as seen below. A progress bar along with updates will be displayed at the bottom. All invoices are stored as `.xlsx` files.
+
+**Note**: The site is designed so that invoices are not accessable from the `htdocs` folder, instead, along with the `config` folder, all invoices are stored in the parent directory in the `invoices` folder. While invoices are easily accessible from the site, authorised users may access the invoices from the mentioned directory.
+
+### Filters for customers on Invoice page
+The search feature is expanded on in the invoices page for users to easily find groups of customers. It is important to mention that only active customers are displayed by default on the invoice page, however, this can be overriden using the filters. Administrators may choose to do the following:
+- Display all active customers (defaut).
+- Display all active customers with pending invoices (this refers to all customers that do not have an invoice for the current month yet).
+- Display all inactive customers.
+- Display all inactive customers with pending invoices.
+From the group of customers returned from the above filters, administrators may still add a search term and search field.
+
+### Checking Duplicate Invoices
+With the risk of human error, it is possible that duplicate invoices may be generated. For this reason, duplication checking is run before generating the invoices. The administrator has the option to cancel the action, overwrite the current invoices, or remove those selected customers from the list and generate invoices for the remaining.
+
+### Invoice Downloading
+It is possible to download invoices from a customer's profile, however, this will quickly become tedious as the number of customers grow. On the invoices page administrators are able to download invoices in batch where it will be downloaded to their local device as a `.zip` file. Administrators can download invoices in batch from a certain month and year as seen below.
+
+### Setting Default Bank Accounts
+Administrators may set default bank accounts to avoid having to manually edit each customer's details. When changing the default bank account the administrator has additional options:
+- All future customers will be linked with the selected bank account.
+- All customers linked with the current default bank account will be linked to the new default bank account.
+- All customers will be linked to the new default bank account.
+
 ## Contributing
-Contributing
-Contributions from the community is most welcomed! Whether it's reporting a bug, submitting a feature request, or improving the documentation, your help is appreciated. To contribute to this project, please follow these guidelines:
+Contributions from the community are most welcomed! Whether it's reporting a bug, submitting a feature request, or improving the documentation, your help is appreciated. To contribute to this project, please follow these guidelines:
 
 ### Issues and Bugs
 If you encounter any issues or find a bug, please check the existing issues to see if it has already been reported. If not, please open a new issue, including the following details:
@@ -80,8 +124,8 @@ If you encounter any issues or find a bug, please check the existing issues to s
 - A detailed description of the issue, including steps to reproduce.
 - Screenshots or code snippets, if applicable.
 - Information about your environment (operating system, browser, etc.).
-- Feature Requests
 
+### Feature Requests
 You are welcome to suggest new features or improvements. Before submitting a feature request, please:
 - Check the existing feature requests to avoid duplicates.
 - Provide a clear and detailed description of the proposed feature.
@@ -99,12 +143,10 @@ Pull requests for bug fixes, new features, and improvements are welcomed as well
 By contributing to this project, you agree that your contributions will be licensed under the project's license.
 Thank you for contributing to the project! 🚀
 
-## Testing
 ## Documentation
+
 ## License
 This project makes use of the [MIT License](LICENSE.md)
-## Acknowledgements
-## Demo
+
 ## Contact Information
 For any questions and support, contact me at t.sikenaris@gmail.com
-## Version History
