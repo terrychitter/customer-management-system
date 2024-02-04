@@ -45,12 +45,14 @@ See below instructions to quickly set up and install the project. The project ma
  7. Bootstrap can be added to your project in several ways: 
 -**Using npm:**  ```bash npm install bootstrap```
 -**Using yarn:** ```bash yarn add bootstrap```
+### Database
+The database file may be found [here](https://github.com/terrychitter/customer-management-system/blob/a65ccb8920d816188ad5829ac44241fee43a5b7f/cms_db.sql). The database is already filled with data that readers may use for testing. Below is a schema of the database.
 
 ## Configuration
 ### Config Folder
 You will find a folder in the repository labelled `config`. It is important that you place this folder in the previous directory of the repository. The project has been set up this way as it is good security practice.
 #### db_conn.php
-The `db_conn.php` file holds the database connection. See the [installation](##Installation) regarding database set up. Ensure that the `db_conn.php` file holds the correct details to successfully connect to your database.
+The `db_conn.php` file holds the database connection. See the [installation](#Database) regarding database set up. Ensure that the `db_conn.php` file holds the correct details to successfully connect to your database.
 
 <div align="center">
 <img src="https://i.ibb.co/DMqGj49/Snap.png" alt="Snap" border="0">
@@ -197,8 +199,6 @@ Pull requests for bug fixes, new features, and improvements are welcomed as well
 
 By contributing to this project, you agree that your contributions will be licensed under the project's license.
 Thank you for contributing to the project! 🚀
-
-## Documentation
 
 ## License
 This project makes use of the [MIT License](LICENSE.md)
