@@ -52,7 +52,7 @@ The database file may be found [here](https://github.com/terrychitter/customer-m
 ### Config Folder
 You will find a folder in the repository labelled `config`. It is important that you place this folder in the previous directory of the repository. The project has been set up this way as it is good security practice.
 #### db_conn.php
-The `db_conn.php` file holds the database connection. See the [installation](#Installation) regarding database set up. Ensure that the `db_conn.php` file holds the correct details to successfully connect to your database.
+The `db_conn.php` file holds the database connection. See the [installation](#Database) regarding database set up. Ensure that the `db_conn.php` file holds the correct details to successfully connect to your database.
 
 <div align="center">
 <img src="https://i.ibb.co/DMqGj49/Snap.png" alt="Snap" border="0">
