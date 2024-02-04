@@ -46,7 +46,7 @@ See below instructions to quickly set up and install the project. The project ma
 -**Using npm:**  ```bash npm install bootstrap```
 -**Using yarn:** ```bash yarn add bootstrap```
 ### Database
-The database file may be found [here](https://github.com/terrychitter/customer-management-system/blob/a65ccb8920d816188ad5829ac44241fee43a5b7f/cms_db.sql). Below is a schema of the database.
+The database file may be found [here](https://github.com/terrychitter/customer-management-system/blob/a65ccb8920d816188ad5829ac44241fee43a5b7f/cms_db.sql). The database is already filled with data that readers may use for testing. Below is a schema of the database.
 
 ## Configuration
 ### Config Folder
