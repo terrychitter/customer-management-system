@@ -69,7 +69,7 @@ The `$recaptchaKey` should be the secret key for your Google reCaptcha. See [her
 </div>
 
 ### Other Configurations
-Lastly, in addition to providing your secret key for Google reCaptcha, ensure to provide your public key [here]() in the project.
+Lastly, in addition to providing your secret key for Google reCaptcha, ensure to provide your public key [here](https://github.com/terrychitter/customer-management-system/blob/9fb5185776cc95a50a35b9b13c9cbbd959bc7bae/login/login.php#L148C1-L148C108) in the `data-sitekey` attribute.
 
 ## Usage
 ## Contributing
