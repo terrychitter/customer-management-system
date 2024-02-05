@@ -131,7 +131,7 @@ Invoice generation using the CMS allows you to select which customers you would 
 
 **Note**: The site is designed so that invoices are not accessable from the `htdocs` folder, instead, along with the `config` folder, all invoices are stored in the parent directory in the `invoices` folder. While invoices are easily accessible from the site, authorised users may access the invoices from the mentioned directory.
 
-<div>
+<div align="center">
  <img src="https://pouch.jumpshare.com/preview/yIEjv3GF7FBZLkal-rcKBmuy7MBEqUw9k78aFZFg0NGnJbHBFcReenzONH_GFTEyikJdwUNrkJfDvJ_kMYHoIR-EQ4Ijnb2sKs2f3hllyz4">
 </div>
 
