@@ -1,7 +1,7 @@
 # Customer Management System
-<p align="center">
- <img src="https://i.ibb.co/rpDYbhw/Customer-Management-System.png" alt="Customer-Management-System" border="0" width="100%">
-</p>
+<div align="center">
+ <img src="https://i.ibb.co/C6Ybsgp/logo-cropped.png" alt="logo-cropped" border="0">
+</div>
 
 ## Table of Contents
 - [Description](#description)
