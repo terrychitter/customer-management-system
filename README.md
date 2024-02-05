@@ -9,9 +9,7 @@
 - [Configuration](#configuration)
 - [Usage](#usage) 
 - [Contributing](#contributing)
-- [Documentation](#documentation)
 - [License](#license)  
-- [Demo](#demo)
 - [Contact Information](#contact-information)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/terrychitter/customer-management-system) ![GitHub repo size](https://img.shields.io/github/repo-size/terrychitter/customer-management-system)
