@@ -156,7 +156,7 @@ With the risk of human error, it is possible that duplicate invoices may be gene
 It is possible to download invoices from a customer's profile, however, this will quickly become tedious as the number of customers grow. On the invoices page administrators are able to download invoices in batch where it will be downloaded to their local device as a `.zip` file. Administrators can download invoices in batch from a certain month and year as seen below.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/f10iFEt0PWDTDNE-hOsiM_eU1-wz_e_CKoyKI7R5vPHrIDANtGvSeIq5E-Bgx1SU3zNxlmFfILdrqQcX1H2a-npVbJk8ZkGkgsIgnm3H944">
+ <img src="https://i.ibb.co/F7vhMNQ/Downloading-invoices.gif">
 </div>
 
 ### Setting Default Bank Accounts
@@ -166,7 +166,7 @@ Administrators may set default bank accounts to avoid having to manually edit ea
 - All customers will be linked to the new default bank account.
 
 <div align="center">
-<img src="https://pouch.jumpshare.com/preview/CmWBVO9VdAlk3jD35VuBCOLIPzGJlHw7zzLK4JZwc2bzplcAisYuti46Bb-BKtA7TtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+<img src="https://i.ibb.co/0ZtXvsB/Setting-default-bank-account.gif">
 </div>
 
 ## Contributing
