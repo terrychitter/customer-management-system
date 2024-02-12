@@ -53,7 +53,7 @@ You will find a folder in the repository labelled `config`. It is important that
 The `db_conn.php` file holds the database connection. See the [installation](#Database) regarding database set up. Ensure that the `db_conn.php` file holds the correct details to successfully connect to your database.
 
 <div align="center">
-<img src="https://i.ibb.co/DMqGj49/Snap.png" alt="Snap" border="0">
+<img src="https://i.ibb.co/QdKcrXw/db-conn-file.png" alt="Snap" border="0">
 </div>
 
 #### keys.php
@@ -62,7 +62,7 @@ The `keys.php` file holds additional keys used in the site. The `$secretLoginTok
 The `$recaptchaKey` should be the secret key for your Google reCaptcha. See [here](https://www.youtube.com/watch?v=i3Uq3-ulW-k) how to setup your Google reCaptcha for the site. Please ensure to use reCaptcha v2 – "I am not a Robot" Checkbox. **Note**: Unfortunately as of the current version there is no work around to the Google reCaptcha and I apologise for the inconvenience this may cause in testing the project.
 
 <div align="center">
-<img src="https://i.ibb.co/ZXdbyGr/Snap-3.png" alt="Snap-3" border="0">
+<img src="https://i.ibb.co/pLYVzWF/keys-file.png" alt="Snap-3" border="0">
 </div>
 
 ### Other Configurations
@@ -75,7 +75,7 @@ This section goes through notable features of the site.
 The site makes use of a login key for administrators to be able to access customer data and perform tasks. If the administrator's session has expired they will be redirected to the login screen seen below. Additionally to prevent cyber attacks such as DDoS a Google reCaptcha is also implemented into the login page.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/DQMTR3Rakrii5LOszaUx36deKN8jiy7v7VmcdUKH7qyjn5xu4AAxxxj5HY6ujIOMy1b1zXJSHNyHdXVfb2HEhtC_2F3s8fhrQL_lRZPVNUY">
+ <img src="https://i.ibb.co/bFrhDS6/login.gif">
 </div>
 
 ### Searching customers
@@ -85,43 +85,43 @@ The search feature is used on multiple pages since customer databases can easily
 Customer details are subject to change, thus, the site provides a quick and easy way to edit customer data. Validation such as length, email validation, and format and always considered.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/ztDqcsqBROngz_cvajK6dyaypo7uM06hIQJQdXyCPOrZzhwofMOgeS8cFOHh0dGbTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk" >
+ <img src="https://i.ibb.co/3f4CWx5/Editing-customer-details.gif" >
 </div>
 
 ### Activating/Deactivating Customers
 If customers decide to discontinue with the business, their accounts are not closed as they may have outstanding balances. For this reason, customer accounts are set as active or inactive.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/WGLAreGQPD7EJPEbysdAC6fC1H-ezKS1zwwYRjV75nMP1OAH-p_AZDQM6Kp7nGImWjOdKHc1R7DZt7DngmNUUyPq163HHNhJYDMOjgplZc8">
+ <img src="https://i.ibb.co/XDYsqVL/Activating-deactivating-customers.gif">
 </div>
 
 ### Adding Comments/Contacts
 In many cases administrators would add or edit comments as well as multiple contacts for individual customers.
 
 <div align="center">
-<img src="https://pouch.jumpshare.com/preview/IvMAFnDpetFiVxymAk2_YuQ02fEW-FPSV2BokUB37r87qnNIk0hP32dI6m2tFkE0WjOdKHc1R7DZt7DngmNUU0qT8Mpgoft53irnsAYrb9E">
- <img src="https://pouch.jumpshare.com/preview/xkKebk1OzgkiW46yRMuBgfIUNI5sE5f34ufmKRSJcYt-ovS11ffxy-94MMnrpINNWjOdKHc1R7DZt7DngmNUUyvie19N1LjeS7Zr_xj-WdU" >
+<img src="https://i.ibb.co/RhTqDq7/adding-comments.gif">
+ <img src="https://i.ibb.co/27Qx4Sh/adding-contacts.gif" >
 </div>
 
 ### Adding Payments
 Payments can be recorded on the payments page for each customer. Addition to recording payments, the customer's balance will also be updated and recorded in the balances table with all the neccessary details of the transaction.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/dqL6DVCQiiq7seje_TNxu0rj0VXEuVQqWB12E8V8lMxZtuMh6xLX3kk3ry_D2AywTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+ <img src="https://i.ibb.co/hZRSx7k/Add-payments.gif">
 </div>
 
 ### Payment Reversal
 It is possible that human error can occur while recording payments. For this reason, payment reversal has been implemented. When a payment is reversed, the customer's payment record will be removed along with the balance recorded inserted into the balances table when the payment was recorded.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/_LkLi1FOybyL9ioFS03cTqu_0v7jgGgH2Rwn8mbDxPCm0GvKaYe-2sat79ZlZ4wVTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+ <img src="https://i.ibb.co/bPs6nF6/Payment-reversal.gif">
 </div>
 
 ### Payment Duplication Checking
 In addition to erroneous input when recording payments, a payment may be mistakingley inserted again. Each payment is checked before inserting it into the database to ensure there is not an existing payment with the same date, amount, and type.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/ntwMh9Rn5drp1uq-NFppXeK3u_NFA4aL1fmWgKTNILveH6ET6q02I8sX_pjhKhUmTtJuokMmSfDIV_8C4zq9kYwg6iB994o-et-RB_4IPjk">
+ <img src="https://i.ibb.co/XXRHskc/Duplicate-payments.gif">
 </div>
 
 ### Invoice Generation
@@ -130,7 +130,7 @@ Invoice generation using the CMS allows you to select which customers you would 
 **Note**: The site is designed so that invoices are not accessable from the `htdocs` folder, instead, along with the `config` folder, all invoices are stored in the parent directory in the `invoices` folder. While invoices are easily accessible from the site, authorised users may access the invoices from the mentioned directory.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/yIEjv3GF7FBZLkal-rcKBmuy7MBEqUw9k78aFZFg0NGnJbHBFcReenzONH_GFTEyikJdwUNrkJfDvJ_kMYHoIR-EQ4Ijnb2sKs2f3hllyz4">
+ <img src="https://i.ibb.co/2KRWLKR/invoice-generation.gif">
 </div>
 
 ### Filters for customers on Invoice page
@@ -142,14 +142,14 @@ The search feature is expanded on in the invoices page for users to easily find 
 From the group of customers returned from the above filters, administrators may still add a search term and search field.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/Gtnl7fIhx3p0kOybZS-3MJOKk2x0515vXT3N1q2-wXdLJfu45iam7qgKeg2Ya2MmikJdwUNrkJfDvJ_kMYHoIYpTrBUbBQGrOVweqpKvoTE">
+ <img src="https://i.ibb.co/sjdJHKH/using-filters.gif">
 </div>
 
 ### Checking Duplicate Invoices
 With the risk of human error, it is possible that duplicate invoices may be generated. For this reason, duplication checking is run before generating the invoices. The administrator has the option to cancel the action, overwrite the current invoices, or remove those selected customers from the list and generate invoices for the remaining.
 
 <div align="center">
- <img src="https://pouch.jumpshare.com/preview/Hfmq-rzDZgyGFDvRidDMTIru37IJitbuZroGGRoNEGr3fAinSQbdCZ9npsRIHZ1NikJdwUNrkJfDvJ_kMYHoIYpTrBUbBQGrOVweqpKvoTE">
+ <img src="https://i.ibb.co/fM0fSSD/invoice-duplication.gif">
 </div>
 
 ### Invoice Downloading
