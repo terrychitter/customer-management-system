@@ -16,7 +16,7 @@
 
 
 ## Description
-This project is a customer management system for a fictional business that sanitizes dustbins.
+This project is a customer management system for a business that sanitizes dustbins.
 
 The program is responsible for managing customers details such as personal, contact and sanitizing details.  Comments may be added for customers for administration use. Additionally, payment-related features can be used such as viewing the customers' current balance, payments made by the customer, and generated invoices for the customer. Customer accounts may also be deactivated or activated.
 
